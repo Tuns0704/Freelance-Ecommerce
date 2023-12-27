@@ -102,9 +102,9 @@ const BestPrice = () => {
 		<section className="flex flex-col">
 			<h2 className="font-bold text-3xl">Giá sốc hôm nay</h2>
 			<Swiper
-				className="w-full h-fit py-5"
+				className="w-full h-fit py-5 px-3"
 				slidesPerView={1}
-				spaceBetween={10}
+				spaceBetween={20}
 				grid={{
 					rows: 2,
 					fill: "row",
@@ -119,35 +119,35 @@ const BestPrice = () => {
 						grid: {
 							rows: 1,
 						},
-						spaceBetween: 10,
+						spaceBetween: 20,
 					},
 					640: {
 						slidesPerView: 2,
 						grid: {
 							rows: 1,
 						},
-						spaceBetween: 10,
+						spaceBetween: 20,
 					},
 					768: {
 						slidesPerView: 3,
 						grid: {
 							rows: 2,
 						},
-						spaceBetween: 10,
+						spaceBetween: 20,
 					},
 					1024: {
 						slidesPerView: 3,
 						grid: {
 							rows: 2,
 						},
-						spaceBetween: 10,
+						spaceBetween: 20,
 					},
 					1280: {
 						slidesPerView: 4,
 						grid: {
 							rows: 2,
 						},
-						spaceBetween: 10,
+						spaceBetween: 20,
 					},
 				}}
 			>
