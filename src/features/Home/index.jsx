@@ -7,18 +7,14 @@ const Home = () => {
 	return (
 		<div className="h-fit flex flex-col gap-10">
 			<img
-				src="/src/assets/minigame.png"
+				src="/img/minigame.png"
 				alt=""
 				className="w-full rounded-lg shadow-lg"
 			/>
 			<Instruct />
 			<BestPrice />
 			<TopSale />
-			<img
-				src="/src/assets/affi.jpg"
-				alt=""
-				className="w-full rounded-lg shadow-lg"
-			/>
+			<img src="/img/affi.png" alt="" className="w-full rounded-lg shadow-lg" />
 			<ImageSlider />
 		</div>
 	);

@@ -4,39 +4,39 @@ import { Autoplay } from "swiper/modules";
 const slideItem = [
 	{
 		id: 1,
-		img: "/src/assets/pic2.jpg",
+		img: "/img/pic2.png",
 	},
 	{
 		id: 2,
-		img: "/src/assets/pic7.jpg",
+		img: "/img/pic7.png",
 	},
 	{
 		id: 3,
-		img: "/src/assets/pic8.jpg",
+		img: "/img/pic8.png",
 	},
 	{
 		id: 4,
-		img: "/src/assets/pic2.jpg",
+		img: "/img/pic2.png",
 	},
 	{
 		id: 5,
-		img: "/src/assets/pic7.jpg",
+		img: "/img/pic7.png",
 	},
 	{
 		id: 6,
-		img: "/src/assets/pic8.jpg",
+		img: "/img/pic8.png",
 	},
 	{
 		id: 7,
-		img: "/src/assets/pic2.jpg",
+		img: "/img/pic2.png",
 	},
 	{
 		id: 8,
-		img: "/src/assets/pic7.jpg",
+		img: "/img/pic7.png",
 	},
 	{
 		id: 9,
-		img: "/src/assets/pic8.jpg",
+		img: "/img/pic8.png",
 	},
 ];
 
