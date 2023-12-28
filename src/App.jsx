@@ -2,7 +2,6 @@
 // import Navbar from "./cores/components/navbar";
 // import routes from "./constant/routes";
 import { ToastContainer } from "react-toastify";
-import { AppRouter } from "./routes/app.router";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
@@ -13,7 +12,6 @@ function App() {
 
 	return (
 		<>
-			<AppRouter />
 			<ToastContainer
 				position="top-center"
 				autoClose={5000}
