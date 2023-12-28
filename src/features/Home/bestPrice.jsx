@@ -162,7 +162,7 @@ const BestPrice = () => {
 						<img
 							src={product?.img}
 							alt="products"
-							className="w-2/4 self-center h-40 hover:scale-125 transition-all duration-500 ease-in-out rounded-lg"
+							className="w-2/4 self-center h-40 scale-90 hover:scale-100 transition-all duration-500 ease-in-out rounded-lg"
 						/>
 						<h4 className="font-medium text-sm text-gray-800">
 							{product?.name}

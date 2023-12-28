@@ -284,7 +284,7 @@ const TopSale = () => {
 											<img
 												src={product?.img}
 												alt="products"
-												className="w-2/4 self-center h-40 sm:h-28 md:h-40 hover:scale-125 transition-all duration-500 ease-in-out rounded-lg"
+												className="w-2/4 self-center h-40 sm:h-28 md:h-40 scale-90 hover:scale-105 transition-all duration-500 ease-in-out rounded-lg"
 											/>
 											<h4 className="font-medium text-sm text-gray-800">
 												{product?.name}
