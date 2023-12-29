@@ -1,7 +1,7 @@
 import { Input, Checkbox, Button, Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
-export function Register() {
+const Register = () => {
 	return (
 		<section className="flex h-screen p-8 gap-4">
 			<div className="w-2/5 h-full hidden lg:block">
@@ -131,6 +131,6 @@ export function Register() {
 			</div>
 		</section>
 	);
-}
+};
 
 export default Register;

@@ -1,7 +1,7 @@
 import { Input, Checkbox, Button, Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
-export function Login() {
+const Login = () => {
 	return (
 		<section className="flex h-screen p-8 gap-4">
 			<div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
@@ -155,6 +155,6 @@ export function Login() {
 			</div>
 		</section>
 	);
-}
+};
 
 export default Login;

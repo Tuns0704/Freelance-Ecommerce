@@ -4,8 +4,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import AppContainer from "../container/app.container";
 import Home from "../features/Home/index";
 import routes from "../constant/routes";
-import { Login } from "./../features/Login/index";
-import { Register } from "./../features/Register/index";
+import Login from "./../features/Login/index";
+import Register from "./../features/Register/index";
+import ProductDetail from "../features/ProductDetail";
+import Products from "../features/Products";
 
 export const AppRouter = () => {
 	// const {
@@ -21,6 +23,9 @@ export const AppRouter = () => {
 				)}
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
+				<Route path="/products" element={<Products />} />
+				<Route path="/report-price" element={<Products />} />
+				<Route path="/product-detail/:id" element={<ProductDetail />} />
 				<Route path="*" element={<Navigate to="/home" replace />} />
 			</Route>
 		</Routes>
