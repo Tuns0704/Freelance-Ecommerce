@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
 	return (
-		<section className="flex h-screen p-8 gap-4">
+		<section className="flex h-[85vh] p-8 gap-4">
 			<div className="w-2/5 h-full hidden lg:block">
 				<img
 					src="/img/pattern.png"

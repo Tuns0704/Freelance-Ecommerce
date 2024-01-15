@@ -1,9 +1,20 @@
 import { Input, Checkbox, Button, Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { loginGoogle } from "../../services/auth";
 
 const Login = () => {
+	const handleLoginGoogle = async () => {
+		const response = await loginGoogle();
+		console.log(response);
+	};
+
+	const handleLoginFacebook = () => {
+		const response = loginGoogle();
+		console.log(response);
+	};
+
 	return (
-		<section className="flex h-screen p-8 gap-4">
+		<section className="flex h-[85vh] p-8 gap-4">
 			<div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
 				<div className="text-center">
 					<Typography variant="h2" className="font-bold mb-4">
@@ -92,14 +103,15 @@ const Login = () => {
 					</div>
 					<div className="space-y-4 mt-8">
 						<Button
+							onClick={handleLoginGoogle}
 							size="lg"
 							color="white"
 							className="flex items-center gap-2 justify-center shadow-md"
 							fullWidth
 						>
 							<svg
-								width="17"
-								height="16"
+								width="20"
+								height="20"
 								viewBox="0 0 17 16"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg"
@@ -134,6 +146,33 @@ const Login = () => {
 								</defs>
 							</svg>
 							<span>Sign in With Google</span>
+						</Button>
+						<Button
+							onClick={handleLoginFacebook}
+							size="lg"
+							color="white"
+							className="flex items-center gap-2 justify-center shadow-md"
+							fullWidth
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 16 16"
+								id="facebook"
+								width="20"
+								height="20"
+							>
+								<path
+									fill="#1976D2"
+									d="M14 0H2C.897 0 0 .897 0 2v12c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V2c0-1.103-.897-2-2-2z"
+								></path>
+								<path
+									fill="#FAFAFA"
+									fillRule="evenodd"
+									d="M13.5 8H11V6c0-.552.448-.5 1-.5h1V3h-2a3 3 0 0 0-3 3v2H6v2.5h2V16h3v-5.5h1.5l1-2.5z"
+									clipRule="evenodd"
+								></path>
+							</svg>
+							<span>Sign in With Facebook</span>
 						</Button>
 					</div>
 					<Typography

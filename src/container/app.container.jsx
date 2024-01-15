@@ -9,9 +9,7 @@ const AppContainer = () => {
 	const { pathname } = useLocation();
 	return (
 		<>
-			{pathname !== "/login" && pathname !== "/register" && (
-				<Navbar routes={routes} />
-			)}
+			<Navbar routes={routes} />
 			<div className="sm:mx-20 mx-5 font-opensans">
 				<Outlet />
 			</div>
