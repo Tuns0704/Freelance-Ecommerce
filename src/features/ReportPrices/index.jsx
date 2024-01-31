@@ -11,6 +11,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { formatCurrency } from "../../helper/formatCurrency";
+import { reportPrice } from "../../services/product";
 
 const data = [
 	{
@@ -37,12 +38,9 @@ const ReportPrice = () => {
 		if (itemIdMatch !== null && itemIdMatch.length > 1) {
 			const itemId = itemIdMatch[1];
 			toast.success("Link hợp lệ " + itemId);
-			setItem({
-				name: "iRobot Roomba j7+ Self-Emptying Vacuum Cleaning Robot - Certified Refurbished! | eBay",
-				image: "https://picsum.photos/200",
-				price: "100$",
-			});
-			// Do something with the extracted item ID, e.g., pass it to a function or set it in the state
+			const response = await reportPrice(link);
+			console.log(response.data);
+			setItem(response.data);
 		} else {
 			toast.error("Link không hợp lệ");
 		}
@@ -99,13 +97,15 @@ const ReportPrice = () => {
 							<div className="flex flex-col sm:flex-row gap-3 mt-5">
 								<div className="flex gap-2 sm:w-1/2 sm:p-3">
 									<img
-										src={item.image}
-										alt={item.name}
+										src={item.galleryURL}
+										alt={item.title}
 										className="w-1/5 lg:w-[200px] rounded-lg"
 									/>
 									<div className="flex flex-col gap-2">
-										<p className="font-semibold">{item.name}</p>
-										<p className="font-semibold">{item.price}</p>
+										<p className="font-semibold">{item.title}</p>
+										<p className="font-semibold">
+											{item.sellingStatus.currentPrice}
+										</p>
 									</div>
 								</div>
 								<div className="sm:w-1/2 p-3 border border-gray-400 rounded">

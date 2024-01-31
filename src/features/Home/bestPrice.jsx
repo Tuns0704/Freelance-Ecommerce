@@ -181,7 +181,6 @@ const BestPrice = () => {
 						<Button
 							variant="filled"
 							size="lg"
-							ripple="light"
 							className="font-medium text-sm font-opensans"
 						>
 							Mua ngay
@@ -193,7 +192,6 @@ const BestPrice = () => {
 				<Button
 					variant="outlined"
 					size="md"
-					ripple="light"
 					className="font-medium text-sm font-opensans"
 				>
 					Tất cả sản phẩm

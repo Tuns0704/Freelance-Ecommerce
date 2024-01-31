@@ -213,10 +213,26 @@ const TopSale = () => {
 			<div className="flex relative flex-col justify-between">
 				<h2 className="font-bold text-3xl mb-10 sm:mb-0">Top Đối Tác</h2>
 				<Tabs value={activeTab} onChange={handleTabChange} className="w-full">
-					<TabsHeader className="absolute flex sm:gap-2 w-full sm:w-3/6 right-0 top-10 sm:top-0">
+					<TabsHeader
+						className="absolute flex sm:gap-2 w-full sm:w-3/6 right-0 top-10 sm:top-0"
+						indicatorProps={{
+							className: "bg-gray-900 shadow-none rounded-md ",
+						}}
+					>
 						{tabs.map(({ label, value }) => (
-							<Tab className="px-0" key={value} value={value}>
-								<p className="text-xs md:text-base">{label}</p>
+							<Tab
+								className={`px-3 py-3 transition-all duration-300 ease-in-out rounded-md`}
+								key={value}
+								value={value}
+								onClick={() => handleTabChange(value)}
+							>
+								<p
+									className={`font-semibold transition-all duration-500 ease-linear ${
+										activeTab === value ? "text-white" : ""
+									}`}
+								>
+									{label}
+								</p>
 							</Tab>
 						))}
 					</TabsHeader>
@@ -303,7 +319,6 @@ const TopSale = () => {
 											<Button
 												variant="filled"
 												size="lg"
-												ripple="light"
 												className="font-medium text-sm font-opensans"
 											>
 												Mua ngay
@@ -321,7 +336,6 @@ const TopSale = () => {
 				<Button
 					variant="outlined"
 					size="md"
-					ripple="light"
 					className="font-medium text-sm font-opensans"
 				>
 					Tất cả sản phẩm
