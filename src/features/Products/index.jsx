@@ -1,6 +1,5 @@
-import { filterPriceOptions } from "../../constant/filter";
-import { formatCurrency } from "./../../helper/formatCurrency";
 import CardItem from "./cardItem";
+import FilterOption from "./filter";
 
 const products = [
 	{
@@ -21,45 +20,10 @@ const products = [
 
 const Products = () => {
 	return (
-		<section className="flex gap-2">
-			<aside className="px-3 py-2 border w-1/4 flex flex-col gap-2">
-				<div className="border-b">
-					<div className="font-semibold">Trạng thái</div>
-					<label>
-						<input type="checkbox" className="mr-2" />
-						Còn hàng
-					</label>
-				</div>
-				<div className="border-b">
-					<div className="font-semibold">Giá tốt</div>
-					<label>
-						<input type="checkbox" className="mr-2" />
-						Giá Tốt Hôm Nay
-					</label>
-				</div>
-				<div className="border-b">
-					<div className="font-semibold">Giá sản phẩm</div>
-					<div className="flex flex-col gap-1">
-						{filterPriceOptions.map((option, index) => (
-							<label key={index} className="flex">
-								<input type="checkbox" className="mr-2" />
-								<p className=" text-base">
-									{formatCurrency(option.from)} - {formatCurrency(option.to)}
-								</p>
-							</label>
-						))}
-					</div>
-				</div>
-				<div className="border-b">
-					<div className="font-semibold">Trạng thái</div>
-					<label>
-						<input type="checkbox" className="mr-2" />
-						Còn hàng
-					</label>
-				</div>
-			</aside>
-			<div className="flex flex-col w-5/6">
-				<div className="flex flex-col gap-4">
+		<section className="flex flex-col md:flex-row gap-2 w-full">
+			<FilterOption />
+			<div className="flex flex-col sm:w-full md:w-5/6">
+				<div className="flex flex-col md:flex-row md:flex-wrap gap-4">
 					{products.map((product) => (
 						<CardItem key={product.id} product={product} />
 					))}

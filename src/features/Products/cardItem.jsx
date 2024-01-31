@@ -5,10 +5,10 @@ import ebayLogo from "../../../public/img/ebay.png";
 
 const CardItem = ({ product }) => {
 	return (
-		<div className="flex gap-3 rounded-md p-2 shadow">
+		<div className="flex flex-col md:w-1/2 lg:w-full md:flex-row gap-3 rounded-md p-2 shadow">
 			<img
 				src={product.img}
-				className="w-1/5 h-40 object-cover rounded-lg hover:scale-105 transition-all duration-300"
+				className="md:w-1/5 h-40 object-cover rounded-lg hover:scale-105 transition-all duration-300"
 				alt={product.name}
 			/>
 			<div className="flex flex-col gap-2">
@@ -27,7 +27,7 @@ const CardItem = ({ product }) => {
 					Quan tâm
 				</Button>
 			</div>
-			<div className="w-2/6 flex flex-col gap-1">
+			<div className="md:w-2/6 flex flex-col gap-1">
 				<div className="px-3 py-1 w-fit bg-red-900 rounded-md text-xs font-bold text-white">
 					Giảm 35%
 				</div>
