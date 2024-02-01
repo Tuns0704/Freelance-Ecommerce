@@ -5,7 +5,7 @@ import ebayLogo from "../../../public/img/ebay.png";
 
 const CardItem = ({ product }) => {
 	return (
-		<div className="flex flex-col md:w-1/2 lg:w-full md:flex-row gap-3 rounded-md p-2 shadow">
+		<div className="flex flex-col sm:w-1/2 md:w-full md:flex-row gap-3 rounded-md p-2 shadow">
 			<img
 				src={product.img}
 				className="md:w-1/5 h-40 object-cover rounded-lg hover:scale-105 transition-all duration-300"

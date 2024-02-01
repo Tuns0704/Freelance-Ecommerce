@@ -34,11 +34,12 @@ const ReportPrice = () => {
 	};
 
 	const onSubmitGetItemFromLink = async () => {
-		const itemIdMatch = link.match(/\/(\d+)\??/);
+		const ebayItemRegex = /ebay\.com\/itm\/(\d+)/i;
+		const itemIdMatch = link.match(ebayItemRegex);
 		if (itemIdMatch !== null && itemIdMatch.length > 1) {
 			const itemId = itemIdMatch[1];
 			toast.success("Link hợp lệ " + itemId);
-			const response = await reportPrice(link);
+			const response = await reportPrice(itemId);
 			console.log(response.data);
 			setItem(response.data);
 		} else {
@@ -78,7 +79,7 @@ const ReportPrice = () => {
 				</TabsHeader>
 				<TabsBody>
 					<TabPanel value="report-price-auto" className="px-0">
-						<div className="flex justify-between gap-2">
+						<div className="flex  justify-between gap-2">
 							<input
 								type="text"
 								placeholder="Nhập link sản phẩm quý khách muốn mua (Ebay)"
@@ -94,21 +95,30 @@ const ReportPrice = () => {
 							</Button>
 						</div>
 						{item && (
-							<div className="flex flex-col sm:flex-row gap-3 mt-5">
-								<div className="flex gap-2 sm:w-1/2 sm:p-3">
+							<div className="flex flex-col md:flex-row gap-3 mt-5">
+								<div className="flex gap-2 md:w-2/3 sm:p-3">
 									<img
-										src={item.galleryURL}
-										alt={item.title}
-										className="w-1/5 lg:w-[200px] rounded-lg"
+										src={item.GalleryURL}
+										alt={item.Title}
+										className="w-1/4 lg:w-[200px] rounded-lg"
 									/>
 									<div className="flex flex-col gap-2">
-										<p className="font-semibold">{item.title}</p>
-										<p className="font-semibold">
-											{item.sellingStatus.currentPrice}
-										</p>
+										<p className="font-semibold">{item.Title}</p>
+										<select
+											name=""
+											id=""
+											className="text-ellipsis w-full px-3 py-2 border border-gray-300"
+										>
+											<option
+												className="border px-2 py-3"
+												value={item.PrimaryCategoryID}
+											>
+												{item.PrimaryCategoryName}
+											</option>
+										</select>
 									</div>
 								</div>
-								<div className="sm:w-1/2 p-3 border border-gray-400 rounded">
+								<div className="md:w-1/2 w-full p-3 border border-gray-400 rounded">
 									<div className="flex flex-col gap-2">
 										<p className="font-semibold text-3xl">Kết quả</p>
 										<div className="flex justify-between">

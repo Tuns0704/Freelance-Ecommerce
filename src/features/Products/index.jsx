@@ -10,7 +10,21 @@ const products = [
 		img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
 	},
 	{
-		id: 1812381,
+		id: 1812382,
+		name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
+		price: 5000000,
+		originPrice: 47000000,
+		img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
+	},
+	{
+		id: 1812383,
+		name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
+		price: 5000000,
+		originPrice: 47000000,
+		img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
+	},
+	{
+		id: 1812384,
 		name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
 		price: 5000000,
 		originPrice: 47000000,
@@ -23,7 +37,7 @@ const Products = () => {
 		<section className="flex flex-col md:flex-row gap-2 w-full">
 			<FilterOption />
 			<div className="flex flex-col sm:w-full md:w-5/6">
-				<div className="flex flex-col md:flex-row md:flex-wrap gap-4">
+				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between md:justify-normal">
 					{products.map((product) => (
 						<CardItem key={product.id} product={product} />
 					))}
