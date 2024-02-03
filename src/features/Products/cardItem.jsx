@@ -10,8 +10,10 @@ const CardItem = ({ product }) => {
 				className="md:w-40 h-40 object-cover rounded-lg hover:scale-105 transition-all duration-300"
 				alt={product.name}
 			/>
-			<div className="flex flex-col gap-2 w-3/5">
-				<h1 className="font-bold text-base">{product.name}</h1>
+			<div className="flex flex-col gap-2 lg:w-3/5">
+				<h1 className="font-bold text-base h-12 overflow-clip">
+					{product.name}
+				</h1>
 				<p className="text-sm">
 					<b>Model:</b> ASUS <b>SKU:</b> 134443717636
 				</p>
