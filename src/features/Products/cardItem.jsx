@@ -1,17 +1,16 @@
 import { Button } from "@material-tailwind/react";
 import { PropTypes } from "prop-types";
 import { PhoneIcon, HeartIcon } from "@heroicons/react/24/outline";
-import ebayLogo from "../../../public/img/ebay.png";
 
 const CardItem = ({ product }) => {
 	return (
 		<div className="flex flex-col sm:w-1/2 md:w-full md:flex-row gap-3 rounded-md p-2 shadow">
 			<img
-				src={product.img}
-				className="md:w-1/5 h-40 object-cover rounded-lg hover:scale-105 transition-all duration-300"
+				src={product.thumbnailImages[0].imageUrl}
+				className="md:w-40 h-40 object-cover rounded-lg hover:scale-105 transition-all duration-300"
 				alt={product.name}
 			/>
-			<div className="flex flex-col gap-2">
+			<div className="flex flex-col gap-2 w-3/5">
 				<h1 className="font-bold text-base">{product.name}</h1>
 				<p className="text-sm">
 					<b>Model:</b> ASUS <b>SKU:</b> 134443717636
@@ -41,9 +40,9 @@ const CardItem = ({ product }) => {
 					Liên hệ
 				</Button>
 				<div className="flex gap-2 items-center">
-					<img src={ebayLogo} className="w-12 h-12" alt="ebaylogo" />
+					<img src="/img/ebay.png" className="w-12 h-12" alt="ebaylogo" />
 					<p className="text-sm">
-						Người bán: <b>vipoutlet</b>
+						Người bán: <b>{product.seller.username}</b>
 					</p>
 				</div>
 			</div>

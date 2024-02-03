@@ -1,38 +1,30 @@
+import { getListProduct } from "../../services/product";
 import CardItem from "./cardItem";
 import FilterOption from "./filter";
-
-const products = [
-	{
-		id: 1812381,
-		name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-		price: 5000000,
-		originPrice: 47000000,
-		img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-	},
-	{
-		id: 1812382,
-		name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-		price: 5000000,
-		originPrice: 47000000,
-		img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-	},
-	{
-		id: 1812383,
-		name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-		price: 5000000,
-		originPrice: 47000000,
-		img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-	},
-	{
-		id: 1812384,
-		name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-		price: 5000000,
-		originPrice: 47000000,
-		img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-	},
-];
+import { useCallback, useEffect, useState } from "react";
 
 const Products = () => {
+	const [products, setProducts] = useState([]);
+	const [page, setPage] = useState(1);
+
+	const getData = useCallback(async () => {
+		try {
+			const response = await getListProduct(page);
+			setProducts(response.data.data);
+			console.log(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	}, [page]);
+
+	useEffect(() => {
+		getData();
+	}, [page, getData]);
+
+	const handlePageChange = (page) => {
+		setPage(page);
+	};
+
 	return (
 		<section className="flex flex-col md:flex-row gap-2 w-full">
 			<FilterOption />
