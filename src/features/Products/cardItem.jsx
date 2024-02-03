@@ -4,7 +4,7 @@ import { PhoneIcon, HeartIcon } from "@heroicons/react/24/outline";
 
 const CardItem = ({ product }) => {
 	return (
-		<div className="flex flex-col sm:w-1/2 md:w-full md:flex-row gap-3 rounded-md p-2 shadow">
+		<div className="flex flex-col sm:w-[49%] mb-4 md:w-full md:flex-row gap-3 rounded-md p-2 shadow">
 			<img
 				src={product.thumbnailImages[0].imageUrl}
 				className="md:w-40 h-40 object-cover rounded-lg hover:scale-105 transition-all duration-300"

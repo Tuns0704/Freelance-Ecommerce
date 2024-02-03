@@ -1,13 +1,25 @@
 import { getListProduct } from "../../services/product";
 import CardItem from "./cardItem";
 import FilterOption from "./filter";
+import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { Button, IconButton } from "@material-tailwind/react";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 const Products = () => {
+	const [isOpen, setIsOpen] = useState(false);
 	const [products, setProducts] = useState([]);
+	const [totalProducts, setTotalProducts] = useState(0);
 	const [page, setPage] = useState(1);
+	const [totalPage, setTotalPage] = useState(1);
+
+	const closeModal = () => {
+		setIsOpen(false);
+	};
+
+	const openModal = () => {
+		setIsOpen(true);
+	};
 
 	const getItemProps = (index) => ({
 		variant: page === index ? "filled" : "text",
@@ -25,10 +37,15 @@ const Products = () => {
 		setPage(page - 1);
 	};
 
+	const calcuteTotalPage = (total, size) => {
+		setTotalPage(Math.ceil(total / size));
+	};
+
 	const getData = useCallback(async () => {
 		try {
 			const response = await getListProduct(page);
 			setProducts(response.data.data);
+			setTotalProducts(response.data.totalCount);
 			console.log(response.data);
 		} catch (error) {
 			console.log(error);
@@ -41,8 +58,18 @@ const Products = () => {
 
 	return (
 		<section className="flex flex-col md:flex-row gap-2 w-full">
-			<FilterOption />
+			<FilterOption isOpen={isOpen} closeModal={closeModal} />
 			<div className="flex flex-col sm:w-full md:w-5/6">
+				<div className="flex items-center gap-2">
+					<Button
+						className="w-fit p-2 rounded-md"
+						variant="outlined"
+						onClick={openModal}
+					>
+						<AdjustmentsHorizontalIcon className="h-5 w-5" />
+					</Button>
+					<p className="font-medium">Tổng số sản phẩm: {totalProducts}</p>
+				</div>
 				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between md:justify-normal">
 					{products.map((product) => (
 						<CardItem key={product.id} product={product} />
