@@ -1,10 +1,11 @@
 import axios from "axios";
 
 export const loginGoogle = () =>
-	axios.get(`${import.meta.env.VITE_API_URL}/auth/google/login`, {
+	axios.get(`${import.meta.env.VITE_API_URL}/auth/google/redirect`, {
 		headers: {
 			"Content-Type": "application/json",
 		},
+		withCredentials: true,
 		validateStatus: (status) => status < 400,
 	});
 
