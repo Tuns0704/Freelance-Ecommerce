@@ -6,9 +6,8 @@ const CardItem = ({ product }) => {
 	return (
 		<div className="flex flex-col sm:w-[49%] mb-4 md:w-full md:flex-row gap-3 rounded-md p-2 shadow">
 			<img
-				src={product.thumbnailImages[0].imageUrl}
+				src={product.thumbnailImages?.[0]?.imageUrl}
 				className="md:w-40 h-40 object-cover rounded-lg hover:scale-105 transition-all duration-300"
-				alt={product.name}
 			/>
 			<div className="flex flex-col gap-2 lg:w-3/5">
 				<h1 className="font-bold text-base h-12 overflow-clip">

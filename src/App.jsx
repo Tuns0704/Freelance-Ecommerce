@@ -1,6 +1,3 @@
-// import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-// import Navbar from "./cores/components/navbar";
-// import routes from "./constant/routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
