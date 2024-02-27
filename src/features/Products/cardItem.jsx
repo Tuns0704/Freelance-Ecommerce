@@ -1,6 +1,7 @@
 import { Button } from "@material-tailwind/react";
 import { PropTypes } from "prop-types";
 import { PhoneIcon, HeartIcon } from "@heroicons/react/24/outline";
+import { calculateDateShipping } from "./../../helper/calculateDateShipping";
 
 const CardItem = ({ product }) => {
 	return (
@@ -17,7 +18,8 @@ const CardItem = ({ product }) => {
 					<b>Model:</b> ASUS <b>SKU:</b> 134443717636
 				</p>
 				<p className="text-sm">
-					<b>Giao hàng:</b> Thời gian giao hàng dự kiến 14/02 - 21/02
+					<b>Giao hàng:</b> Thời gian giao hàng dự kiến{" "}
+					{calculateDateShipping()}
 				</p>
 				<Button
 					variant="outlined"
