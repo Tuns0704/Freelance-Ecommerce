@@ -6,6 +6,7 @@ import { Button, IconButton } from "@material-tailwind/react";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useSearchParams } from "react-router-dom";
+import Loading from "../../cores/components/loading";
 
 const Products = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,7 @@ const Products = () => {
 	const [totalProducts, setTotalProducts] = useState(0);
 	const [searchParams, setSearchParams] = useSearchParams({ page: 1 });
 	const page = searchParams.get("page");
+	const [loading, setLoading] = useState(false);
 
 	const closeModal = () => {
 		setIsOpen(false);
@@ -82,9 +84,11 @@ const Products = () => {
 
 	const getData = useCallback(async () => {
 		try {
-			const response = await getListProduct(page);
-			setProducts(response.data.data);
-			setTotalProducts(response.data.totalCount);
+			setLoading(true);
+			const { data } = await getListProduct(page);
+			setProducts(data.data);
+			setTotalProducts(data.totalCount);
+			setLoading(false);
 		} catch (error) {
 			console.log(error);
 		}
@@ -109,9 +113,13 @@ const Products = () => {
 					<p className="font-medium">Tổng số sản phẩm: {totalProducts}</p>
 				</div>
 				<div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between md:justify-normal">
-					{products.map((product) => (
-						<CardItem key={product.id} product={product} />
-					))}
+					{loading ? (
+						<Loading />
+					) : (
+						products.map((product) => (
+							<CardItem key={product.id} product={product} />
+						))
+					)}
 				</div>
 				<div className="flex items-center justify-center mt-5 gap-4">
 					<Button
