@@ -110,7 +110,7 @@ Footer.defaultProps = {
 			items: [
 				{
 					name: "Về chúng tôi",
-					path: "https://www.creative-tim.com/presentation",
+					path: "/about-us",
 				},
 				{
 					name: "Truy vết hàng hoá",

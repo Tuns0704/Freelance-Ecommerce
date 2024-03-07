@@ -65,7 +65,7 @@ const Products = () => {
 
 		if (start > 1) {
 			buttons.unshift(
-				<IconButton key="prevEllipsis" disabled>
+				<IconButton className="md:flex xxs:hidden" key="prevEllipsis" disabled>
 					...
 				</IconButton>
 			);
@@ -73,7 +73,7 @@ const Products = () => {
 
 		if (end < totalPages) {
 			buttons.push(
-				<IconButton key="nextEllipsis" disabled>
+				<IconButton className="md:flex xxs:hidden" key="nextEllipsis" disabled>
 					...
 				</IconButton>
 			);
