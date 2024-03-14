@@ -114,11 +114,11 @@ Footer.defaultProps = {
 				},
 				{
 					name: "Truy vết hàng hoá",
-					path: "https://www.creative-tim.com/blog",
+					path: "/contact-us",
 				},
 				{
 					name: "Liên hệ chúng tôi",
-					path: "https://www.github.com/creativetimofficial/material-tailwind?ref=mtk",
+					path: "/contact-us",
 				},
 			],
 		},

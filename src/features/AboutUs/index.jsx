@@ -70,23 +70,29 @@ const AboutUs = () => {
 			<h1 className="flex justify-center items-center text-3xl font-semibold mb-5">
 				Về Chúng Tôi
 			</h1>
-			<div className=" text-lg">
-				<h2 className="font-semibold">Về Orderus.vn</h2>
-				<p className="text-justify">
-					Orderus.vn là website thương mại điện tử cung cấp dịch vụ mua hàng hộ
-					và vận chuyển hàng hộ từ Mỹ về Việt Nam – chủ yếu là các thiết bị công
-					nghệ. Nền tảng Orderus.vn giúp kết nối người Việt với các nhà cung cấp
-					sản phẩm tại Mỹ. Chúng tôi kết nối với các sàn thương mại điện tử lớn
-					tại Mỹ (Ebay, Amazon, Walmart, Bestbuy, Cotso …) và hàng chục đối tác
-					vận chuyển tại Mỹ (Fedex, UPS, DHL …) nhằm mang đến trải nghiệm mua
-					sắm vượt trội cho khách hàng
-				</p>
-			</div>
-			<div className="flex justify-center">
-				<img
-					src="/public/img/pic2.png"
-					className="rounded justify-center h-[40vh] object-cover"
-				/>
+			<div className="flex gap-5 w-full flex-col md:flex-row">
+				<div className="md:w-1/2 flex justify-center">
+					<img
+						src="/public/img/pic2.png"
+						className="rounded w-full h-[50vh] justify-center object-cover"
+					/>
+				</div>
+				<div className="md:w-1/2 text-lg">
+					<h2 className="font-semibold">Về Orderus.vn</h2>
+					<p className="text-justify">
+						<b>
+							Orderus.vn là website thương mại điện tử cung cấp dịch vụ mua hàng
+							hộ và vận chuyển hàng hộ từ Mỹ về Việt Nam – chủ yếu là các thiết
+							bị công nghệ.
+						</b>
+						<br />
+						Nền tảng Orderus.vn giúp kết nối người Việt với các nhà cung cấp sản
+						phẩm tại Mỹ. Chúng tôi kết nối với các sàn thương mại điện tử lớn
+						tại Mỹ (Ebay, Amazon, Walmart, Bestbuy, Cotso …) và hàng chục đối
+						tác vận chuyển tại Mỹ (Fedex, UPS, DHL …) nhằm mang đến trải nghiệm
+						mua sắm vượt trội cho khách hàng
+					</p>
+				</div>
 			</div>
 			<div className="flex flex-col gap-5">
 				<div>

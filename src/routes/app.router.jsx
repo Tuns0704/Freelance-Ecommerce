@@ -9,6 +9,7 @@ import Register from "./../features/Register/index";
 import ProductDetail from "../features/ProductDetail";
 import Products from "../features/Products";
 import AboutUs from "../features/AboutUs";
+import ContactUs from "../features/ContactUs";
 
 export const AppRouter = () => {
 	// const {
@@ -28,6 +29,7 @@ export const AppRouter = () => {
 				<Route path="/report-price" element={<Products />} />
 				<Route path="/product-detail/:id" element={<ProductDetail />} />
 				<Route path="/about-us" element={<AboutUs />} />
+				<Route path="/contact-us" element={<ContactUs />} />
 				<Route path="*" element={<Navigate to="/home" replace />} />
 			</Route>
 		</Routes>
