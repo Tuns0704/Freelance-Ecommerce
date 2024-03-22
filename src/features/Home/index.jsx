@@ -1,6 +1,7 @@
-import BestPrice from "./bestPrice";
+import FashionDeal from "./fashionDeal";
 // import Instruct from "./instruct";
 import ImageSlider from "./imageSlider";
+import LaptopDeal from "./laptopDeal";
 import TopSale from "./topSale";
 
 const Home = () => {
@@ -12,7 +13,8 @@ const Home = () => {
 				className="w-full rounded-lg shadow-lg"
 			/>
 			{/* <Instruct /> */}
-			<BestPrice />
+			<FashionDeal />
+			<LaptopDeal />
 			<TopSale />
 			<img src="/img/affi.png" alt="" className="w-full rounded-lg shadow-lg" />
 			<ImageSlider />

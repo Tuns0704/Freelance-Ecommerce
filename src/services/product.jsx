@@ -15,3 +15,16 @@ export const getListProduct = (page) =>
 		},
 		validateStatus: (status) => status < 400,
 	});
+
+export const getSaleProductByCategory = (category) =>
+	axios.get(
+		`${
+			import.meta.env.VITE_API_URL
+		}/ebay?category=${category}&marketingPrice=true`,
+		{
+			headers: {
+				"Content-Type": "application/json",
+			},
+			validateStatus: (status) => status < 400,
+		}
+	);
