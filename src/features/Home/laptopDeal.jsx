@@ -5,6 +5,7 @@ import { Grid, Pagination } from "swiper/modules";
 import { getSaleProductByCategory } from "../../services/product";
 import { useEffect, useState } from "react";
 import Loading from "../../cores/components/loading";
+import { calculateSalePrice } from "./../../helper/calculateSalePrice";
 
 const LaptopDeal = () => {
 	const [products, setProducts] = useState([]);
@@ -102,7 +103,11 @@ const LaptopDeal = () => {
 							<section className="flex justify-start items-center gap-2">
 								<h2 className="text-2xl font-bold">
 									{/* {formatCurrency(product.marketingPrice.originalPrice)} */}
-									{product.marketingPrice.discountAmount.value}$
+									{calculateSalePrice(
+										product.marketingPrice.originalPrice.value,
+										product.marketingPrice.discountAmount.value
+									)}
+									$
 								</h2>
 								<del className="text-gray-500 text-sm">
 									{/* {formatCurrency(product.originPrice)} */}
