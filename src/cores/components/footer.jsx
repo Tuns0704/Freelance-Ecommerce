@@ -144,7 +144,7 @@ Footer.defaultProps = {
 			items: [
 				{
 					name: "Chính sách mua hàng",
-					path: "https://github.com/creativetimofficial/material-tailwind/blob/main/LICENSE.md?ref=mtk",
+					path: "/purchase-policy",
 				},
 				{
 					name: "Chính sách bảo hành",

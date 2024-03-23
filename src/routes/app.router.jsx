@@ -12,6 +12,7 @@ import AboutUs from "../features/AboutUs";
 import ContactUs from "../features/ContactUs";
 import InstallmentPolicy from "../features/InstallmentPolicy";
 import WarrantyPolicy from "../features/WarrantyPolicy";
+import PurchasePolicy from "../features/PurchasePolicy";
 
 export const AppRouter = () => {
 	// const {
@@ -34,6 +35,7 @@ export const AppRouter = () => {
 				<Route path="/contact-us" element={<ContactUs />} />
 				<Route path="/installment-policy" element={<InstallmentPolicy />} />
 				<Route path="/warranty-policy" element={<WarrantyPolicy />} />
+				<Route path="/purchase-policy" element={<PurchasePolicy />} />
 				<Route path="*" element={<Navigate to="/home" replace />} />
 			</Route>
 		</Routes>
