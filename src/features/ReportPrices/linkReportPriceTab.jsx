@@ -22,7 +22,8 @@ const LinkReportTab = () => {
 			try {
 				setLoading(true);
 				const response = await reportPrice(itemIdMatch[1]);
-				setItem(response);
+				setItem(response.data);
+				console.log(response.data);
 				setLoading(false);
 			} catch (error) {
 				setLoading(false);
@@ -35,7 +36,7 @@ const LinkReportTab = () => {
 	return (
 		<TabPanel value="report-price-auto" className="px-0">
 			<div className="text-center">
-				<Typography variant="h2" className="font-bold mb-4">
+				<Typography variant="h2" className="font-bold text-gray-900 mb-4">
 					Nhận báo giá tự động
 				</Typography>
 			</div>
@@ -61,12 +62,22 @@ const LinkReportTab = () => {
 					<div className="flex flex-col md:flex-row gap-3 mt-5">
 						<div className="flex gap-2 md:w-2/3 sm:p-3">
 							<img
-								src={item.GalleryURL}
+								src={item.PictureURL[0]}
 								alt={item.Title}
 								className="w-1/4 lg:w-[200px] rounded-lg"
 							/>
 							<div className="flex flex-col gap-2">
-								<p className="font-semibold">{item.Title}</p>
+								<p className="font-semibold text-gray-900">{item.Title}</p>
+								<div className="flex gap-2">
+									<div className="text-lg text-gray-900">
+										Giá sản phẩm: {item.ConvertedCurrentPrice}$
+									</div>
+									{item.DiscountPriceInfo && (
+										<del className="text-sm font-semibold text-red-400">
+											{item.DiscountPriceInfo.OriginalRetailPrice}$
+										</del>
+									)}
+								</div>
 								<select
 									name=""
 									id=""
@@ -79,11 +90,12 @@ const LinkReportTab = () => {
 										{item.PrimaryCategoryName}
 									</option>
 								</select>
+								<div></div>
 							</div>
 						</div>
 						<div className="md:w-1/2 w-full p-3 border border-gray-400 rounded">
 							<div className="flex flex-col gap-2">
-								<p className="font-semibold text-3xl">Kết quả</p>
+								<p className="font-semibold text-3xl text-gray-900">Kết quả</p>
 								<div className="flex justify-between">
 									<p className="">Giá sản phẩm</p>
 									<p>{formatCurrency(300000)}</p>
