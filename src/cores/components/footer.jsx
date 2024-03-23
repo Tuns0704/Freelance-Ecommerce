@@ -151,8 +151,8 @@ Footer.defaultProps = {
 					path: "https://github.com/creativetimofficial/material-tailwind/blob/main/CONTRIBUTING.md?ref=mtk",
 				},
 				{
-					name: "Chăm sóc khách hàng",
-					path: "https://github.com/creativetimofficial/material-tailwind/blob/main/CHANGELOG.md?ref=mtk",
+					name: "Chính sách trả góp",
+					path: "/installment-policy",
 				},
 				{
 					name: "Hướng dẫn sử dụng",
