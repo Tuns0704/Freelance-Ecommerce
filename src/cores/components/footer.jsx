@@ -148,7 +148,7 @@ Footer.defaultProps = {
 				},
 				{
 					name: "Chính sách bảo hành",
-					path: "https://github.com/creativetimofficial/material-tailwind/blob/main/CONTRIBUTING.md?ref=mtk",
+					path: "/warranty-policy",
 				},
 				{
 					name: "Chính sách trả góp",
