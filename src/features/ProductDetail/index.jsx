@@ -120,67 +120,11 @@ const ProductDetail = () => {
 	}
 
 	return (
-		<div className="flex gap-5">
-			<div className="w-full flex flex-col gap-5 md:w-1/2">
+		<div className="grid sm:grid-cols-2 sm:grid-rows-2 grid-cols-1 grid-rows-1 grid-flow-col gap-4">
+			<div className="col-start-auto row-auto">
 				<ImageSlider images={images} />
-				<div>
-					<Accordion open={openAccordion === 1}>
-						<AccordionHeader
-							className="font-semibold text-blue-gray-900 text-lg"
-							onClick={() => handleOpen(1)}
-						>
-							Chính sách mua hàng và vận chuyển
-						</AccordionHeader>
-						<AccordionBody>
-							{term.map((item, index) => (
-								<div key={index}>
-									<ul className="list-disc pl-5">
-										{item.term.map((term, index) => (
-											<li key={index}>
-												<p className="text-justify">{term}</p>
-											</li>
-										))}
-									</ul>
-									<h2 className="font-semibold text-lg">Lưu ý</h2>
-									<ul className="list-disc pl-5">
-										{item.note.map((note, index) => (
-											<li key={index}>
-												<p className="text-justify">{note}</p>
-											</li>
-										))}
-									</ul>
-								</div>
-							))}
-						</AccordionBody>
-					</Accordion>
-					<Accordion open={openAccordion === 2}>
-						<AccordionHeader
-							className="font-semibold text-blue-gray-900 text-lg"
-							onClick={() => handleOpen(2)}
-						>
-							Quyền lợi mua hàng
-						</AccordionHeader>
-						<AccordionBody>
-							<ol className="list-decimal pl-5">
-								{benifits.map((item, index) => (
-									<li key={index}>
-										<p className="text-justify">{item}</p>
-									</li>
-								))}
-							</ol>
-						</AccordionBody>
-					</Accordion>
-					<Accordion open={openAccordion === 3}>
-						<AccordionHeader
-							className="font-semibold text-blue-gray-900 text-lg"
-							// onClick={() => handleOpen(3)}
-						>
-							Đánh giá của khách hàng
-						</AccordionHeader>
-					</Accordion>
-				</div>
 			</div>
-			<div className="w-full flex flex-col gap-5 md:w-1/2">
+			<div className="sm:row-span-2 sm:col-start-2 sm:row-start-1 col-start-1 row-start-2 row-end-3 flex flex-col gap-5">
 				<div className="flex gap-2">
 					{product.marketingPrice && (
 						<div className="text-lg px-3 py-1 border border-red-900 bg-red-900 text-white font-bold rounded">
@@ -191,7 +135,7 @@ const ProductDetail = () => {
 						{product.condition}
 					</div>
 				</div>
-				<h1 className="font-bold text-blue-gray-900 text-3xl text-justify">
+				<h1 className="font-bold text-blue-gray-900 sm:text-3xl text-lg text-justify">
 					{product.title}
 				</h1>
 				<div className="flex gap-2">
@@ -241,7 +185,7 @@ const ProductDetail = () => {
 					<div className="flex w-full gap-5">
 						{guaranteeCondition.map((item, index) => (
 							<div
-								className={`flex flex-col items-center w-1/3 px-3 py-2 border rounded hover:cursor-pointer ${
+								className={`flex flex-col items-center justify-center w-1/3 px-3 py-2 border rounded hover:cursor-pointer ${
 									item.time === guarantee
 										? "border-blue-600"
 										: "border-gray-600"
@@ -255,7 +199,9 @@ const ProductDetail = () => {
 									)
 								}
 							>
-								<p className="font-semibold">Bảo hành {item.time} tháng</p>
+								<p className="font-semibold text-center">
+									Bảo hành {item.time} tháng
+								</p>
 								<p>{formatCurrency(item.price)}</p>
 							</div>
 						))}
@@ -264,6 +210,62 @@ const ProductDetail = () => {
 				<p className="text-justify">
 					<b>Mô tả:</b> {product.shortDescription}
 				</p>
+			</div>
+			<div className="sm:col-start-1 sm:row-start-2 col-start-1 row-start-3">
+				<Accordion open={openAccordion === 1}>
+					<AccordionHeader
+						className="font-semibold text-blue-gray-900 text-lg"
+						onClick={() => handleOpen(1)}
+					>
+						Chính sách mua hàng và vận chuyển
+					</AccordionHeader>
+					<AccordionBody>
+						{term.map((item, index) => (
+							<div key={index}>
+								<ul className="list-disc pl-5">
+									{item.term.map((term, index) => (
+										<li key={index}>
+											<p className="text-justify">{term}</p>
+										</li>
+									))}
+								</ul>
+								<h2 className="font-semibold text-lg">Lưu ý</h2>
+								<ul className="list-disc pl-5">
+									{item.note.map((note, index) => (
+										<li key={index}>
+											<p className="text-justify">{note}</p>
+										</li>
+									))}
+								</ul>
+							</div>
+						))}
+					</AccordionBody>
+				</Accordion>
+				<Accordion open={openAccordion === 2}>
+					<AccordionHeader
+						className="font-semibold text-blue-gray-900 text-lg"
+						onClick={() => handleOpen(2)}
+					>
+						Quyền lợi mua hàng
+					</AccordionHeader>
+					<AccordionBody>
+						<ol className="list-decimal pl-5">
+							{benifits.map((item, index) => (
+								<li key={index}>
+									<p className="text-justify">{item}</p>
+								</li>
+							))}
+						</ol>
+					</AccordionBody>
+				</Accordion>
+				<Accordion open={openAccordion === 3}>
+					<AccordionHeader
+						className="font-semibold text-blue-gray-900 text-lg"
+						// onClick={() => handleOpen(3)}
+					>
+						Đánh giá của khách hàng
+					</AccordionHeader>
+				</Accordion>
 			</div>
 		</div>
 	);
