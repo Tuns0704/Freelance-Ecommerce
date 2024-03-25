@@ -5,14 +5,19 @@ import {
 	Accordion,
 	AccordionHeader,
 	AccordionBody,
+	Button,
 } from "@material-tailwind/react";
 import Loading from "../../cores/components/loading";
-// import { Button } from "@material-tailwind/react";
-// import DescriptionModal from "./descriptionModal";
 import { formatCurrency } from "./../../helper/formatCurrency";
 import { calculateDateShipping } from "./../../helper/calculateDateShipping";
-import { TruckIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
+import {
+	TruckIcon,
+	ShieldCheckIcon,
+	ShoppingCartIcon,
+	CreditCardIcon,
+} from "@heroicons/react/24/outline";
 import ImageSlider from "./imageSlider";
+import { formatPercentage } from "../../helper/formatPercentage";
 
 const term = [
 	{
@@ -155,9 +160,9 @@ const ProductDetail = () => {
 							</del>
 						)}
 						{product.marketingPrice && (
-							<del className="font-bold text-gray-500 line-through">
-								({product.marketingPrice.discountPercentage}%)
-							</del>
+							<p className="font-bold text-gray-500 line-through">
+								({formatPercentage(product.marketingPrice.discountPercentage)}%)
+							</p>
 						)}
 					</div>
 					<p className="font-semibold">
@@ -184,12 +189,9 @@ const ProductDetail = () => {
 					</p>
 					<div className="flex w-full gap-5">
 						{guaranteeCondition.map((item, index) => (
-							<div
-								className={`flex flex-col items-center justify-center w-1/3 px-3 py-2 border rounded hover:cursor-pointer ${
-									item.time === guarantee
-										? "border-blue-600"
-										: "border-gray-600"
-								}`}
+							<Button
+								className="w-1/3"
+								variant={item.time === guarantee ? "filled" : "outlined"}
 								key={index}
 								onClick={() =>
 									handleChangeGuarantee(
@@ -199,17 +201,42 @@ const ProductDetail = () => {
 									)
 								}
 							>
-								<p className="font-semibold text-center">
+								<p
+									className={`font-semibold text-center ${
+										item.time === guarantee ? "text-white" : ""
+									}`}
+								>
 									Bảo hành {item.time} tháng
 								</p>
-								<p>{formatCurrency(item.price)}</p>
-							</div>
+								<p
+									className={`text-center ${
+										item.time === guarantee ? "text-white" : ""
+									}`}
+								>
+									{formatCurrency(item.price)}
+								</p>
+							</Button>
 						))}
 					</div>
 				</div>
 				<p className="text-justify">
 					<b>Mô tả:</b> {product.shortDescription}
 				</p>
+				<div className="flex gap-5">
+					<Button
+						className="w-1/2 flex gap-2 justify-center items-center"
+						variant="outlined"
+					>
+						<ShoppingCartIcon className="w-6 h-6" /> Thêm vào giỏ
+					</Button>
+					<Button
+						className="w-1/2 flex gap-2 justify-center items-center"
+						variant="filled"
+					>
+						<CreditCardIcon className="w-6 h-6" />
+						Đặt hàng ngay
+					</Button>
+				</div>
 			</div>
 			<div className="sm:col-start-1 sm:row-start-2 col-start-1 row-start-3">
 				<Accordion open={openAccordion === 1}>
