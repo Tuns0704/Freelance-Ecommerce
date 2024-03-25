@@ -1,10 +1,25 @@
 import { formatCurrency } from "./../../helper/formatCurrency";
 import { filterPriceOptions } from "./../../constant/filter";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
+import { getListCategory } from "../../services/category";
 
 const RenderFilter = () => {
+	const [categories, setCategories] = useState([]);
+	const getCategories = async () => {
+		try {
+			const response = await getListCategory();
+			setCategories(response.data);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	useEffect(() => {
+		getCategories();
+	}, []);
+
 	return (
 		<aside className="px-3 py-2 border md:w-full sm:flex flex-col gap-2">
 			<div className="border-b">
@@ -35,11 +50,15 @@ const RenderFilter = () => {
 				</div>
 			</div>
 			<div className="border-b">
-				<div className="font-semibold">Trạng thái</div>
-				<label>
-					<input type="checkbox" className="mr-2" />
-					Còn hàng
-				</label>
+				<div className="font-semibold">Danh mục</div>
+				<div className="flex flex-col gap-1">
+					{categories.map((item) => (
+						<label key={item.id} className="flex">
+							<input type="checkbox" className="mr-2" />
+							<p className=" text-base">{item.vietnameseName}</p>
+						</label>
+					))}
+				</div>
 			</div>
 		</aside>
 	);

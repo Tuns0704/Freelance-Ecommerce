@@ -2,20 +2,34 @@ import { Button } from "@material-tailwind/react";
 import { PropTypes } from "prop-types";
 import { PhoneIcon, HeartIcon } from "@heroicons/react/24/outline";
 import { calculateDateShipping } from "./../../helper/calculateDateShipping";
+import { useNavigate } from "react-router-dom";
+import { formatCurrency } from "../../helper/formatCurrency";
+import { formatDate } from "../../helper/formatDate";
+import { formatPercentage } from "../../helper/formatPercentage";
 
 const CardItem = ({ product }) => {
+	const navigate = useNavigate();
+
+	const handleNavigateToDetail = () => {
+		navigate(`/product-detail/${product.id}`);
+	};
+
 	return (
 		<div className="flex flex-col sm:w-[49%] mb-4 md:w-full md:flex-row gap-3 rounded-md p-2 shadow">
 			<img
+				onClick={handleNavigateToDetail}
 				src={product.thumbnailImages?.[0]?.imageUrl}
-				className="md:w-40 h-40 object-cover rounded-lg hover:scale-105 transition-all duration-300"
+				className="md:w-40 h-40 object-contain rounded-lg hover:scale-105 transition-all duration-300 hover:cursor-pointer"
 			/>
 			<div className="flex flex-col gap-2 lg:w-3/5">
-				<h1 className="font-bold text-base h-12 overflow-clip">
+				<h1
+					onClick={handleNavigateToDetail}
+					className="font-bold text-base h-12 overflow-clip hover:cursor-pointer"
+				>
 					{product.name}
 				</h1>
 				<p className="text-sm">
-					<b>Model:</b> ASUS <b>SKU:</b> 134443717636
+					<b>Danh mục:</b> {product.category.vietnameseName}
 				</p>
 				<p className="text-sm">
 					<b>Giao hàng:</b> Thời gian giao hàng dự kiến{" "}
@@ -30,14 +44,27 @@ const CardItem = ({ product }) => {
 				</Button>
 			</div>
 			<div className="md:w-2/6 flex flex-col gap-1">
-				<div className="px-3 py-1 w-fit bg-red-900 rounded-md text-xs font-bold text-white">
-					Giảm 35%
+				<div className="flex gap-2">
+					{product.marketingPrice && (
+						<div className="flex items-center px-3 py-2 w-fit bg-red-900 rounded-md text-xs font-bold text-white">
+							Giảm {formatPercentage(product.marketingPrice.discountPercentage)}
+							%
+						</div>
+					)}
+					<div className="flex items-center px-3 py-2 w-fit bg-white rounded-md text-xs font-bold text-red-900 border border-red-900">
+						{product.condition}
+					</div>
 				</div>
-				<h1 className="text-lg font-bold">7.018.000 ₫</h1>
+
+				<h1 className="text-lg font-bold">
+					{formatCurrency(product.price[0].value)}
+				</h1>
 				<p className="text-sm">
-					Giá tốt nhất: <b>7.018.000 ₫</b>
+					Giá tốt nhất: <b>{formatCurrency(product.price[0].value)}</b>
 				</p>
-				<i className="text-sm text-gray-700">Lần cập nhật cuối: 26/01/2024</i>
+				<i className="text-sm text-gray-700">
+					Lần cập nhật cuối: {formatDate(product.price[0].lastUpdated)}
+				</i>
 				<Button className="flex py-2 justify-center items-center gap-2">
 					<PhoneIcon className="w-5 h-5" />
 					Liên hệ
@@ -45,7 +72,7 @@ const CardItem = ({ product }) => {
 				<div className="flex gap-2 items-center">
 					<img src="/img/ebay.png" className="w-12 h-12" alt="ebaylogo" />
 					<p className="text-sm">
-						Người bán: <b>{product.seller.username}</b>
+						Người bán: <b>{product?.seller?.username}</b>
 					</p>
 				</div>
 			</div>

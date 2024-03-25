@@ -6,6 +6,7 @@ import { getSaleProductByCategory } from "../../services/product";
 import { useEffect, useState } from "react";
 import Loading from "../../cores/components/loading";
 import { calculateSalePrice } from "../../helper/calculateSalePrice";
+import { formatPercentage } from "../../helper/formatPercentage";
 
 const FashionDeal = () => {
 	const [products, setProducts] = useState([]);
@@ -16,7 +17,6 @@ const FashionDeal = () => {
 		try {
 			const response = await getSaleProductByCategory(category);
 			setProducts(response.data.data);
-			console.log(response.data.data);
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
@@ -90,7 +90,8 @@ const FashionDeal = () => {
 							className="flex relative flex-col gap-2 bg-white shadow p-5 rounded-lg hover:cursor-pointer"
 						>
 							<label className="absolute px-2 rounded top-[-5px] z-40 left-[-5px] bg-red-900 text-white font-bold py-1">
-								Giảm {product.marketingPrice.discountPercentage}%
+								Giảm{" "}
+								{formatPercentage(product.marketingPrice.discountPercentage)}%
 							</label>
 							<img
 								src={product?.thumbnailImages?.[0]?.imageUrl}

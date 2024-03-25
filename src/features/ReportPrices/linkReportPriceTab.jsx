@@ -23,8 +23,8 @@ const LinkReportTab = () => {
 				setLoading(true);
 				const response = await reportPrice(itemIdMatch[1]);
 				setItem(response.data);
-				console.log(response.data);
 				setLoading(false);
+				console.log(response.data);
 			} catch (error) {
 				setLoading(false);
 				toast.error("Lỗi không xác định");
@@ -62,15 +62,15 @@ const LinkReportTab = () => {
 					<div className="flex flex-col md:flex-row gap-3 mt-5">
 						<div className="flex gap-2 md:w-2/3 sm:p-3">
 							<img
-								src={item.PictureURL[0]}
-								alt={item.Title}
+								src={item.thumbnailImages[0]}
+								alt={item.name}
 								className="w-1/4 lg:w-[200px] rounded-lg"
 							/>
 							<div className="flex flex-col gap-2">
-								<p className="font-semibold text-gray-900">{item.Title}</p>
+								<p className="font-semibold text-gray-900">{item.name}</p>
 								<div className="flex gap-2">
 									<div className="text-lg text-gray-900">
-										Giá sản phẩm: {item.ConvertedCurrentPrice}$
+										Giá sản phẩm: {formatCurrency(item.price)}
 									</div>
 									{item.DiscountPriceInfo && (
 										<del className="text-sm font-semibold text-red-400">
@@ -83,11 +83,8 @@ const LinkReportTab = () => {
 									id=""
 									className="text-ellipsis w-full px-3 py-2 border border-gray-300"
 								>
-									<option
-										className="border px-2 py-3"
-										value={item.PrimaryCategoryID}
-									>
-										{item.PrimaryCategoryName}
+									<option className="border px-2 py-3" value={item.condition}>
+										{item.condition}
 									</option>
 								</select>
 								<div></div>
@@ -98,7 +95,7 @@ const LinkReportTab = () => {
 								<p className="font-semibold text-3xl text-gray-900">Kết quả</p>
 								<div className="flex justify-between">
 									<p className="">Giá sản phẩm</p>
-									<p>{formatCurrency(300000)}</p>
+									<p>{formatCurrency(item.price)}</p>
 								</div>
 								<div className="flex justify-between">
 									<p className="">Phí vận chuyển và cân nặng</p>

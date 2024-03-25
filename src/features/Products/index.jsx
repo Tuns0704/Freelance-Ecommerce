@@ -89,6 +89,7 @@ const Products = () => {
 			setProducts(data.data);
 			setTotalProducts(data.totalCount);
 			setLoading(false);
+			console.log(data.data);
 		} catch (error) {
 			console.log(error);
 		}
