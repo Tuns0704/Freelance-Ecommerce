@@ -16,8 +16,8 @@ export const getProduct = (productId) =>
 		validateStatus: (status) => status < 400,
 	});
 
-export const getListProduct = (page) =>
-	axios.get(`${import.meta.env.VITE_API_URL}/ebay?page=${page}`, {
+export const getListProduct = (searchParams) =>
+	axios.get(`${import.meta.env.VITE_API_URL}/ebay?${searchParams}`, {
 		headers: {
 			"Content-Type": "application/json",
 		},

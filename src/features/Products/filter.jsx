@@ -4,59 +4,168 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
 import { getListCategory } from "../../services/category";
+import { Radio } from "@material-tailwind/react";
+import { useSearchParams } from "react-router-dom";
 
-const RenderFilter = () => {
-	const [categories, setCategories] = useState([]);
-	const getCategories = async () => {
-		try {
-			const response = await getListCategory();
-			setCategories(response.data);
-		} catch (error) {
-			console.error(error);
-		}
+const RenderFilter = ({ categories, setSearchParams }) => {
+	const [marketingPrice, setMarketingPrice] = useState({
+		isChecked: false,
+		value: false,
+	});
+
+	const [productPrice, setProductPrice] = useState({
+		isChecked: false,
+		value: {
+			minPrice: 0,
+			maxPrice: 0,
+		},
+	});
+
+	const [productCategory, setProductCategory] = useState({
+		isChecked: false,
+		value: "",
+	});
+
+	const handleChangeCategory = (category) => {
+		productCategory.value === category && productCategory.value === category
+			? setProductCategory({ isChecked: false, value: "" })
+			: setProductCategory({ isChecked: true, value: category });
 	};
 
+	const handleChangeProductPrice = (option) => {
+		productPrice.value.minPrice === option.minPrice &&
+		productPrice.value.maxPrice === option.maxPrice
+			? setProductPrice({
+					isChecked: false,
+					value: { minPrice: 0, maxPrice: 0 },
+			  })
+			: setProductPrice({ isChecked: true, value: option });
+	};
+
+	const handleSelectMarketingPrice = () => {
+		setMarketingPrice({
+			isChecked: !marketingPrice.isChecked,
+			value: !marketingPrice.isChecked,
+		});
+	};
 	useEffect(() => {
-		getCategories();
-	}, []);
+		const handleFilter = () => {
+			if (marketingPrice.isChecked) {
+				setSearchParams((prev) => {
+					prev.set("marketingPrice", marketingPrice.value);
+					return prev;
+				});
+			} else {
+				setSearchParams((prev) => {
+					prev.delete("marketingPrice");
+					return prev;
+				});
+			}
+			if (productCategory.isChecked) {
+				setSearchParams((prev) => {
+					prev.set("category", productCategory.value);
+					return prev;
+				});
+			} else {
+				setSearchParams((prev) => {
+					prev.delete("category");
+					return prev;
+				});
+			}
+
+			if (productPrice.isChecked) {
+				setSearchParams((prev) => {
+					prev.set("minPrice", productPrice.value.minPrice);
+					prev.set("maxPrice", productPrice.value.maxPrice);
+					return prev;
+				});
+			} else {
+				setSearchParams((prev) => {
+					prev.delete("minPrice");
+					prev.delete("maxPrice");
+					return prev;
+				});
+			}
+		};
+		handleFilter();
+	}, [
+		marketingPrice.isChecked,
+		marketingPrice.value,
+		productCategory.isChecked,
+		productCategory.value,
+		productPrice.isChecked,
+		productPrice.value.maxPrice,
+		productPrice.value.minPrice,
+		setSearchParams,
+	]);
 
 	return (
 		<aside className="px-3 py-2 border md:w-full sm:flex flex-col gap-2">
 			<div className="border-b">
-				<div className="font-semibold">Trạng thái</div>
-				<label>
-					<input type="checkbox" className="mr-2" />
-					Còn hàng
-				</label>
-			</div>
-			<div className="border-b">
 				<div className="font-semibold">Giá tốt</div>
-				<label>
-					<input type="checkbox" className="mr-2" />
-					Giá Tốt Hôm Nay
-				</label>
+				<div className="flex">
+					<Radio
+						name="marketingPrice"
+						onClick={handleSelectMarketingPrice}
+						defaultChecked={marketingPrice.isChecked}
+						containerProps={{
+							className: "py-2",
+						}}
+						label={
+							<h1 className="text-blue-gray-900 font-medium">
+								Giá tốt hôm nay
+							</h1>
+						}
+					/>
+				</div>
 			</div>
 			<div className="border-b">
 				<div className="font-semibold">Giá sản phẩm</div>
 				<div className="flex flex-col gap-1">
 					{filterPriceOptions.map((option, index) => (
-						<label key={index} className="flex">
-							<input type="checkbox" className="mr-2" />
-							<p className=" text-base">
-								{formatCurrency(option.from)} - {formatCurrency(option.to)}
-							</p>
-						</label>
+						<div key={index} className="flex">
+							<Radio
+								name="option"
+								onClick={() => handleChangeProductPrice(option)}
+								defaultChecked={
+									productPrice.isChecked && productPrice.value === option
+								}
+								containerProps={{
+									className: "py-2",
+								}}
+								label={
+									<h1 className="text-blue-gray-900 font-medium">
+										{formatCurrency(option.minPrice)} -{" "}
+										{formatCurrency(option.maxPrice)}
+									</h1>
+								}
+							/>
+						</div>
 					))}
 				</div>
 			</div>
 			<div className="border-b">
 				<div className="font-semibold">Danh mục</div>
-				<div className="flex flex-col gap-1">
+				<div className="flex flex-col">
 					{categories.map((item) => (
-						<label key={item.id} className="flex">
-							<input type="checkbox" className="mr-2" />
-							<p className=" text-base">{item.vietnameseName}</p>
-						</label>
+						<div key={item.id} className="flex">
+							<Radio
+								onClick={() => handleChangeCategory(item.englishName)}
+								defaultChecked={
+									productCategory.isChecked &&
+									productCategory.value === item.englishName
+								}
+								name="category"
+								containerProps={{
+									className: "py-2",
+								}}
+								label={
+									<h1 className="text-blue-gray-900 font-medium">
+										{item.vietnameseName}
+									</h1>
+								}
+							/>
+						</div>
 					))}
 				</div>
 			</div>
@@ -64,11 +173,19 @@ const RenderFilter = () => {
 	);
 };
 
-const FilterOption = ({ isOpen, closeModal }) => {
+RenderFilter.propTypes = {
+	categories: PropTypes.array,
+	setSearchParams: PropTypes.func,
+};
+
+const FilterOption = ({ isOpen, closeModal, setSearchParams, categories }) => {
 	return (
 		<>
 			<div className="hidden md:flex w-1/5">
-				<RenderFilter />
+				<RenderFilter
+					categories={categories}
+					setSearchParams={setSearchParams}
+				/>
 			</div>
 			<Transition appear show={isOpen} as={Fragment}>
 				<Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -103,7 +220,7 @@ const FilterOption = ({ isOpen, closeModal }) => {
 										Bộ lọc sản phẩm
 									</Dialog.Title>
 									<div className="mt-2">
-										<RenderFilter />
+										<RenderFilter categories={categories} />
 									</div>
 
 									<div className="mt-4">
@@ -128,6 +245,8 @@ const FilterOption = ({ isOpen, closeModal }) => {
 FilterOption.propTypes = {
 	isOpen: PropTypes.bool,
 	closeModal: PropTypes.func,
+	setSearchParams: PropTypes.func,
+	categories: PropTypes.array,
 };
 
 export default FilterOption;
