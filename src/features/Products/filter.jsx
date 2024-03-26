@@ -105,7 +105,8 @@ const RenderFilter = ({ categories, setSearchParams }) => {
 					<Radio
 						name="marketingPrice"
 						onClick={handleSelectMarketingPrice}
-						defaultChecked={marketingPrice.isChecked}
+						checked={marketingPrice.isChecked}
+						onChange={() => ""}
 						containerProps={{
 							className: "py-2",
 						}}
@@ -125,9 +126,10 @@ const RenderFilter = ({ categories, setSearchParams }) => {
 							<Radio
 								name="option"
 								onClick={() => handleChangeProductPrice(option)}
-								defaultChecked={
+								checked={
 									productPrice.isChecked && productPrice.value === option
 								}
+								onChange={() => ""}
 								containerProps={{
 									className: "py-2",
 								}}
@@ -149,10 +151,11 @@ const RenderFilter = ({ categories, setSearchParams }) => {
 						<div key={item.id} className="flex">
 							<Radio
 								onClick={() => handleChangeCategory(item.englishName)}
-								defaultChecked={
+								checked={
 									productCategory.isChecked &&
 									productCategory.value === item.englishName
 								}
+								onChange={() => ""}
 								name="category"
 								containerProps={{
 									className: "py-2",
