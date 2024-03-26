@@ -3,9 +3,7 @@ import { filterPriceOptions } from "./../../constant/filter";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
-import { getListCategory } from "../../services/category";
 import { Radio } from "@material-tailwind/react";
-import { useSearchParams } from "react-router-dom";
 
 const RenderFilter = ({ categories, setSearchParams }) => {
 	const [marketingPrice, setMarketingPrice] = useState({

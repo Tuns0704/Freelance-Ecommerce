@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getListProduct } from "../../services/product";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
@@ -16,11 +16,7 @@ const Products = () => {
 	const [loading, setLoading] = useState(false);
 	const [categories, setCategories] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams({
-		// page: 1,
-		// marketingPrice: false,
-		// category: "",
-		// minPrice: 0,
-		// maxPrice: 0,
+		page: 1,
 	});
 
 	const page = searchParams.get("page");
