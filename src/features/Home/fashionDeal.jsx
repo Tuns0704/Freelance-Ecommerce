@@ -5,8 +5,8 @@ import { Grid, Pagination } from "swiper/modules";
 import { getSaleProductByCategory } from "../../services/product";
 import { useEffect, useState } from "react";
 import Loading from "../../cores/components/loading";
-import { calculateSalePrice } from "../../helper/calculateSalePrice";
 import { formatPercentage } from "../../helper/formatPercentage";
+import { formatCurrency } from "./../../helper/formatCurrency";
 
 const FashionDeal = () => {
 	const [products, setProducts] = useState([]);
@@ -17,6 +17,7 @@ const FashionDeal = () => {
 		try {
 			const response = await getSaleProductByCategory(category);
 			setProducts(response.data.data);
+			console.log(response.data.data);
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
@@ -103,23 +104,16 @@ const FashionDeal = () => {
 							</h4>
 							<section className="flex justify-start items-center gap-2">
 								<h2 className="text-2xl font-bold">
-									{/* {formatCurrency(product.marketingPrice.originalPrice)} */}
-									{calculateSalePrice(
-										product.marketingPrice.originalPrice.value,
-										product.marketingPrice.discountAmount.value
-									)}
-									$
+									{formatCurrency(product.price[0].value)}
 								</h2>
 								<del className="text-gray-500 text-sm">
-									{/* {formatCurrency(product.originPrice)} */}
-									{product.marketingPrice.originalPrice.value}$
+									{formatCurrency(product.marketingPrice.originalPrice.value)}
 								</del>
 							</section>
 							<i className="font-medium text-sm">
 								Giá tốt nhất{" "}
 								<b>
-									{/* {formatCurrency(product.price)} */}
-									{product.marketingPrice.originalPrice.value}$
+									{formatCurrency(product.marketingPrice.originalPrice.value)}
 								</b>
 							</i>
 							<Button

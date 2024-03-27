@@ -79,19 +79,22 @@ const Products = () => {
 				<FilterOption
 					isOpen={isOpen}
 					closeModal={closeModal}
+					searchParams={searchParams}
 					setSearchParams={setSearchParams}
 					categories={categories}
 				/>
-				<div className="flex flex-col sm:w-full md:w-5/6">
-					<div className="flex items-center gap-2">
+				<div className="flex flex-col sm:w-full md:w-4/6 xl:w-5/6">
+					<div className="flex items-center gap-2 mb-5">
 						<Button
-							className="w-fit p-2 rounded-md"
+							className="w-fit p-2 rounded-md md:hidden"
 							variant="outlined"
 							onClick={openModal}
 						>
 							<AdjustmentsHorizontalIcon className="h-5 w-5" />
 						</Button>
-						<p className="font-medium">Tổng số sản phẩm: {totalProducts}</p>
+						<p className="font-semibold text-lg">
+							Tổng số sản phẩm: {totalProducts}
+						</p>
 					</div>
 					{loading ? (
 						<Loading />

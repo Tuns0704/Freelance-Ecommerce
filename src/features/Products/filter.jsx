@@ -3,9 +3,10 @@ import { filterPriceOptions } from "./../../constant/filter";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
-import { Radio } from "@material-tailwind/react";
+import { IconButton, Radio } from "@material-tailwind/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
-const RenderFilter = ({ categories, setSearchParams }) => {
+const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 	const [marketingPrice, setMarketingPrice] = useState({
 		isChecked: false,
 		value: false,
@@ -24,6 +25,13 @@ const RenderFilter = ({ categories, setSearchParams }) => {
 		value: "",
 	});
 
+	const handleSelectMarketingPrice = () => {
+		setMarketingPrice({
+			isChecked: !marketingPrice.isChecked,
+			value: !marketingPrice.isChecked,
+		});
+	};
+
 	const handleChangeCategory = (category) => {
 		productCategory.value === category && productCategory.value === category
 			? setProductCategory({ isChecked: false, value: "" })
@@ -40,60 +48,95 @@ const RenderFilter = ({ categories, setSearchParams }) => {
 			: setProductPrice({ isChecked: true, value: option });
 	};
 
-	const handleSelectMarketingPrice = () => {
-		setMarketingPrice({
-			isChecked: !marketingPrice.isChecked,
-			value: !marketingPrice.isChecked,
-		});
-	};
 	useEffect(() => {
+		const param = new URLSearchParams(searchParams);
+
+		const handleInitFilter = () => {
+			if (param.has("marketingPrice")) {
+				setMarketingPrice({ isChecked: true, value: true });
+			}
+			if (param.has("minPrice") && param.has("maxPrice")) {
+				setProductPrice({
+					isChecked: true,
+					value: {
+						minPrice: parseInt(param.get("minPrice")),
+						maxPrice: parseInt(param.get("maxPrice")),
+					},
+				});
+			}
+			if (param.has("category")) {
+				setProductCategory({
+					isChecked: true,
+					value: param.get("category"),
+				});
+			}
+		};
+		handleInitFilter();
+	}, []);
+
+	useEffect(() => {
+		const param = new URLSearchParams(searchParams);
+
 		const handleFilter = () => {
 			if (marketingPrice.isChecked) {
 				setSearchParams((prev) => {
 					prev.set("marketingPrice", marketingPrice.value);
 					return prev;
 				});
-			} else {
+			}
+			if (
+				marketingPrice.isChecked === false &&
+				marketingPrice.value !== param.has("marketingPrice")
+			) {
 				setSearchParams((prev) => {
 					prev.delete("marketingPrice");
 					return prev;
 				});
 			}
-			if (productCategory.isChecked) {
-				setSearchParams((prev) => {
-					prev.set("category", productCategory.value);
-					return prev;
-				});
-			} else {
-				setSearchParams((prev) => {
-					prev.delete("category");
-					return prev;
-				});
-			}
-
-			if (productPrice.isChecked) {
+			if (
+				productPrice.isChecked &&
+				productPrice.value.minPrice !== param.get("minPrice") &&
+				productPrice.value.maxPrice !== param.get("maxPrice")
+			) {
 				setSearchParams((prev) => {
 					prev.set("minPrice", productPrice.value.minPrice);
 					prev.set("maxPrice", productPrice.value.maxPrice);
 					return prev;
 				});
-			} else {
+			}
+			if (
+				productPrice.isChecked === false &&
+				param.has("minPrice") &&
+				param.has("maxPrice")
+			) {
 				setSearchParams((prev) => {
 					prev.delete("minPrice");
 					prev.delete("maxPrice");
 					return prev;
 				});
 			}
+			if (
+				productCategory.isChecked &&
+				productCategory.value !== param.get("category")
+			) {
+				setSearchParams((prev) => {
+					prev.set("category", productCategory.value);
+					return prev;
+				});
+			}
+			if (productCategory.isChecked === false && param.has("category")) {
+				setSearchParams((prev) => {
+					prev.delete("category");
+					return prev;
+				});
+			}
 		};
 		handleFilter();
 	}, [
-		marketingPrice.isChecked,
-		marketingPrice.value,
-		productCategory.isChecked,
-		productCategory.value,
-		productPrice.isChecked,
-		productPrice.value.maxPrice,
-		productPrice.value.minPrice,
+		marketingPrice,
+		productCategory,
+		productPrice,
+		searchParams,
 		setSearchParams,
 	]);
 
@@ -127,7 +170,9 @@ const RenderFilter = ({ categories, setSearchParams }) => {
 								name="option"
 								onClick={() => handleChangeProductPrice(option)}
 								checked={
-									productPrice.isChecked && productPrice.value === option
+									productPrice.isChecked &&
+									productPrice.value.maxPrice === option.maxPrice &&
+									productPrice.value.minPrice === option.minPrice
 								}
 								onChange={() => ""}
 								containerProps={{
@@ -177,18 +222,26 @@ const RenderFilter = ({ categories, setSearchParams }) => {
 RenderFilter.propTypes = {
 	categories: PropTypes.array,
 	setSearchParams: PropTypes.func,
+	searchParams: PropTypes.object,
 };
 
-const FilterOption = ({ isOpen, closeModal, setSearchParams, categories }) => {
+const FilterOption = ({
+	isOpen,
+	closeModal,
+	setSearchParams,
+	categories,
+	searchParams,
+}) => {
 	return (
 		<>
-			<div className="hidden md:flex w-1/5">
+			<div className="hidden md:flex w-2/6 xl:w-1/5">
 				<RenderFilter
 					categories={categories}
 					setSearchParams={setSearchParams}
+					searchParams={searchParams}
 				/>
 			</div>
-			<Transition appear show={isOpen} as={Fragment}>
+			<Transition appear show={isOpen}>
 				<Dialog as="div" className="relative z-10" onClose={closeModal}>
 					<Transition.Child
 						as={Fragment}
@@ -216,22 +269,19 @@ const FilterOption = ({ isOpen, closeModal, setSearchParams, categories }) => {
 								<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
 									<Dialog.Title
 										as="h3"
-										className="text-lg font-medium leading-6 text-gray-900"
+										className="text-lg flex justify-between items-center font-medium leading-6 text-gray-900"
 									>
-										Bộ lọc sản phẩm
+										<div>Bộ lọc sản phẩm</div>
+										<IconButton onClick={closeModal}>
+											<XMarkIcon className="w-5 h-5" />
+										</IconButton>
 									</Dialog.Title>
 									<div className="mt-2">
-										<RenderFilter categories={categories} />
-									</div>
-
-									<div className="mt-4">
-										<button
-											type="button"
-											className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-											onClick={closeModal}
-										>
-											Got it, thanks!
-										</button>
+										<RenderFilter
+											categories={categories}
+											setSearchParams={setSearchParams}
+											searchParams={searchParams}
+										/>
 									</div>
 								</Dialog.Panel>
 							</Transition.Child>
@@ -248,6 +298,7 @@ FilterOption.propTypes = {
 	closeModal: PropTypes.func,
 	setSearchParams: PropTypes.func,
 	categories: PropTypes.array,
+	searchParams: PropTypes.object,
 };
 
 export default FilterOption;
