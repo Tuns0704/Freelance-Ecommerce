@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Loading from "../../cores/components/loading";
 import { formatPercentage } from "../../helper/formatPercentage";
 import { formatCurrency } from "./../../helper/formatCurrency";
+import { useNavigate } from "react-router-dom";
 
 const FashionDeal = () => {
 	const [products, setProducts] = useState([]);
@@ -28,6 +29,16 @@ const FashionDeal = () => {
 	useEffect(() => {
 		getSaleProduct("Fashion");
 	}, []);
+
+	const navigate = useNavigate();
+
+	const handleNavigateToDetail = (id) => {
+		navigate(`/product-detail/${id}`);
+	};
+
+	const handleNavigateToProductsPage = () => {
+		navigate("/products?category=Fashion&marketingPrice=true");
+	};
 
 	return (
 		<section className="flex flex-col">
@@ -96,10 +107,14 @@ const FashionDeal = () => {
 							</label>
 							<img
 								src={product?.thumbnailImages?.[0]?.imageUrl}
+								onClick={() => handleNavigateToDetail(product.id)}
 								alt="products"
 								className="w-full object-cover h-48 scale-100 hover:scale-105 transition-all duration-500 ease-in-out rounded-lg"
 							/>
-							<h4 className="pt-5 font-semibold text-sm text-gray-800">
+							<h4
+								onClick={() => handleNavigateToDetail(product.id)}
+								className="pt-5 font-semibold text-sm text-gray-800"
+							>
 								{product?.name}
 							</h4>
 							<section className="flex justify-start items-center gap-2">
@@ -132,6 +147,7 @@ const FashionDeal = () => {
 					variant="outlined"
 					size="md"
 					className="font-medium text-sm font-opensans"
+					onClick={handleNavigateToProductsPage}
 				>
 					Tất cả sản phẩm
 				</Button>

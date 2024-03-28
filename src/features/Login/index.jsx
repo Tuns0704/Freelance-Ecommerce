@@ -1,35 +1,36 @@
-import { Input, Checkbox, Button, Typography } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Button, Typography } from "@material-tailwind/react";
 import { loginGoogle } from "../../services/auth";
 
 const Login = () => {
 	const handleLoginGoogle = async () => {
-		const response = await loginGoogle();
-		console.log(response);
+		const link = "https://api-ebay.onrender.com/api/auth/google/login";
+		var win = window.open(link, "_self");
+		win.focus();
 	};
 
 	const handleLoginFacebook = () => {
-		const response = loginGoogle();
-		console.log(response);
+		const link = "https://api-ebay.onrender.com/api/auth/facebook/login";
+		var win = window.open(link, "_self");
+		win.win.focus();
 	};
 
 	return (
 		<section className="flex h-[85vh] p-8 gap-4">
 			<div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
 				<div className="text-center">
-					<Typography variant="h2" className="font-bold mb-4">
-						Sign In
+					<Typography variant="h2" className="font-bold">
+						Đăng nhập
 					</Typography>
-					<Typography
+					{/* <Typography
 						variant="paragraph"
 						color="blue-gray"
 						className="text-lg font-normal"
 					>
 						Enter your email and password to Sign In.
-					</Typography>
+					</Typography> */}
 				</div>
-				<form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
-					<div className="mb-1 flex flex-col gap-6">
+				<form className="mt-4 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+					{/* <div className="mb-1 flex flex-col gap-6">
 						<Typography
 							variant="small"
 							color="blue-gray"
@@ -100,13 +101,12 @@ const Login = () => {
 						<Typography variant="small" className="font-medium text-gray-900">
 							<a href="#">Forgot Password</a>
 						</Typography>
-					</div>
+					</div> */}
 					<div className="space-y-4 mt-8">
 						<Button
 							onClick={handleLoginGoogle}
 							size="lg"
-							color="white"
-							className="flex items-center gap-2 justify-center shadow-md"
+							className="flex items-center gap-2 justify-center"
 							fullWidth
 						>
 							<svg
@@ -145,12 +145,11 @@ const Login = () => {
 									</clipPath>
 								</defs>
 							</svg>
-							<span>Sign in With Google</span>
+							<span>Đăng nhập với Google</span>
 						</Button>
 						<Button
 							onClick={handleLoginFacebook}
 							size="lg"
-							color="white"
 							className="flex items-center gap-2 justify-center shadow-md"
 							fullWidth
 						>
@@ -172,10 +171,10 @@ const Login = () => {
 									clipRule="evenodd"
 								></path>
 							</svg>
-							<span>Sign in With Facebook</span>
+							<span>Đăng nhập với Facebook</span>
 						</Button>
 					</div>
-					<Typography
+					{/* <Typography
 						variant="paragraph"
 						className="text-center text-blue-gray-500 font-medium mt-4"
 					>
@@ -183,7 +182,7 @@ const Login = () => {
 						<Link to="/register" className="text-gray-900 ml-1 underline">
 							Create account
 						</Link>
-					</Typography>
+					</Typography> */}
 				</form>
 			</div>
 			<div className="w-2/5 h-full hidden lg:block">

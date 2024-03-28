@@ -6,7 +6,12 @@ import "swiper/css/grid";
 import "swiper/css/scrollbar";
 
 function App() {
-	// const { pathname } = useLocation();
+	const queryParameters = new URLSearchParams(window.location.search);
+	const token = queryParameters.get("token");
+
+	if (token) {
+		localStorage.setItem("token", token);
+	}
 
 	return (
 		<>

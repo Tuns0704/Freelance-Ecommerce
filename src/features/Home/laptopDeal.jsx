@@ -7,10 +7,17 @@ import { useEffect, useState } from "react";
 import Loading from "../../cores/components/loading";
 import { formatPercentage } from "../../helper/formatPercentage";
 import { formatCurrency } from "./../../helper/formatCurrency";
+import { useNavigate } from "react-router-dom";
 
 const LaptopDeal = () => {
+	const navigate = useNavigate();
+
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
+
+	const handleNavigateToDetail = (id) => {
+		navigate(`/product-detail/${id}`);
+	};
 
 	const getSaleProduct = async (category) => {
 		setLoading(true);
@@ -22,6 +29,10 @@ const LaptopDeal = () => {
 			setLoading(false);
 			console.error(error);
 		}
+	};
+
+	const handleNavigateToProductsPage = () => {
+		navigate("/products?category=Laptop&marketingPrice=true");
 	};
 
 	useEffect(() => {
@@ -95,10 +106,14 @@ const LaptopDeal = () => {
 							</label>
 							<img
 								src={product?.thumbnailImages?.[0]?.imageUrl}
+								onClick={() => handleNavigateToDetail(product.id)}
 								alt="products"
 								className="w-3/4 object-contain self-center h-40 scale-100 hover:scale-110 transition-all duration-500 ease-in-out rounded-lg"
 							/>
-							<h4 className="pt-5 font-semibold text-sm text-gray-800">
+							<h4
+								onClick={() => handleNavigateToDetail(product.id)}
+								className="pt-5 font-semibold text-sm text-gray-800"
+							>
 								{product?.name}
 							</h4>
 							<section className="flex justify-start items-center gap-2">
@@ -128,6 +143,7 @@ const LaptopDeal = () => {
 					variant="outlined"
 					size="md"
 					className="font-medium text-sm font-opensans"
+					onClick={handleNavigateToProductsPage}
 				>
 					Tất cả sản phẩm
 				</Button>

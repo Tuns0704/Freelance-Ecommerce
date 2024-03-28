@@ -65,9 +65,9 @@ export function Navbar({ routes }) {
 		navigate("/login");
 	};
 
-	const navigateRegister = () => {
-		navigate("/register");
-	};
+	// const navigateRegister = () => {
+	// 	navigate("/register");
+	// };
 
 	return (
 		<nav className="sticky rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 mb-10 mx-5 sm:mx-20 z-50 top-3 px-4 py-3">
@@ -81,7 +81,7 @@ export function Navbar({ routes }) {
 				<div className="hidden gap-2 lg:flex">
 					<div className="flex items-center gap-2">
 						<div className="flex gap-2">
-							<Button
+							{/* <Button
 								onClick={navigateRegister}
 								variant="text"
 								size="sm"
@@ -89,7 +89,7 @@ export function Navbar({ routes }) {
 								className="font-opensans"
 							>
 								Đăng ký
-							</Button>
+							</Button> */}
 							<Button
 								onClick={navigateLogin}
 								variant="text"

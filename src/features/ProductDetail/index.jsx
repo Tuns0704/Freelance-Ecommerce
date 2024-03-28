@@ -99,13 +99,14 @@ const ProductDetail = () => {
 			try {
 				const response = await getProduct(id);
 				setProduct(response.data);
+				console.log(response.data);
 				const combinedImages = [
 					{
 						imageUrl: response.data.image.imageUrl,
 						width: response.data.image.width,
 						height: response.data.image.height,
 					},
-					...response.data.additionalImages,
+					...(response.data.additionalImages || []),
 				];
 				setImages(combinedImages);
 				setPrice(response.data.price.value);
