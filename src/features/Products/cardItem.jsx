@@ -1,7 +1,7 @@
 import { Button } from "@material-tailwind/react";
 import { PropTypes } from "prop-types";
 import { PhoneIcon, HeartIcon } from "@heroicons/react/24/outline";
-import { calculateDateShipping } from "./../../helper/calculateDateShipping";
+import { calculateDateShipping } from "../../helper/calculateDateShipping";
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "../../helper/formatCurrency";
 import { formatDate } from "../../helper/formatDate";

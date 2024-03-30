@@ -1,4 +1,4 @@
-import { useState, useEffect, createElement } from "react";
+import { useState, useEffect, createElement, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -8,8 +8,12 @@ import {
 	IconButton,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { AppContext } from "./../context/app.context";
+import { SET_TOKEN, SET_AUTHENTICATED } from "./../context/app.context";
 
 export function Navbar({ routes }) {
+	const navigate = useNavigate();
+	const { state, dispatchAuth } = useContext(AppContext);
 	const [openNav, setOpenNav] = useState(false);
 
 	useEffect(() => {
@@ -19,7 +23,22 @@ export function Navbar({ routes }) {
 		);
 	}, []);
 
-	const navigate = useNavigate();
+	const handleLogout = () => {
+		const urlWithoutToken = window.location.href.split("?")[0];
+		window.history.replaceState({}, document.title, urlWithoutToken);
+
+		localStorage.removeItem("token");
+		dispatchAuth({ type: SET_TOKEN, payload: null });
+		dispatchAuth({ type: SET_AUTHENTICATED, payload: false });
+	};
+
+	const navigateLogin = () => {
+		navigate("/login");
+	};
+
+	const navigateProfile = () => {
+		navigate("/profile");
+	};
 
 	const navList = (
 		<ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -61,14 +80,6 @@ export function Navbar({ routes }) {
 		</ul>
 	);
 
-	const navigateLogin = () => {
-		navigate("/login");
-	};
-
-	// const navigateRegister = () => {
-	// 	navigate("/register");
-	// };
-
 	return (
 		<nav className="sticky rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 mb-10 mx-5 sm:mx-20 z-50 top-3 px-4 py-3">
 			<div className="flex items-center justify-between text-white">
@@ -81,24 +92,38 @@ export function Navbar({ routes }) {
 				<div className="hidden gap-2 lg:flex">
 					<div className="flex items-center gap-2">
 						<div className="flex gap-2">
-							{/* <Button
-								onClick={navigateRegister}
-								variant="text"
-								size="sm"
-								color="white"
-								className="font-opensans"
-							>
-								Đăng ký
-							</Button> */}
-							<Button
-								onClick={navigateLogin}
-								variant="text"
-								size="sm"
-								color="white"
-								className="font-opensans"
-							>
-								Đăng nhập
-							</Button>
+							{state.isAuthenticated ? (
+								<>
+									<Button
+										onClick={navigateProfile}
+										variant="text"
+										size="sm"
+										color="white"
+										className="font-opensans"
+									>
+										Hồ sơ
+									</Button>
+									<Button
+										onClick={handleLogout}
+										variant="text"
+										size="sm"
+										color="white"
+										className="font-opensans"
+									>
+										Đăng xuất
+									</Button>
+								</>
+							) : (
+								<Button
+									onClick={navigateLogin}
+									variant="text"
+									size="sm"
+									color="white"
+									className="font-opensans"
+								>
+									Đăng nhập
+								</Button>
+							)}
 						</div>
 					</div>
 				</div>

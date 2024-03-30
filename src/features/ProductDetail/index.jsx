@@ -8,8 +8,8 @@ import {
 	Button,
 } from "@material-tailwind/react";
 import Loading from "../../cores/components/loading";
-import { formatCurrency } from "./../../helper/formatCurrency";
-import { calculateDateShipping } from "./../../helper/calculateDateShipping";
+import { formatCurrency } from "../../helper/formatCurrency";
+import { calculateDateShipping } from "../../helper/calculateDateShipping";
 import {
 	TruckIcon,
 	ShieldCheckIcon,

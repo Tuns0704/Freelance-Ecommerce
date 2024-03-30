@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { useState } from "react";
-import { formatCurrency } from "./../../helper/formatCurrency";
+import { formatCurrency } from "../../helper/formatCurrency";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Grid, Pagination } from "swiper/modules";
 

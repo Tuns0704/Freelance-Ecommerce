@@ -6,7 +6,7 @@ import { getSaleProductByCategory } from "../../services/product";
 import { useEffect, useState } from "react";
 import Loading from "../../cores/components/loading";
 import { formatPercentage } from "../../helper/formatPercentage";
-import { formatCurrency } from "./../../helper/formatCurrency";
+import { formatCurrency } from "../../helper/formatCurrency";
 import { useNavigate } from "react-router-dom";
 
 const FashionDeal = () => {
@@ -18,7 +18,6 @@ const FashionDeal = () => {
 		try {
 			const response = await getSaleProductByCategory(category);
 			setProducts(response.data.data);
-			console.log(response.data.data);
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);

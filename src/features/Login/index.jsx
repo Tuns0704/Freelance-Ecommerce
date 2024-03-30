@@ -1,5 +1,4 @@
 import { Button, Typography } from "@material-tailwind/react";
-import { loginGoogle } from "../../services/auth";
 
 const Login = () => {
 	const handleLoginGoogle = async () => {

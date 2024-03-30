@@ -6,7 +6,7 @@ import { getSaleProductByCategory } from "../../services/product";
 import { useEffect, useState } from "react";
 import Loading from "../../cores/components/loading";
 import { formatPercentage } from "../../helper/formatPercentage";
-import { formatCurrency } from "./../../helper/formatCurrency";
+import { formatCurrency } from "../../helper/formatCurrency";
 import { useNavigate } from "react-router-dom";
 
 const LaptopDeal = () => {

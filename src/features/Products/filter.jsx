@@ -1,4 +1,4 @@
-import { formatCurrency } from "./../../helper/formatCurrency";
+import { formatCurrency } from "../../helper/formatCurrency";
 import { filterPriceOptions } from "./../../constant/filter";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
