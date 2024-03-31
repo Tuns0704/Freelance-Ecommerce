@@ -8,6 +8,7 @@ import Loading from "../../cores/components/loading";
 import { formatPercentage } from "../../helper/formatPercentage";
 import { formatCurrency } from "../../helper/formatCurrency";
 import { useNavigate } from "react-router-dom";
+import AddToCartButton from "./../../cores/components/addToCart";
 
 const FashionDeal = () => {
 	const [products, setProducts] = useState([]);
@@ -130,13 +131,10 @@ const FashionDeal = () => {
 									{formatCurrency(product.marketingPrice.originalPrice.value)}
 								</b>
 							</i>
-							<Button
-								variant="filled"
-								size="lg"
-								className="font-medium text-sm font-opensans"
-							>
-								Mua ngay
-							</Button>
+							<AddToCartButton
+								productId={product.id}
+								productPrice={product.price[0].value}
+							/>
 						</SwiperSlide>
 					))
 				)}

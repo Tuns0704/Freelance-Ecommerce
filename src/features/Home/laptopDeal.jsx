@@ -8,6 +8,7 @@ import Loading from "../../cores/components/loading";
 import { formatPercentage } from "../../helper/formatPercentage";
 import { formatCurrency } from "../../helper/formatCurrency";
 import { useNavigate } from "react-router-dom";
+import AddToCartButton from "../../cores/components/addToCart";
 
 const LaptopDeal = () => {
 	const navigate = useNavigate();
@@ -127,13 +128,10 @@ const LaptopDeal = () => {
 							<i className="font-medium text-sm">
 								Giá tốt nhất <b>{formatCurrency(product.price[0].value)}</b>
 							</i>
-							<Button
-								variant="filled"
-								size="lg"
-								className="font-medium text-sm font-opensans"
-							>
-								Mua ngay
-							</Button>
+							<AddToCartButton
+								productId={product.id}
+								productPrice={product.price[0].value}
+							/>
 						</SwiperSlide>
 					))
 				)}

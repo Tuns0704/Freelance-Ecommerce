@@ -1,11 +1,10 @@
-import { Button } from "@material-tailwind/react";
 import { PropTypes } from "prop-types";
-import { PhoneIcon, HeartIcon } from "@heroicons/react/24/outline";
 import { calculateDateShipping } from "../../helper/calculateDateShipping";
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "../../helper/formatCurrency";
 import { formatDate } from "../../helper/formatDate";
 import { formatPercentage } from "../../helper/formatPercentage";
+import AddToCartButton from "./../../cores/components/addToCart";
 
 const CardItem = ({ product }) => {
 	const navigate = useNavigate();
@@ -35,13 +34,12 @@ const CardItem = ({ product }) => {
 					<b>Giao hàng:</b> Thời gian giao hàng dự kiến{" "}
 					{calculateDateShipping()}
 				</p>
-				<Button
-					variant="outlined"
-					className="flex w-fit py-2 px-3 justify-center items-center gap-2"
-				>
-					<HeartIcon className="w-5 h-5" />
-					Quan tâm
-				</Button>
+				<div className="w-2/5">
+					<AddToCartButton
+						productId={product.id}
+						productPrice={product.price[0].value}
+					/>
+				</div>
 			</div>
 			<div className="md:w-2/6 flex flex-col gap-1">
 				<div className="flex gap-2">
@@ -65,10 +63,10 @@ const CardItem = ({ product }) => {
 				<i className="text-sm text-gray-700">
 					Lần cập nhật cuối: {formatDate(product.price[0].lastUpdated)}
 				</i>
-				<Button className="flex py-2 justify-center items-center gap-2">
-					<PhoneIcon className="w-5 h-5" />
-					Liên hệ
-				</Button>
+				<AddToCartButton
+					productId={product.id}
+					productPrice={product.price[0].value}
+				/>
 				<div className="flex gap-2 items-center">
 					<img src="/img/ebay.png" className="w-12 h-12" alt="ebaylogo" />
 					<p className="text-sm">
