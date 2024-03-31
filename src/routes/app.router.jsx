@@ -25,12 +25,8 @@ export const AppRouter = () => {
 	const { state } = useContext(AppContext);
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
-		if (token) {
-			setUserRole(decodeToken(token).role);
-		}
-		if (decodeToken(token).role === "") {
-			window.location.reload();
+		if (state.token !== null) {
+			setUserRole(decodeToken(state.token).role);
 		}
 	}, []);
 
