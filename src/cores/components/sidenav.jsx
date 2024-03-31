@@ -9,7 +9,7 @@ import {
 
 export function Sidenav({ brandName, routes }) {
 	const [controller, dispatch] = useMaterialTailwindController();
-	const { sidenavColor, sidenavType, openSidenav } = controller;
+	const { sidenavType, openSidenav } = controller;
 	const sidenavTypes = {
 		dark: "bg-gradient-to-br from-gray-800 to-gray-900",
 		white: "bg-white shadow-sm",
@@ -24,12 +24,7 @@ export function Sidenav({ brandName, routes }) {
 		>
 			<div className={`relative`}>
 				<Link to="/" className="py-6 px-8 text-center">
-					<Typography
-						variant="h6"
-						color={sidenavType === "dark" ? "white" : "blue-gray"}
-					>
-						{brandName}
-					</Typography>
+					<Typography variant="h6">{brandName}</Typography>
 				</Link>
 				<IconButton
 					variant="text"
@@ -49,7 +44,6 @@ export function Sidenav({ brandName, routes }) {
 							<li className="mx-3.5 mt-4 mb-2">
 								<Typography
 									variant="small"
-									color={sidenavType === "dark" ? "white" : "blue-gray"}
 									className="font-black uppercase opacity-75"
 								>
 									{title}
@@ -62,13 +56,7 @@ export function Sidenav({ brandName, routes }) {
 									{({ isActive }) => (
 										<Button
 											variant={isActive ? "gradient" : "text"}
-											color={
-												isActive
-													? sidenavColor
-													: sidenavType === "dark"
-													? "white"
-													: "blue-gray"
-											}
+											color={isActive ? "black" : "blue-gray"}
 											className="flex items-center gap-4 px-4 capitalize"
 											fullWidth
 										>
@@ -92,7 +80,6 @@ export function Sidenav({ brandName, routes }) {
 }
 
 Sidenav.propTypes = {
-	brandImg: PropTypes.string,
 	brandName: PropTypes.string,
 	routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -18,17 +18,19 @@ import { AppContext } from "./../cores/context/app.context";
 import Profile from "../features/Profile";
 import { decodeToken } from "../helper/decodeToken";
 import AdminContainer from "../container/admin.container";
+import ReportPrice from "../features/ReportPrices";
 
 export const AppRouter = () => {
 	const [userRole, setUserRole] = useState("");
 	const { state } = useContext(AppContext);
+	console.log(userRole);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		if (token) {
 			setUserRole(decodeToken(token).role);
 		}
-	}, []);
+	}, [userRole]);
 
 	return (
 		<Routes>
@@ -50,7 +52,7 @@ export const AppRouter = () => {
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
 						<Route path="/products" element={<Products />} />
-						<Route path="/report-price" element={<Products />} />
+						<Route path="/report-price" element={<ReportPrice />} />
 						<Route path="/product-detail/:id" element={<ProductDetail />} />
 						<Route path="/about-us" element={<AboutUs />} />
 						<Route path="/contact-us" element={<ContactUs />} />
