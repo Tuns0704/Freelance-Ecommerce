@@ -23,14 +23,16 @@ import ReportPrice from "../features/ReportPrices";
 export const AppRouter = () => {
 	const [userRole, setUserRole] = useState("");
 	const { state } = useContext(AppContext);
-	console.log(userRole);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		if (token) {
 			setUserRole(decodeToken(token).role);
 		}
-	}, [userRole]);
+		if (decodeToken(token).role === "") {
+			window.location.reload();
+		}
+	}, []);
 
 	return (
 		<Routes>
