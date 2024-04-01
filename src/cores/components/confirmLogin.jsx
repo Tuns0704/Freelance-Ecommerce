@@ -1,6 +1,5 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Transition, Dialog } from "@headlessui/react";
-import { Fragment } from "react";
+import { Dialog } from "@headlessui/react";
 import { Button } from "@material-tailwind/react";
 import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";

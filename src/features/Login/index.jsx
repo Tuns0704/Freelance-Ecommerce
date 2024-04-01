@@ -3,13 +3,13 @@ import { Button, Typography } from "@material-tailwind/react";
 const Login = () => {
 	const handleLoginGoogle = async () => {
 		const link = "https://api-ebay.onrender.com/api/auth/google/login";
-		window.open(link, "_blank");
+		window.open(link, "_self");
 		window.close();
 	};
 
 	const handleLoginFacebook = () => {
 		const link = "https://api-ebay.onrender.com/api/auth/facebook/login";
-		window.open(link, "_blank");
+		window.open(link, "_self");
 		window.close();
 	};
 
