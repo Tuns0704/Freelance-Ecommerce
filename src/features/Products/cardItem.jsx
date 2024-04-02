@@ -5,9 +5,12 @@ import { formatCurrency } from "../../helper/formatCurrency";
 import { formatDate } from "../../helper/formatDate";
 import { formatPercentage } from "../../helper/formatPercentage";
 import AddToCartButton from "./../../cores/components/addToCart";
+import { useLocation } from "react-router-dom";
 
 const CardItem = ({ product }) => {
 	const navigate = useNavigate();
+	const location = useLocation();
+	const isDashboard = location.pathname.includes("/dashboard");
 
 	const handleNavigateToDetail = () => {
 		navigate(`/product-detail/${product.id}`);
@@ -20,25 +23,29 @@ const CardItem = ({ product }) => {
 				src={product.thumbnailImages?.[0]?.imageUrl}
 				className="md:w-40 h-40 object-contain rounded-lg hover:scale-105 transition-all duration-300 hover:cursor-pointer"
 			/>
-			<div className="flex flex-col gap-2 lg:w-3/5">
+			<div className="flex flex-col justify-between gap-2 lg:w-3/5">
 				<h1
 					onClick={handleNavigateToDetail}
 					className="font-bold text-base h-12 overflow-clip hover:cursor-pointer"
 				>
 					{product.name}
 				</h1>
-				<p className="text-sm">
-					<b>Danh mục:</b> {product.category.vietnameseName}
-				</p>
-				<p className="text-sm">
-					<b>Giao hàng:</b> Thời gian giao hàng dự kiến{" "}
-					{calculateDateShipping()}
-				</p>
-				<div className="w-2/5">
-					<AddToCartButton
-						productId={product.id}
-						productPrice={product.price[0].value}
-					/>
+				<div className="flex flex-col gap-2 md:mb-5">
+					<p className="text-sm">
+						<b>Danh mục:</b> {product.category.vietnameseName}
+					</p>
+					<p className="text-sm">
+						<b>Giao hàng:</b> Thời gian giao hàng dự kiến{" "}
+						{calculateDateShipping()}
+					</p>
+					<div className="w-2/5">
+						{!isDashboard && (
+							<AddToCartButton
+								productId={product.id}
+								productPrice={product.price[0].value}
+							/>
+						)}
+					</div>
 				</div>
 			</div>
 			<div className="md:w-2/6 flex flex-col gap-1">
@@ -63,10 +70,12 @@ const CardItem = ({ product }) => {
 				<i className="text-sm text-gray-700">
 					Lần cập nhật cuối: {formatDate(product.price[0].lastUpdated)}
 				</i>
-				<AddToCartButton
-					productId={product.id}
-					productPrice={product.price[0].value}
-				/>
+				{!isDashboard && (
+					<AddToCartButton
+						productId={product.id}
+						productPrice={product.price[0].value}
+					/>
+				)}
 				<div className="flex gap-2 items-center">
 					<img src="/img/ebay.png" className="w-12 h-12" alt="ebaylogo" />
 					<p className="text-sm">

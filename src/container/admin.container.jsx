@@ -15,6 +15,7 @@ const AdminContainer = () => {
 				brandImg={
 					sidenavType === "dark" ? "/img/logo-ct.png" : "/img/logo-ct-dark.png"
 				}
+				brandName={"OrderUS"}
 			/>
 			<div className="p-4 xl:ml-80">
 				<DashboardNavbar />
