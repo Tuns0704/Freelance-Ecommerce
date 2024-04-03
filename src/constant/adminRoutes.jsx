@@ -9,8 +9,8 @@ import {
 
 import Home from "./../features/Home/index";
 import CategoryManage from "../features/CategoryManage";
-import Products from "./../features/Products/index";
 import UserManage from "../features/UserManage";
+import ManageProducts from "../features/ManageProducts";
 
 const icon = {
 	className: "w-5 h-5 text-inherit",
@@ -48,13 +48,13 @@ export const adminRoutes = [
 				icon: <ClipboardDocumentListIcon {...icon} />,
 				name: "Quản lý sản phẩm",
 				path: "/product-manage",
-				element: <Products />,
+				element: <ManageProducts />,
 			},
 			{
 				icon: <Cog6ToothIcon {...icon} />,
 				name: "Cài đặt",
 				path: "/admin-settings",
-				element: <Products />,
+				element: <ManageProducts />,
 			},
 		],
 	},

@@ -5,11 +5,11 @@ import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { Button } from "@material-tailwind/react";
 import Loading from "../../cores/components/loading";
 import Pagination from "../../cores/components/pagination";
-import CardItem from "./cardItem";
 import FilterOption from "../../cores/components/filter";
 import { getListCategory } from "../../services/category";
+import CardItem from "./cardItem";
 
-const Products = () => {
+const ManageProducts = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [products, setProducts] = useState([]);
 	const [totalProducts, setTotalProducts] = useState(0);
@@ -92,11 +92,26 @@ const Products = () => {
 					<Loading />
 				) : (
 					<>
-						<div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between md:justify-normal">
-							{products.map((product) => (
-								<CardItem key={product.id} product={product} />
-							))}
+						<div className="relative overflow-x-auto">
+							<table className="w-full p-5 rounded-t-lg bg-white shadow text-left rtl:text-right">
+								<thead>
+									<tr className="border-b border-blue-gray-50">
+										<th className="px-5 py-2 border-r">Id</th>
+										<th className="px-5 py-2 border-r">Ảnh</th>
+										<th className="px-5 py-2 border-r">Tên sản phẩm</th>
+										<th className="px-5 py-2 border-r">Giá sản phẩm</th>
+										<th className="px-5 py-2 border-r">Danh mục</th>
+										<th className="px-5 py-2 "></th>
+									</tr>
+								</thead>
+								<tbody>
+									{products.map((product) => (
+										<CardItem product={product} key={product.id} />
+									))}
+								</tbody>
+							</table>
 						</div>
+
 						<Pagination
 							handleClick={handleClick}
 							page={page}
@@ -117,4 +132,4 @@ const Products = () => {
 	);
 };
 
-export default Products;
+export default ManageProducts;

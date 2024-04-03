@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "../../helper/formatCurrency";
 import { formatDate } from "../../helper/formatDate";
 import { formatPercentage } from "../../helper/formatPercentage";
-import AddToCartButton from "./../../cores/components/addToCart";
+import AddToCartButton from "../../cores/components/addToCart";
 import { useLocation } from "react-router-dom";
 
 const CardItem = ({ product }) => {

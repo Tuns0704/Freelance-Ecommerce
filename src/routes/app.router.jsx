@@ -25,15 +25,16 @@ export const AppRouter = () => {
 	const tokenURL = urlParams.get("token");
 	const [token, setToken] = useState(tokenURL ? tokenURL : "");
 
-	if (token === "" && localStorage.getItem(token)) {
-		setToken(localStorage.getItem("token"));
-	}
+	const localStorageToken = localStorage.getItem("token");
 
 	useEffect(() => {
+		if (localStorageToken) {
+			setToken(localStorageToken);
+		}
 		if (token !== "") {
 			setUserRole(decodeToken(token).role);
 		}
-	}, [token]);
+	}, [localStorageToken, token]);
 
 	return (
 		<Routes>

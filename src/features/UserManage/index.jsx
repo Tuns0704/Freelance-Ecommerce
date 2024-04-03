@@ -40,8 +40,8 @@ const UserManage = () => {
 							<tr className="border-b border-blue-gray-50">
 								<th className="px-5 w-20 py-2 border-r">Id</th>
 								<th className="px-5 py-2 border-r">Tên khách hàng</th>
-								<th className="px-5 py-2  border-r">Email</th>
-								<th className="px-5 py-2 ">Địa chỉ</th>
+								<th className="px-5 py-2 border-r">Email</th>
+								<th className="px-5 py-2 border-r">Địa chỉ</th>
 								<th className="px-5 py-2 ">Số điện thoại</th>
 							</tr>
 						</thead>

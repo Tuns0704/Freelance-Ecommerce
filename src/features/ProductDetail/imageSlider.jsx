@@ -14,6 +14,7 @@ const ImageSlider = ({ images }) => {
 	const handleSlideClick = (index) => {
 		setActiveIndex(index);
 	};
+
 	return (
 		<div className="flex w-full justify-between h-[30vh] xs:h-[40vh] sm:h-[50vh] md:h-[500px] gap-4">
 			{images && (

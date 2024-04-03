@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { getListCategory } from "./../../services/category";
 import { toast } from "react-toastify";
-import { Button } from "@material-tailwind/react";
+import { IconButton } from "@material-tailwind/react";
 import ModalAddCategory from "./modalAddCategory";
 import ModalDeleteCategoryConfirm from "./deleteModalConfirm";
 import Loading from "../../cores/components/loading";
+import { ArchiveBoxXMarkIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
 
 const CategoryManage = () => {
 	const [category, setCategory] = useState([]);
@@ -50,7 +51,9 @@ const CategoryManage = () => {
 					closeModal={handleOpenModal}
 					reload={getData}
 				/>
-				<Button onClick={handleOpenModal}>Thêm danh mục</Button>
+				<IconButton onClick={handleOpenModal}>
+					<PlusCircleIcon className="w-5 h-5" />
+				</IconButton>
 			</div>
 			<div className="relative overflow-x-auto">
 				{loading ? (
@@ -72,12 +75,13 @@ const CategoryManage = () => {
 										{item.vietnameseName}
 									</td>
 									<td className="px-5 w-2/6 py-2 border-r">
-										<Button
+										<IconButton
 											onClick={() => handleOpenDeleteModal(item.id)}
-											className="bg-red-900 px-3 py-2 rounded"
+											className="px-3 py-2 rounded"
+											color="red"
 										>
-											Xoá
-										</Button>
+											<ArchiveBoxXMarkIcon className="w-5 h-5" />
+										</IconButton>
 									</td>
 								</tr>
 							))}
