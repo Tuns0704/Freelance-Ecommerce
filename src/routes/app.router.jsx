@@ -21,13 +21,19 @@ import AdminContainer from "../container/admin.container";
 export const AppRouter = () => {
 	const [userRole, setUserRole] = useState("");
 	const { state } = useContext(AppContext);
+	const urlParams = new URLSearchParams(window.location.search);
+	const tokenURL = urlParams.get("token");
+	const [token, setToken] = useState(tokenURL ? tokenURL : "");
+
+	if (token === "" && localStorage.getItem(token)) {
+		setToken(localStorage.getItem("token"));
+	}
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
-		if (token) {
+		if (token !== "") {
 			setUserRole(decodeToken(token).role);
 		}
-	}, []);
+	}, [token]);
 
 	return (
 		<Routes>
