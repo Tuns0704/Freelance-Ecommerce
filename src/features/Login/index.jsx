@@ -9,7 +9,6 @@ const Login = () => {
 	const handleLoginFacebook = () => {
 		const link = "https://api-ebay.onrender.com/api/auth/facebook/login";
 		window.open(link, "_self");
-		window.close();
 	};
 
 	return (
