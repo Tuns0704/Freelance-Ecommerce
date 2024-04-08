@@ -168,7 +168,7 @@ const FilterOption = ({
 }) => {
 	return (
 		<>
-			<div className="hidden md:flex w-2/6 xl:w-1/5">
+			<div className="hidden md:flex w-[30%]">
 				<RenderFilter
 					categories={categories}
 					setSearchParams={setSearchParams}

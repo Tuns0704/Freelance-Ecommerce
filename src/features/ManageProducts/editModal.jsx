@@ -2,18 +2,47 @@ import { Dialog, Transition } from "@headlessui/react";
 import { PropTypes } from "prop-types";
 import { IconButton, Input, Button } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { updateProduct } from "../../services/product";
+import { formatNumberToFloat } from "../../helper/formatNumberToString";
+import { toast } from "react-toastify";
 
-const ModalEdit = ({ isOpen, closeModal, product }) => {
-	const [productItem, setProductItem] = useState(product);
+const ModalEdit = ({ isOpen, closeModal, product, reload }) => {
+	const [productDiscount, setProductDiscount] = useState(0);
 
-	const handleChangeProduct = (field, value) => {
-		setProductItem((prev) => {
-			return {
-				...prev,
-				[field]: value,
+	const handleChangeProductDiscount = (event) => {
+		setProductDiscount(event.target.value);
+	};
+
+	useEffect(() => {
+		setProductDiscount(
+			product.marketingPrice !== null
+				? parseFloat(product.marketingPrice.discountPercentage)
+				: 0
+		);
+	}, [product.marketingPrice]);
+
+	const handleOnSubmit = async () => {
+		try {
+			const body = {
+				marketingPrice: {
+					discountAmount: product.marketingPrice.discountAmount,
+					originalPrice: product.marketingPrice.originalPrice,
+					priceTreatment: product.marketingPrice.priceTreatment,
+					discountPercentage: formatNumberToFloat(productDiscount),
+				},
 			};
-		});
+			const response = await updateProduct(product.id, body);
+			if (response.status === 200) {
+				toast.success("Cập nhật giảm giá sản phẩm thành công");
+				reload();
+				closeModal();
+			} else {
+				toast.error("Cập nhật gặp lỗi");
+			}
+		} catch (e) {
+			toast.error("Lỗi khi cập nhật giảm giá");
+		}
 	};
 
 	return (
@@ -47,14 +76,26 @@ const ModalEdit = ({ isOpen, closeModal, product }) => {
 									as="h3"
 									className="text-lg flex justify-between items-center font-medium leading-6 text-gray-900"
 								>
-									<div>Sửa sản phảm</div>
+									<div>Sửa giảm giá sản phẩm</div>
 									<IconButton onClick={closeModal}>
 										<XMarkIcon className="w-5 h-5" />
 									</IconButton>
 								</Dialog.Title>
 								<div className="flex flex-col gap-4 mt-5">
-									<Input label="Tên danh mục" required={true} />
-									<Button className="w-full">Thêm</Button>
+									<Input
+										label="Giảm % giá sản phẩm"
+										required={true}
+										type="number"
+										value={productDiscount}
+										onChange={() => handleChangeProductDiscount(event)}
+									/>
+									<Button
+										disabled={product.marketingPrice === null ? true : false}
+										className="w-full"
+										onClick={() => handleOnSubmit()}
+									>
+										Thêm
+									</Button>
 								</div>
 							</Dialog.Panel>
 						</Transition.Child>
@@ -69,6 +110,7 @@ ModalEdit.propTypes = {
 	isOpen: PropTypes.bool,
 	closeModal: PropTypes.func,
 	product: PropTypes.object,
+	reload: PropTypes.func,
 };
 
 export default ModalEdit;

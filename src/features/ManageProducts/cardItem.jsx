@@ -9,7 +9,7 @@ import { useState } from "react";
 import ModalInfo from "./infoModal";
 import ModalEdit from "./editModal";
 
-const CardItem = ({ product }) => {
+const CardItem = ({ product, reload }) => {
 	const [infoModalIsOpen, setInfoModalIsOpen] = useState(false);
 	const [editModalIsOpen, setEditModalIsOpen] = useState(false);
 
@@ -59,6 +59,7 @@ const CardItem = ({ product }) => {
 					product={product}
 					isOpen={editModalIsOpen}
 					closeModal={handleToggleEditModal}
+					reload={reload}
 				/>
 			</td>
 		</tr>
@@ -67,6 +68,7 @@ const CardItem = ({ product }) => {
 
 CardItem.propTypes = {
 	product: PropTypes.object,
+	reload: PropTypes.func,
 };
 
 export default CardItem;

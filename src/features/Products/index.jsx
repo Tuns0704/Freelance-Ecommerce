@@ -75,7 +75,7 @@ const Products = () => {
 
 	return (
 		<section className="flex flex-col md:flex-row-reverse gap-2 w-full">
-			<div className="flex flex-col sm:w-full md:w-4/6 xl:w-5/6">
+			<div className="flex flex-col md:w-full">
 				<div className="flex items-center gap-2 mb-5">
 					<Button
 						className="w-fit p-2 rounded-md md:hidden"

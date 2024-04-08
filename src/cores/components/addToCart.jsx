@@ -5,6 +5,7 @@ import { decodeToken } from "./../../helper/decodeToken";
 import { addToCart } from "../../services/cart";
 import { toast } from "react-toastify";
 import { PropTypes } from "prop-types";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const AddToCartButton = ({ productId, productPrice }) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -42,11 +43,11 @@ const AddToCartButton = ({ productId, productPrice }) => {
 			<Button
 				variant="filled"
 				size="lg"
-				className="font-medium text-sm font-opensans outline-none"
+				className="font-medium flex justify-center items-center text-sm font-opensans outline-none"
 				ripple={false}
 				onClick={() => AddToCart()}
 			>
-				Thêm vào giỏ hàng
+				<ShoppingCartIcon className="w-6 h-6" /> Thêm vào giỏ hàng
 			</Button>
 		</>
 	);

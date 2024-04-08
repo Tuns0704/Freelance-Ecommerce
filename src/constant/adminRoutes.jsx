@@ -11,6 +11,7 @@ import Home from "./../features/Home/index";
 import CategoryManage from "../features/CategoryManage";
 import UserManage from "../features/UserManage";
 import ManageProducts from "../features/ManageProducts";
+import AdminSetting from "./../features/AdminSetting/index";
 
 const icon = {
 	className: "w-5 h-5 text-inherit",
@@ -54,7 +55,7 @@ export const adminRoutes = [
 				icon: <Cog6ToothIcon {...icon} />,
 				name: "Cài đặt",
 				path: "/admin-settings",
-				element: <ManageProducts />,
+				element: <AdminSetting />,
 			},
 		],
 	},

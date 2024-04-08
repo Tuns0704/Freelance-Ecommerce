@@ -1,4 +1,5 @@
 import axios from "axios";
+import instance from "./axios.config";
 
 export const reportPrice = (productId) =>
 	axios.get(`${import.meta.env.VITE_API_URL}/ebay/searchById/${productId}`, {
@@ -18,6 +19,14 @@ export const getProduct = (productId) =>
 
 export const getListProduct = (searchParams) =>
 	axios.get(`${import.meta.env.VITE_API_URL}/ebay?${searchParams}`, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		validateStatus: (status) => status < 400,
+	});
+
+export const updateProduct = (id, body) =>
+	instance.put(`${import.meta.env.VITE_API_URL}/ebay/${id}`, body, {
 		headers: {
 			"Content-Type": "application/json",
 		},
