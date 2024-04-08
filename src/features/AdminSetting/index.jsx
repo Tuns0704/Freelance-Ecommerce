@@ -6,6 +6,7 @@ import { formatCurrency } from "../../helper/formatCurrency";
 import ImageSlider from "../../cores/components/imageSlider";
 import Loading from "../../cores/components/loading";
 import ModalEditSettings from "./editModal";
+import { WrenchScrewdriverIcon } from "@heroicons/react/24/solid";
 
 const AdminSetting = () => {
 	const [settings, setSettings] = useState({});
@@ -36,10 +37,16 @@ const AdminSetting = () => {
 	};
 
 	return (
-		<div>
+		<div className="mt-5">
 			<div className="flex justify-between items-center mb-5">
 				<h2 className="text-2xl font-semibold ">Cài đặt trang</h2>
-				<Button onClick={handleToggleEditModal}>Sửa settings</Button>
+				<Button
+					className="flex justify-center items-center gap-2"
+					onClick={handleToggleEditModal}
+				>
+					<WrenchScrewdriverIcon className="w-5 h-5" />
+					Settings
+				</Button>
 			</div>
 			{isLoading ? (
 				<Loading />
