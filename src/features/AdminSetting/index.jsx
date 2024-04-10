@@ -42,7 +42,7 @@ const AdminSetting = () => {
 				<h2 className="text-2xl font-semibold ">Cài đặt trang</h2>
 				<Button
 					className="flex justify-center items-center gap-2"
-					onClick={handleToggleEditModal}
+					onClick={() => handleToggleEditModal()}
 				>
 					<WrenchScrewdriverIcon className="w-5 h-5" />
 					Settings

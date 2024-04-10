@@ -28,6 +28,14 @@ export const updateOrder = (id, formData) =>
 		}
 	);
 
+export const adminUpdateOrder = (id, body) =>
+	instance.put(`${import.meta.env.VITE_API_URL}/order/${id}`, body, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		validateStatus: (status) => status < 400,
+	});
+
 export const getListOrder = () =>
 	instance.get(`${import.meta.env.VITE_API_URL}/order`, {
 		headers: {

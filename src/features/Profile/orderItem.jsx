@@ -22,7 +22,7 @@ const OrderItem = ({ order, reload }) => {
 			<div>Tổng tiền: {formatCurrency(order.totalPrice)}</div>
 			<button
 				className="absolute top-2 right-2"
-				onClick={handleToggleInfoModal}
+				onClick={() => handleToggleInfoModal()}
 			>
 				<ModalInfo
 					isOpen={infoModalIsOpen}

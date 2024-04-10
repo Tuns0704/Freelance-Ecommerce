@@ -44,10 +44,10 @@ const CardItem = ({ product, reload }) => {
 				{product.category.vietnameseName}
 			</td>
 			<td className="px-5 py-2 w-[160px] h-[100px] gap-5 flex items-center">
-				<IconButton onClick={handleToggleInfoModal}>
+				<IconButton onClick={() => handleToggleInfoModal()}>
 					<InformationCircleIcon className="w-5 h-5" />
 				</IconButton>
-				<IconButton color="green" onClick={handleToggleEditModal}>
+				<IconButton color="green" onClick={() => handleToggleEditModal()}>
 					<PencilSquareIcon className="w-5 h-5" />
 				</IconButton>
 				<ModalInfo

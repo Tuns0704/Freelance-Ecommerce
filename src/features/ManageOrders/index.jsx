@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../../cores/components/loading";
 import { getListOrder } from "../../services/order";
-import { paymentStatus } from "../../helper/paymentStatus";
-import { formatDateTime } from "../../helper/formatDateTime";
-import { IconButton } from "@material-tailwind/react";
-import {
-	InformationCircleIcon,
-	PencilSquareIcon,
-} from "@heroicons/react/24/solid";
+
 import TableItem from "./tableItem";
 
 const OrderManage = () => {
@@ -57,7 +51,7 @@ const OrderManage = () => {
 						</thead>
 						<tbody>
 							{orders.map((item) => (
-								<TableItem order={item} key={item.id} />
+								<TableItem order={item} key={item.id} reload={getData} />
 							))}
 						</tbody>
 					</table>

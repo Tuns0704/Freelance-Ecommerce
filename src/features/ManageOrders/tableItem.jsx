@@ -8,6 +8,8 @@ import { useState } from "react";
 import { paymentStatus } from "./../../helper/paymentStatus";
 import { formatDateTime } from "./../../helper/formatDateTime";
 import { deliveryStatus } from "../../helper/deliveryStatus";
+import ModalInfo from "./infoModal";
+import ModalEdit from "./editModal";
 
 const TableItem = ({ order, reload }) => {
 	const [infoModalIsOpen, setInfoModalIsOpen] = useState(false);
@@ -32,13 +34,24 @@ const TableItem = ({ order, reload }) => {
 			<td className="px-5  py-2 border-r">
 				{deliveryStatus(order.deliveryStatus)}
 			</td>
-			<td className="px-5  py-2  flex gap-2">
-				<IconButton>
+			<td className="px-5  py-2 w-[140px] flex gap-2">
+				<IconButton onClick={() => handleToggleInfoModal()}>
 					<InformationCircleIcon className="w-5 h-5" />
 				</IconButton>
-				<IconButton>
+				<IconButton color="green" onClick={() => handleToggleEditModal()}>
 					<PencilSquareIcon className="w-5 h-5" />
 				</IconButton>
+				<ModalInfo
+					isOpen={infoModalIsOpen}
+					closeModal={handleToggleInfoModal}
+					order={order}
+				/>
+				<ModalEdit
+					isOpen={editModalIsOpen}
+					closeModal={handleToggleEditModal}
+					order={order}
+					reload={reload}
+				/>
 			</td>
 		</tr>
 	);
