@@ -8,6 +8,7 @@ import Pagination from "../../cores/components/pagination";
 import CardItem from "./cardItem";
 import FilterOption from "../../cores/components/filter";
 import { getListCategory } from "../../services/category";
+import { toast } from "react-toastify";
 
 const Products = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -67,7 +68,7 @@ const Products = () => {
 				setTotalProducts(data.totalCount);
 				setLoading(false);
 			} catch (error) {
-				console.log(error);
+				toast.error("Lấy sản phẩm");
 			}
 		};
 		getData();

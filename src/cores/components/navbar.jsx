@@ -7,7 +7,12 @@ import {
 	Button,
 	IconButton,
 } from "@material-tailwind/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+	Bars3Icon,
+	XMarkIcon,
+	UserCircleIcon,
+	ShoppingCartIcon,
+} from "@heroicons/react/24/outline";
 import { AppContext } from "./../context/app.context";
 import { SET_TOKEN, SET_AUTHENTICATED } from "./../context/app.context";
 
@@ -38,6 +43,10 @@ export function Navbar({ routes }) {
 
 	const navigateProfile = () => {
 		navigate("/profile");
+	};
+
+	const navigateCart = () => {
+		navigate("/cart");
 	};
 
 	const navList = (
@@ -95,13 +104,22 @@ export function Navbar({ routes }) {
 							{state.isAuthenticated ? (
 								<>
 									<Button
+										onClick={navigateCart}
+										variant="text"
+										size="sm"
+										color="white"
+										className="font-opensans"
+									>
+										<ShoppingCartIcon className="w-6 h-6" />
+									</Button>
+									<Button
 										onClick={navigateProfile}
 										variant="text"
 										size="sm"
 										color="white"
 										className="font-opensans"
 									>
-										Hồ sơ
+										<UserCircleIcon className="w-6 h-6" />
 									</Button>
 									<Button
 										onClick={handleLogout}
@@ -148,12 +166,44 @@ export function Navbar({ routes }) {
 				<div className="container p-4 mx-auto">
 					{navList}
 					<div className="flex flex-col gap-2">
-						<Button size="sm" fullWidth>
-							Log in
-						</Button>
-						<Button size="sm" fullWidth>
-							Register
-						</Button>
+						{state.isAuthenticated ? (
+							<>
+								<Button
+									onClick={navigateCart}
+									size="sm"
+									className="font-opensans"
+									fullWidth
+								>
+									Giỏ hàng
+								</Button>
+								<Button
+									onClick={navigateProfile}
+									size="sm"
+									className="font-opensans"
+									fullWidth
+								>
+									Hồ sơ
+								</Button>
+								<Button
+									onClick={handleLogout}
+									size="sm"
+									className="font-opensans"
+									fullWidth
+								>
+									Đăng xuất
+								</Button>
+							</>
+						) : (
+							<Button
+								onClick={navigateLogin}
+								variant="text"
+								size="sm"
+								className="font-opensans"
+								fullWidth
+							>
+								Đăng nhập
+							</Button>
+						)}
 					</div>
 				</div>
 			</Collapse>

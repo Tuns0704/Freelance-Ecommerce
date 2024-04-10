@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getListCategory } from "./../../services/category";
+import { getListCategory } from "../../services/category";
 import { toast } from "react-toastify";
 import { IconButton } from "@material-tailwind/react";
 import ModalAddCategory from "./modalAddCategory";

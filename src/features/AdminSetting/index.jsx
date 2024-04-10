@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Button } from "@material-tailwind/react";
-import { getSettings } from "./../../services/setting";
+import { getSettings } from "../../services/setting";
 import { formatCurrency } from "../../helper/formatCurrency";
 import ImageSlider from "../../cores/components/imageSlider";
 import Loading from "../../cores/components/loading";

@@ -9,6 +9,7 @@ import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const AddToCartButton = ({ productId, productPrice }) => {
 	const [isOpen, setIsOpen] = useState(false);
+
 	const handleOpenModal = () => {
 		setIsOpen((prev) => !prev);
 	};
@@ -23,6 +24,7 @@ const AddToCartButton = ({ productId, productPrice }) => {
 					productId: productId,
 					quantity: 1,
 					totalPrice: productPrice,
+					warrantyFee: 0,
 				};
 				const response = await addToCart(body);
 				if (response.status === 201) {

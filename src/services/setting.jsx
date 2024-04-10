@@ -1,7 +1,8 @@
 import instance from "./axios.config";
+import axios from "axios";
 
 export const getSettings = () =>
-	instance.get(`${import.meta.env.VITE_API_URL}/setting`, {
+	axios.get(`${import.meta.env.VITE_API_URL}/setting`, {
 		headers: {
 			"Content-Type": "application/json",
 		},

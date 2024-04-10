@@ -17,6 +17,9 @@ import { AppContext } from "./../cores/context/app.context";
 import Profile from "../features/Profile";
 import { decodeToken } from "../helper/decodeToken";
 import AdminContainer from "../container/admin.container";
+import Cart from "../features/Cart";
+import Order from "../features/Order";
+import OrderPayment from "../features/OrderPayment";
 
 export const AppRouter = () => {
 	const [userRole, setUserRole] = useState("");
@@ -61,9 +64,14 @@ export const AppRouter = () => {
 						<Route path="/installment-policy" element={<InstallmentPolicy />} />
 						<Route path="/warranty-policy" element={<WarrantyPolicy />} />
 						<Route path="/purchase-policy" element={<PurchasePolicy />} />
+						<Route path="/orderPayment/:id" element={<OrderPayment />} />
+						<Route path="/order" element={<Order />} />
 						<Route path="*" element={<Navigate to="/home" replace />} />
 						{state.isAuthenticated && (
-							<Route path="/profile" element={<Profile />} />
+							<>
+								<Route path="/profile" element={<Profile />} />
+								<Route path="/cart" element={<Cart />} />
+							</>
 						)}
 					</Route>
 				</>

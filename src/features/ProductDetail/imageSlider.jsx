@@ -16,7 +16,7 @@ const ImageSlider = ({ images }) => {
 	};
 
 	return (
-		<div className="flex w-full justify-between h-[30vh] xs:h-[40vh] sm:h-[50vh] md:h-[500px] gap-4">
+		<div className="flex w-full justify-between h-[50vh] xs:h-[60vh] sm:h-[70vh] md:h-[500px] gap-4">
 			{images && (
 				<>
 					<Swiper
@@ -26,14 +26,14 @@ const ImageSlider = ({ images }) => {
 						freeMode={true}
 						watchSlidesProgress={true}
 						modules={[FreeMode, Navigation, Thumbs]}
-						className="mySwiper w-2/6 sm:w-1/6 lg:w-1/6 m-0"
+						className="mySwiper w-2/6 sm:w-1/6 lg:w-1/6 m-0 h-[350px]"
 					>
 						{images.map((image, index) => (
 							<SwiperSlide key={index}>
 								<img
 									src={image.imageUrl}
-									className={`rounded-lg border hover:cursor-pointer object-contain object-center w-full h-[80px] xs:h-[100px] md:h-[120px] lg:h-[150px] p-2 ${
-										index === activeIndex ? "border-blue-500" : ""
+									className={`rounded-lg border-2 hover:cursor-pointer object-contain object-center w-full h-[80px] xs:h-[100px] md:h-[120px] lg:h-[150px] p-2 ${
+										index === activeIndex ? "border-blue-gray-900 " : ""
 									}`}
 									onClick={() => handleSlideClick(index)}
 									alt={`gallery-image-${index}`}
@@ -52,10 +52,10 @@ const ImageSlider = ({ images }) => {
 						navigation={true}
 						thumbs={{ swiper: ".mySwiper" }}
 						modules={[FreeMode, Navigation, Thumbs]}
-						className="mySwiper2 w-5/6 lg:w-5/6 m-0"
+						className="mySwiper2 w-5/6 lg:w-5/6 m-0 border-2 border-blue-gray-900 rounded-md"
 					>
 						{images.map((image, index) => (
-							<SwiperSlide key={index} className="p-5 border">
+							<SwiperSlide key={index} className="p-5">
 								<img
 									src={image.imageUrl}
 									className="w-full h-full rounded-lg hover:cursor-pointer object-contain object-center"

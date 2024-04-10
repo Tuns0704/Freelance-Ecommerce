@@ -1,39 +1,9 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
-import { Button } from "@material-tailwind/react";
 import { PropTypes } from "prop-types";
-import { order } from "./../../services/order";
-import { decodeToken } from "./../../helper/decodeToken";
-import { toast } from "react-toastify";
+import { Button } from "@material-tailwind/react";
 import { Fragment } from "react";
 
-const BuyNowModal = ({ isOpen, closeModal, productId, productPrice }) => {
-	const buyNow = async () => {
-		try {
-			const token = localStorage.getItem("token");
-			const useId = decodeToken(token).sub;
-			const body = {
-				userId: useId,
-				product: {
-					productId: productId,
-					quantity: 1,
-					price: productPrice,
-					warrantyFee: 0,
-				},
-				totalPrice: productPrice,
-			};
-			console.log(body);
-			// const response = await order(body);
-			// if (response.status === 201) {
-			// 	toast.success("Thêm sản phẩm thành công");
-			// } else {
-			// 	toast.error("Thêm sản phẩm thất bại");
-			// }
-		} catch (error) {
-			toast.error("Có lỗi khi thêm sản phẩm");
-		}
-	};
-
+const ModalDeleteConfirm = ({ isOpen, onSubmit, closeModal }) => {
 	return (
 		<Transition appear show={isOpen}>
 			<Dialog as="div" className="relative z-50" onClose={closeModal}>
@@ -65,14 +35,14 @@ const BuyNowModal = ({ isOpen, closeModal, productId, productPrice }) => {
 									as="h3"
 									className="text-lg text-center font-medium leading-6 text-gray-900 mb-4"
 								>
-									<div>Nhập thông tin</div>
+									<div>Bạn muốn xoá danh mục này?</div>
 								</Dialog.Title>
 								<div className="flex gap-2">
 									<Button className="w-1/2" onClick={closeModal}>
 										Huỷ
 									</Button>
-									<Button className="w-1/2 bg-red-900" onClick={buyNow}>
-										Mua ngay
+									<Button className="w-1/2 bg-red-900" onClick={onSubmit}>
+										Xoá
 									</Button>
 								</div>
 							</Dialog.Panel>
@@ -84,11 +54,10 @@ const BuyNowModal = ({ isOpen, closeModal, productId, productPrice }) => {
 	);
 };
 
-BuyNowModal.propTypes = {
+ModalDeleteConfirm.propTypes = {
 	isOpen: PropTypes.bool,
 	closeModal: PropTypes.func,
-	buyNow: PropTypes.func,
-	productId: PropTypes.string,
-	productPrice: PropTypes.number,
+	onSubmit: PropTypes.func,
 };
-export default BuyNowModal;
+
+export default ModalDeleteConfirm;

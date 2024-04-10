@@ -6,12 +6,12 @@ import {
 	Cog6ToothIcon,
 	ShoppingBagIcon,
 } from "@heroicons/react/24/solid";
-
 import Home from "./../features/Home/index";
-import CategoryManage from "../features/CategoryManage";
-import UserManage from "../features/UserManage";
-import ManageProducts from "../features/ManageProducts";
-import AdminSetting from "./../features/AdminSetting/index";
+import UserManage from "./../features/ManageUsers/index";
+import CategoryManage from "../features/ManageCategories";
+import ManageProducts from "./../features/ManageProducts/index";
+import AdminSetting from "../features/AdminSetting";
+import OrderManage from "../features/ManageOrders";
 
 const icon = {
 	className: "w-5 h-5 text-inherit",
@@ -37,7 +37,7 @@ export const adminRoutes = [
 				icon: <ShoppingBagIcon {...icon} />,
 				name: "Quản lý đơn đặt hàng",
 				path: "/order-manage",
-				element: <UserManage />,
+				element: <OrderManage />,
 			},
 			{
 				icon: <RectangleStackIcon {...icon} />,

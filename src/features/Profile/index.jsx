@@ -4,30 +4,42 @@ import {
 	CardBody,
 	Avatar,
 	Typography,
-	// Tabs,
-	// TabsHeader,
-	// Tab,
-	// Tooltip,
 	Button,
 } from "@material-tailwind/react";
-import {
-	// HomeIcon,
-	// ChatBubbleLeftEllipsisIcon,
-	// Cog6ToothIcon,
-	PencilIcon,
-} from "@heroicons/react/24/solid";
+import { PencilIcon } from "@heroicons/react/24/solid";
 import { ProfileInfoCard } from "./profileInforCard";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useState } from "react";
 import { decodeToken } from "../../helper/decodeToken";
+import { getUserOrder, getUserProfile } from "../../services/user";
+import OrderItem from "./orderItem";
 
 const Profile = () => {
 	const [profile, setProfile] = useState({});
+	const [orders, setOrders] = useState([]);
+
+	const token = localStorage.getItem("token");
+
+	const getOrderOfUser = useCallback(async () => {
+		const useId = decodeToken(token).sub;
+		const response = await getUserOrder(useId);
+		console.log(response);
+		if (response.status === 200) {
+			setOrders(response.data);
+		}
+	}, [token]);
+
+	const getUserInformation = async () => {
+		const response = await getUserProfile();
+		setProfile(response.data);
+		console.log(response.data);
+	};
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
 		setProfile(decodeToken(token));
-	}, []);
+		getOrderOfUser();
+		getUserInformation();
+	}, [getOrderOfUser, token]);
 
 	return (
 		<>
@@ -51,30 +63,12 @@ const Profile = () => {
 								</Typography>
 							</div>
 						</div>
-						<div>
+						<div className="flex gap-2">
 							<Button className="flex gap-2 items-center">
 								<PencilIcon className="w-5 h-5" />
 								<p className="hidden md:flex">Sửa thông tin</p>
 							</Button>
 						</div>
-						{/* <div className="w-96">
-							<Tabs value="app">
-								<TabsHeader>
-									<Tab value="app">
-										<HomeIcon className="-mt-1 mr-2 inline-block h-5 w-5" />
-										App
-									</Tab>
-									<Tab value="message">
-										<ChatBubbleLeftEllipsisIcon className="-mt-0.5 mr-2 inline-block h-5 w-5" />
-										Message
-									</Tab>
-									<Tab value="settings">
-										<Cog6ToothIcon className="-mt-1 mr-2 inline-block h-5 w-5" />
-										Settings
-									</Tab>
-								</TabsHeader>
-							</Tabs>
-						</div> */}
 					</div>
 					<div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3">
 						<ProfileInfoCard
@@ -82,15 +76,20 @@ const Profile = () => {
 							description=""
 							details={{
 								Tên: profile.displayName,
-								"Số điện thoại": profile.phoneNumber
-									? profile.phoneNumber
+								"Số điện thoại": profile.phone
+									? profile.phone
 									: "Hiện tại bạn chưa nhập số điện thoại",
 								email: profile.email,
-								"Địa chỉ": profile.location
-									? profile.location
+								"Địa chỉ": profile.address
+									? profile.address
 									: "Hiện tại bạn chưa nhập địa chỉ",
 							}}
 						/>
+					</div>
+					<div className="w-full flex gap-2 flex-wrap">
+						{orders.map((order) => (
+							<OrderItem key={order.id} order={order} reload={getOrderOfUser} />
+						))}
 					</div>
 				</CardBody>
 			</Card>

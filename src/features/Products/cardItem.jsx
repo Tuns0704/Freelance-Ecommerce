@@ -65,14 +65,16 @@ const CardItem = ({ product }) => {
 				<i className="text-sm text-gray-700">
 					Lần cập nhật cuối: {formatDate(product.price[0].lastUpdated)}
 				</i>
-				<AddToCartButton
-					productId={product.id}
-					productPrice={product.price[0].value}
-				/>
-				<BuyNowButton
-					productId={product.id}
-					productPrice={product.price[0].value}
-				/>
+				<div className="flex flex-col gap-2">
+					<AddToCartButton
+						productId={product.id}
+						productPrice={product.price[0].value}
+					/>
+					<BuyNowButton
+						productId={product.id}
+						productPrice={product.price[0].value}
+					/>
+				</div>
 			</div>
 		</div>
 	);

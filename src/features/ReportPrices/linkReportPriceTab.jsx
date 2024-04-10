@@ -24,7 +24,6 @@ const LinkReportTab = () => {
 				const response = await reportPrice(itemIdMatch[1]);
 				setItem(response.data);
 				setLoading(false);
-				console.log(response.data);
 			} catch (error) {
 				setLoading(false);
 				toast.error("Lỗi không xác định");
