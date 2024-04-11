@@ -36,8 +36,8 @@ export const adminUpdateOrder = (id, body) =>
 		validateStatus: (status) => status < 400,
 	});
 
-export const getListOrder = () =>
-	instance.get(`${import.meta.env.VITE_API_URL}/order`, {
+export const getListOrder = (searchParams) =>
+	instance.get(`${import.meta.env.VITE_API_URL}/order?${searchParams}`, {
 		headers: {
 			"Content-Type": "application/json",
 		},

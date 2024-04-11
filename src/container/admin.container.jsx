@@ -1,9 +1,9 @@
 // import { useContext } from "react";
-import { Routes, Route } from "react-router-dom";
 import adminRoutes from "../constant/adminRoutes";
 import { Sidenav } from "../cores/components/sidenav";
 import { DashboardNavbar } from "./../cores/components/dashboard-navbar";
 import { useMaterialTailwindController } from "../cores/context/admin.context";
+import { Outlet } from "react-router-dom";
 
 const AdminContainer = () => {
 	const [controller] = useMaterialTailwindController();
@@ -19,15 +19,7 @@ const AdminContainer = () => {
 			/>
 			<div className="p-4 xl:ml-80">
 				<DashboardNavbar />
-				<Routes>
-					{adminRoutes.map(
-						({ layout, pages }) =>
-							layout === "dashboard" &&
-							pages.map(({ path, element }) => (
-								<Route key={path} exact path={path} element={element} />
-							))
-					)}
-				</Routes>
+				<Outlet />
 			</div>
 		</div>
 	);

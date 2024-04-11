@@ -20,6 +20,7 @@ import AdminContainer from "../container/admin.container";
 import Cart from "../features/Cart";
 import Order from "../features/Order";
 import OrderPayment from "../features/OrderPayment";
+import adminRoutes from "../constant/adminRoutes";
 
 export const AppRouter = () => {
 	const [userRole, setUserRole] = useState("");
@@ -43,7 +44,19 @@ export const AppRouter = () => {
 		<Routes>
 			{userRole === "admin" ? (
 				<>
-					<Route path="/dashboard/*" element={<AdminContainer />} />
+					<Route path="/dashboard" element={<AdminContainer />}>
+						{adminRoutes.map(
+							({ layout, pages }) =>
+								layout === "dashboard" &&
+								pages.map(({ path, element }, key) => (
+									<Route
+										key={key}
+										path={`/dashboard/${path}`}
+										element={element}
+									/>
+								))
+						)}
+					</Route>
 					<Route path="*" element={<Navigate to="/dashboard/home" replace />} />
 				</>
 			) : (

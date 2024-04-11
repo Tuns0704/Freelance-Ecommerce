@@ -1,7 +1,6 @@
 // import { useContext } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../cores/components/navbar";
-// import AuthContext from "../cores/context/app.context";
 import routes from "../constant/routes";
 import Footer from "../cores/components/footer";
 

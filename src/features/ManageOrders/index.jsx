@@ -1,20 +1,46 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../../cores/components/loading";
 import { getListOrder } from "../../services/order";
 
 import TableItem from "./tableItem";
+import { useSearchParams } from "react-router-dom";
+import Pagination from "../../cores/components/pagination";
+import Filter from "./filter";
 
 const OrderManage = () => {
 	const [orders, setListOrder] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [totalProducts, setTotalProducts] = useState(0);
+	const [searchParams, setSearchParams] = useSearchParams({
+		page: 1,
+	});
 
-	const getData = async () => {
+	const page = searchParams.get("page");
+
+	const handleClick = (pageNumber) => {
+		setSearchParams((prev) => {
+			prev.set("page", pageNumber);
+			return prev;
+		});
+	};
+
+	const getItemProps = (index) => ({
+		variant: parseInt(page) === index ? "filled" : "text",
+		className: parseInt(page) === index ? "bg-gray-900 text-white" : "",
+		onClick: () => handleClick(index),
+	});
+
+	const totalPages = Math.ceil(totalProducts / 20);
+
+	const getData = useCallback(async () => {
 		try {
 			setLoading(true);
-			const response = await getListOrder();
+			const response = await getListOrder(searchParams);
 			if (response.status === 200) {
 				setListOrder(response.data.data);
+				setTotalProducts(response.data.totalCount);
+				console.log(response.data);
 			} else {
 				toast("Lấy danh sách khách hàng gặp lỗi");
 			}
@@ -22,17 +48,18 @@ const OrderManage = () => {
 		} catch (error) {
 			toast.error("Lỗi khi lấy danh danh sách khách hàng");
 		}
-	};
+	}, [searchParams]);
 
 	useEffect(() => {
 		getData();
-	}, []);
+	}, [getData]);
 
 	return (
 		<div>
 			<div className="flex justify-between items-center mb-5">
 				<h2 className="text-2xl font-semibold ">Quản lý đơn đặt hàng</h2>
 			</div>
+			<Filter searchParams={searchParams} setSearchParams={setSearchParams} />
 			<div className="relative overflow-x-auto">
 				{loading ? (
 					<Loading />
@@ -56,6 +83,12 @@ const OrderManage = () => {
 						</tbody>
 					</table>
 				)}
+				<Pagination
+					handleClick={handleClick}
+					page={page}
+					totalPages={totalPages}
+					getItemProps={getItemProps}
+				/>
 			</div>
 		</div>
 	);

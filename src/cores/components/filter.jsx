@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { formatCurrency } from "../../helper/formatCurrency";
 import { filterPriceOptions } from "../../constant/filter";
 import { Dialog, Transition } from "@headlessui/react";

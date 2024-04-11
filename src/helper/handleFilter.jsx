@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const handleFilter = ({
 	searchParams,
 	setSearchParams,
@@ -85,5 +87,115 @@ export const handleInitFilter = ({
 			isChecked: true,
 			value: param.get("category"),
 		});
+	}
+};
+
+export const handleOrderFilter = ({
+	searchParams,
+	setSearchParams,
+	deliveryStatus,
+	paymentStatus,
+	findBy,
+	searchText,
+	fromDate,
+	toDate,
+}) => {
+	const param = new URLSearchParams(searchParams);
+
+	if (deliveryStatus !== "all") {
+		setSearchParams((prev) => {
+			prev.set("deliveryStatus", deliveryStatus);
+			return prev;
+		});
+	} else if (param.has("deliveryStatus")) {
+		setSearchParams((prev) => {
+			prev.delete("deliveryStatus");
+			return prev;
+		});
+	}
+
+	if (paymentStatus !== "all") {
+		setSearchParams((prev) => {
+			prev.set("paymentStatus", paymentStatus);
+			return prev;
+		});
+	} else if (param.has("paymentStatus")) {
+		setSearchParams((prev) => {
+			prev.delete("paymentStatus");
+			return prev;
+		});
+	}
+	if (findBy === "userName" && searchText !== "") {
+		setSearchParams((prev) => {
+			prev.set("userName", searchText);
+			return prev;
+		});
+	} else if (param.has("userName")) {
+		setSearchParams((prev) => {
+			prev.delete("userName");
+			return prev;
+		});
+	}
+	if (findBy === "phone" && searchText !== "") {
+		setSearchParams((prev) => {
+			prev.set("phone", searchText);
+			return prev;
+		});
+	} else if (param.has("phone")) {
+		setSearchParams((prev) => {
+			prev.delete("phone");
+			return prev;
+		});
+	}
+	if (fromDate !== undefined && toDate !== undefined) {
+		setSearchParams((prev) => {
+			prev.set("createdAtFrom", format(fromDate, "yyyy-MM-dd"));
+			prev.set("createdAtTo", format(toDate, "yyyy-MM-dd"));
+			return prev;
+		});
+	} else if (param.has("createdAtFrom") && param.has("createdAtTo")) {
+		setSearchParams((prev) => {
+			prev.delete("createdAtFrom");
+			prev.delete("createdAtTo");
+			return prev;
+		});
+	}
+};
+
+export const handleInitOrderFilter = ({
+	searchParams,
+	setDeliveryStatus,
+	setPaymentStatus,
+	setFindBy,
+	setSearchText,
+}) => {
+	const param = new URLSearchParams(searchParams);
+
+	if (param.has("deliveryStatus")) {
+		setDeliveryStatus(param.get("deliveryStatus"));
+	} else {
+		setDeliveryStatus("all");
+	}
+
+	if (param.has("paymentStatus")) {
+		setPaymentStatus(param.get("paymentStatus"));
+	} else {
+		setPaymentStatus("all");
+	}
+
+	if (param.has("userName")) {
+		setFindBy("userName");
+		setSearchText(param.get("userName"));
+	} else {
+		setFindBy("userName");
+		setSearchText("");
+	}
+
+	if (param.has("phone")) {
+		setFindBy("phone");
+		setSearchText(param.get("phone"));
+	} else {
+		setFindBy("phone");
+		setSearchText("");
 	}
 };
