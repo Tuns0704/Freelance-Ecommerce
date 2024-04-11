@@ -87,7 +87,7 @@ const ProductDetail = () => {
 			<div className="w-full md:w-1/2 self-center">
 				<ImageSlider images={images} />
 			</div>
-			<div className="flex flex-col gap-3">
+			<div className="flex flex-col gap-3 md:w-1/2">
 				<div className="flex gap-2">
 					{product.marketingPrice && (
 						<div className="text-lg px-3 py-1 border border-red-900 bg-red-900 text-white font-bold rounded">
