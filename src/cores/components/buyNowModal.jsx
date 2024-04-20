@@ -37,13 +37,15 @@ const BuyNowModal = ({ isOpen, closeModal, productId, productPrice }) => {
 
 	const token = localStorage.getItem("token");
 
-	const getUserInformation = async () => {
-		const response = await getUserProfile();
-		if (response.status === 200) {
-			setPhoneNumber(response.data.phone);
-			setLocation(formatAddressToLocation(response.data.address));
+	const getUserInformation = useCallback(async () => {
+		if (token) {
+			const response = await getUserProfile();
+			if (response.status === 200) {
+				setPhoneNumber(response.data.phone);
+				setLocation(formatAddressToLocation(response.data.address));
+			}
 		}
-	};
+	}, [token]);
 
 	const settingsOption = useCallback(async () => {
 		const response = await getSettings();
@@ -60,7 +62,7 @@ const BuyNowModal = ({ isOpen, closeModal, productId, productPrice }) => {
 	useEffect(() => {
 		settingsOption();
 		getUserInformation();
-	}, [settingsOption]);
+	}, [getUserInformation, settingsOption]);
 
 	const buyNow = async () => {
 		const errors = validateInputs(phoneNumber, location);
