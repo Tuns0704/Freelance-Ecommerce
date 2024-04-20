@@ -141,7 +141,7 @@ const LaptopDeal = () => {
 					variant="outlined"
 					size="md"
 					className="font-medium text-sm font-opensans"
-					onClick={handleNavigateToProductsPage}
+					onClick={() => handleNavigateToProductsPage()}
 				>
 					Tất cả sản phẩm
 				</Button>

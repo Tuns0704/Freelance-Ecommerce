@@ -3,7 +3,6 @@ import axios from "axios";
 const instance = axios.create({
 	baseURL: import.meta.env.VITE_API_URL,
 });
-import { toast } from "react-toastify";
 
 const handleLogout = () => {
 	localStorage.removeItem("token");
@@ -41,7 +40,6 @@ instance.interceptors.response.use(
 			!originalRequest._retry
 		) {
 			handleLogout();
-			toast.info("Tài khoản hết hạn bạn cần phải đăng nhập lại");
 			originalRequest._retry = true;
 		}
 		return Promise.reject(error);

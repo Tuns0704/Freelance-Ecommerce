@@ -40,18 +40,18 @@ const AddToCartButton = ({ productId, productPrice }) => {
 		}
 	};
 	return (
-		<>
+		<div className="flex w-full">
 			<ConfirmLogin isOpen={isOpen} closeModal={handleOpenModal} />
 			<Button
 				variant="filled"
 				size="lg"
-				className="font-medium flex justify-center items-center text-sm font-opensans outline-none"
+				className="font-medium flex justify-center items-center text-sm font-opensans outline-none w-[99%]"
 				ripple={false}
 				onClick={() => AddToCart()}
 			>
 				<ShoppingCartIcon className="w-6 h-6" /> Thêm vào giỏ hàng
 			</Button>
-		</>
+		</div>
 	);
 };
 

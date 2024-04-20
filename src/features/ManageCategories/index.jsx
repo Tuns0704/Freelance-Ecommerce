@@ -51,7 +51,7 @@ const CategoryManage = () => {
 					closeModal={handleOpenModal}
 					reload={getData}
 				/>
-				<IconButton onClick={handleOpenModal}>
+				<IconButton onClick={() => handleOpenModal()}>
 					<PlusCircleIcon className="w-5 h-5" />
 				</IconButton>
 			</div>

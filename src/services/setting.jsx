@@ -9,6 +9,14 @@ export const getSettings = () =>
 		validateStatus: (status) => status < 400,
 	});
 
+export const getAdmnSettings = () =>
+	axios.get(`${import.meta.env.VITE_API_URL}/setting/admin`, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		validateStatus: (status) => status < 400,
+	});
+
 export const updateSettings = (formData) =>
 	instance.put(`${import.meta.env.VITE_API_URL}/setting`, formData, {
 		headers: {

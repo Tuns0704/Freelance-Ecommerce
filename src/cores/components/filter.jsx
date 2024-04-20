@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { formatCurrency } from "../../helper/formatCurrency";
-import { filterPriceOptions } from "../../constant/filter";
+import {
+	filterConditionOptions,
+	filterPriceOptions,
+} from "../../constant/filter";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
@@ -23,6 +26,11 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 		},
 	});
 
+	const [productCondition, setProductCondition] = useState({
+		isChecked: false,
+		value: "",
+	});
+
 	const [productCategory, setProductCategory] = useState({
 		isChecked: false,
 		value: "",
@@ -36,7 +44,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 	};
 
 	const handleChangeCategory = (category) => {
-		productCategory.value === category && productCategory.value === category
+		productCategory.value === category
 			? setProductCategory({ isChecked: false, value: "" })
 			: setProductCategory({ isChecked: true, value: category });
 	};
@@ -51,12 +59,22 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			: setProductPrice({ isChecked: true, value: option });
 	};
 
+	const handleChangeProductCondition = (option) => {
+		productCondition.value === option.value
+			? setProductCondition({
+					isChecked: false,
+					value: "",
+			  })
+			: setProductCondition({ isChecked: true, value: option.value });
+	};
+
 	useEffect(() => {
 		handleInitFilter({
 			searchParams,
 			setMarketingPrice,
 			setProductPrice,
 			setProductCategory,
+			setProductCondition,
 		});
 	}, []);
 
@@ -67,11 +85,13 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			marketingPrice,
 			productPrice,
 			productCategory,
+			productCondition,
 		});
 	}, [
 		marketingPrice,
 		productCategory,
 		productPrice,
+		productCondition,
 		searchParams,
 		setSearchParams,
 	]);
@@ -83,7 +103,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 				<div className="flex">
 					<Radio
 						name="marketingPrice"
-						onClick={handleSelectMarketingPrice}
+						onClick={() => handleSelectMarketingPrice()}
 						checked={marketingPrice.isChecked}
 						onChange={() => ""}
 						containerProps={{
@@ -98,12 +118,38 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 				</div>
 			</div>
 			<div className="border-b">
+				<div className="font-semibold">Tình trạng hàng</div>
+				<div className="flex flex-col gap-1">
+					{filterConditionOptions.map((option, index) => (
+						<div key={index} className="flex">
+							<Radio
+								name="conditionOption"
+								onClick={() => handleChangeProductCondition(option)}
+								checked={
+									productCondition.isChecked &&
+									productCondition.value === option.value
+								}
+								onChange={() => ""}
+								containerProps={{
+									className: "py-2",
+								}}
+								label={
+									<h1 className="text-blue-gray-900 font-medium">
+										{option.label}
+									</h1>
+								}
+							/>
+						</div>
+					))}
+				</div>
+			</div>
+			<div className="border-b">
 				<div className="font-semibold">Giá sản phẩm</div>
 				<div className="flex flex-col gap-1">
 					{filterPriceOptions.map((option, index) => (
 						<div key={index} className="flex">
 							<Radio
-								name="option"
+								name="priceOption"
 								onClick={() => handleChangeProductPrice(option)}
 								checked={
 									productPrice.isChecked &&

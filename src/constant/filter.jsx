@@ -24,3 +24,26 @@ export const filterPriceOptions = [
 		maxPrice: 100000000,
 	},
 ];
+
+export const filterConditionOptions = [
+	{
+		value: "Pre Order",
+		label: "Pre Order",
+	},
+	{
+		value: "New",
+		label: "New",
+	},
+	{
+		value: "Open Box",
+		label: "Open Box",
+	},
+	{
+		value: "Refurbished",
+		label: "Refurbished",
+	},
+	{
+		value: "Used",
+		label: "Used",
+	},
+];

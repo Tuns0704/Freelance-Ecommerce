@@ -24,14 +24,14 @@ const OrderItem = ({ order, reload }) => {
 				className="absolute top-2 right-2"
 				onClick={() => handleToggleInfoModal()}
 			>
-				<ModalInfo
-					isOpen={infoModalIsOpen}
-					closeModal={handleToggleInfoModal}
-					order={order}
-					reload={reload}
-				/>
 				<InformationCircleIcon className="w-6 h-6 text-blue-gray-900" />
 			</button>
+			<ModalInfo
+				isOpen={infoModalIsOpen}
+				closeModal={handleToggleInfoModal}
+				order={order}
+				reload={reload}
+			/>
 		</div>
 	);
 };

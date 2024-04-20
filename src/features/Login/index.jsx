@@ -22,7 +22,7 @@ const Login = () => {
 				<form className="mt-4 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
 					<div className="space-y-4 mt-8">
 						<Button
-							onClick={handleLoginGoogle}
+							onClick={() => handleLoginGoogle()}
 							size="lg"
 							className="flex items-center gap-2 justify-center"
 							fullWidth
@@ -66,7 +66,7 @@ const Login = () => {
 							<span>Đăng nhập với Google</span>
 						</Button>
 						<Button
-							onClick={handleLoginFacebook}
+							onClick={() => handleLoginFacebook()}
 							size="lg"
 							className="flex items-center gap-2 justify-center shadow-md"
 							fullWidth

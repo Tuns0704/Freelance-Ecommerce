@@ -52,10 +52,13 @@ const ModalDeleteCategoryConfirm = ({
 									<div>Bạn muốn xoá danh mục này?</div>
 								</Dialog.Title>
 								<div className="flex gap-2">
-									<Button className="w-1/2" onClick={closeModal}>
+									<Button className="w-1/2" onClick={() => closeModal()}>
 										Huỷ
 									</Button>
-									<Button className="w-1/2 bg-red-900" onClick={onSubmit}>
+									<Button
+										className="w-1/2 bg-red-900"
+										onClick={() => onSubmit()}
+									>
 										Xoá
 									</Button>
 								</div>

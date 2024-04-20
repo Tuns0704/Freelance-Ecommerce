@@ -6,6 +6,7 @@ export const handleFilter = ({
 	marketingPrice,
 	productPrice,
 	productCategory,
+	productCondition,
 }) => {
 	const param = new URLSearchParams(searchParams);
 	if (marketingPrice.isChecked) {
@@ -60,6 +61,23 @@ export const handleFilter = ({
 			return prev;
 		});
 	}
+
+	if (
+		productCondition.isChecked &&
+		productCondition.value !== param.get("conditionOrder")
+	) {
+		setSearchParams((prev) => {
+			prev.set("conditionOrder", productCondition.value);
+			return prev;
+		});
+	}
+
+	if (productCondition.isChecked === false && param.has("conditionOrder")) {
+		setSearchParams((prev) => {
+			prev.delete("conditionOrder");
+			return prev;
+		});
+	}
 };
 
 export const handleInitFilter = ({
@@ -67,6 +85,7 @@ export const handleInitFilter = ({
 	setMarketingPrice,
 	setProductPrice,
 	setProductCategory,
+	setProductCondition,
 }) => {
 	const param = new URLSearchParams(searchParams);
 
@@ -86,6 +105,12 @@ export const handleInitFilter = ({
 		setProductCategory({
 			isChecked: true,
 			value: param.get("category"),
+		});
+	}
+	if (param.has("conditionOrder")) {
+		setProductCondition({
+			isChecked: true,
+			value: param.get("conditionOrder"),
 		});
 	}
 };

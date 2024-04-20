@@ -61,7 +61,7 @@ const ModalAddCategory = ({ isOpen, closeModal, reload }) => {
 									className="text-lg flex justify-between items-center font-medium leading-6 text-gray-900"
 								>
 									<div>Thêm danh mục</div>
-									<IconButton onClick={closeModal}>
+									<IconButton onClick={() => closeModal()}>
 										<XMarkIcon className="w-5 h-5" />
 									</IconButton>
 								</Dialog.Title>
@@ -74,7 +74,7 @@ const ModalAddCategory = ({ isOpen, closeModal, reload }) => {
 									/>
 									<Button
 										className="w-full"
-										onClick={handleOnSubmit}
+										onClick={() => handleOnSubmit()}
 										disabled={category !== "" ? false : true}
 									>
 										Thêm

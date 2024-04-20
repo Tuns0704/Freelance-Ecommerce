@@ -23,27 +23,27 @@ const BuyNowButton = ({ productId, productPrice }) => {
 	};
 
 	return (
-		<>
+		<div className="flex w-full">
 			<Button
 				variant="filled"
 				size="lg"
-				className="font-medium flex justify-center items-center text-sm font-opensans outline-none"
+				className="font-medium flex justify-center items-center text-sm font-opensans outline-none w-[99%]"
 				ripple={false}
 				onClick={() => handleToggleBuyNowModal()}
 			>
-				<ConfirmLogin
-					isOpen={isConfirmModalOpen}
-					closeModal={handleToggleConfirmModal}
-				/>
 				<CreditCardIcon className="w-6 h-6" /> Mua ngay
-				<BuyNowModal
-					isOpen={isBuyNowModalOpen}
-					closeModal={handleToggleBuyNowModal}
-					productId={productId}
-					productPrice={productPrice}
-				/>
 			</Button>
-		</>
+			<ConfirmLogin
+				isOpen={isConfirmModalOpen}
+				closeModal={handleToggleConfirmModal}
+			/>
+			<BuyNowModal
+				isOpen={isBuyNowModalOpen}
+				closeModal={handleToggleBuyNowModal}
+				productId={productId}
+				productPrice={productPrice}
+			/>
+		</div>
 	);
 };
 

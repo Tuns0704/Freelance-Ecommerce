@@ -104,7 +104,7 @@ export function Navbar({ routes }) {
 							{state.isAuthenticated ? (
 								<>
 									<Button
-										onClick={navigateCart}
+										onClick={() => navigateCart()}
 										variant="text"
 										size="sm"
 										color="white"
@@ -113,7 +113,7 @@ export function Navbar({ routes }) {
 										<ShoppingCartIcon className="w-6 h-6" />
 									</Button>
 									<Button
-										onClick={navigateProfile}
+										onClick={() => navigateProfile()}
 										variant="text"
 										size="sm"
 										color="white"
@@ -122,7 +122,7 @@ export function Navbar({ routes }) {
 										<UserCircleIcon className="w-6 h-6" />
 									</Button>
 									<Button
-										onClick={handleLogout}
+										onClick={() => handleLogout()}
 										variant="text"
 										size="sm"
 										color="white"
@@ -133,7 +133,7 @@ export function Navbar({ routes }) {
 								</>
 							) : (
 								<Button
-									onClick={navigateLogin}
+									onClick={() => navigateLogin()}
 									variant="text"
 									size="sm"
 									color="white"
@@ -169,7 +169,7 @@ export function Navbar({ routes }) {
 						{state.isAuthenticated ? (
 							<>
 								<Button
-									onClick={navigateCart}
+									onClick={() => navigateCart()}
 									size="sm"
 									className="font-opensans"
 									fullWidth
@@ -177,7 +177,7 @@ export function Navbar({ routes }) {
 									Giỏ hàng
 								</Button>
 								<Button
-									onClick={navigateProfile}
+									onClick={() => navigateProfile()}
 									size="sm"
 									className="font-opensans"
 									fullWidth
@@ -185,7 +185,7 @@ export function Navbar({ routes }) {
 									Hồ sơ
 								</Button>
 								<Button
-									onClick={handleLogout}
+									onClick={() => handleLogout()}
 									size="sm"
 									className="font-opensans"
 									fullWidth
@@ -195,7 +195,7 @@ export function Navbar({ routes }) {
 							</>
 						) : (
 							<Button
-								onClick={navigateLogin}
+								onClick={() => navigateLogin()}
 								variant="text"
 								size="sm"
 								className="font-opensans"
