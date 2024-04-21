@@ -77,10 +77,9 @@ const Order = () => {
 	const calculateTotalPrice = useCallback(() => {
 		let total = 0;
 		carts.forEach((item) => {
-			total +=
-				(item.product.price[0].value + item.warrantyFee) * item.quantity +
-				shippingFee;
+			total += (item.product.price[0].value + item.warrantyFee) * item.quantity;
 		});
+		total = total + shippingFee;
 		setTotalPrice(total);
 	}, [carts, shippingFee]);
 
@@ -92,9 +91,16 @@ const Order = () => {
 		try {
 			const body = { discountCode: coupon };
 			const response = await checkDiscountCode(body);
-			console.log(response);
-			if (response.status === 200) {
-				setTotalPrice(totalPrice + response.data.value / 100);
+			if (response.status === 201 && response.data.discount) {
+				setTotalPrice(
+					totalPrice - (totalPrice * response.data.discount.value) / 100
+				);
+				toast.success(
+					`Mã giảm giá ${response.data.discount.value}% giá trị hoá đơn`
+				);
+			} else {
+				calculateTotalPrice();
+				toast.error("Mã giảm giá sai!");
 			}
 		} catch {
 			toast.error("Mã giảm giá sai");

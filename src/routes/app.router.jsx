@@ -77,13 +77,13 @@ export const AppRouter = () => {
 						<Route path="/installment-policy" element={<InstallmentPolicy />} />
 						<Route path="/warranty-policy" element={<WarrantyPolicy />} />
 						<Route path="/purchase-policy" element={<PurchasePolicy />} />
-						<Route path="/orderPayment/:id" element={<OrderPayment />} />
-						<Route path="/order" element={<Order />} />
 						<Route path="*" element={<Navigate to="/home" replace />} />
 						{state.isAuthenticated && (
 							<>
 								<Route path="/profile" element={<Profile />} />
 								<Route path="/cart" element={<Cart />} />
+								<Route path="/orderPayment/:id" element={<OrderPayment />} />\
+								<Route path="/order" element={<Order />} />
 							</>
 						)}
 					</Route>
