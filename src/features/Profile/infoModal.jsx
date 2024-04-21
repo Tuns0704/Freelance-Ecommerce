@@ -142,7 +142,7 @@ ModalInfo.propTypes = {
 	isOpen: PropTypes.bool,
 	closeModal: PropTypes.func,
 	order: PropTypes.object,
-	reload: PropTypes.object,
+	reload: PropTypes.func,
 };
 
 export default ModalInfo;

@@ -54,10 +54,9 @@ const Cart = () => {
 	const calculateTotalPrice = useCallback(() => {
 		let total = 0;
 		carts.forEach((item) => {
-			total +=
-				(item.product.price[0].value + item.warrantyFee) * item.quantity +
-				shippingFee;
+			total += (item.product.price[0].value + item.warrantyFee) * item.quantity;
 		});
+		total = total + shippingFee;
 		setTotalPrice(total);
 	}, [carts, shippingFee]);
 

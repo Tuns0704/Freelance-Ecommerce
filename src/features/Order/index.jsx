@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { order } from "../../services/order";
 import { formatAddressToLocation } from "../../helper/formatAdressToObjectLocation";
+import { checkDiscountCode } from "../../services/discount";
 
 const Order = () => {
 	const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Order = () => {
 		city: "",
 	});
 	const [phoneNumber, setPhoneNumber] = useState("");
+	const [coupon, setCoupon] = useState("");
 
 	const token = localStorage.getItem("token");
 
@@ -40,7 +42,6 @@ const Order = () => {
 		setLoading(true);
 		const useId = decodeToken(token).sub;
 		const response = await getUserCart(useId);
-		console.log(response.data);
 		if (response.status === 200) {
 			setCarts(response.data);
 		}
@@ -61,6 +62,7 @@ const Order = () => {
 			setSettings(response.data);
 		}
 	}, []);
+
 	useEffect(() => {
 		setDeposit((settings.depositAmount / 100) * totalPrice);
 		setShippingFee(settings.weightBasedPrice * 10);
@@ -85,6 +87,19 @@ const Order = () => {
 	useEffect(() => {
 		calculateTotalPrice();
 	}, [calculateTotalPrice]);
+
+	const getCoupon = async () => {
+		try {
+			const body = { discountCode: coupon };
+			const response = await checkDiscountCode(body);
+			console.log(response);
+			if (response.status === 200) {
+				setTotalPrice(totalPrice + response.data.value / 100);
+			}
+		} catch {
+			toast.error("Mã giảm giá sai");
+		}
+	};
 
 	const onSubmit = async () => {
 		const errors = validateInputs(phoneNumber, location);
@@ -124,6 +139,10 @@ const Order = () => {
 
 	const handleChangePhoneNumber = (event) => {
 		setPhoneNumber(event.target.value);
+	};
+
+	const handleChangeCoupon = (event) => {
+		setCoupon(event.target.value);
 	};
 
 	const handleChangeLocation = (event) => {
@@ -188,7 +207,7 @@ const Order = () => {
 									))}
 								</div>
 								<div className="sm:w-2/6 h-fit flex flex-col gap-2 ">
-									<div className="flex flex-col gap-2 border-2 border-gray-200 p-3 rounded-xl">
+									<div className="flex w-full flex-col gap-2 border-2 border-gray-200 p-3 rounded-xl">
 										<h1 className="font-medium text-md">
 											Số tiền cần cọc: {formatCurrency(deposit)}
 										</h1>
@@ -206,7 +225,16 @@ const Order = () => {
 												<InformationCircleIcon className="w-5 h-5 text-red-900" />
 											</Tooltip>
 										</div>
-										<h1 className="font-medium text-3xl border-t-2 pt-2 border-gray-200">
+										<div className="flex md:flex-row flex-col gap-2">
+											<Input
+												value={coupon}
+												label="Mã giảm giá"
+												className="w-1/2"
+												onChange={(e) => handleChangeCoupon(e)}
+											/>
+											<Button onClick={getCoupon}>Nhập</Button>
+										</div>
+										<h1 className="w-1/2 font-medium text-3xl border-t-2 pt-2 border-gray-200">
 											Tổng tiền:{" "}
 											<label className="text-red-900">
 												{formatCurrency(totalPrice)}
