@@ -6,206 +6,62 @@ import {
 	TabsBody,
 } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { formatCurrency } from "../../helper/formatCurrency";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Grid, Pagination } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
+import { getSaleProductByCategory } from "../../services/product";
+import Loading from "./../../cores/components/loading";
+import { formatPercentage } from "./../../helper/formatPercentage";
+import AddToCartButton from "./../../cores/components/addToCart";
 
 const tabs = [
 	{
-		label: "Buy Refurbished",
-		value: "Buy Refurbished",
-		data: [
-			{
-				id: 1,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/aK8AAOSw11hlKYIR/s-l400.jpg",
-			},
-			{
-				id: 2,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/aK8AAOSw11hlKYIR/s-l400.jpg",
-			},
-			{
-				id: 3,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/aK8AAOSw11hlKYIR/s-l400.jpg",
-			},
-			{
-				id: 4,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/aK8AAOSw11hlKYIR/s-l400.jpg",
-			},
-			{
-				id: 5,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/aK8AAOSw11hlKYIR/s-l400.jpg",
-			},
-			{
-				id: 6,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/aK8AAOSw11hlKYIR/s-l400.jpg",
-			},
-			{
-				id: 7,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/aK8AAOSw11hlKYIR/s-l400.jpg",
-			},
-			{
-				id: 8,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/aK8AAOSw11hlKYIR/s-l400.jpg",
-			},
-		],
+		label: "Đồng hồ",
+		value: "Watch",
 	},
 	{
-		label: "Best Buy",
-		value: "react",
-		data: [
-			{
-				id: 1,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-			},
-			{
-				id: 2,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-			},
-			{
-				id: 3,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-			},
-			{
-				id: 4,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-			},
-			{
-				id: 5,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-			},
-			{
-				id: 6,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-			},
-			{
-				id: 7,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-			},
-			{
-				id: 8,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/y0gAAOSw8qtlaYLv/s-l500.png",
-			},
-		],
-	},
-	{
-		label: "New Techies",
-		value: "vue",
-		data: [
-			{
-				id: 1,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/PZEAAOSwFP1jKDvK/s-l500.jpg",
-			},
-			{
-				id: 2,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/PZEAAOSwFP1jKDvK/s-l500.jpg",
-			},
-			{
-				id: 3,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/PZEAAOSwFP1jKDvK/s-l500.jpg",
-			},
-			{
-				id: 4,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/PZEAAOSwFP1jKDvK/s-l500.jpg",
-			},
-			{
-				id: 5,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/PZEAAOSwFP1jKDvK/s-l500.jpg",
-			},
-			{
-				id: 6,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/PZEAAOSwFP1jKDvK/s-l500.jpg",
-			},
-			{
-				id: 7,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/PZEAAOSwFP1jKDvK/s-l500.jpg",
-			},
-			{
-				id: 8,
-				name: "AKG N5005 Reference Class 5-driver Configuration In-Ear Headphones",
-				price: 5000000,
-				originPrice: 47000000,
-				img: "https://i.ebayimg.com/images/g/PZEAAOSwFP1jKDvK/s-l500.jpg",
-			},
-		],
+		label: "Điện thoại",
+		value: "Phone",
 	},
 ];
 
 const TopSale = () => {
-	const defaultTabValue = "Buy Refurbished";
+	const defaultTabValue = "Phone";
 	const [activeTab, setActiveTab] = useState(defaultTabValue);
+	const [products, setProducts] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	const handleTabChange = (value) => {
 		setActiveTab(value);
+	};
+
+	const getData = useCallback(async () => {
+		try {
+			setLoading(true);
+			const response = await getSaleProductByCategory(activeTab);
+			if (response.status === 200) {
+				setProducts(response.data.data);
+				setLoading(false);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}, [activeTab]);
+
+	useEffect(() => {
+		getData();
+	}, [getData]);
+
+	const navigate = useNavigate();
+
+	const handleNavigateToDetail = (id) => {
+		navigate(`/product-detail/${id}`);
+	};
+
+	const handleNavigateToProductsPage = () => {
+		navigate(`/products?category=${activeTab}&marketingPrice=true`);
 	};
 
 	return (
@@ -237,7 +93,7 @@ const TopSale = () => {
 						))}
 					</TabsHeader>
 					<TabsBody>
-						{tabs.map(({ value, data }) => (
+						{tabs.map(({ value }) => (
 							<TabPanel className="p-0 py-4" key={value} value={value}>
 								<Swiper
 									className="w-full h-fit py-5 px-3"
@@ -289,54 +145,66 @@ const TopSale = () => {
 										},
 									}}
 								>
-									{data.map((product) => (
-										<SwiperSlide
-											key={product?.id}
-											className="flex relative flex-col gap-2 bg-white shadow p-5 rounded-lg hover:cursor-pointer"
-										>
-											<label className="absolute top-0 z-40 left-0 bg-red-900 text-white font-bold px-5 py-1">
-												Giảm 30%
-											</label>
-											<img
-												src={product?.img}
-												alt="products"
-												className="w-2/4 self-center h-40 sm:h-28 md:h-40 scale-90 hover:scale-105 transition-all duration-500 ease-in-out rounded-lg"
-											/>
-											<h4 className="font-medium text-sm text-gray-800">
-												{product?.name}
-											</h4>
-											<section className="flex justify-start items-center gap-2">
-												<h2 className="text-2xl font-bold">
-													{formatCurrency(product.price)}
-												</h2>
-												<del className="text-gray-500 text-sm">
-													{formatCurrency(product.originPrice)}
-												</del>
-											</section>
-											<i className="font-medium text-sm">
-												Giá tốt nhất <b>{formatCurrency(product.price)}</b>
-											</i>
-											<Button
-												variant="filled"
-												size="lg"
-												className="font-medium text-sm font-opensans"
+									{loading ? (
+										<Loading />
+									) : (
+										products.map((product) => (
+											<SwiperSlide
+												key={product?.id}
+												className="flex relative flex-col gap-2 bg-white shadow p-5 rounded-lg hover:cursor-pointer"
 											>
-												Mua ngay
-											</Button>
-										</SwiperSlide>
-									))}
+												<label className="absolute px-2 rounded top-[-5px] z-40 left-[-5px] bg-red-900 text-white font-bold py-1">
+													Giảm{" "}
+													{formatPercentage(
+														product.marketingPrice.discountPercentage
+													)}
+													%
+												</label>
+												<img
+													src={product?.thumbnailImages?.[0]?.imageUrl}
+													onClick={() => handleNavigateToDetail(product.id)}
+													alt="products"
+													className="w-3/4 object-contain self-center h-40 scale-100 hover:scale-110 transition-all duration-500 ease-in-out rounded-lg"
+												/>
+												<h4
+													onClick={() => handleNavigateToDetail(product.id)}
+													className="pt-5 font-semibold text-sm text-gray-800"
+												>
+													{product?.name}
+												</h4>
+												<section className="flex justify-start items-center gap-2">
+													<h2 className="text-2xl font-bold">
+														{formatCurrency(product.price[0].value)}
+													</h2>
+													<del className="text-gray-500 text-sm">
+														{formatCurrency(
+															product.marketingPrice.originalPrice.value
+														)}
+													</del>
+												</section>
+												<i className="font-medium text-sm">
+													Giá tốt nhất{" "}
+													<b>{formatCurrency(product.price[0].value)}</b>
+												</i>
+												<AddToCartButton
+													productId={product.id}
+													productPrice={product.price[0].value}
+												/>
+											</SwiperSlide>
+										))
+									)}
 								</Swiper>
 							</TabPanel>
 						))}
 					</TabsBody>
 				</Tabs>
 			</div>
-
 			<div className="self-center">
 				<Button
 					variant="outlined"
 					size="md"
 					className="font-medium text-sm font-opensans"
+					onClick={() => handleNavigateToProductsPage()}
 				>
 					Tất cả sản phẩm
 				</Button>

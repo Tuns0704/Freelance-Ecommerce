@@ -5,72 +5,91 @@ import LaptopDeal from "./laptopDeal";
 import TopSale from "./topSale";
 import { useEffect, useState } from "react";
 import { getSettings } from "../../services/setting";
-
-const images = [
-	{
-		slideImg: "/img/pic2.png",
-	},
-	{
-		slideImg: "/img/pic7.png",
-	},
-	{
-		slideImg: "/img/pic8.png",
-	},
-	{
-		slideImg: "/img/pic2.png",
-	},
-	{
-		slideImg: "/img/pic7.png",
-	},
-	{
-		slideImg: "/img/pic8.png",
-	},
-	{
-		slideImg: "/img/pic2.png",
-	},
-	{
-		slideImg: "/img/pic7.png",
-	},
-	{
-		slideImg: "/img/pic8.png",
-	},
-];
+import Loading from "./../../cores/components/loading";
+import { getListCategory } from "../../services/category";
+import { useNavigate } from "react-router-dom";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 const Home = () => {
-	const [settings, setSettings] = useState({
-		bannerTop:
-			"https://res.cloudinary.com/dhburx7mh/image/upload/v1712567430/lptvjelsftrsiwiuytkw.png",
-		slide: images,
-		bannerBot:
-			"https://res.cloudinary.com/dhburx7mh/image/upload/v1712567431/b8h5bdaxsj90ptlekltm.jpg",
-	});
+	const [settings, setSettings] = useState({});
+	const [loading, setLoading] = useState(false);
+	const [categories, setCategories] = useState([]);
 
 	useEffect(() => {
 		const settingsData = async () => {
+			setLoading(true);
 			const response = await getSettings();
-			setSettings(response.data);
+			if (response.status === 200) {
+				setSettings(response.data);
+				setLoading(false);
+			}
 		};
 		settingsData();
 	}, []);
 
+	useEffect(() => {
+		const getCategories = async () => {
+			try {
+				setLoading(true);
+				const response = await getListCategory();
+				setCategories(response.data);
+				setLoading(false);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		getCategories();
+	}, []);
+
+	const navigate = useNavigate();
+
+	const handleNavigateToProductsPage = (value) => {
+		navigate(`/products?category=${value}`);
+	};
+
 	return (
-		<div className="h-fit flex flex-col gap-10">
-			<img
-				src={settings.bannerTop}
-				alt=""
-				className="w-full rounded-lg shadow-lg"
-			/>
-			{/* <Instruct /> */}
-			<FashionDeal />
-			<LaptopDeal />
-			<TopSale />
-			<img
-				src={settings.bannerBot}
-				alt=""
-				className="w-full rounded-lg shadow-lg"
-			/>
-			<ImageSlider images={settings.slide} />
-		</div>
+		<>
+			{loading ? (
+				<Loading />
+			) : (
+				<div className="h-fit flex flex-col gap-10">
+					<div className="flex flex-col md:flex-row w-full gap-5">
+						<div className="md:w-1/4 flex flex-col flex-grow">
+							{categories.map((item, index) => (
+								<div
+									onClick={() => handleNavigateToProductsPage(item.englishName)}
+									className={`p-3 flex justify-between items-center hover:cursor-pointer border-gray-900 ${
+										index !== categories.length - 1
+											? index === 0
+												? "rounded-t-lg border-x-2 border-t-2"
+												: "border-x-2 border-t-2"
+											: "border-2 rounded-b-lg"
+									}`}
+									key={index}
+								>
+									<p className="font-semibold text-lg">{item.vietnameseName}</p>
+									<ChevronRightIcon className="w-6 h-6 text-blue-gray-900" />
+								</div>
+							))}
+						</div>
+						<img
+							src={settings.bannerTop}
+							alt=""
+							className="md:w-3/4 rounded-lg shadow-lg"
+						/>
+					</div>
+					<FashionDeal />
+					<LaptopDeal />
+					<TopSale />
+					<img
+						src={settings.bannerBot}
+						alt=""
+						className="w-full rounded-lg shadow-lg"
+					/>
+					<ImageSlider images={settings.slide} />
+				</div>
+			)}
+		</>
 	);
 };
 

@@ -34,7 +34,7 @@ export function DashboardNavbar() {
 			blurred={fixedNavbar}
 		>
 			<div className="flex bg-white p-5 border rounded-xl border-blue-gray-100 justify-between gap-6 md:flex-row md:items-center mb-2">
-				<h1 className="text-blue-gray-900 font-bold text-3xl">OrderUS</h1>
+				<h1 className="text-blue-gray-900 font-bold text-3xl">OrderUS.vn</h1>
 				<div className="flex gap-2 justify-end">
 					<IconButton
 						className="grid xl:hidden"

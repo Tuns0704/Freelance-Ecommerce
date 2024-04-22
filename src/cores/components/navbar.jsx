@@ -94,7 +94,7 @@ export function Navbar({ routes }) {
 			<div className="flex items-center justify-between text-white">
 				<Link to="/">
 					<Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold font-opensans">
-						Home
+						Orderus.vn
 					</Typography>
 				</Link>
 				<div className="hidden lg:block">{navList}</div>
