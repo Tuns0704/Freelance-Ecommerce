@@ -48,7 +48,7 @@ const Pagination = ({ handleClick, page, totalPages, getItemProps }) => {
 	};
 
 	return (
-		<div className="flex items-center justify-center mt-5 gap-4">
+		<div className="flex items-center justify-center my-5 gap-4">
 			<Button
 				variant="text"
 				className="flex items-center gap-2"

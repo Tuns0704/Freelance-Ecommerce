@@ -97,7 +97,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 	]);
 
 	return (
-		<aside className="px-3 py-2 border md:w-full sm:flex flex-col gap-2">
+		<aside className="px-3 py-2 bg-white rounded-t-lg border md:w-full sm:flex flex-col gap-2">
 			<div className="border-b">
 				<div className="font-semibold">Giá tốt</div>
 				<div className="flex">

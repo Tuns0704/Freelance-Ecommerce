@@ -10,7 +10,7 @@ const AdminContainer = () => {
 	const { sidenavType } = controller;
 
 	return (
-		<div className="min-h-screen bg-white bg-opacity-95">
+		<div className="min-h-screen bg-gray-50 bg-opacity-95">
 			<Sidenav
 				routes={adminRoutes}
 				brandImg={

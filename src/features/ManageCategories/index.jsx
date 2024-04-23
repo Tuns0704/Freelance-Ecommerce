@@ -59,7 +59,7 @@ const CategoryManage = () => {
 				{loading ? (
 					<Loading />
 				) : (
-					<table className="w-full p-5 rounded-t-lg bg-white shadow text-left rtl:text-right">
+					<table className="w-full p-5 rounded-t-lg bg-white shadow-md text-left rtl:text-right">
 						<thead>
 							<tr className="border-b border-blue-gray-50">
 								<th className="px-5 w-1/6 py-2 border-r">Id</th>
