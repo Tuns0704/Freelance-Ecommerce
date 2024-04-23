@@ -8,8 +8,9 @@ import { Outlet } from "react-router-dom";
 const AdminContainer = () => {
 	const [controller] = useMaterialTailwindController();
 	const { sidenavType } = controller;
+
 	return (
-		<div className="min-h-screen bg-blue-gray-50/50">
+		<div className="min-h-screen bg-white bg-opacity-95">
 			<Sidenav
 				routes={adminRoutes}
 				brandImg={
@@ -17,7 +18,7 @@ const AdminContainer = () => {
 				}
 				brandName={"OrderUS.vn"}
 			/>
-			<div className="p-4 xl:ml-80">
+			<div className="px-4 xl:ml-80">
 				<DashboardNavbar />
 				<Outlet />
 			</div>

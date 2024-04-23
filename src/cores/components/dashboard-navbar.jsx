@@ -28,26 +28,29 @@ export function DashboardNavbar() {
 	return (
 		<Navbar
 			color={"transparent"}
-			className={`rounded-xl p-0 transition-all sticky top-4 z-40 shadow-md"
+			className={`rounded-xl p-0 transition-all sticky top-0 mt-4 z-40 shadow-md"
 			}`}
 			fullWidth
 			blurred={fixedNavbar}
 		>
-			<div className="flex bg-white p-5 border rounded-xl border-blue-gray-100 justify-between gap-6 md:flex-row md:items-center mb-2">
-				<h1 className="text-blue-gray-900 font-bold text-3xl">OrderUS.vn</h1>
+			<div className="flex bg-gradient-to-tr from-gray-900 to-gray-800 shadow-md shadow-gray-900/10 p-5 border rounded-xl border-blue-gray-100 justify-between gap-6 md:flex-row md:items-center mb-2">
+				<h1 className="text-white font-bold text-3xl">OrderUS.vn</h1>
 				<div className="flex gap-2 justify-end">
 					<IconButton
-						className="grid xl:hidden"
+						className="grid xl:hidden  text-white"
 						onClick={() => setOpenSidenav(dispatch, !openSidenav)}
 					>
 						<Bars3Icon className="h-6 w-6" />
 					</IconButton>
-					<IconButton className="grid xl:hidden" onClick={() => handleLogout()}>
+					<IconButton
+						className="grid xl:hidden text-white"
+						onClick={() => handleLogout()}
+					>
 						<ArrowLeftCircleIcon className="h-6 w-6" />
 					</IconButton>
 					<Button
 						onClick={() => handleLogout()}
-						className="hidden xl:flex items-center gap-2"
+						className="hidden xl:flex text-white"
 					>
 						<p>Đăng xuất</p>
 					</Button>

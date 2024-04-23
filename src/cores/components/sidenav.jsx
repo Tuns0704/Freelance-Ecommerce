@@ -9,21 +9,16 @@ import {
 
 export function Sidenav({ brandName, routes }) {
 	const [controller, dispatch] = useMaterialTailwindController();
-	const { sidenavType, openSidenav } = controller;
-	const sidenavTypes = {
-		dark: "bg-gradient-to-br from-gray-800 to-gray-900",
-		white: "bg-white shadow-sm",
-		transparent: "bg-transparent",
-	};
+	const { openSidenav } = controller;
 
 	return (
 		<aside
-			className={`${sidenavTypes[sidenavType]} ${
+			className={`${
 				openSidenav ? "translate-x-0" : "-translate-x-80"
-			} fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 border border-blue-gray-100`}
+			} bg-gradient-to-b from-gray-900 to-gray-900 fixed inset-0 z-50 h-screen w-72  xl:translate-x-0`}
 		>
 			<div className={`relative`}>
-				<Link to="/" className="py-6 px-8 text-center">
+				<Link to="/" className="py-6 text-white px-8 text-center">
 					<Typography variant="h6">{brandName}</Typography>
 				</Link>
 				<IconButton
@@ -56,7 +51,7 @@ export function Sidenav({ brandName, routes }) {
 									{({ isActive }) => (
 										<Button
 											variant={isActive ? "gradient" : "text"}
-											color={isActive ? "black" : "blue-gray"}
+											color={isActive ? "white" : "white"}
 											className="flex items-center gap-4 px-4 capitalize"
 											fullWidth
 										>

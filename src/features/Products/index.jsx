@@ -93,7 +93,7 @@ const Products = () => {
 					<Loading />
 				) : (
 					<>
-						<div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between md:justify-normal">
+						<div className="flex flex-col sm:flex-row gap-5 sm:flex-wrap sm:justify-between md:justify-normal">
 							{products.map((product) => (
 								<CardItem key={product.id} product={product} />
 							))}

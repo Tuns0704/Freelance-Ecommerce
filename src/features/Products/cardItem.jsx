@@ -15,7 +15,7 @@ const CardItem = ({ product }) => {
 	};
 
 	return (
-		<div className="flex flex-col sm:w-[49%] mb-4 md:w-full md:flex-row gap-3 rounded-md p-3 shadow">
+		<div className="flex flex-col sm:w-[49%] md:w-full md:flex-row gap-3 rounded-md p-3 shadow-md bg-white">
 			<img
 				onClick={handleNavigateToDetail}
 				src={product.thumbnailImages?.[0]?.imageUrl}

@@ -90,43 +90,108 @@ export function Navbar({ routes }) {
 	);
 
 	return (
-		<nav className="sticky rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 mb-10 mx-5 sm:mx-20 z-50 top-3 px-4 py-3">
-			<div className="flex items-center justify-between text-white">
-				<Link to="/">
-					<Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold font-opensans">
-						Orderus.vn
-					</Typography>
-				</Link>
-				<div className="hidden lg:block">{navList}</div>
-				<div className="hidden gap-2 lg:flex">
-					<div className="flex items-center gap-2">
-						<div className="flex gap-2">
+		<div className="sticky mt-3 top-0 mb-10 mx-5 sm:mx-20 z-50 bg-white">
+			<nav
+				className={` rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10   px-4 py-3`}
+			>
+				<div className="flex items-center justify-between text-white">
+					<Link to="/">
+						<Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold font-opensans">
+							Orderus.vn
+						</Typography>
+					</Link>
+					<div className="hidden lg:block">{navList}</div>
+					<div className="hidden gap-2 lg:flex">
+						<div className="flex items-center gap-2">
+							<div className="flex gap-2">
+								{state.isAuthenticated ? (
+									<>
+										<Button
+											onClick={() => navigateCart()}
+											variant="text"
+											size="sm"
+											color="white"
+											className="font-opensans"
+										>
+											<ShoppingCartIcon className="w-6 h-6" />
+										</Button>
+										<Button
+											onClick={() => navigateProfile()}
+											variant="text"
+											size="sm"
+											color="white"
+											className="font-opensans"
+										>
+											<UserCircleIcon className="w-6 h-6" />
+										</Button>
+										<Button
+											onClick={() => handleLogout()}
+											variant="text"
+											size="sm"
+											color="white"
+											className="font-opensans"
+										>
+											Đăng xuất
+										</Button>
+									</>
+								) : (
+									<Button
+										onClick={() => navigateLogin()}
+										variant="text"
+										size="sm"
+										color="white"
+										className="font-opensans"
+									>
+										Đăng nhập
+									</Button>
+								)}
+							</div>
+						</div>
+					</div>
+					<IconButton
+						variant="text"
+						size="sm"
+						color="white"
+						className="ml-auto text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+						onClick={() => setOpenNav(!openNav)}
+					>
+						{openNav ? (
+							<XMarkIcon strokeWidth={2} className="h-6 w-6" />
+						) : (
+							<Bars3Icon strokeWidth={2} className="h-6 w-6" />
+						)}
+					</IconButton>
+				</div>
+				<Collapse
+					className={`rounded-xl bg-white text-blue-gray-900`}
+					open={openNav}
+				>
+					<div className="container p-4 mx-auto">
+						{navList}
+						<div className="flex flex-col gap-2">
 							{state.isAuthenticated ? (
 								<>
 									<Button
 										onClick={() => navigateCart()}
-										variant="text"
 										size="sm"
-										color="white"
 										className="font-opensans"
+										fullWidth
 									>
-										<ShoppingCartIcon className="w-6 h-6" />
+										Giỏ hàng
 									</Button>
 									<Button
 										onClick={() => navigateProfile()}
-										variant="text"
 										size="sm"
-										color="white"
 										className="font-opensans"
+										fullWidth
 									>
-										<UserCircleIcon className="w-6 h-6" />
+										Hồ sơ
 									</Button>
 									<Button
 										onClick={() => handleLogout()}
-										variant="text"
 										size="sm"
-										color="white"
 										className="font-opensans"
+										fullWidth
 									>
 										Đăng xuất
 									</Button>
@@ -136,78 +201,17 @@ export function Navbar({ routes }) {
 									onClick={() => navigateLogin()}
 									variant="text"
 									size="sm"
-									color="white"
 									className="font-opensans"
+									fullWidth
 								>
 									Đăng nhập
 								</Button>
 							)}
 						</div>
 					</div>
-				</div>
-				<IconButton
-					variant="text"
-					size="sm"
-					color="white"
-					className="ml-auto text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-					onClick={() => setOpenNav(!openNav)}
-				>
-					{openNav ? (
-						<XMarkIcon strokeWidth={2} className="h-6 w-6" />
-					) : (
-						<Bars3Icon strokeWidth={2} className="h-6 w-6" />
-					)}
-				</IconButton>
-			</div>
-			<Collapse
-				className={`rounded-xl bg-white text-blue-gray-900`}
-				open={openNav}
-			>
-				<div className="container p-4 mx-auto">
-					{navList}
-					<div className="flex flex-col gap-2">
-						{state.isAuthenticated ? (
-							<>
-								<Button
-									onClick={() => navigateCart()}
-									size="sm"
-									className="font-opensans"
-									fullWidth
-								>
-									Giỏ hàng
-								</Button>
-								<Button
-									onClick={() => navigateProfile()}
-									size="sm"
-									className="font-opensans"
-									fullWidth
-								>
-									Hồ sơ
-								</Button>
-								<Button
-									onClick={() => handleLogout()}
-									size="sm"
-									className="font-opensans"
-									fullWidth
-								>
-									Đăng xuất
-								</Button>
-							</>
-						) : (
-							<Button
-								onClick={() => navigateLogin()}
-								variant="text"
-								size="sm"
-								className="font-opensans"
-								fullWidth
-							>
-								Đăng nhập
-							</Button>
-						)}
-					</div>
-				</div>
-			</Collapse>
-		</nav>
+				</Collapse>
+			</nav>
+		</div>
 	);
 }
 
