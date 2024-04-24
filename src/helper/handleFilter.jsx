@@ -4,9 +4,10 @@ export const handleFilter = ({
 	searchParams,
 	setSearchParams,
 	marketingPrice,
-	productPrice,
 	productCategory,
 	productCondition,
+	minValue,
+	maxValue,
 }) => {
 	const param = new URLSearchParams(searchParams);
 	if (marketingPrice.isChecked) {
@@ -21,28 +22,6 @@ export const handleFilter = ({
 	) {
 		setSearchParams((prev) => {
 			prev.delete("marketingPrice");
-			return prev;
-		});
-	}
-	if (
-		productPrice.isChecked &&
-		productPrice.value.minPrice !== param.get("minPrice") &&
-		productPrice.value.maxPrice !== param.get("maxPrice")
-	) {
-		setSearchParams((prev) => {
-			prev.set("minPrice", productPrice.value.minPrice);
-			prev.set("maxPrice", productPrice.value.maxPrice);
-			return prev;
-		});
-	}
-	if (
-		productPrice.isChecked === false &&
-		param.has("minPrice") &&
-		param.has("maxPrice")
-	) {
-		setSearchParams((prev) => {
-			prev.delete("minPrice");
-			prev.delete("maxPrice");
 			return prev;
 		});
 	}
@@ -78,13 +57,29 @@ export const handleFilter = ({
 			return prev;
 		});
 	}
+
+	if ((minValue !== 0 && maxValue !== 0) || minValue !== 0 || maxValue !== 0) {
+		setSearchParams((prev) => {
+			prev.set("minPrice", minValue);
+			prev.set("maxPrice", maxValue);
+			return prev;
+		});
+	}
+	if (minValue === 0 && maxValue === 0) {
+		setSearchParams((prev) => {
+			prev.delete("minPrice");
+			prev.delete("maxPrice");
+			return prev;
+		});
+	}
 };
 
 export const handleInitFilter = ({
 	searchParams,
 	setMarketingPrice,
-	setProductPrice,
 	setProductCategory,
+	setMinValue,
+	setMaxValue,
 	setProductCondition,
 }) => {
 	const param = new URLSearchParams(searchParams);
@@ -93,13 +88,8 @@ export const handleInitFilter = ({
 		setMarketingPrice({ isChecked: true, value: true });
 	}
 	if (param.has("minPrice") && param.has("maxPrice")) {
-		setProductPrice({
-			isChecked: true,
-			value: {
-				minPrice: parseInt(param.get("minPrice")),
-				maxPrice: parseInt(param.get("maxPrice")),
-			},
-		});
+		setMinValue(parseInt(param.get("minPrice")));
+		setMaxValue(parseInt(param.get("maxPrice")));
 	}
 	if (param.has("category")) {
 		setProductCategory({

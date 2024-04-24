@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { formatCurrency } from "../../helper/formatCurrency";
-import {
-	filterConditionOptions,
-	filterPriceOptions,
-} from "../../constant/filter";
+import { filterConditionOptions } from "../../constant/filter";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
 import { IconButton, Radio } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { handleFilter, handleInitFilter } from "../../helper/handleFilter";
+import MultiRangeSlider from "multi-range-slider-react";
+import "../../App.css";
+import { debounce } from "lodash";
 
 const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 	const [marketingPrice, setMarketingPrice] = useState({
@@ -18,18 +18,17 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 		value: false,
 	});
 
-	const [productPrice, setProductPrice] = useState({
-		isChecked: false,
-		value: {
-			minPrice: 0,
-			maxPrice: 0,
-		},
-	});
-
 	const [productCondition, setProductCondition] = useState({
 		isChecked: false,
 		value: "",
 	});
+
+	const [minValue, setMinValue] = useState(0);
+	const [maxValue, setMaxValue] = useState(0);
+
+	const handleChange = () => {};
+
+	const debouncedHandleChange = debounce(handleChange, 500);
 
 	const [productCategory, setProductCategory] = useState({
 		isChecked: false,
@@ -49,16 +48,6 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			: setProductCategory({ isChecked: true, value: category });
 	};
 
-	const handleChangeProductPrice = (option) => {
-		productPrice.value.minPrice === option.minPrice &&
-		productPrice.value.maxPrice === option.maxPrice
-			? setProductPrice({
-					isChecked: false,
-					value: { minPrice: 0, maxPrice: 0 },
-			  })
-			: setProductPrice({ isChecked: true, value: option });
-	};
-
 	const handleChangeProductCondition = (option) => {
 		productCondition.value === option.value
 			? setProductCondition({
@@ -72,8 +61,9 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 		handleInitFilter({
 			searchParams,
 			setMarketingPrice,
-			setProductPrice,
 			setProductCategory,
+			setMaxValue,
+			setMinValue,
 			setProductCondition,
 		});
 	}, []);
@@ -83,18 +73,25 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			searchParams,
 			setSearchParams,
 			marketingPrice,
-			productPrice,
+			minValue,
+			maxValue,
 			productCategory,
 			productCondition,
 		});
 	}, [
 		marketingPrice,
 		productCategory,
-		productPrice,
 		productCondition,
 		searchParams,
 		setSearchParams,
+		minValue,
+		maxValue,
 	]);
+
+	const handleInput = (e) => {
+		setMinValue(e.minValue);
+		setMaxValue(e.maxValue);
+	};
 
 	return (
 		<aside className="px-3 py-2 bg-white rounded-t-lg border md:w-full sm:flex flex-col gap-2">
@@ -145,7 +142,37 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			</div>
 			<div className="border-b">
 				<div className="font-semibold">Giá sản phẩm</div>
-				<div className="flex flex-col gap-1">
+				<MultiRangeSlider
+					min={0}
+					max={100000000}
+					step={1}
+					canMinMaxValueSame={true}
+					minCaption={formatCurrency(minValue)}
+					maxCaption={formatCurrency(maxValue)}
+					label={false}
+					ruler={false}
+					style={{
+						border: "none",
+						boxShadow: "none",
+					}}
+					barInnerColor="#333333"
+					className="shadow-none"
+					thumbLeftColor="#333333"
+					thumbRightColor="#333333"
+					minValue={minValue}
+					maxValue={maxValue}
+					onInput={(e) => {
+						handleInput(e);
+					}}
+					onChange={(e) => {
+						debouncedHandleChange(e);
+					}}
+				/>
+				<div className="flex justify-between mb-2">
+					<div className="font-medium">{formatCurrency(0)}</div>
+					<div className="font-medium">{formatCurrency(100000000)}</div>
+				</div>
+				{/* <div className="flex flex-col gap-1">
 					{filterPriceOptions.map((option, index) => (
 						<div key={index} className="flex">
 							<Radio
@@ -169,7 +196,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 							/>
 						</div>
 					))}
-				</div>
+				</div> */}
 			</div>
 			<div className="border-b">
 				<div className="font-semibold">Danh mục</div>

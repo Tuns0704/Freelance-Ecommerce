@@ -96,9 +96,7 @@ export function Navbar({ routes }) {
 			>
 				<div className="flex items-center justify-between text-white">
 					<Link to="/">
-						<Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold font-opensans">
-							Orderus.vn
-						</Typography>
+						<img src="/logo.png" className="w-32 bg-white rounded-lg" alt="" />
 					</Link>
 					<div className="hidden lg:block">{navList}</div>
 					<div className="hidden gap-2 lg:flex">

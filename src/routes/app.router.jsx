@@ -56,7 +56,12 @@ export const AppRouter = () => {
 									/>
 								))
 						)}
+						<Route
+							path="/dashboard/product-detail/:id"
+							element={<ProductDetail />}
+						/>
 					</Route>
+
 					<Route path="*" element={<Navigate to="/dashboard/home" replace />} />
 				</>
 			) : (

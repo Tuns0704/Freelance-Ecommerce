@@ -9,17 +9,18 @@ const contact = [
 	{
 		icon: <MapPinIcon className="w-6 h-6" />,
 		title: "Địa Chỉ",
-		content: "18 Thân Văn Nhiếp, P.An Phú, TP.Thủ Đức",
+		content:
+			"Số 15, Ngõ 28 Ngụy Như Kon Tum, P. Nhân Chính, Q. Thanh Xuân, Hà Nội",
 	},
 	{
 		icon: <EnvelopeIcon className="w-6 h-6" />,
 		title: "Email",
-		content: "sup.orderus@gmail.com",
+		content: "cskh.orderus@gmail.com",
 	},
 	{
 		icon: <PhoneIcon className="w-6 h-6" />,
 		title: "Điện Thoại",
-		content: "0123456789",
+		content: "0332.888.222 - 0962.139.661",
 	},
 ];
 
@@ -44,7 +45,9 @@ const ContactUs = () => {
 				<div className="md:w-2/3 flex flex-col h-full justify-between">
 					<iframe
 						className="w-full h-[50vh]"
-						src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d173537.2977969947!2d108.01555496858708!3d16.030762420278602!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421827a3c439f5%3A0xdec2fb897aa16a90!2sGreenwich%20Vi%E1%BB%87t%20Nam!5e0!3m2!1svi!2s!4v1709810004170!5m2!1svi!2s"
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.868473301721!2d105.79731751131779!3d20.99790878056296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acbc80fa76b1%3A0x6787490119b5fb63!2zMTUgTmcuIDI4IFAuIE5n4buxeSBOaMawIEtvbiBUdW0sIE5ow6JuIENow61uaCwgVGhhbmggWHXDom4sIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1713945678052!5m2!1svi!2s"
+						width="800"
+						height="600"
 						style={{ border: 0 }}
 						allowfullscreen=""
 						loading="lazy"
