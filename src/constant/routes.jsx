@@ -1,12 +1,12 @@
-import Home from "../features/Home";
 import Products from "../features/Products";
 import ReportPrice from "../features/ReportPrices";
+import ContactUs from "./../features/ContactUs/index";
 
 export const routes = [
 	{
-		name: "Trang chủ",
-		path: "/home",
-		element: <Home />,
+		name: "Báo giá nhanh",
+		path: "/report-price",
+		element: <ReportPrice />,
 	},
 	{
 		name: "Sản phẩm",
@@ -14,9 +14,9 @@ export const routes = [
 		element: <Products />,
 	},
 	{
-		name: "Báo giá",
-		path: "/report-price",
-		element: <ReportPrice />,
+		name: "Liên hệ",
+		path: "/contact-us",
+		element: <ContactUs />,
 	},
 ];
 

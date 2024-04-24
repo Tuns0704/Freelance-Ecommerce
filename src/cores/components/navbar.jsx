@@ -1,6 +1,6 @@
 import { useState, useEffect, createElement, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
 	Collapse,
 	Typography,
@@ -10,16 +10,18 @@ import {
 import {
 	Bars3Icon,
 	XMarkIcon,
-	UserCircleIcon,
-	ShoppingCartIcon,
+	MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import { AppContext } from "./../context/app.context";
 import { SET_TOKEN, SET_AUTHENTICATED } from "./../context/app.context";
+import { toast } from "react-toastify";
 
 export function Navbar({ routes }) {
 	const navigate = useNavigate();
 	const { state, dispatchAuth } = useContext(AppContext);
 	const [openNav, setOpenNav] = useState(false);
+	const [searchString, setSearchString] = useState("");
+	const [searchParams, setSearchParams] = useSearchParams([]);
 
 	useEffect(() => {
 		window.addEventListener(
@@ -49,8 +51,75 @@ export function Navbar({ routes }) {
 		navigate("/cart");
 	};
 
+	const param = new URLSearchParams(searchParams);
+
+	useEffect(() => {
+		if (searchString === "" && param.has("name")) {
+			setSearchParams((prev) => {
+				prev.delete("name");
+				return prev;
+			});
+		}
+	}, [searchString]);
+
+	const handleSetSearchString = () => {
+		if (searchString !== "") {
+			setSearchParams((prev) => {
+				prev.append("name", searchString);
+				return prev;
+			});
+			navigate(`/products?${searchParams}`);
+		}
+		if (searchString !== "" && param.has("name")) {
+			setSearchParams((prev) => {
+				prev.set("name", searchString);
+				return prev;
+			});
+			navigate(`/products?${searchParams}`);
+		}
+		if (searchString === "" && param.has("name")) {
+			setSearchParams((prev) => {
+				prev.delete("name");
+				return prev;
+			});
+		}
+	};
+
+	const findProduct = () => {
+		handleSetSearchString();
+	};
+
+	const handleKeyDown = (e) => {
+		if (e.keyCode === 13) {
+			handleSetSearchString();
+		}
+	};
+
+	const handleChange = (e) => {
+		setSearchString(e.target.value);
+	};
+
 	const navList = (
 		<ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+			<div className="md:w-2/3">
+				<div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+					<IconButton
+						onClick={() => findProduct()}
+						className="grid bg-transparent shadow-none hover:shadow-none  active:shadow-none place-items-center h-full w-12 text-gray-300"
+					>
+						<MagnifyingGlassIcon className="w-6 h-6 text-gray-900 hover:text-blue-900" />
+					</IconButton>
+					<input
+						className="peer font-opensans h-full w-full outline-none text-sm text-gray-900 pr-2"
+						type="text"
+						id="search"
+						value={searchString}
+						onChange={(e) => handleChange(e)}
+						placeholder="Nhập thông tin sản phẩm bạn muốn mua..."
+						onKeyDown={(e) => handleKeyDown(e)}
+					/>
+				</div>
+			</div>
 			{routes.map((route) => (
 				<Typography
 					key={route.name}
@@ -98,7 +167,7 @@ export function Navbar({ routes }) {
 					<Link to="/">
 						<img src="/logo.png" className="w-32 bg-white rounded-lg" alt="" />
 					</Link>
-					<div className="hidden lg:block">{navList}</div>
+					<div className="hidden lg:block w-2/3">{navList}</div>
 					<div className="hidden gap-2 lg:flex">
 						<div className="flex items-center gap-2">
 							<div className="flex gap-2">
@@ -111,16 +180,16 @@ export function Navbar({ routes }) {
 											color="white"
 											className="font-opensans"
 										>
-											<ShoppingCartIcon className="w-6 h-6" />
+											Giỏ hàng
 										</Button>
 										<Button
 											onClick={() => navigateProfile()}
 											variant="text"
 											size="sm"
 											color="white"
-											className="font-opensans"
+											className="font-opensans flex justify-center items-center gap-2"
 										>
-											<UserCircleIcon className="w-6 h-6" />
+											Trang cá nhân
 										</Button>
 										<Button
 											onClick={() => handleLogout()}
