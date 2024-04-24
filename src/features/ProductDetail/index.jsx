@@ -22,7 +22,6 @@ import BuyNowButton from "./../../cores/components/buyNowButton";
 const ProductDetail = () => {
 	const { id } = useParams();
 	const [images, setImages] = useState([]);
-	// const [isOpen, setIsOpen] = useState(false);
 	const [product, setProduct] = useState({});
 	const [price, setPrice] = useState(0);
 	const [loading, setLoading] = useState(false);
@@ -123,12 +122,13 @@ const ProductDetail = () => {
 							<div className="text-lg px-3 py-1 border border-red-900 text-red-900 font-bold rounded">
 								{product.condition}
 							</div>
+							{product.marketingPrice && (
+								<div className="text-lg px-3 py-1 border border-red-900 bg-red-900 text-white font-bold rounded">
+									Flash Sale
+								</div>
+							)}
 						</div>
-						{product.marketingPrice && (
-							<div className="text-lg px-3 py-1 border border-red-900 bg-red-900 text-white font-bold rounded">
-								Flash Sale
-							</div>
-						)}
+
 						<h1 className="font-bold text-blue-gray-900 sm:text-3xl text-lg text-justify">
 							{product.title}
 						</h1>
