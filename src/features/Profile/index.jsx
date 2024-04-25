@@ -23,16 +23,15 @@ const Profile = () => {
 	const getOrderOfUser = useCallback(async () => {
 		const useId = decodeToken(token).sub;
 		const response = await getUserOrder(useId);
-		console.log(response);
 		if (response.status === 200) {
 			setOrders(response.data);
+			console.log(response.data);
 		}
 	}, [token]);
 
 	const getUserInformation = async () => {
 		const response = await getUserProfile();
 		setProfile(response.data);
-		console.log(response.data);
 	};
 
 	useEffect(() => {

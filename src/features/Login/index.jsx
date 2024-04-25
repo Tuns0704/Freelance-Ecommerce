@@ -1,4 +1,5 @@
-import { Button, Typography } from "@material-tailwind/react";
+import { Button, Typography, Input } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
 	const handleLoginGoogle = async () => {
@@ -19,11 +20,59 @@ const Login = () => {
 						Đăng nhập
 					</Typography>
 				</div>
-				<form className="mt-4 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+				<form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+					<div className="mb-4 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Email
+						</Typography>
+						<Input
+							size="lg"
+							placeholder="name@mail.com"
+							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+							labelProps={{
+								className: "before:content-none after:content-none",
+							}}
+						/>
+					</div>
+					<div className="mb-1 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Mật khẩu
+						</Typography>
+						<Input
+							size="lg"
+							placeholder="••••••••"
+							type="password"
+							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+							labelProps={{
+								className: "before:content-none after:content-none",
+							}}
+						/>
+					</div>
+					<Button size="lg" className="mt-6" fullWidth>
+						Đăng nhập
+					</Button>
+					<Typography
+						variant="paragraph"
+						className="text-center text-blue-gray-500 font-medium mt-4"
+					>
+						Chưa có tài khoản?
+						<Link to="/register" className="text-gray-900 ml-1 underline">
+							Đăng ký ngay
+						</Link>
+					</Typography>
 					<div className="space-y-4 mt-8">
 						<Button
 							onClick={() => handleLoginGoogle()}
 							size="lg"
+							color="white"
 							className="flex items-center gap-2 justify-center"
 							fullWidth
 						>
@@ -68,6 +117,7 @@ const Login = () => {
 						<Button
 							onClick={() => handleLoginFacebook()}
 							size="lg"
+							color="white"
 							className="flex items-center gap-2 justify-center shadow-md"
 							fullWidth
 						>

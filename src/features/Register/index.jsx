@@ -1,7 +1,16 @@
-import { Input, Checkbox, Button, Typography } from "@material-tailwind/react";
+import { Input, Button, Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+	const handleLoginGoogle = async () => {
+		const link = "https://api-ebay.onrender.com/api/auth/google/login";
+		window.open(link, "_self");
+	};
+
+	const handleLoginFacebook = () => {
+		const link = "https://api-ebay.onrender.com/api/auth/facebook/login";
+		window.open(link, "_self");
+	};
 	return (
 		<section className="flex h-[85vh] p-8 gap-4">
 			<div className="w-2/5 h-full hidden lg:block">
@@ -13,24 +22,17 @@ const Register = () => {
 			<div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
 				<div className="text-center">
 					<Typography variant="h2" className="font-bold mb-4">
-						Join Us Today
-					</Typography>
-					<Typography
-						variant="paragraph"
-						color="blue-gray"
-						className="text-lg font-normal"
-					>
-						Enter your email and password to register.
+						Đăng ký
 					</Typography>
 				</div>
 				<form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
-					<div className="mb-1 flex flex-col gap-6">
+					<div className="mb-4 flex flex-col gap-6">
 						<Typography
 							variant="small"
 							color="blue-gray"
-							className="-mb-3 font-medium"
+							className="-mb-5 font-medium"
 						>
-							Your email
+							Email
 						</Typography>
 						<Input
 							size="lg"
@@ -41,38 +43,47 @@ const Register = () => {
 							}}
 						/>
 					</div>
-					<Checkbox
-						label={
-							<Typography
-								variant="small"
-								color="gray"
-								className="flex items-center justify-start font-medium"
-							>
-								I agree the&nbsp;
-								<a
-									href="#"
-									className="font-normal text-black transition-colors hover:text-gray-900 underline"
-								>
-									Terms and Conditions
-								</a>
-							</Typography>
-						}
-						containerProps={{ className: "-ml-2.5" }}
-					/>
+					<div className="mb-1 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Mật khẩu
+						</Typography>
+						<Input
+							size="lg"
+							placeholder="••••••••"
+							type="password"
+							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+							labelProps={{
+								className: "before:content-none after:content-none",
+							}}
+						/>
+					</div>
 					<Button className="mt-6" fullWidth>
-						Register Now
+						Đăng ký ngay
 					</Button>
-
+					<Typography
+						variant="paragraph"
+						className="text-center text-blue-gray-500 font-medium mt-4"
+					>
+						Đã có tài khoản?
+						<Link to="/login" className="text-gray-900 ml-1 underline">
+							Đăng nhập ngay
+						</Link>
+					</Typography>
 					<div className="space-y-4 mt-8">
 						<Button
+							onClick={() => handleLoginGoogle()}
 							size="lg"
 							color="white"
-							className="flex items-center gap-2 justify-center shadow-md"
+							className="flex items-center gap-2 justify-center"
 							fullWidth
 						>
 							<svg
-								width="17"
-								height="16"
+								width="20"
+								height="20"
 								viewBox="0 0 17 16"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg"
@@ -106,27 +117,36 @@ const Register = () => {
 									</clipPath>
 								</defs>
 							</svg>
-							<span>Sign in With Google</span>
+							<span>Đăng ký với Google</span>
 						</Button>
 						<Button
+							onClick={() => handleLoginFacebook()}
 							size="lg"
 							color="white"
 							className="flex items-center gap-2 justify-center shadow-md"
 							fullWidth
 						>
-							<img src="/img/twitter-logo.svg" height={24} width={24} alt="" />
-							<span>Sign in With Twitter</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 16 16"
+								id="facebook"
+								width="20"
+								height="20"
+							>
+								<path
+									fill="#1976D2"
+									d="M14 0H2C.897 0 0 .897 0 2v12c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V2c0-1.103-.897-2-2-2z"
+								></path>
+								<path
+									fill="#FAFAFA"
+									fillRule="evenodd"
+									d="M13.5 8H11V6c0-.552.448-.5 1-.5h1V3h-2a3 3 0 0 0-3 3v2H6v2.5h2V16h3v-5.5h1.5l1-2.5z"
+									clipRule="evenodd"
+								></path>
+							</svg>
+							<span>Đăng ký với Facebook</span>
 						</Button>
 					</div>
-					<Typography
-						variant="paragraph"
-						className="text-center text-blue-gray-500 font-medium mt-4"
-					>
-						Already have an account?
-						<Link to="/login" className="text-gray-900 ml-1 underline">
-							Sign in
-						</Link>
-					</Typography>
 				</form>
 			</div>
 		</section>

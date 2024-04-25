@@ -51,6 +51,10 @@ export function Navbar({ routes }) {
 		navigate("/login");
 	};
 
+	const navigateRegister = () => {
+		navigate("/register");
+	};
+
 	const navigateProfile = () => {
 		navigate("/profile");
 	};
@@ -223,7 +227,7 @@ export function Navbar({ routes }) {
 								) : (
 									<div className="flex gap-2">
 										<Button
-											onClick={() => navigateLogin()}
+											onClick={() => navigateRegister()}
 											variant="text"
 											size="sm"
 											color="white"
