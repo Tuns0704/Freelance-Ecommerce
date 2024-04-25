@@ -153,7 +153,7 @@ const ModalInfo = ({ isOpen, closeModal, order }) => {
 																{item.quantity}
 															</td>
 															<td className="text-center border-r border-blue-gray-900">
-																{formatCurrency(item.depositAmount)}
+																{formatCurrency(item.warrantyFee)}
 															</td>
 															<td className="text-center border-r border-blue-gray-900">
 																{formatCurrency(item.price)}
