@@ -37,8 +37,7 @@ const CardItem = ({ product }) => {
 				</del>
 			</section>
 			<i className="font-medium text-sm">
-				Giá tốt nhất{" "}
-				<b>{formatCurrency(product.marketingPrice.originalPrice.value)}</b>
+				Giá tốt nhất: <b>{formatCurrency(product.price[0].value)}</b>
 			</i>
 			<AddToCartButton
 				productId={product.id}
