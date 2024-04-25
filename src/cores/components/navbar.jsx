@@ -11,10 +11,18 @@ import {
 	Bars3Icon,
 	XMarkIcon,
 	MagnifyingGlassIcon,
+	UserCircleIcon,
+	ShoppingCartIcon,
+	ArrowLeftCircleIcon,
 } from "@heroicons/react/24/outline";
+import {
+	MenuHandler,
+	MenuList,
+	MenuItem,
+	Menu,
+} from "@material-tailwind/react";
 import { AppContext } from "./../context/app.context";
 import { SET_TOKEN, SET_AUTHENTICATED } from "./../context/app.context";
-import { toast } from "react-toastify";
 
 export function Navbar({ routes }) {
 	const navigate = useNavigate();
@@ -102,15 +110,15 @@ export function Navbar({ routes }) {
 	const navList = (
 		<ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
 			<div className="md:w-2/3">
-				<div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+				<div className="relative flex items-center w-full h-12 rounded-lg md:shadow-none shadow-md focus-within:shadow-lg bg-white overflow-hidden">
 					<IconButton
 						onClick={() => findProduct()}
-						className="grid bg-transparent shadow-none hover:shadow-none  active:shadow-none place-items-center h-full w-12 text-gray-300"
+						className="grid bg-transparent shadow-none hover:shadow-none focus-within:shadow-none   place-items-center h-full w-12 text-gray-300"
 					>
 						<MagnifyingGlassIcon className="w-6 h-6 text-gray-900 hover:text-blue-900" />
 					</IconButton>
 					<input
-						className="peer font-opensans h-full w-full outline-none text-sm text-gray-900 pr-2"
+						className="peer font-opensans h-full w-full outline-none text-sm md:text-gray-900 pr-2"
 						type="text"
 						id="search"
 						value={searchString}
@@ -170,47 +178,69 @@ export function Navbar({ routes }) {
 					<div className="hidden lg:block w-2/3">{navList}</div>
 					<div className="hidden gap-2 lg:flex">
 						<div className="flex items-center gap-2">
-							<div className="flex gap-2">
+							<div className="flex justify-end gap-2 w-52">
 								{state.isAuthenticated ? (
-									<>
-										<Button
-											onClick={() => navigateCart()}
-											variant="text"
-											size="sm"
-											color="white"
-											className="font-opensans"
-										>
-											Giỏ hàng
-										</Button>
-										<Button
-											onClick={() => navigateProfile()}
-											variant="text"
-											size="sm"
-											color="white"
-											className="font-opensans flex justify-center items-center gap-2"
-										>
-											Trang cá nhân
-										</Button>
-										<Button
-											onClick={() => handleLogout()}
-											variant="text"
-											size="sm"
-											color="white"
-											className="font-opensans"
-										>
-											Đăng xuất
-										</Button>
-									</>
+									<Menu placement="bottom-end">
+										<MenuHandler>
+											<Button className="font-opensans">Tài khoản</Button>
+										</MenuHandler>
+										<MenuList>
+											<MenuItem>
+												<Button
+													onClick={() => navigateCart()}
+													variant="text"
+													size="sm"
+													className="font-opensans hover:bg-transparent flex justify-center items-center gap-2"
+												>
+													<ShoppingCartIcon className="w-6 h-6 text-blue-gray-900" />
+													Giỏ hàng
+												</Button>
+											</MenuItem>
+											<MenuItem>
+												<Button
+													onClick={() => navigateProfile()}
+													variant="text"
+													size="sm"
+													className="font-opensans hover:bg-transparent flex justify-center items-center gap-2"
+												>
+													<UserCircleIcon className="w-6 h-6 text-blue-gray-900" />
+													Trang cá nhân
+												</Button>
+											</MenuItem>
+											<MenuItem>
+												<Button
+													onClick={() => handleLogout()}
+													variant="text"
+													size="sm"
+													className="font-opensans hover:bg-transparent flex justify-center items-center gap-2"
+												>
+													<ArrowLeftCircleIcon className="w-6 h-6 text-blue-gray-900" />
+													Đăng xuất
+												</Button>
+											</MenuItem>
+										</MenuList>
+									</Menu>
 								) : (
-									<Button
-										onClick={() => navigateLogin()}
-										variant="text"
-										size="sm"
-										color="white"
-										className="font-opensans"
-									>
-										Đăng nhập
-									</Button>
+									<div className="flex gap-2">
+										<Button
+											onClick={() => navigateLogin()}
+											variant="text"
+											size="sm"
+											color="white"
+											className="font-opensans"
+										>
+											Đăng ký
+										</Button>
+										<Button
+											onClick={() => navigateLogin()}
+											variant="text"
+											size="sm"
+											color="white"
+											className="font-opensans"
+										>
+											Đăng nhập
+										</Button>
+									</div>
 								)}
 							</div>
 						</div>

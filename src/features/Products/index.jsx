@@ -2,13 +2,42 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getListProduct } from "../../services/product";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
-import { Button } from "@material-tailwind/react";
+import { Button, Select, Option } from "@material-tailwind/react";
 import Loading from "../../cores/components/loading";
 import Pagination from "../../cores/components/pagination";
 import CardItem from "./cardItem";
 import FilterOption from "../../cores/components/filter";
 import { getListCategory } from "../../services/category";
 import { toast } from "react-toastify";
+import { setValueSort } from "../../helper/handleGetSort";
+
+const sortOptions = [
+	{ value: "", sortField: "", sortDirection: "", label: "Mặc định" },
+	{
+		value: "priceDesc",
+		sortField: "price",
+		sortDirection: "descend",
+		label: "Giá giảm dần",
+	},
+	{
+		value: "priceAsc",
+		sortField: "price",
+		sortDirection: "ascend",
+		label: "Giá tăng dần",
+	},
+	{
+		value: "createAtDesc",
+		sortField: "createAt",
+		sortDirection: "descend",
+		label: "Sản phẩm mới đến cũ",
+	},
+	{
+		value: "createAtAsc",
+		sortField: "createAt",
+		sortDirection: "ascend",
+		label: "Sản phẩm cũ đến mới",
+	},
+];
 
 const Products = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +45,7 @@ const Products = () => {
 	const [totalProducts, setTotalProducts] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [categories, setCategories] = useState([]);
+	const [seletedOption, setSelectedOption] = useState("");
 	const [searchParams, setSearchParams] = useSearchParams({
 		page: 1,
 	});
@@ -74,20 +104,66 @@ const Products = () => {
 		getData();
 	}, [searchParams]);
 
+	const handleChangeSortOption = (option) => {
+		if (option.value !== "") {
+			setSearchParams((prev) => {
+				prev.set("sortField", option.sortField);
+				prev.set("sortDirection", option.sortDirection);
+				return prev;
+			});
+		} else {
+			setSearchParams((prev) => {
+				prev.delete("sortField");
+				prev.delete("sortDirection");
+				return prev;
+			});
+		}
+	};
+
+	useEffect(() => {
+		setValueSort({
+			searchParams,
+			setSelectedOption,
+		});
+	}, []);
+
 	return (
 		<section className="flex flex-col md:flex-row-reverse gap-2 w-full">
 			<div className="flex flex-col md:w-full">
-				<div className="flex items-center gap-2 mb-5">
-					<Button
-						className="w-fit p-2 rounded-md md:hidden"
-						variant="outlined"
-						onClick={openModal}
-					>
-						<AdjustmentsHorizontalIcon className="h-5 w-5" />
-					</Button>
-					<p className="font-semibold text-lg">
-						Tổng số sản phẩm: {totalProducts}
-					</p>
+				<div className="flex items-center justify-between gap-2 mb-5">
+					<div className="flex items-center gap-2">
+						<Button
+							className="w-fit p-2 rounded-md md:hidden"
+							variant="outlined"
+							onClick={openModal}
+						>
+							<AdjustmentsHorizontalIcon className="h-5 w-5" />
+						</Button>
+						<p className="font-semibold text-lg">
+							Tổng số sản phẩm: {totalProducts}
+						</p>
+					</div>
+					<div className="flex w-fit items-center gap-2">
+						<div className="relative">
+							<Select
+								label="Sắp xếp"
+								placeholder="Sắp xếp theo..."
+								className=""
+								value={seletedOption}
+								onChange={(e) => setSelectedOption(e.target.value)}
+							>
+								{sortOptions.map((option, index) => (
+									<Option
+										onClick={() => handleChangeSortOption(option)}
+										key={index}
+										value={option.value}
+									>
+										{option.label}
+									</Option>
+								))}
+							</Select>
+						</div>
+					</div>
 				</div>
 				{loading ? (
 					<Loading />
