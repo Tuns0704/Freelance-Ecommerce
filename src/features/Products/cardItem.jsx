@@ -71,10 +71,14 @@ const CardItem = ({ product }) => {
 						{formatCurrency(product.price[0].value)}
 					</h1>
 					<p className="text-sm">
-						Giá tốt nhất: <b>{formatCurrency(product.price[0].value)}</b>
+						Giá tốt nhất:{" "}
+						<b>
+							{formatCurrency(product.price[product.price.length - 1].value)}
+						</b>
 					</p>
 					<i className="text-sm text-gray-700">
-						Lần cập nhật cuối: {formatDate(product.price[0].lastUpdated)}
+						Lần cập nhật cuối:{" "}
+						{formatDate(product.price[product.price.length - 1].lastUpdated)}
 					</i>
 				</div>
 				<div className="flex flex-col gap-2 w-full">

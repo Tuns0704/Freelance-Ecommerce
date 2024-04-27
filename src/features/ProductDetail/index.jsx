@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProduct } from "../../services/product";
-import { Button } from "@material-tailwind/react";
+import {
+	Button,
+	Popover,
+	PopoverHandler,
+	PopoverContent,
+	IconButton,
+} from "@material-tailwind/react";
 import Loading from "../../cores/components/loading";
 import { formatCurrency } from "../../helper/formatCurrency";
 import { calculateDateShipping } from "../../helper/calculateDateShipping";
@@ -9,6 +15,7 @@ import {
 	TruckIcon,
 	ShieldCheckIcon,
 	ShoppingCartIcon,
+	InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 import ImageSlider from "./imageSlider";
 import { formatPercentage } from "../../helper/formatPercentage";
@@ -18,6 +25,7 @@ import { toast } from "react-toastify";
 import { addToCart } from "../../services/cart";
 import ConfirmLogin from "./../../cores/components/confirmLogin";
 import BuyNowButton from "./../../cores/components/buyNowButton";
+import { formatDateTime } from "../../helper/formatDateTime";
 
 const ProductDetail = () => {
 	const { id } = useParams();
@@ -114,10 +122,10 @@ const ProductDetail = () => {
 				<Loading />
 			) : (
 				<div className="flex flex-col md:flex-row gap-5">
-					<div className="w-full md:w-1/2 self-center">
+					<div className="w-full md:w-1/2">
 						<ImageSlider images={images} />
 					</div>
-					<div className="flex flex-col justify-between md:w-1/2">
+					<div className="flex flex-col justify-between md:w-1/2 gap-2">
 						<div className="flex gap-2">
 							<div className="text-lg px-3 py-1 border border-red-900 text-red-900 font-bold rounded">
 								{product.condition}
@@ -138,28 +146,60 @@ const ProductDetail = () => {
 								{product.brand}
 							</p>
 						</div>
-						<div>
-							<div className="flex gap-2 items-center">
-								<p className="font-bold text-red-900 text-3xl">
-									{formatCurrency(price)}
+						<div className="flex gap-2 items-center">
+							<p className="font-bold text-red-900 text-3xl">
+								{formatCurrency(price)}
+							</p>
+							{product.marketingPrice && (
+								<del className="font-bold text-gray-500 line-through">
+									{formatCurrency(product.marketingPrice.originalPrice?.value)}
+								</del>
+							)}
+							{product.marketingPrice && (
+								<p className="font-bold text-gray-500 line-through">
+									({formatPercentage(product.marketingPrice.discountPercentage)}
+									%)
 								</p>
-								{product.marketingPrice && (
-									<del className="font-bold text-gray-500 line-through">
-										{formatCurrency(
-											product.marketingPrice.originalPrice?.value
-										)}
-									</del>
-								)}
-								{product.marketingPrice && (
-									<p className="font-bold text-gray-500 line-through">
-										(
-										{formatPercentage(
-											product.marketingPrice.discountPercentage
-										)}
-										%)
-									</p>
-								)}
-							</div>
+							)}
+						</div>
+						<div className="flex gap-2 items-center">
+							<p className="font-bold">Xem lịch sử giá</p>
+							<Popover placement="bottom">
+								<PopoverHandler>
+									<IconButton
+										className="border-none p-0 w-6 h-6"
+										variant="outlined"
+									>
+										<InformationCircleIcon className="w-6 h-6 text-red-900" />
+									</IconButton>
+								</PopoverHandler>
+								<PopoverContent className="bg-gray-900 text-white shadow-md shadow-gray-900/10">
+									<div className="border rounded-lg">
+										<table>
+											<thead>
+												<tr>
+													<th className="p-2 border-r border-b">STT</th>
+													<th className="p-2 border-r border-b">
+														Giá sản phẩm
+													</th>
+													<th className="p-2 border-b">Thời gian cập nhật</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td className="p-2 border-r">1</td>
+													<td className="p-2 border-r">
+														{formatCurrency(product.price.value)}
+													</td>
+													<td className={`p-2`}>
+														{formatDateTime(product.price.lastUpdated)}
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</PopoverContent>
+							</Popover>
 						</div>
 						<div>
 							<div className="flex gap-2 items-center">
@@ -217,7 +257,10 @@ const ProductDetail = () => {
 							</div>
 						</div>
 						<p className="text-justify">
-							<b>Mô tả:</b> {product.shortDescription}
+							<b>Mô tả:</b>{" "}
+							{product.shortDescription
+								? product.shortDescription
+								: "Người bán không viết mô tả"}
 						</p>
 						<div className="flex gap-5">
 							<div className="flex w-1/2">

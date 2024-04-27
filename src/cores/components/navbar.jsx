@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, createElement, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
@@ -113,7 +114,7 @@ export function Navbar({ routes }) {
 
 	const navList = (
 		<ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-			<div className="md:w-2/3">
+			<div className="md:w-[400px]">
 				<div className="relative flex items-center w-full h-12 rounded-lg md:shadow-none shadow-md focus-within:shadow-lg bg-white overflow-hidden">
 					<IconButton
 						onClick={() => findProduct()}
@@ -132,41 +133,43 @@ export function Navbar({ routes }) {
 					/>
 				</div>
 			</div>
-			{routes.map((route) => (
-				<Typography
-					key={route.name}
-					as="li"
-					variant="small"
-					color="inherit"
-					className="capitalize font-opensans"
-				>
-					{route.href ? (
-						<a
-							href={route.href}
-							target={route.target}
-							className="flex items-center gap-1 p-1 font-bold"
-						>
-							{route.icon &&
-								createElement(route.icon, {
-									className: "w-[18px] h-[18px] opacity-75 mr-1",
-								})}
-							{route.name}
-						</a>
-					) : (
-						<Link
-							to={route.path}
-							target={route.target}
-							className="flex items-center gap-1 p-1 font-bold"
-						>
-							{route.icon &&
-								createElement(route.icon, {
-									className: "w-[18px] h-[18px] opacity-75 mr-1",
-								})}
-							{route.name}
-						</Link>
-					)}
-				</Typography>
-			))}
+			<div className="md:w-fit flex gap-3">
+				{routes.map((route) => (
+					<Typography
+						key={route.name}
+						as="li"
+						variant="small"
+						color="inherit"
+						className="capitalize font-opensans"
+					>
+						{route.href ? (
+							<a
+								href={route.href}
+								target={route.target}
+								className="flex items-center gap-1 p-1 font-bold"
+							>
+								{route.icon &&
+									createElement(route.icon, {
+										className: "w-[18px] h-[18px] opacity-75 mr-1",
+									})}
+								{route.name}
+							</a>
+						) : (
+							<Link
+								to={route.path}
+								target={route.target}
+								className="flex items-center gap-1 p-1 font-bold"
+							>
+								{route.icon &&
+									createElement(route.icon, {
+										className: "w-[18px] h-[18px] opacity-75 mr-1",
+									})}
+								{route.name}
+							</Link>
+						)}
+					</Typography>
+				))}
+			</div>
 		</ul>
 	);
 
@@ -179,7 +182,7 @@ export function Navbar({ routes }) {
 					<Link to="/">
 						<img src="/logo.png" className="w-32 bg-white rounded-lg" alt="" />
 					</Link>
-					<div className="hidden lg:block w-2/3">{navList}</div>
+					<div className="hidden self-center lg:block w-fit">{navList}</div>
 					<div className="hidden gap-2 lg:flex">
 						<div className="flex items-center gap-2">
 							<div className="flex justify-end gap-2 w-52">
