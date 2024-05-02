@@ -189,10 +189,10 @@ const ProductDetail = () => {
 												<tr>
 													<td className="p-2 border-r">1</td>
 													<td className="p-2 border-r">
-														{formatCurrency(product.price.value)}
+														{formatCurrency(product.price?.value)}
 													</td>
 													<td className={`p-2`}>
-														{formatDateTime(product.price.lastUpdated)}
+														{formatDateTime(product.price?.lastUpdated)}
 													</td>
 												</tr>
 											</tbody>
