@@ -12,7 +12,7 @@ const CardItem = ({ product }) => {
 	};
 
 	return (
-		<div className="flex relative flex-col gap-2 bg-white shadow-md p-5 rounded-lg hover:cursor-pointer">
+		<div className="flex w-full relative flex-col gap-2 bg-white shadow-md p-5 rounded-lg hover:cursor-pointer">
 			<label className="absolute px-2 rounded top-[-5px] z-40 left-[-5px] bg-red-900 text-white font-bold py-1">
 				Giảm {formatPercentage(product.marketingPrice.discountPercentage)}%
 			</label>

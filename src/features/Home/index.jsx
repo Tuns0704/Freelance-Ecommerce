@@ -1,14 +1,11 @@
-import FashionDeal from "./fashionDeal";
-// import Instruct from "./instruct";
 import ImageSlider from "../../cores/components/imageSlider";
-import LaptopDeal from "./laptopDeal";
-import TopSale from "./topSale";
 import { useEffect, useState } from "react";
 import { getSettings } from "../../services/setting";
 import Loading from "./../../cores/components/loading";
 import { getListCategory } from "../../services/category";
 import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import Deals from "./deal";
 
 const Home = () => {
 	const [settings, setSettings] = useState({});
@@ -78,9 +75,9 @@ const Home = () => {
 							className="md:w-3/4 rounded-lg shadow-lg"
 						/>
 					</div>
-					<FashionDeal />
-					<LaptopDeal />
-					<TopSale />
+					{categories.map((item, index) => (
+						<Deals key={index} deal={item} />
+					))}
 					<img
 						src={settings.bannerBot}
 						alt=""

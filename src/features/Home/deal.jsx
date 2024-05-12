@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import { formatCurrency } from "./../../helper/formatCurrency";
 import { Button } from "@material-tailwind/react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,15 +8,16 @@ import { useEffect, useState } from "react";
 import Loading from "../../cores/components/loading";
 import { useNavigate } from "react-router-dom";
 import CardItem from "./cardItem";
+import { PropTypes } from "prop-types";
 
-const FashionDeal = () => {
+const Deals = ({ deal }) => {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 
-	const getSaleProduct = async (category) => {
+	const getSaleProduct = async () => {
 		setLoading(true);
 		try {
-			const response = await getSaleProductByCategory(category);
+			const response = await getSaleProductByCategory(deal.englishName);
 			setProducts(response.data.data);
 			setLoading(false);
 		} catch (error) {
@@ -25,18 +27,18 @@ const FashionDeal = () => {
 	};
 
 	useEffect(() => {
-		getSaleProduct("Fashion");
+		getSaleProduct();
 	}, []);
 
 	const navigate = useNavigate();
 
 	const handleNavigateToProductsPage = () => {
-		navigate("/products?category=Fashion&marketingPrice=true");
+		navigate(`/products?category=${deal.englishName}&marketingPrice=true`);
 	};
 
 	return (
 		<section className="flex flex-col">
-			<h2 className="font-bold text-3xl">Deal hot Thời trang</h2>
+			<h2 className="font-bold text-3xl">Deal hot {deal.vietnameseName}</h2>
 			<Swiper
 				className="w-full h-fit py-5 px-3"
 				slidesPerView={1}
@@ -111,4 +113,8 @@ const FashionDeal = () => {
 	);
 };
 
-export default FashionDeal;
+Deals.propTypes = {
+	deal: PropTypes.object,
+};
+
+export default Deals;

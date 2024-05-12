@@ -6,7 +6,6 @@ import {
 	Popover,
 	PopoverHandler,
 	PopoverContent,
-	IconButton,
 } from "@material-tailwind/react";
 import Loading from "../../cores/components/loading";
 import { formatCurrency } from "../../helper/formatCurrency";
@@ -15,7 +14,6 @@ import {
 	TruckIcon,
 	ShieldCheckIcon,
 	ShoppingCartIcon,
-	InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 import ImageSlider from "./imageSlider";
 import { formatPercentage } from "../../helper/formatPercentage";
@@ -26,6 +24,7 @@ import { addToCart } from "../../services/cart";
 import ConfirmLogin from "./../../cores/components/confirmLogin";
 import BuyNowButton from "./../../cores/components/buyNowButton";
 import { formatDateTime } from "../../helper/formatDateTime";
+import DescriptionDetail from "./descriptionDetail";
 
 const ProductDetail = () => {
 	const { id } = useParams();
@@ -36,6 +35,7 @@ const ProductDetail = () => {
 	const [guarantee, setGuarantee] = useState(1);
 	const [guaranteeCondition, setGuaranteeCondition] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
+	const [descriptionModal, setDescriptionModal] = useState(false);
 
 	const currentUrl = window.location.href;
 	const urlParts = currentUrl.split("/");
@@ -43,6 +43,10 @@ const ProductDetail = () => {
 
 	const handleOpenModal = () => {
 		setIsOpen((prev) => !prev);
+	};
+
+	const handleOpenDescriptionModal = () => {
+		setDescriptionModal((prev) => !prev);
 	};
 
 	const handleAddToCart = async () => {
@@ -125,7 +129,7 @@ const ProductDetail = () => {
 					<div className="w-full md:w-1/2">
 						<ImageSlider images={images} />
 					</div>
-					<div className="flex flex-col justify-between md:w-1/2 gap-2">
+					<div className="flex flex-col justify-between md:w-1/2 gap-2 h-fit">
 						<div className="flex gap-2">
 							<div className="text-lg px-3 py-1 border border-red-900 text-red-900 font-bold rounded">
 								{product.condition}
@@ -163,15 +167,9 @@ const ProductDetail = () => {
 							)}
 						</div>
 						<div className="flex gap-2 items-center">
-							<p className="font-bold">Xem lịch sử giá</p>
 							<Popover placement="bottom">
 								<PopoverHandler>
-									<IconButton
-										className="border-none p-0 w-6 h-6"
-										variant="outlined"
-									>
-										<InformationCircleIcon className="w-6 h-6 text-red-900" />
-									</IconButton>
+									<Button variant="outlined">Xem lịch sử giá</Button>
 								</PopoverHandler>
 								<PopoverContent className="bg-gray-900 text-white shadow-md shadow-gray-900/10">
 									<div className="border rounded-lg">
@@ -200,7 +198,26 @@ const ProductDetail = () => {
 									</div>
 								</PopoverContent>
 							</Popover>
+							<div className="flex items-center">
+								{product.localizedAspects && (
+									<div>
+										<Button
+											variant="outlined"
+											onClick={handleOpenDescriptionModal}
+										>
+											Thông tin sản phẩm
+										</Button>
+										<DescriptionDetail
+											localizedAspects={product.localizedAspects}
+											shortDescription={product.shortDescription}
+											isOpen={descriptionModal}
+											closeModal={() => handleOpenDescriptionModal()}
+										/>
+									</div>
+								)}
+							</div>
 						</div>
+
 						<div>
 							<div className="flex gap-2 items-center">
 								<TruckIcon className="w-6 h-6" />
@@ -250,18 +267,12 @@ const ProductDetail = () => {
 												item.duration === guarantee ? "text-white" : ""
 											}`}
 										>
-											{formatCurrency((item.fee / 100) * product.price.value)}
+											{formatCurrency((item.fee / 100) * product.price?.value)}
 										</p>
 									</Button>
 								))}
 							</div>
 						</div>
-						<p className="text-justify">
-							<b>Mô tả:</b>{" "}
-							{product.shortDescription
-								? product.shortDescription
-								: "Người bán không viết mô tả"}
-						</p>
 						<div className="flex gap-5">
 							<div className="flex w-1/2">
 								<Button
