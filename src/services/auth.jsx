@@ -1,15 +1,15 @@
 import axios from "axios";
 
-export const loginGoogle = () =>
-	axios.get(`${import.meta.env.VITE_API_URL}/auth/google/login`, {
+export const login = (body) =>
+	axios.post(`${import.meta.env.VITE_API_URL}/auth/signin`, body, {
 		headers: {
 			"Content-Type": "application/json",
 		},
 		validateStatus: (status) => status < 400,
 	});
 
-export const loginFacebook = () =>
-	axios.get(`${import.meta.env.VITE_API_URL}/auth/facebook/login`, {
+export const register = (body) =>
+	axios.post(`${import.meta.env.VITE_API_URL}/auth/signin`, body, {
 		headers: {
 			"Content-Type": "application/json",
 		},

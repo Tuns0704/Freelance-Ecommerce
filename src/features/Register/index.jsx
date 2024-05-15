@@ -1,7 +1,17 @@
 import { Input, Button, Typography } from "@material-tailwind/react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+	const [user, setUser] = useState({
+		displayName: "",
+		email: "",
+		password: "",
+		phone: "",
+		birthDate: "",
+		address: "",
+	});
+
 	const handleLoginGoogle = async () => {
 		const link = "https://api-ebay.onrender.com/api/auth/google/login";
 		window.open(link, "_self");
@@ -21,12 +31,12 @@ const Register = () => {
 			</div>
 			<div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
 				<div className="text-center">
-					<Typography variant="h2" className="font-bold mb-4">
+					<Typography variant="h2" className="font-bold">
 						Đăng ký
 					</Typography>
 				</div>
 				<form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
-					<div className="mb-4 flex flex-col gap-6">
+					<div className="mb-2 flex flex-col gap-6">
 						<Typography
 							variant="small"
 							color="blue-gray"
@@ -37,6 +47,60 @@ const Register = () => {
 						<Input
 							size="lg"
 							placeholder="name@mail.com"
+							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+							labelProps={{
+								className: "before:content-none after:content-none",
+							}}
+						/>
+					</div>
+					<div className="mb-2 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Tên
+						</Typography>
+						<Input
+							size="lg"
+							placeholder="Nguyen Van A"
+							type="text"
+							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+							labelProps={{
+								className: "before:content-none after:content-none",
+							}}
+						/>
+					</div>
+					<div className="mb-2 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Số điện thoại
+						</Typography>
+						<Input
+							size="lg"
+							placeholder="0919430112"
+							type="text"
+							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+							labelProps={{
+								className: "before:content-none after:content-none",
+							}}
+						/>
+					</div>
+					<div className="mb-2 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Địa chỉ
+						</Typography>
+						<Input
+							size="lg"
+							placeholder="Số 15, Ngõ 28 Ngụy Như Kon Tum, P. Nhân Chính, Q. Thanh Xuân, Hà Nội"
+							type="text"
 							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
 							labelProps={{
 								className: "before:content-none after:content-none",

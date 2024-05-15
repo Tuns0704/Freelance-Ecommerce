@@ -1,7 +1,40 @@
 import { Button, Typography, Input } from "@material-tailwind/react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { login } from "../../services/auth";
 
 const Login = () => {
+	const [user, setUser] = useState({
+		email: "",
+		password: "",
+	});
+
+	const handleChangeInput = (event) => {
+		const { name, value } = event.target;
+		setUser((prevLocation) => ({
+			...prevLocation,
+			[name]: value,
+		}));
+	};
+
+	const isValidEmail = (email) => {
+		const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return regex.test(email);
+	};
+
+	const handleLogin = async () => {
+		if (isValidEmail(user.email)) {
+			try {
+				const response = await login(user);
+			} catch (error) {
+				toast.error("Đăng nhập thất bại!");
+			}
+		} else {
+			toast.info("Bạn cần nhập đúng email!");
+		}
+	};
+
 	const handleLoginGoogle = async () => {
 		const link = "https://api-ebay.onrender.com/api/auth/google/login";
 		window.open(link, "_self");
@@ -31,11 +64,14 @@ const Login = () => {
 						</Typography>
 						<Input
 							size="lg"
+							name="email"
 							placeholder="name@mail.com"
 							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
 							labelProps={{
 								className: "before:content-none after:content-none",
 							}}
+							value={user.email}
+							onChange={(event) => handleChangeInput(event)}
 						/>
 					</div>
 					<div className="mb-1 flex flex-col gap-6">
@@ -49,14 +85,22 @@ const Login = () => {
 						<Input
 							size="lg"
 							placeholder="••••••••"
+							name="password"
 							type="password"
 							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
 							labelProps={{
 								className: "before:content-none after:content-none",
 							}}
+							value={user.password}
+							onChange={(event) => handleChangeInput(event)}
 						/>
 					</div>
-					<Button size="lg" className="mt-6" fullWidth>
+					<Button
+						size="lg"
+						className="mt-6"
+						fullWidth
+						onClick={() => handleLogin()}
+					>
 						Đăng nhập
 					</Button>
 					<Typography

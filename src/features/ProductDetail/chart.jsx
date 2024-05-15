@@ -1,38 +1,52 @@
-import {
-	Card,
-	CardHeader,
-	CardBody,
-	CardFooter,
-	Typography,
-} from "@material-tailwind/react";
 import PropTypes from "prop-types";
 import Chart from "react-apexcharts";
+import { chartsConfig } from "./../../constant/chart";
 
-export function StatisticsChart({ color, chart, title, description, footer }) {
+export function StatisticsChart({ chart }) {
+	const formatChartData = (data) => {
+		return {
+			seriesData: data.map((item) => item.value),
+			categoriesData: data.map((item) =>
+				new Date(item.lastUpdated).toLocaleDateString("vi-VN", {
+					weekday: "short",
+					day: "2-digit",
+					month: "numeric",
+					year: "numeric",
+				})
+			),
+		};
+	};
+	const formattedData = formatChartData(chart);
+	const dailySalesChart = {
+		type: "line",
+		height: 220,
+		series: [
+			{
+				name: "Sales",
+				data: formattedData.seriesData,
+			},
+		],
+		options: {
+			...chartsConfig,
+			colors: ["#0288d1"],
+			stroke: {
+				lineCap: "round",
+			},
+			markers: {
+				size: 5,
+			},
+			xaxis: {
+				...chartsConfig.xaxis,
+				categories: formattedData.categoriesData,
+			},
+		},
+	};
 	return (
-		<Card className="border border-blue-gray-100 shadow-sm">
-			<CardHeader
-				variant="gradient"
-				color={color}
-				floated={false}
-				shadow={false}
-			>
-				<Chart {...chart} />
-			</CardHeader>
-			<CardBody className="px-6 pt-0">
-				<Typography variant="h6" color="blue-gray">
-					{title}
-				</Typography>
-				<Typography variant="small" className="font-normal text-blue-gray-600">
-					{description}
-				</Typography>
-			</CardBody>
-			{footer && (
-				<CardFooter className="border-t border-blue-gray-50 px-6 py-5">
-					{footer}
-				</CardFooter>
-			)}
-		</Card>
+		<div className="bg-white z-50 opacity-100">
+			<div>
+				<Chart {...dailySalesChart} />
+			</div>
+		</div>
 	);
 }
 
@@ -69,7 +83,5 @@ StatisticsChart.propTypes = {
 	description: PropTypes.node.isRequired,
 	footer: PropTypes.node,
 };
-
-StatisticsChart.displayName = "/src/widgets/charts/statistics-chart.jsx";
 
 export default StatisticsChart;

@@ -25,6 +25,7 @@ import ConfirmLogin from "./../../cores/components/confirmLogin";
 import BuyNowButton from "./../../cores/components/buyNowButton";
 import { formatDateTime } from "../../helper/formatDateTime";
 import DescriptionDetail from "./descriptionDetail";
+import { StatisticsChart } from "./chart";
 
 const ProductDetail = () => {
 	const { id } = useParams();
@@ -109,7 +110,7 @@ const ProductDetail = () => {
 					...(response.data.additionalImages || []),
 				];
 				setImages(combinedImages);
-				setPrice(response.data.price.value);
+				setPrice(response.data.price[response.data.price.length - 1].value);
 				setLoading(false);
 			} catch (error) {
 				console.error(error);
@@ -167,35 +168,12 @@ const ProductDetail = () => {
 							)}
 						</div>
 						<div className="flex gap-2 items-center">
-							<Popover placement="bottom">
+							<Popover placement="bottom-start">
 								<PopoverHandler>
 									<Button variant="outlined">Xem lịch sử giá</Button>
 								</PopoverHandler>
-								<PopoverContent className="bg-gray-900 text-white shadow-md shadow-gray-900/10">
-									<div className="border rounded-lg">
-										<table>
-											<thead>
-												<tr>
-													<th className="p-2 border-r border-b">STT</th>
-													<th className="p-2 border-r border-b">
-														Giá sản phẩm
-													</th>
-													<th className="p-2 border-b">Thời gian cập nhật</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td className="p-2 border-r">1</td>
-													<td className="p-2 border-r">
-														{formatCurrency(product.price?.value)}
-													</td>
-													<td className={`p-2`}>
-														{formatDateTime(product.price?.lastUpdated)}
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+								<PopoverContent className=" text-white shadow-md border-gray-900 shadow-gray-900/10">
+									<StatisticsChart chart={product?.price} />
 								</PopoverContent>
 							</Popover>
 							<div className="flex items-center">
@@ -251,7 +229,7 @@ const ProductDetail = () => {
 											handleChangeGuarantee(
 												item.duration,
 												item.fee,
-												product.price.value
+												product.price[product.price.length - 1].value
 											)
 										}
 									>
@@ -267,7 +245,10 @@ const ProductDetail = () => {
 												item.duration === guarantee ? "text-white" : ""
 											}`}
 										>
-											{formatCurrency((item.fee / 100) * product.price?.value)}
+											{formatCurrency(
+												(item.fee / 100) *
+													product?.price[product.price.length - 1].value
+											)}
 										</p>
 									</Button>
 								))}
