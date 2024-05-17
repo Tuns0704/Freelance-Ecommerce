@@ -1,21 +1,9 @@
 import PropTypes from "prop-types";
 import Chart from "react-apexcharts";
 import { chartsConfig } from "./../../constant/chart";
+import { formatChartData } from "../../helper/formatChatData";
 
 export function StatisticsChart({ chart }) {
-	const formatChartData = (data) => {
-		return {
-			seriesData: data.map((item) => item.value),
-			categoriesData: data.map((item) =>
-				new Date(item.lastUpdated).toLocaleDateString("vi-VN", {
-					weekday: "short",
-					day: "2-digit",
-					month: "numeric",
-					year: "numeric",
-				})
-			),
-		};
-	};
 	const formattedData = formatChartData(chart);
 	const dailySalesChart = {
 		type: "line",

@@ -1,10 +1,16 @@
 import { Button, Typography, Input } from "@material-tailwind/react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login } from "../../services/auth";
+import { AppContext } from "../../cores/context/app.context";
+import {
+	SET_TOKEN,
+	SET_AUTHENTICATED,
+} from "./../../cores/context/app.context";
 
 const Login = () => {
+	const { dispatchAuth } = useContext(AppContext);
 	const [user, setUser] = useState({
 		email: "",
 		password: "",
@@ -23,10 +29,23 @@ const Login = () => {
 		return regex.test(email);
 	};
 
+	const navigate = useNavigate();
+
 	const handleLogin = async () => {
 		if (isValidEmail(user.email)) {
 			try {
 				const response = await login(user);
+				if (response.status === 201) {
+					navigate(`/`);
+					localStorage.setItem("token", response.data.token.access_token);
+					dispatchAuth({
+						type: SET_TOKEN,
+						payload: response.data.token.accessToken,
+					});
+					dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
+					toast.success("Đăng nhập thành công!");
+				}
+				console.log(response);
 			} catch (error) {
 				toast.error("Đăng nhập thất bại!");
 			}
@@ -36,12 +55,12 @@ const Login = () => {
 	};
 
 	const handleLoginGoogle = async () => {
-		const link = "https://api-ebay.onrender.com/api/auth/google/login";
+		const link = `${import.meta.env.VITE_API_URL}/auth/google/login`;
 		window.open(link, "_self");
 	};
 
 	const handleLoginFacebook = () => {
-		const link = "https://api-ebay.onrender.com/api/auth/facebook/login";
+		const link = `${import.meta.env.VITE_API_URL}/auth/facebook/login`;
 		window.open(link, "_self");
 	};
 

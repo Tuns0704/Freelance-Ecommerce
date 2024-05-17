@@ -13,7 +13,7 @@ const AppContainer = () => {
 			<div className="sm:mx-20 mx-5 font-opensans">
 				<Outlet />
 			</div>
-			{pathname !== "/login" && pathname !== "/register" && <Footer />}
+			<Footer />
 		</div>
 	);
 };

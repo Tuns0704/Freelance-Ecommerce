@@ -1,28 +1,74 @@
-import { Input, Button, Typography } from "@material-tailwind/react";
+import { Input, Button, Typography, Tooltip } from "@material-tailwind/react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { validateRegister } from "./../../helper/validateRegister";
+import { toast } from "react-toastify";
+import { register } from "../../services/auth";
 
 const Register = () => {
 	const [user, setUser] = useState({
 		displayName: "",
 		email: "",
 		password: "",
+		confirmPassword: "",
 		phone: "",
-		birthDate: "",
 		address: "",
 	});
 
+	const [errors, setErrors] = useState({});
+
+	const handleChangeInput = (e) => {
+		const { name, value } = e.target;
+		setUser((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
+
+	const navigate = useNavigate();
+
+	const handleSubmit = async () => {
+		const errors = validateRegister(user);
+		setErrors(errors);
+		if (Object.keys(errors).length === 0) {
+			try {
+				const body = {
+					displayName: user.displayName,
+					email: user.email,
+					password: user.password,
+					phone: user.phone,
+					address: user.address,
+				};
+				const response = await register(body);
+				if (response.status === 201) {
+					toast.success("Đăng ký thành công!");
+					navigate("/login");
+				} else {
+					toast.error("Đăng ký không thành công!");
+				}
+			} catch (error) {
+				if (error.response.status === 409) {
+					toast.error("Email đã được đăng ký");
+				} else {
+					toast.error("Lỗi đăng ký");
+				}
+			}
+		} else {
+			toast.error("Bạn cần nhập đúng thông tin!");
+		}
+	};
+
 	const handleLoginGoogle = async () => {
-		const link = "https://api-ebay.onrender.com/api/auth/google/login";
+		const link = `${import.meta.env.VITE_API_URL}/auth/google/login`;
 		window.open(link, "_self");
 	};
 
 	const handleLoginFacebook = () => {
-		const link = "https://api-ebay.onrender.com/api/auth/facebook/login";
+		const link = `${import.meta.env.VITE_API_URL}/auth/facebook/login`;
 		window.open(link, "_self");
 	};
 	return (
-		<section className="flex h-[85vh] p-8 gap-4">
+		<section className="flex min-h-[85vh] p-8 gap-4">
 			<div className="w-2/5 h-full hidden lg:block">
 				<img
 					src="/img/pattern.png"
@@ -30,28 +76,11 @@ const Register = () => {
 				/>
 			</div>
 			<div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
-				<div className="text-center">
-					<Typography variant="h2" className="font-bold">
-						Đăng ký
-					</Typography>
-				</div>
 				<form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
-					<div className="mb-2 flex flex-col gap-6">
-						<Typography
-							variant="small"
-							color="blue-gray"
-							className="-mb-5 font-medium"
-						>
-							Email
+					<div className="text-center">
+						<Typography variant="h2" className="font-bold">
+							Đăng ký
 						</Typography>
-						<Input
-							size="lg"
-							placeholder="name@mail.com"
-							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-							labelProps={{
-								className: "before:content-none after:content-none",
-							}}
-						/>
 					</div>
 					<div className="mb-2 flex flex-col gap-6">
 						<Typography
@@ -59,17 +88,26 @@ const Register = () => {
 							color="blue-gray"
 							className="-mb-5 font-medium"
 						>
-							Tên
+							Email <b className="text-red-400">*</b>
 						</Typography>
-						<Input
-							size="lg"
-							placeholder="Nguyen Van A"
-							type="text"
-							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-							labelProps={{
-								className: "before:content-none after:content-none",
-							}}
-						/>
+						<Tooltip
+							content={errors.email}
+							placement="top-end"
+							open={!!errors.email}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								name="email"
+								value={user.email}
+								onChange={handleChangeInput}
+								placeholder="name@mail.com"
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900 "
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
 					</div>
 					<div className="mb-2 flex flex-col gap-6">
 						<Typography
@@ -77,17 +115,27 @@ const Register = () => {
 							color="blue-gray"
 							className="-mb-5 font-medium"
 						>
-							Số điện thoại
+							Tên <b className="text-red-400">*</b>
 						</Typography>
-						<Input
-							size="lg"
-							placeholder="0919430112"
-							type="text"
-							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-							labelProps={{
-								className: "before:content-none after:content-none",
-							}}
-						/>
+						<Tooltip
+							content={errors.displayName}
+							placement="top-end"
+							open={!!errors.displayName}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								placeholder="Nguyen Van A"
+								name="displayName"
+								value={user.displayName}
+								onChange={handleChangeInput}
+								type="text"
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
 					</div>
 					<div className="mb-2 flex flex-col gap-6">
 						<Typography
@@ -95,17 +143,83 @@ const Register = () => {
 							color="blue-gray"
 							className="-mb-5 font-medium"
 						>
-							Địa chỉ
+							Số điện thoại <b className="text-red-400">*</b>
 						</Typography>
-						<Input
-							size="lg"
-							placeholder="Số 15, Ngõ 28 Ngụy Như Kon Tum, P. Nhân Chính, Q. Thanh Xuân, Hà Nội"
-							type="text"
-							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-							labelProps={{
-								className: "before:content-none after:content-none",
-							}}
-						/>
+						<Tooltip
+							content={errors.phone}
+							placement="top-end"
+							open={!!errors.phone}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								placeholder="0919430112"
+								name="phone"
+								value={user.phone}
+								onChange={handleChangeInput}
+								type="text"
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
+					</div>
+					<div className="mb-2 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Địa chỉ <b className="text-red-400">*</b>
+						</Typography>
+						<Tooltip
+							content={errors.address}
+							placement="top-end"
+							open={!!errors.address}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								name="address"
+								value={user.address}
+								onChange={handleChangeInput}
+								placeholder="Số 15, Ngõ 28 Ngụy Như Kon Tum, P. Nhân Chính, Q. Thanh Xuân, Hà Nội"
+								type="text"
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
+					</div>
+					<div className="mb-2 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Mật khẩu <b className="text-red-400">*</b>
+						</Typography>
+						<Tooltip
+							content={errors.password}
+							placement="top-end"
+							open={!!errors.password}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								placeholder="••••••••"
+								name="password"
+								value={user.password}
+								onChange={handleChangeInput}
+								type="password"
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
 					</div>
 					<div className="mb-1 flex flex-col gap-6">
 						<Typography
@@ -113,19 +227,29 @@ const Register = () => {
 							color="blue-gray"
 							className="-mb-5 font-medium"
 						>
-							Mật khẩu
+							Xác thực mật khẩu <b className="text-red-400">*</b>
 						</Typography>
-						<Input
-							size="lg"
-							placeholder="••••••••"
-							type="password"
-							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-							labelProps={{
-								className: "before:content-none after:content-none",
-							}}
-						/>
+						<Tooltip
+							content={errors.confirmPassword}
+							placement="top-end"
+							open={!!errors.confirmPassword}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								placeholder="••••••••"
+								name="confirmPassword"
+								value={user.confirmPassword}
+								onChange={handleChangeInput}
+								type="password"
+								className={` !border-t-blue-gray-200 focus:!border-t-gray-900`}
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
 					</div>
-					<Button className="mt-6" fullWidth>
+					<Button onClick={handleSubmit} className="mt-6" fullWidth>
 						Đăng ký ngay
 					</Button>
 					<Typography

@@ -1,12 +1,5 @@
 // import PropTypes from "prop-types";
-import {
-	Card,
-	CardBody,
-	Avatar,
-	Typography,
-	Button,
-} from "@material-tailwind/react";
-import { PencilIcon } from "@heroicons/react/24/solid";
+import { Card, CardBody, Avatar, Typography } from "@material-tailwind/react";
 import { ProfileInfoCard } from "./profileInforCard";
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
@@ -61,12 +54,6 @@ const Profile = () => {
 									{profile.displayName}
 								</Typography>
 							</div>
-						</div>
-						<div className="flex gap-2">
-							<Button className="flex gap-2 items-center">
-								<PencilIcon className="w-5 h-5" />
-								<p className="hidden md:flex">Sửa thông tin</p>
-							</Button>
 						</div>
 					</div>
 					<div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3">

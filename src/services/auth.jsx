@@ -9,7 +9,7 @@ export const login = (body) =>
 	});
 
 export const register = (body) =>
-	axios.post(`${import.meta.env.VITE_API_URL}/auth/signin`, body, {
+	axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, body, {
 		headers: {
 			"Content-Type": "application/json",
 		},

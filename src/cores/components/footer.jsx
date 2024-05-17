@@ -80,8 +80,8 @@ export function Footer({ title, description, socials, menus, copyright }) {
 }
 
 Footer.defaultProps = {
-	title: "App Store",
-	description: "Ebay store order tracking app",
+	title: "Orderus.vn",
+	description: "Mua sản phẩm tại ebay",
 	socials: [
 		{
 			color: "gray",
@@ -123,23 +123,6 @@ Footer.defaultProps = {
 			],
 		},
 		{
-			name: "Tài khoản",
-			items: [
-				{
-					name: "Tài khoản của tôi",
-					path: "https://github.com/creativetimofficial/material-tailwind/blob/main/LICENSE.md?ref=mtk",
-				},
-				{
-					name: "Lịch sử mua hàng",
-					path: "https://github.com/creativetimofficial/material-tailwind/blob/main/CONTRIBUTING.md?ref=mtk",
-				},
-				{
-					name: "Yêu thích",
-					path: "https://github.com/creativetimofficial/material-tailwind/blob/main/CHANGELOG.md?ref=mtk",
-				},
-			],
-		},
-		{
 			name: "Dịch vụ",
 			items: [
 				{
@@ -160,30 +143,17 @@ Footer.defaultProps = {
 				},
 			],
 		},
-		{
-			name: "Sản phẩm",
-			items: [
-				{
-					name: "Giá sốc",
-					path: "https://github.com/creativetimofficial/material-tailwind/blob/main/LICENSE.md?ref=mtk",
-				},
-				{
-					name: "Giảm giá nhiều nhất",
-					path: "https://github.com/creativetimofficial/material-tailwind/blob/main/CONTRIBUTING.md?ref=mtk",
-				},
-			],
-		},
 	],
 	copyright: (
 		<>
-			Copyright © {year} App Store by{" "}
+			Copyright © {year} by{" "}
 			<a
 				href="https://www.creative-tim.com?ref=mtk"
 				target="_blank"
 				rel="noreferrer"
 				className="text-blue-gray-500 transition-colors hover:text-blue-500"
 			>
-				Recode
+				Orderus.vn
 			</a>
 			.
 		</>

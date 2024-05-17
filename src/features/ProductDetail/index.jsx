@@ -23,7 +23,6 @@ import { toast } from "react-toastify";
 import { addToCart } from "../../services/cart";
 import ConfirmLogin from "./../../cores/components/confirmLogin";
 import BuyNowButton from "./../../cores/components/buyNowButton";
-import { formatDateTime } from "../../helper/formatDateTime";
 import DescriptionDetail from "./descriptionDetail";
 import { StatisticsChart } from "./chart";
 
