@@ -1,9 +1,20 @@
-import { Button, Input, Textarea } from "@material-tailwind/react";
+import {
+	Button,
+	Input,
+	Textarea,
+	Typography,
+	Tooltip,
+} from "@material-tailwind/react";
 import {
 	MapPinIcon,
 	EnvelopeIcon,
 	PhoneIcon,
 } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import { validateContactUs } from "../../helper/validateContactUs";
+import { toast } from "react-toastify";
+import { sendContactUs } from "../../services/contactUs";
+import { useNavigate } from "react-router-dom";
 
 const contact = [
 	{
@@ -25,6 +36,45 @@ const contact = [
 ];
 
 const ContactUs = () => {
+	const [contactUs, setContactUs] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		phone: "",
+		comment: "",
+	});
+	const [errors, setErrors] = useState({});
+
+	const handleChangeInput = (e) => {
+		const { name, value } = e.target;
+		setContactUs((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
+
+	const navigate = useNavigate();
+
+	const handleSubmit = async () => {
+		const errors = validateContactUs(contactUs);
+		setErrors(errors);
+		if (Object.keys(errors).length === 0) {
+			try {
+				const response = await sendContactUs(contactUs);
+				if (response.status === 201) {
+					toast.success("Gửi liên hệ thành công!");
+					navigate("/");
+				} else {
+					toast.error("Gửi liên hệ thất bại!");
+				}
+			} catch (error) {
+				toast.error("Gửi liên hệ thất bại!");
+			}
+		} else {
+			toast.error("Bạn cần nhập đúng thông tin!");
+		}
+	};
+
 	return (
 		<div className="md:h-[70vh] mb-5">
 			<h1 className="text-3xl font-medium text-center mb-5">
@@ -32,15 +82,150 @@ const ContactUs = () => {
 			</h1>
 
 			<div className="h-full md:flex gap-5">
-				<div className="md:w-1/3 border">
-					<div className="flex flex-col gap-5 p-5">
-						<Input label="Tên" placeholder="Nhập tên" required />
-						<Input label="Họ" placeholder="Nhập họ" required />
-						<Input label="Email" placeholder="Nhập email" required />
-						<Input label="Điện Thoại" placeholder="Nhập điện thoại" required />
-						<Textarea label="Nhận Xét / Câu Hỏi" className="h-40" required />
-						<Button className="px-14 py-3 rounded">Gửi</Button>
+				<div className="md:w-1/3 border p-5">
+					<div className="mb-2 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Tên <b className="text-red-400">*</b>
+						</Typography>
+						<Tooltip
+							content={errors.lastName}
+							placement="top-end"
+							open={!!errors.lastName}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								name="lastName"
+								value={contactUs.lastName}
+								onChange={handleChangeInput}
+								placeholder="Tên"
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900 "
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
 					</div>
+					<div className="mb-2 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Họ <b className="text-red-400">*</b>
+						</Typography>
+						<Tooltip
+							content={errors.firstName}
+							placement="top-end"
+							open={!!errors.firstName}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								placeholder="Nguyen Van A"
+								name="firstName"
+								value={contactUs.firstName}
+								onChange={handleChangeInput}
+								type="text"
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
+					</div>
+					<div className="mb-2 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Email <b className="text-red-400">*</b>
+						</Typography>
+						<Tooltip
+							content={errors.email}
+							placement="top-end"
+							open={!!errors.email}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								placeholder="0919430112"
+								name="email"
+								value={contactUs.email}
+								onChange={handleChangeInput}
+								type="text"
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
+					</div>
+					<div className="mb-2 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Số điện thoại <b className="text-red-400">*</b>
+						</Typography>
+						<Tooltip
+							content={errors.phone}
+							placement="top-end"
+							open={!!errors.phone}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								placeholder="0919430112"
+								name="phone"
+								value={contactUs.phone}
+								onChange={handleChangeInput}
+								type="text"
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
+					</div>
+					<div className="mb-2 flex flex-col gap-6">
+						<Typography
+							variant="small"
+							color="blue-gray"
+							className="-mb-5 font-medium"
+						>
+							Nhận xét/Câu hỏi <b className="text-red-400">*</b>
+						</Typography>
+						<Tooltip
+							content={errors.comment}
+							placement="top-end"
+							open={!!errors.comment}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Textarea
+								size="lg"
+								placeholder="Nếu bạn có thắc mắc hay vấn đề hãy gửi cho chúng tôi!"
+								name="comment"
+								value={contactUs.comment}
+								onChange={handleChangeInput}
+								type="text"
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+							/>
+						</Tooltip>
+					</div>
+
+					<Button onClick={handleSubmit} className="mt-6" fullWidth>
+						Đăng ký ngay
+					</Button>
 				</div>
 				<div className="md:w-2/3 flex flex-col h-full justify-between">
 					<iframe
