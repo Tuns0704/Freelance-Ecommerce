@@ -2,6 +2,7 @@ import { Input, Button, Typography, Tooltip } from "@material-tailwind/react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { validateRegister } from "./../../helper/validateRegister";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { toast } from "react-toastify";
 import { register } from "../../services/auth";
 
@@ -16,6 +17,16 @@ const Register = () => {
 	});
 
 	const [errors, setErrors] = useState({});
+	const [showPassword, setShowPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+	const handleTogglePasswordVisibility = () => {
+		setShowPassword((prevShowPassword) => !prevShowPassword);
+	};
+
+	const handleToggleConfirmPasswordVisibility = () => {
+		setShowConfirmPassword((prevShowPassword) => !prevShowPassword);
+	};
 
 	const handleChangeInput = (e) => {
 		const { name, value } = e.target;
@@ -193,7 +204,7 @@ const Register = () => {
 							/>
 						</Tooltip>
 					</div>
-					<div className="mb-2 flex flex-col gap-6">
+					<div className="mb-2 relative flex flex-col gap-6">
 						<Typography
 							variant="small"
 							color="blue-gray"
@@ -213,15 +224,26 @@ const Register = () => {
 								name="password"
 								value={user.password}
 								onChange={handleChangeInput}
-								type="password"
-								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								type={showPassword ? "text" : "password"}
+								className=" !border-t-blue-gray-200  focus:!border-t-gray-900"
 								labelProps={{
 									className: "before:content-none after:content-none",
 								}}
 							/>
 						</Tooltip>
+						<button
+							type="button"
+							onClick={handleTogglePasswordVisibility}
+							className="absolute inset-y-0 right-0 top-6 flex items-center pr-3 text-gray-700"
+						>
+							{showPassword ? (
+								<EyeSlashIcon className="h-5 w-5 text-gray-500" />
+							) : (
+								<EyeIcon className="h-5 w-5 text-gray-500" />
+							)}
+						</button>
 					</div>
-					<div className="mb-1 flex flex-col gap-6">
+					<div className="mb-1 relative flex flex-col gap-6">
 						<Typography
 							variant="small"
 							color="blue-gray"
@@ -241,13 +263,24 @@ const Register = () => {
 								name="confirmPassword"
 								value={user.confirmPassword}
 								onChange={handleChangeInput}
-								type="password"
+								type={showConfirmPassword ? "text" : "password"}
 								className={` !border-t-blue-gray-200 focus:!border-t-gray-900`}
 								labelProps={{
 									className: "before:content-none after:content-none",
 								}}
 							/>
 						</Tooltip>
+						<button
+							type="button"
+							onClick={handleToggleConfirmPasswordVisibility}
+							className="absolute inset-y-0 right-0 top-6 flex items-center pr-3 text-gray-700"
+						>
+							{showConfirmPassword ? (
+								<EyeSlashIcon className="h-5 w-5 text-gray-500" />
+							) : (
+								<EyeIcon className="h-5 w-5 text-gray-500" />
+							)}
+						</button>
 					</div>
 					<Button onClick={handleSubmit} className="mt-6" fullWidth>
 						Đăng ký ngay

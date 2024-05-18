@@ -131,7 +131,7 @@ const Products = () => {
 	return (
 		<section className="flex flex-col md:flex-row-reverse gap-2 w-full">
 			<div className="flex flex-col md:w-full">
-				<div className="flex items-center justify-between gap-2 mb-5">
+				<div className="flex flex-row items-center justify-between gap-2 mb-5">
 					<div className="flex items-center gap-2">
 						<Button
 							className="w-fit p-2 rounded-md md:hidden"
@@ -140,16 +140,16 @@ const Products = () => {
 						>
 							<AdjustmentsHorizontalIcon className="h-5 w-5" />
 						</Button>
-						<p className="font-semibold text-lg">
-							Tổng số sản phẩm: {totalProducts}
-						</p>
+						<div className="hidden md:block text-lg">
+							<b>Tổng số sản phẩm: </b> {totalProducts}
+						</div>
 					</div>
-					<div className="flex w-fit items-center gap-2">
+
+					<div className="flex md:w-fit items-center gap-2">
 						<div className="relative">
 							<Select
 								label="Sắp xếp"
 								placeholder="Sắp xếp theo..."
-								className=""
 								value={seletedOption}
 								onChange={(e) => setSelectedOption(e.target.value)}
 							>
@@ -170,6 +170,10 @@ const Products = () => {
 					<Loading />
 				) : (
 					<>
+						<div className="md:hidden text-lg">
+							<b>Tổng số sản phẩm: </b> {totalProducts}
+						</div>
+
 						<div className="flex flex-col sm:flex-row gap-5 sm:flex-wrap sm:justify-between md:justify-normal">
 							{products.map((product) => (
 								<CardItem key={product.id} product={product} />

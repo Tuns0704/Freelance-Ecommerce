@@ -44,32 +44,7 @@ StatisticsChart.defaultProps = {
 };
 
 StatisticsChart.propTypes = {
-	color: PropTypes.oneOf([
-		"white",
-		"blue-gray",
-		"gray",
-		"brown",
-		"deep-orange",
-		"orange",
-		"amber",
-		"yellow",
-		"lime",
-		"light-green",
-		"green",
-		"teal",
-		"cyan",
-		"light-blue",
-		"blue",
-		"indigo",
-		"deep-purple",
-		"purple",
-		"pink",
-		"red",
-	]),
-	chart: PropTypes.object.isRequired,
-	title: PropTypes.node.isRequired,
-	description: PropTypes.node.isRequired,
-	footer: PropTypes.node,
+	chart: PropTypes.array,
 };
 
 export default StatisticsChart;

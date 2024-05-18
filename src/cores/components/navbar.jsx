@@ -125,7 +125,7 @@ export function Navbar({ routes }) {
 					<input
 						className="peer font-opensans h-full w-full outline-none text-sm md:text-gray-900 pr-2"
 						type="text"
-						id="search"
+						id="searchNav"
 						value={searchString}
 						onChange={(e) => handleChange(e)}
 						placeholder="Nhập thông tin sản phẩm bạn muốn mua..."

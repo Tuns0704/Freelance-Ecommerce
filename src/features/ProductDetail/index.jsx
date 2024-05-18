@@ -147,7 +147,7 @@ const ProductDetail = () => {
 						<div className="flex gap-2">
 							<p className="uppercase font-semibold">Hãng:</p>
 							<p className="font-bold text-white px-2 bg-blue-800 rounded">
-								{product.brand}
+								{product.brand ? product.brand : "Không có hãng"}
 							</p>
 						</div>
 						<div className="flex gap-2 items-center">
@@ -172,7 +172,7 @@ const ProductDetail = () => {
 									<Button variant="outlined">Xem lịch sử giá</Button>
 								</PopoverHandler>
 								<PopoverContent className=" text-white shadow-md border-gray-900 shadow-gray-900/10">
-									<StatisticsChart chart={product?.price} />
+									<StatisticsChart chart={product.price} />
 								</PopoverContent>
 							</Popover>
 							<div className="flex items-center">
@@ -216,10 +216,10 @@ const ProductDetail = () => {
 								Hàng nhận được máy). Khách có thể chọn mua thêm bảo hành khi
 								nhận máy.
 							</p>
-							<div className="flex w-full gap-5">
+							<div className="flex w-full md:flex-row flex-col gap-2 md:gap-5">
 								{guaranteeCondition.map((item, index) => (
 									<Button
-										className="w-1/3"
+										className="md:w-1/3"
 										variant={
 											item.duration === guarantee ? "filled" : "outlined"
 										}
@@ -253,8 +253,8 @@ const ProductDetail = () => {
 								))}
 							</div>
 						</div>
-						<div className="flex gap-5">
-							<div className="flex w-1/2">
+						<div className="flex gap-2 md:gap-5 md:flex-row flex-col">
+							<div className="flex md:w-1/2">
 								<Button
 									onClick={() => handleAddToCart()}
 									className="w-[99%] flex gap-2 justify-center items-center"
@@ -264,7 +264,7 @@ const ProductDetail = () => {
 								</Button>
 								<ConfirmLogin isOpen={isOpen} closeModal={handleOpenModal} />
 							</div>
-							<div className="w-1/2">
+							<div className="md:w-1/2">
 								<BuyNowButton
 									productId={productId}
 									productPrice={product.price ? product.price.value : 0}

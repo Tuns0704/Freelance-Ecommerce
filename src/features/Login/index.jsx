@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login } from "../../services/auth";
 import { AppContext } from "../../cores/context/app.context";
+import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import {
 	SET_TOKEN,
 	SET_AUTHENTICATED,
@@ -15,6 +16,12 @@ const Login = () => {
 		email: "",
 		password: "",
 	});
+
+	const [showPassword, setShowPassword] = useState(false);
+
+	const handleTogglePasswordVisibility = () => {
+		setShowPassword((prevShowPassword) => !prevShowPassword);
+	};
 
 	const handleChangeInput = (event) => {
 		const { name, value } = event.target;
@@ -47,7 +54,7 @@ const Login = () => {
 				}
 				console.log(response);
 			} catch (error) {
-				toast.error("Đăng nhập thất bại!");
+				toast.error("Email hoặc mật khẩu không đúng!");
 			}
 		} else {
 			toast.info("Bạn cần nhập đúng email!");
@@ -93,7 +100,7 @@ const Login = () => {
 							onChange={(event) => handleChangeInput(event)}
 						/>
 					</div>
-					<div className="mb-1 flex flex-col gap-6">
+					<div className="mb-1 flex relative flex-col gap-6">
 						<Typography
 							variant="small"
 							color="blue-gray"
@@ -105,7 +112,7 @@ const Login = () => {
 							size="lg"
 							placeholder="••••••••"
 							name="password"
-							type="password"
+							type={showPassword ? "text" : "password"}
 							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
 							labelProps={{
 								className: "before:content-none after:content-none",
@@ -113,6 +120,17 @@ const Login = () => {
 							value={user.password}
 							onChange={(event) => handleChangeInput(event)}
 						/>
+						<button
+							type="button"
+							onClick={handleTogglePasswordVisibility}
+							className="absolute inset-y-0 right-0 top-6 flex items-center pr-3 text-gray-700"
+						>
+							{showPassword ? (
+								<EyeSlashIcon className="h-5 w-5 text-gray-500" />
+							) : (
+								<EyeIcon className="h-5 w-5 text-gray-500" />
+							)}
+						</button>
 					</div>
 					<Button
 						size="lg"

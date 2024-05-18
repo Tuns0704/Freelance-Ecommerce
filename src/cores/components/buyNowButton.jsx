@@ -48,8 +48,8 @@ const BuyNowButton = ({ productId, productPrice }) => {
 };
 
 BuyNowButton.propTypes = {
-	productId: PropTypes.string.isRequired,
-	productPrice: PropTypes.number.isRequired,
+	productId: PropTypes.string,
+	productPrice: PropTypes.number,
 };
 
 export default BuyNowButton;
