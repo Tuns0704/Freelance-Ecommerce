@@ -60,7 +60,8 @@ const Login = () => {
 					dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
 					dispatchAuth({
 						type: SET_ROLE,
-						payload: decodeToken(token).role,
+						payload:
+							decodeToken(token) !== null ? decodeToken(token).role : "user",
 					});
 					toast.success("Đăng nhập thành công!");
 				}

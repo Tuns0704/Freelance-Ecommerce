@@ -58,14 +58,21 @@ const AuthContext = ({ children }) => {
 				localStorage.setItem("token", tokenFromUrl);
 				dispatchAuth({ type: SET_TOKEN, payload: tokenFromUrl });
 				dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
-				dispatchAuth({ type: SET_ROLE, payload: decodeToken(token).role });
+				dispatchAuth({
+					type: SET_ROLE,
+					payload:
+						decodeToken(token) !== null ? decodeToken(token).role : "user",
+				});
 			}
 		}
 		const tokenFromLocalStorage = localStorage.getItem("token");
 		if (tokenFromLocalStorage) {
 			dispatchAuth({ type: SET_TOKEN, payload: tokenFromLocalStorage });
 			dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
-			dispatchAuth({ type: SET_ROLE, payload: decodeToken(token).role });
+			dispatchAuth({
+				type: SET_ROLE,
+				payload: decodeToken(token) !== null ? decodeToken(token).role : "user",
+			});
 		}
 	}, []);
 
