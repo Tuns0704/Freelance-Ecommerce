@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import PropTypes from "prop-types";
 import { decodeToken } from "../../helper/decodeToken";
 
@@ -17,7 +17,7 @@ export const AppContext = createContext({
 
 const getTokenFromUrl = () => {
 	const currentUrl = window.location.href;
-	const targetUrl = "http://localhost:5173/?token=";
+	const targetUrl = "https://www.orderus.vn/?token=";
 	let token = null;
 	if (currentUrl.startsWith(targetUrl)) {
 		const currentUrl = window.location.href;
