@@ -34,7 +34,7 @@ export const AppRouter = () => {
 
 	useEffect(() => {
 		const currentUrl = window.location.href;
-		const targetUrl = "https://orderus.vn/";
+		const targetUrl = "https://www.orderus.vn/";
 		if (localStorageToken) {
 			setToken(localStorageToken);
 		}
@@ -64,7 +64,6 @@ export const AppRouter = () => {
 							element={<ProductDetail />}
 						/>
 					</Route>
-
 					<Route path="*" element={<Navigate to="/dashboard/home" replace />} />
 				</>
 			) : (
