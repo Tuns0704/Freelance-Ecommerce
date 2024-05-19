@@ -17,14 +17,15 @@ export const AppContext = createContext({
 
 const getTokenFromUrl = () => {
 	const currentUrl = window.location.href;
-	const targetUrl = "https://www.orderus.vn/?token=";
+	const targetUrl = "http://localhost:5173/?token=";
+	let token = null;
 	if (currentUrl.startsWith(targetUrl)) {
 		const currentUrl = window.location.href;
 		const url = new URL(currentUrl);
-		return url.searchParams.get("token");
-	} else {
-		return null;
+		token = url.searchParams.get("token");
+		localStorage.setItem("token", token);
 	}
+	return token;
 };
 
 const tokenFromUrl = getTokenFromUrl();
@@ -61,37 +62,6 @@ const authReducer = (state, action) => {
 
 const AuthContext = ({ children }) => {
 	const [state, dispatchAuth] = useReducer(authReducer, initialState);
-
-	useEffect(() => {
-		if (tokenFromUrl !== null) {
-			const queryParameters = new URLSearchParams(window.location.search);
-			const tokenFromUrl = queryParameters.get("token");
-			if (tokenFromUrl) {
-				localStorage.setItem("token", tokenFromUrl);
-				dispatchAuth({ type: SET_TOKEN, payload: tokenFromUrl });
-				dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
-				dispatchAuth({
-					type: SET_ROLE,
-					payload:
-						decodeToken(tokenFromUrl) !== null
-							? decodeToken(tokenFromUrl).role
-							: "user",
-				});
-			}
-		}
-		const tokenFromLocalStorage = localStorage.getItem("token");
-		if (tokenFromLocalStorage) {
-			dispatchAuth({ type: SET_TOKEN, payload: tokenFromLocalStorage });
-			dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
-			dispatchAuth({
-				type: SET_ROLE,
-				payload:
-					decodeToken(tokenFromLocalStorage) !== null
-						? decodeToken(tokenFromLocalStorage).role
-						: "user",
-			});
-		}
-	}, []);
 
 	return (
 		<AppContext.Provider value={{ state, dispatchAuth }}>
