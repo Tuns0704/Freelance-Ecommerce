@@ -45,11 +45,11 @@ const AddToCartButton = ({ productId, productPrice }) => {
 			<Button
 				variant="filled"
 				size="lg"
-				className="font-medium flex justify-center items-center text-sm font-opensans outline-none w-[99%]"
+				className="font-medium flex justify-center items-center text-sm font-opensans outline-none w-full"
 				ripple={false}
 				onClick={() => AddToCart()}
 			>
-				<ShoppingCartIcon className="w-6 h-6" /> Thêm vào giỏ hàng
+				<ShoppingCartIcon className="w-6 h-6" /> Thêm vào
 			</Button>
 		</div>
 	);

@@ -10,21 +10,14 @@ import {
 import Loading from "../../cores/components/loading";
 import { formatCurrency } from "../../helper/formatCurrency";
 import { calculateDateShipping } from "../../helper/calculateDateShipping";
-import {
-	TruckIcon,
-	ShieldCheckIcon,
-	ShoppingCartIcon,
-} from "@heroicons/react/24/outline";
+import { TruckIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
 import ImageSlider from "./imageSlider";
 import { formatPercentage } from "../../helper/formatPercentage";
 import { getSettings } from "../../services/setting";
-import { decodeToken } from "./../../helper/decodeToken";
-import { toast } from "react-toastify";
-import { addToCart } from "../../services/cart";
-import ConfirmLogin from "./../../cores/components/confirmLogin";
 import BuyNowButton from "./../../cores/components/buyNowButton";
 import DescriptionDetail from "./descriptionDetail";
 import { StatisticsChart } from "./chart";
+import AddToCartButton from "./../../cores/components/addToCart";
 
 const ProductDetail = () => {
 	const { id } = useParams();
@@ -34,45 +27,14 @@ const ProductDetail = () => {
 	const [loading, setLoading] = useState(false);
 	const [guarantee, setGuarantee] = useState(1);
 	const [guaranteeCondition, setGuaranteeCondition] = useState([]);
-	const [isOpen, setIsOpen] = useState(false);
 	const [descriptionModal, setDescriptionModal] = useState(false);
 
 	const currentUrl = window.location.href;
 	const urlParts = currentUrl.split("/");
 	const productId = urlParts[urlParts.length - 1].split("%7C").join("|");
 
-	const handleOpenModal = () => {
-		setIsOpen((prev) => !prev);
-	};
-
 	const handleOpenDescriptionModal = () => {
 		setDescriptionModal((prev) => !prev);
-	};
-
-	const handleAddToCart = async () => {
-		try {
-			const token = localStorage.getItem("token");
-			if (token) {
-				const useId = decodeToken(token).sub;
-				const body = {
-					userId: useId,
-					productId: productId,
-					quantity: 1,
-					totalPrice: product.price.value,
-					warrantyFee: price - product.price.value,
-				};
-				const response = await addToCart(body);
-				if (response.status === 201) {
-					toast.success("Thêm sản phẩm thành công");
-				} else {
-					toast.error("Thêm sản phẩm thất bại");
-				}
-			} else {
-				setIsOpen(true);
-			}
-		} catch (error) {
-			toast.error("Có lỗi khi thêm sản phẩm");
-		}
 	};
 
 	const handleChangeGuarantee = (duration, fee, itemPrice) => {
@@ -129,7 +91,7 @@ const ProductDetail = () => {
 					<div className="w-full md:w-1/2">
 						<ImageSlider images={images} />
 					</div>
-					<div className="flex flex-col justify-between md:w-1/2 gap-2 h-fit">
+					<div className="flex flex-col justify-between w-full md:w-1/2 gap-2 h-fit">
 						<div className="flex gap-2">
 							<div className="text-lg px-3 py-1 border border-red-900 text-red-900 font-bold rounded">
 								{product.condition}
@@ -232,7 +194,7 @@ const ProductDetail = () => {
 										}
 									>
 										<p
-											className={`font-semibold text-sm text-center ${
+											className={`font-semibold text-sm px-0 text-center ${
 												item.duration === guarantee ? "text-white" : ""
 											}`}
 										>
@@ -252,18 +214,14 @@ const ProductDetail = () => {
 								))}
 							</div>
 						</div>
-						<div className="flex gap-2 xl:gap-5 md:flex-row flex-col">
-							<div className="flex md:w-1/2">
-								<Button
-									onClick={() => handleAddToCart()}
-									className="w-[99%] flex gap-2 justify-center items-center"
-									variant="outlined"
-								>
-									<ShoppingCartIcon className="w-6 h-6" /> Thêm vào giỏ
-								</Button>
-								<ConfirmLogin isOpen={isOpen} closeModal={handleOpenModal} />
+						<div className="flex gap-2 w-full xl:gap-5 flex-col xs:flex-row">
+							<div className="w-full sm:w-1/2">
+								<AddToCartButton
+									productId={productId}
+									productPrice={product.price ? product.price.value : 0}
+								/>
 							</div>
-							<div className="md:w-1/2">
+							<div className="w-full sm:w-1/2">
 								<BuyNowButton
 									productId={productId}
 									productPrice={product.price ? product.price.value : 0}

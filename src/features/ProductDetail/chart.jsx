@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import Chart from "react-apexcharts";
 import { chartsConfig } from "./../../constant/chart";
 import { formatChartData } from "../../helper/formatChatData";
+import { formatCurrency } from "../../helper/formatCurrency";
 
 export function StatisticsChart({ chart }) {
 	const formattedData = formatChartData(chart);
@@ -22,6 +23,13 @@ export function StatisticsChart({ chart }) {
 			},
 			markers: {
 				size: 5,
+			},
+			yaxis: {
+				labels: {
+					formatter: (value) => {
+						return formatCurrency(value);
+					},
+				},
 			},
 			xaxis: {
 				...chartsConfig.xaxis,
