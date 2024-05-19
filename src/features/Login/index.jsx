@@ -51,15 +51,16 @@ const Login = () => {
 				const response = await login(user);
 				if (response.status === 201) {
 					navigate(`/`);
-					localStorage.setItem("token", response.data.token.access_token);
+					const token = response.data.token.access_token;
+					localStorage.setItem("token", token);
 					dispatchAuth({
 						type: SET_TOKEN,
-						payload: response.data.token.accessToken,
+						payload: token,
 					});
 					dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
 					dispatchAuth({
 						type: SET_ROLE,
-						payload: decodeToken(response.data.token.access_token).token,
+						payload: decodeToken(token).role,
 					});
 					toast.success("Đăng nhập thành công!");
 				}
