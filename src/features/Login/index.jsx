@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import ForgotPasswordModal from "./forgotPasswordModal";
 import { toast } from "react-toastify";
 import { login } from "../../services/auth";
-import { AppContext } from "../../cores/context/app.context";
+import { AppContext, SET_ROLE } from "../../cores/context/app.context";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import {
 	SET_TOKEN,
 	SET_AUTHENTICATED,
 } from "./../../cores/context/app.context";
+import { decodeToken } from "../../helper/decodeToken";
 
 const Login = () => {
 	const { dispatchAuth } = useContext(AppContext);
@@ -56,9 +57,12 @@ const Login = () => {
 						payload: response.data.token.accessToken,
 					});
 					dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
+					dispatchAuth({
+						type: SET_ROLE,
+						payload: decodeToken(response.data.token.access_token).token,
+					});
 					toast.success("Đăng nhập thành công!");
 				}
-				console.log(response);
 			} catch (error) {
 				toast.error("Email hoặc mật khẩu không đúng!");
 			}

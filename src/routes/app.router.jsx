@@ -15,7 +15,6 @@ import PurchasePolicy from "../features/PurchasePolicy";
 import { useContext } from "react";
 import { AppContext } from "./../cores/context/app.context";
 import Profile from "../features/Profile";
-import { decodeToken } from "../helper/decodeToken";
 import AdminContainer from "../container/admin.container";
 import Cart from "../features/Cart";
 import Order from "../features/Order";
