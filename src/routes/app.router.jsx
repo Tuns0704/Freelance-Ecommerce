@@ -12,7 +12,7 @@ import ContactUs from "../features/ContactUs";
 import InstallmentPolicy from "../features/InstallmentPolicy";
 import WarrantyPolicy from "../features/WarrantyPolicy";
 import PurchasePolicy from "../features/PurchasePolicy";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "./../cores/context/app.context";
 import Profile from "../features/Profile";
 import { decodeToken } from "../helper/decodeToken";
@@ -24,28 +24,11 @@ import adminRoutes from "../constant/adminRoutes";
 import ResetPassword from "../features/ResetPassword";
 
 export const AppRouter = () => {
-	const [userRole, setUserRole] = useState("");
 	const { state } = useContext(AppContext);
-	const urlParams = new URLSearchParams(window.location.search);
-	const tokenURL = urlParams.get("token");
-	const [token, setToken] = useState(tokenURL ? tokenURL : "");
-
-	const localStorageToken = localStorage.getItem("token");
-
-	useEffect(() => {
-		const currentUrl = window.location.href;
-		const targetUrl = "https://www.orderus.vn/?token=";
-		if (localStorageToken) {
-			setToken(localStorageToken);
-		}
-		if (token !== "" && currentUrl.startsWith(targetUrl)) {
-			setUserRole(decodeToken(token).role);
-		}
-	}, [localStorageToken, token]);
 
 	return (
 		<Routes>
-			{userRole === "admin" ? (
+			{state.role === "admin" ? (
 				<>
 					<Route path="/dashboard" element={<AdminContainer />}>
 						{adminRoutes.map(
