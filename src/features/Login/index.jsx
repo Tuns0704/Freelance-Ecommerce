@@ -1,6 +1,7 @@
 import { Button, Typography, Input } from "@material-tailwind/react";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ForgotPasswordModal from "./forgotPasswordModal";
 import { toast } from "react-toastify";
 import { login } from "../../services/auth";
 import { AppContext } from "../../cores/context/app.context";
@@ -18,6 +19,11 @@ const Login = () => {
 	});
 
 	const [showPassword, setShowPassword] = useState(false);
+	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+
+	const handleToggleForgotPasswordModal = () => {
+		setIsPasswordModalOpen((prev) => !prev);
+	};
 
 	const handleTogglePasswordVisibility = () => {
 		setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -79,7 +85,7 @@ const Login = () => {
 						Đăng nhập
 					</Typography>
 				</div>
-				<form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+				<form className="mt-8 mb-2 mx-auto max-w-screen-lg lg:w-1/2">
 					<div className="mb-4 flex flex-col gap-6">
 						<Typography
 							variant="small"
@@ -149,6 +155,22 @@ const Login = () => {
 							Đăng ký ngay
 						</Link>
 					</Typography>
+					<Typography
+						variant="paragraph"
+						className="text-center text-blue-gray-500 font-medium mt-4"
+					>
+						Quên mật khẩu?
+						<Link
+							onClick={handleToggleForgotPasswordModal}
+							className="text-gray-900 ml-1 underline"
+						>
+							Lấy lại mật khẩu
+						</Link>
+					</Typography>
+					<ForgotPasswordModal
+						isOpen={isPasswordModalOpen}
+						closeModal={handleToggleForgotPasswordModal}
+					/>
 					<div className="space-y-4 mt-8">
 						<Button
 							onClick={() => handleLoginGoogle()}

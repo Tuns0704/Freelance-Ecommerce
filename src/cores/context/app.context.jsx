@@ -38,17 +38,21 @@ const AuthContext = ({ children }) => {
 	const [state, dispatchAuth] = useReducer(authReducer, initialState);
 
 	useEffect(() => {
-		const queryParameters = new URLSearchParams(window.location.search);
-		const tokenFromUrl = queryParameters.get("token");
-		if (tokenFromUrl) {
-			localStorage.setItem("token", tokenFromUrl);
-			dispatchAuth({ type: SET_TOKEN, payload: tokenFromUrl });
-			dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
-		}
-		const tokenFromLocalStorage = localStorage.getItem("token");
-		if (tokenFromLocalStorage) {
-			dispatchAuth({ type: SET_TOKEN, payload: tokenFromLocalStorage });
-			dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
+		const currentUrl = window.location.href;
+		const targetUrl = "https://orderus.vn/";
+		if (currentUrl.startsWith(targetUrl)) {
+			const queryParameters = new URLSearchParams(window.location.search);
+			const tokenFromUrl = queryParameters.get("token");
+			if (tokenFromUrl) {
+				localStorage.setItem("token", tokenFromUrl);
+				dispatchAuth({ type: SET_TOKEN, payload: tokenFromUrl });
+				dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
+			}
+			const tokenFromLocalStorage = localStorage.getItem("token");
+			if (tokenFromLocalStorage) {
+				dispatchAuth({ type: SET_TOKEN, payload: tokenFromLocalStorage });
+				dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
+			}
 		}
 	}, []);
 

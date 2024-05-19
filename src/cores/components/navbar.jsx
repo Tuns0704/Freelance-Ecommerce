@@ -125,7 +125,6 @@ export function Navbar({ routes }) {
 					<input
 						className="peer font-opensans h-full w-full outline-none text-sm md:text-gray-900 pr-2"
 						type="text"
-						id="searchNav"
 						value={searchString}
 						onChange={(e) => handleChange(e)}
 						placeholder="Nhập thông tin sản phẩm bạn muốn mua..."
@@ -133,7 +132,7 @@ export function Navbar({ routes }) {
 					/>
 				</div>
 			</div>
-			<div className="md:w-fit flex gap-3">
+			<div className="md:w-fit flex flex-col md:flex-row gap-3">
 				{routes.map((route) => (
 					<Typography
 						key={route.name}
@@ -267,7 +266,7 @@ export function Navbar({ routes }) {
 					</IconButton>
 				</div>
 				<Collapse
-					className={`rounded-xl bg-white text-blue-gray-900`}
+					className={`rounded-xl bg-white md:mt-0 mt-3 text-blue-gray-900`}
 					open={openNav}
 				>
 					<div className="container p-4 mx-auto">
@@ -301,15 +300,22 @@ export function Navbar({ routes }) {
 									</Button>
 								</>
 							) : (
-								<Button
-									onClick={() => navigateLogin()}
-									variant="text"
-									size="sm"
-									className="font-opensans"
-									fullWidth
-								>
-									Đăng nhập
-								</Button>
+								<>
+									<Button
+										onClick={() => navigateRegister()}
+										className="font-opensans"
+										fullWidth
+									>
+										Đăng ký
+									</Button>
+									<Button
+										onClick={() => navigateLogin()}
+										className="font-opensans"
+										fullWidth
+									>
+										Đăng nhập
+									</Button>
+								</>
 							)}
 						</div>
 					</div>

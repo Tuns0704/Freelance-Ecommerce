@@ -17,15 +17,15 @@ export const register = (body) =>
 	});
 
 export const forgotPassword = (body) =>
-	axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, body, {
+	axios.post(`${import.meta.env.VITE_API_URL}/auth/forgot-password`, body, {
 		headers: {
 			"Content-Type": "application/json",
 		},
 		validateStatus: (status) => status < 400,
 	});
 
-export const changePassword = (body) =>
-	axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, body, {
+export const resetPassword = (body) =>
+	axios.post(`${import.meta.env.VITE_API_URL}/auth/reset-password`, body, {
 		headers: {
 			"Content-Type": "application/json",
 		},

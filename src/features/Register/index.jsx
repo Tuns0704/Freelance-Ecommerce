@@ -87,7 +87,7 @@ const Register = () => {
 				/>
 			</div>
 			<div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
-				<form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+				<form className="mt-8 mb-2 mx-auto max-w-screen-lg lg:w-1/2">
 					<div className="text-center">
 						<Typography variant="h2" className="font-bold">
 							Đăng ký
