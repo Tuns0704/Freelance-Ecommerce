@@ -141,7 +141,7 @@ const ProductDetail = () => {
 							)}
 						</div>
 
-						<h1 className="font-bold text-blue-gray-900 sm:text-3xl text-lg text-justify">
+						<h1 className="font-bold text-blue-gray-900 sm:text-2xl lg:text-3xl text-lg text-justify">
 							{product.title}
 						</h1>
 						<div className="flex gap-2">
@@ -194,7 +194,6 @@ const ProductDetail = () => {
 								)}
 							</div>
 						</div>
-
 						<div>
 							<div className="flex gap-2 items-center">
 								<TruckIcon className="w-6 h-6" />
@@ -210,16 +209,16 @@ const ProductDetail = () => {
 								Chính sách bảo hành và cam kết
 							</p>
 						</div>
-						<div className="flex flex-col gap-2">
-							<p>
+						<div className="flex flex-col gap-2 ">
+							<p className="text-justify">
 								Máy được <b>Bảo hành {guarantee} tháng</b> (tính từ ngày Khách
 								Hàng nhận được máy). Khách có thể chọn mua thêm bảo hành khi
 								nhận máy.
 							</p>
-							<div className="flex w-full md:flex-row flex-col gap-2 md:gap-5">
+							<div className="flex w-full xs:flex-row md:flex-row flex-col gap-2 xl:gap-5">
 								{guaranteeCondition.map((item, index) => (
 									<Button
-										className="md:w-1/3"
+										className="w-full xs:w-1/3 md:w-1/3"
 										variant={
 											item.duration === guarantee ? "filled" : "outlined"
 										}
@@ -233,11 +232,11 @@ const ProductDetail = () => {
 										}
 									>
 										<p
-											className={`font-semibold text-center ${
+											className={`font-semibold text-sm text-center ${
 												item.duration === guarantee ? "text-white" : ""
 											}`}
 										>
-											Bảo hành {item.duration} tháng
+											BH {item.duration} tháng
 										</p>
 										<p
 											className={`text-center ${
@@ -253,7 +252,7 @@ const ProductDetail = () => {
 								))}
 							</div>
 						</div>
-						<div className="flex gap-2 md:gap-5 md:flex-row flex-col">
+						<div className="flex gap-2 xl:gap-5 md:flex-row flex-col">
 							<div className="flex md:w-1/2">
 								<Button
 									onClick={() => handleAddToCart()}

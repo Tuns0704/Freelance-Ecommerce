@@ -114,7 +114,7 @@ export function Navbar({ routes }) {
 
 	const navList = (
 		<ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-			<div className="md:w-[400px]">
+			<div className=" md:w-[350px] xl:w-[500px]">
 				<div className="relative flex items-center w-full h-12 rounded-lg md:shadow-none shadow-md focus-within:shadow-lg bg-white overflow-hidden">
 					<IconButton
 						onClick={() => findProduct()}
