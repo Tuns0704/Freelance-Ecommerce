@@ -15,11 +15,25 @@ export const AppContext = createContext({
 	dispatchAuth: () => {},
 });
 
-const token = localStorage.getItem("token");
+const getTokenFromUrl = () => {
+	const currentUrl = window.location.href;
+	const targetUrl = "https://www.orderus.vn/?token=";
+	if (currentUrl.startsWith(targetUrl)) {
+		const currentUrl = window.location.href;
+		const url = new URL(currentUrl);
+		return url.searchParams.get("token");
+	} else {
+		return null;
+	}
+};
+
+const tokenFromUrl = getTokenFromUrl();
+const token =
+	tokenFromUrl !== null ? tokenFromUrl : localStorage.getItem("token");
 
 const initialState = {
 	token: token,
-	isAuthenticated: token !== null ? true : false,
+	isAuthenticated: token !== null,
 	role: token !== null ? decodeToken(token).role : "user",
 };
 
@@ -49,9 +63,7 @@ const AuthContext = ({ children }) => {
 	const [state, dispatchAuth] = useReducer(authReducer, initialState);
 
 	useEffect(() => {
-		const currentUrl = window.location.href;
-		const targetUrl = "https://www.orderus.vn/?token=";
-		if (currentUrl.startsWith(targetUrl)) {
+		if (tokenFromUrl !== null) {
 			const queryParameters = new URLSearchParams(window.location.search);
 			const tokenFromUrl = queryParameters.get("token");
 			if (tokenFromUrl) {
@@ -61,7 +73,9 @@ const AuthContext = ({ children }) => {
 				dispatchAuth({
 					type: SET_ROLE,
 					payload:
-						decodeToken(token) !== null ? decodeToken(token).role : "user",
+						decodeToken(tokenFromUrl) !== null
+							? decodeToken(tokenFromUrl).role
+							: "user",
 				});
 			}
 		}
@@ -71,7 +85,10 @@ const AuthContext = ({ children }) => {
 			dispatchAuth({ type: SET_AUTHENTICATED, payload: true });
 			dispatchAuth({
 				type: SET_ROLE,
-				payload: decodeToken(token) !== null ? decodeToken(token).role : "user",
+				payload:
+					decodeToken(tokenFromLocalStorage) !== null
+						? decodeToken(tokenFromLocalStorage).role
+						: "user",
 			});
 		}
 	}, []);
