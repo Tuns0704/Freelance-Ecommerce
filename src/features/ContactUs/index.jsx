@@ -154,7 +154,7 @@ const ContactUs = () => {
 						>
 							<Input
 								size="lg"
-								placeholder="0919430112"
+								placeholder="nguyenA@gmail.com"
 								name="email"
 								value={contactUs.email}
 								onChange={handleChangeInput}
