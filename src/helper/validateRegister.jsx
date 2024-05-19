@@ -12,7 +12,7 @@ export const validateRegister = (user) => {
 	if (!user.password) {
 		errors.password = "Thông tin cần phải nhập";
 	} else if (user.password.length < 8) {
-		errors.password = "Mật khẩu phải 8 kí tự";
+		errors.password = "Mật khẩu phải có ít nhất 8 kí tự";
 	}
 	if (!user.confirmPassword || user.confirmPassword !== user.password) {
 		errors.confirmPassword = "Mật khẩu không trùng";

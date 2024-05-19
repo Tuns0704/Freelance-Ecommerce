@@ -1,8 +1,10 @@
-import { Button, Typography, Input } from "@material-tailwind/react";
+import { Button, Typography, Input, Tooltip } from "@material-tailwind/react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
+import { validateResetPassword } from "./../../helper/validateResetPassword";
+import { resetPassword } from "../../services/auth";
 
 const ResetPassword = () => {
 	const [password, setPassword] = useState({
@@ -11,9 +13,7 @@ const ResetPassword = () => {
 	});
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-	const queryParameters = new URLSearchParams(window.location.search);
-	const tokenFromUrl = queryParameters.get("token");
+	const [errors, setErrors] = useState({});
 
 	const handleTogglePasswordVisibility = () => {
 		setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -31,12 +31,34 @@ const ResetPassword = () => {
 		}));
 	};
 
+	const queryParameters = new URLSearchParams(window.location.search);
+	const tokenFromUrl = queryParameters.get("token");
+
+	const navigate = useNavigate();
+
 	const handleSubmit = async () => {
-		const body = {
-			token: tokenFromUrl,
-			newPassword: password.newPassword,
-		};
-		console.log(body);
+		const errors = validateResetPassword(password);
+		setErrors(errors);
+		if (Object.keys(errors).length === 0) {
+			try {
+				const body = {
+					token: tokenFromUrl,
+					newPassword: password.newPassword,
+				};
+				const response = await resetPassword(body);
+				if (response.status === 200) {
+					toast.success("Đổi mật khẩu thành công!");
+					navigate("/login");
+				} else {
+					toast.error("Đổi mật khẩu thất bại!");
+				}
+			} catch (error) {
+				toast.error("Bạn vui lòng tạo 1 phiếu đổi mật khẩu mới");
+				navigate("/login");
+			}
+		} else {
+			toast.error("Cần phải nhập đầy đủ thông tin!");
+		}
 	};
 
 	return (
@@ -44,7 +66,7 @@ const ResetPassword = () => {
 			<div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
 				<div className="text-center">
 					<Typography variant="h2" className="font-bold">
-						Đăng nhập
+						Quên mật khẩu
 					</Typography>
 				</div>
 				<form className="mt-8 mb-2 mx-auto max-w-screen-lg lg:w-1/2">
@@ -54,20 +76,27 @@ const ResetPassword = () => {
 							color="blue-gray"
 							className="-mb-5 font-medium"
 						>
-							Mật khẩu khẩu mới
+							Mật khẩu khẩu mới <b className="text-red-400">*</b>
 						</Typography>
-						<Input
-							size="lg"
-							placeholder="••••••••"
-							name="newPassword"
-							type={showPassword ? "text" : "password"}
-							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-							labelProps={{
-								className: "before:content-none after:content-none",
-							}}
-							value={password.newPassword}
-							onChange={(event) => handleChangeInput(event)}
-						/>
+						<Tooltip
+							content={errors.newPassword}
+							placement="top-end"
+							open={!!errors.newPassword}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								placeholder="••••••••"
+								name="newPassword"
+								type={showPassword ? "text" : "password"}
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+								value={password.newPassword}
+								onChange={(event) => handleChangeInput(event)}
+							/>
+						</Tooltip>
 						<button
 							type="button"
 							onClick={handleTogglePasswordVisibility}
@@ -86,20 +115,27 @@ const ResetPassword = () => {
 							color="blue-gray"
 							className="-mb-5 font-medium"
 						>
-							Xác nhận mật khẩu khẩu mới
+							Xác nhận mật khẩu khẩu mới <b className="text-red-400">*</b>
 						</Typography>
-						<Input
-							size="lg"
-							placeholder="••••••••"
-							name="confirmNewPassword"
-							type={showPassword ? "text" : "password"}
-							className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-							labelProps={{
-								className: "before:content-none after:content-none",
-							}}
-							value={password.confirmNewPassword}
-							onChange={(event) => handleChangeInput(event)}
-						/>
+						<Tooltip
+							content={errors.confirmNewPassword}
+							placement="top-end"
+							open={!!errors.confirmNewPassword}
+							className="!visible bg-transparent font-medium text-red-800 py-1 mt-1"
+						>
+							<Input
+								size="lg"
+								placeholder="••••••••"
+								name="confirmNewPassword"
+								type={showConfirmPassword ? "text" : "password"}
+								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+								labelProps={{
+									className: "before:content-none after:content-none",
+								}}
+								value={password.confirmNewPassword}
+								onChange={(event) => handleChangeInput(event)}
+							/>
+						</Tooltip>
 						<button
 							type="button"
 							onClick={handleToggleConfirmPasswordVisibility}

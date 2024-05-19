@@ -33,10 +33,12 @@ export const AppRouter = () => {
 	const localStorageToken = localStorage.getItem("token");
 
 	useEffect(() => {
+		const currentUrl = window.location.href;
+		const targetUrl = "https://orderus.vn/";
 		if (localStorageToken) {
 			setToken(localStorageToken);
 		}
-		if (token !== "") {
+		if (token !== "" && currentUrl.startsWith(targetUrl)) {
 			setUserRole(decodeToken(token).role);
 		}
 	}, [localStorageToken, token]);
