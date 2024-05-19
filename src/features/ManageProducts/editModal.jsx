@@ -1,6 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { PropTypes } from "prop-types";
-import { IconButton, Input, Button } from "@material-tailwind/react";
+import {
+	IconButton,
+	Input,
+	Button,
+	Select,
+	Option,
+} from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useState } from "react";
 import { updateProduct } from "../../services/product";
@@ -9,9 +15,14 @@ import { toast } from "react-toastify";
 
 const ModalEdit = ({ isOpen, closeModal, product, reload }) => {
 	const [productDiscount, setProductDiscount] = useState(0);
+	const [conditionOrder, setConditionOrder] = useState(product.conditionOrder);
 
 	const handleChangeProductDiscount = (event) => {
 		setProductDiscount(event.target.value);
+	};
+
+	const handleDeliveryStatusChange = (value) => {
+		setConditionOrder(value);
 	};
 
 	useEffect(() => {
@@ -31,6 +42,7 @@ const ModalEdit = ({ isOpen, closeModal, product, reload }) => {
 					priceTreatment: product.marketingPrice.priceTreatment,
 					discountPercentage: formatNumberToFloat(productDiscount),
 				},
+				conditionOrder: conditionOrder,
 			};
 			const response = await updateProduct(product.id, body);
 			if (response.status === 200) {
@@ -76,13 +88,26 @@ const ModalEdit = ({ isOpen, closeModal, product, reload }) => {
 									as="h3"
 									className="text-lg flex justify-between items-center font-medium leading-6 text-gray-900"
 								>
-									<div>Sửa giảm giá sản phẩm</div>
+									<div>Sửa giảm giá, tình trạng sản phẩm</div>
 									<IconButton onClick={closeModal}>
 										<XMarkIcon className="w-5 h-5" />
 									</IconButton>
 								</Dialog.Title>
-								<div className="flex flex-col gap-4 mt-5">
+								<div className="flex flex-col gap-5 mt-5 ">
+									<Select
+										disabled={product.marketingPrice === null ? true : false}
+										value={conditionOrder}
+										label="Trạng thái sản phẩm"
+										onChange={handleDeliveryStatusChange}
+									>
+										<Option value="Pre Order">Pre Order</Option>
+										<Option value="Open Box">Open Box</Option>
+										<Option value="Used">Used</Option>
+										<Option value="Refurbished">Refurbished</Option>
+										<Option value="New">New</Option>
+									</Select>
 									<Input
+										disabled={product.marketingPrice === null ? true : false}
 										label="Giảm % giá sản phẩm"
 										required={true}
 										type="number"
@@ -91,7 +116,7 @@ const ModalEdit = ({ isOpen, closeModal, product, reload }) => {
 									/>
 									<Button
 										disabled={product.marketingPrice === null ? true : false}
-										className="w-full"
+										className="w-full mt-20"
 										onClick={() => handleOnSubmit()}
 									>
 										Thêm

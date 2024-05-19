@@ -40,7 +40,6 @@ const OrderManage = () => {
 			if (response.status === 200) {
 				setListOrder(response.data.data);
 				setTotalProducts(response.data.totalCount);
-				console.log(response.data);
 			} else {
 				toast("Lấy danh sách khách hàng gặp lỗi");
 			}
