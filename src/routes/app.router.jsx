@@ -34,7 +34,7 @@ export const AppRouter = () => {
 
 	useEffect(() => {
 		const currentUrl = window.location.href;
-		const targetUrl = "https://www.orderus.vn/";
+		const targetUrl = "https://www.orderus.vn/?token=";
 		if (localStorageToken) {
 			setToken(localStorageToken);
 		}

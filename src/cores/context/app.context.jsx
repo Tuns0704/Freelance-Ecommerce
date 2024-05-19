@@ -39,7 +39,7 @@ const AuthContext = ({ children }) => {
 
 	useEffect(() => {
 		const currentUrl = window.location.href;
-		const targetUrl = "https://www.orderus.vn/";
+		const targetUrl = "https://www.orderus.vn/?token=";
 		if (currentUrl.startsWith(targetUrl)) {
 			const queryParameters = new URLSearchParams(window.location.search);
 			const tokenFromUrl = queryParameters.get("token");
