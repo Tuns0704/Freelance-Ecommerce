@@ -21,6 +21,7 @@ import Cart from "../features/Cart";
 import Order from "../features/Order";
 import OrderPayment from "../features/OrderPayment";
 import adminRoutes from "../constant/adminRoutes";
+import ResetPassword from "../features/ResetPassword";
 
 export const AppRouter = () => {
 	const [userRole, setUserRole] = useState("");
@@ -82,6 +83,7 @@ export const AppRouter = () => {
 						<Route path="/installment-policy" element={<InstallmentPolicy />} />
 						<Route path="/warranty-policy" element={<WarrantyPolicy />} />
 						<Route path="/purchase-policy" element={<PurchasePolicy />} />
+						<Route path="/reset-password" element={<ResetPassword />} />
 						<Route path="*" element={<Navigate to="/home" replace />} />
 						{state.isAuthenticated && (
 							<>
