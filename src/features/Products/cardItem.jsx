@@ -15,17 +15,17 @@ const CardItem = ({ product }) => {
 	};
 
 	return (
-		<div className="flex flex-col sm:w-[48%] md:w-full lg:flex-row justify-between gap-3 rounded-md p-3 shadow-md bg-white">
+		<div className="group flex flex-col sm:w-[48%] md:w-full lg:flex-row justify-between gap-3 rounded-md p-3 shadow-md bg-white">
 			<div className="lg:w-4/6 flex flex-col md:flex-row gap-3 lg:gap-5">
 				<img
 					onClick={handleNavigateToDetail}
 					src={product.thumbnailImages?.[0]?.imageUrl}
-					className="md:min-w-[180px] md:max-w-[180px] h-[220px] object-cover rounded-lg hover:scale-105 transition-all duration-300 hover:cursor-pointer"
+					className="md:min-w-[180px] md:max-w-[180px] h-[220px] object-cover rounded-lg group-hover:scale-105 transition-all duration-300 group-hover:cursor-pointer"
 				/>
 				<div className="flex flex-col gap-2 lg:w-4/6">
 					<h1
 						onClick={handleNavigateToDetail}
-						className="font-bold text-base h-12 text-justify overflow-clip hover:cursor-pointer"
+						className="font-bold text-base h-12 text-justify overflow-clip group-hover:text-blue-600 group-hover:cursor-pointer"
 					>
 						{product.name}
 					</h1>

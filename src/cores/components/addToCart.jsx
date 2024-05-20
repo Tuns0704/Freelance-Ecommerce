@@ -49,7 +49,7 @@ const AddToCartButton = ({ productId, productPrice }) => {
 				ripple={false}
 				onClick={() => AddToCart()}
 			>
-				<ShoppingCartIcon className="w-6 h-6" /> Thêm vào
+				<ShoppingCartIcon className="w-6 h-6" /> Thêm vào giỏ hàng
 			</Button>
 		</div>
 	);

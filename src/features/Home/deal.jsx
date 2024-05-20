@@ -66,28 +66,21 @@ const Deals = ({ deal }) => {
 						},
 						spaceBetween: 20,
 					},
-					768: {
+					1110: {
 						slidesPerView: 3,
 						grid: {
 							rows: 2,
 						},
 						spaceBetween: 20,
 					},
-					1024: {
-						slidesPerView: 3,
-						grid: {
-							rows: 2,
-						},
-						spaceBetween: 20,
-					},
-					1280: {
+					1370: {
 						slidesPerView: 4,
 						grid: {
 							rows: 2,
 						},
 						spaceBetween: 20,
 					},
-					1520: {
+					1620: {
 						slidesPerView: 5,
 						grid: {
 							rows: 2,
