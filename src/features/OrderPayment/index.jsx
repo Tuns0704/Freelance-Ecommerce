@@ -58,7 +58,7 @@ const OrderPayment = () => {
 			toast.success(
 				"Gửi ảnh thanh toán thành công! Tiến hành kiểm tra thông tin chuyển khoản <3"
 			);
-			navigate("/home");
+			navigate("/");
 		} else {
 			toast.error("Gửi ảnh thanh toán thất bạ");
 		}
@@ -79,6 +79,7 @@ const OrderPayment = () => {
 							<input
 								type="file"
 								className="block w-full text-sm text-slate-500 file:mr-4 border-r border-y border-blue-gray-900 rounded-md file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-gray-900 file:text-white hover:file:opacity-80 hover:cursor-pointer"
+								accept="image/*"
 								onChange={(e) => onFileChange(e.target.files)}
 							/>
 						</div>

@@ -154,6 +154,7 @@ const ModalEditSettings = ({
 											</p>
 											<input
 												type="file"
+												accept="image/*"
 												className="block w-full text-sm text-slate-500 file:mr-4 border-r border-y border-blue-gray-900 rounded-md file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-gray-900 file:text-white hover:file:opacity-80 hover:cursor-pointer"
 												onChange={(e) => onFileBannerTopChange(e.target.files)}
 											/>
@@ -164,6 +165,7 @@ const ModalEditSettings = ({
 											</p>
 											<input
 												type="file"
+												accept="image/*"
 												className="block w-full text-sm text-slate-500 file:mr-4 border-r border-y border-blue-gray-900 rounded-md file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-gray-900 file:text-white hover:file:opacity-80 hover:cursor-pointer"
 												onChange={(e) =>
 													onFileBannerBottomChange(e.target.files)
@@ -201,6 +203,7 @@ const ModalEditSettings = ({
 											/>
 											<input
 												type="file"
+												accept="image/*"
 												className="block w-full text-sm text-slate-500 file:mr-4 border-r border-y border-blue-gray-900 rounded-md file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-gray-900 file:text-white hover:file:opacity-80 hover:cursor-pointer"
 												onChange={(e) => onFileBankQRChange(e.target.files)}
 											/>
@@ -244,6 +247,7 @@ const ModalEditSettings = ({
 										<input
 											type="file"
 											multiple={true}
+											accept="image/*"
 											className="block w-full text-sm text-slate-500 file:mr-4 border-r border-y border-blue-gray-900 rounded-md file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-gray-900 file:text-white hover:file:opacity-80 hover:cursor-pointer"
 											onChange={(e) => onFileSlideChange(e.target.files)}
 										/>

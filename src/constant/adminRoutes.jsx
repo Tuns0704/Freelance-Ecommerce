@@ -24,7 +24,7 @@ export const adminRoutes = [
 			{
 				icon: <HomeIcon {...icon} />,
 				name: "Trang chủ",
-				path: "/home",
+				path: "/",
 				element: <Home />,
 			},
 			{

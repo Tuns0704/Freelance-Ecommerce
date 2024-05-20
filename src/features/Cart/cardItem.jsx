@@ -58,13 +58,18 @@ const CardItem = ({ cart, reload, updateQuantity }) => {
 				/>
 			</div>
 			<div className="col-span-12 lg:col-span-10 detail w-full lg:pl-3">
-				<div className="flex items-center justify-between w-full mb-4">
+				<div className="items-center text-justify w-full mb-4">
 					<h5 className="font-bold text-2xl md:w-4/5 leading-9 text-gray-900">
 						{cart.product.name}
 					</h5>
 				</div>
-				<div className="px-3 py-1 border border-red-900 w-fit rounded-md font-semibold text-red-900 mb-4">
-					{cart.product.condition}
+				<div className="flex gap-2">
+					<div className="px-3 py-1 border border-red-900 w-fit rounded-md font-semibold text-red-900 mb-4">
+						{cart.product.condition}
+					</div>
+					<div className="px-3 py-1 border border-red-900 w-fit rounded-md font-semibold text-red-900 mb-4">
+						{formatCurrency(cart.warrantyFee)}
+					</div>
 				</div>
 				<div className="flex justify-between items-center">
 					<div className="flex">
@@ -94,7 +99,9 @@ const CardItem = ({ cart, reload, updateQuantity }) => {
 					/>
 					<h6 className="text-red-900 font-manrope font-bold text-2xl leading-9 text-right">
 						{formatCurrency(
-							(cart.product.price[0].value + cart.warrantyFee) * quantity
+							(cart.product.price[cart.product.price.length - 1].value +
+								cart.warrantyFee) *
+								quantity
 						)}
 					</h6>
 				</div>

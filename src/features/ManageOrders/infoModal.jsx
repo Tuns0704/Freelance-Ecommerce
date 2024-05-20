@@ -115,7 +115,7 @@ const ModalInfo = ({ isOpen, closeModal, order }) => {
 												<img
 													src={order.paymentImg}
 													alt=""
-													className="self-center w-[600px] object-cover"
+													className="self-center w-[400px] object-contain"
 												/>
 											</div>
 										</div>

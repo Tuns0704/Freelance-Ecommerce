@@ -172,31 +172,6 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 					<div className="font-medium">{formatCurrency(0)}</div>
 					<div className="font-medium">{formatCurrency(100000000)}</div>
 				</div>
-				{/* <div className="flex flex-col gap-1">
-					{filterPriceOptions.map((option, index) => (
-						<div key={index} className="flex">
-							<Radio
-								name="priceOption"
-								onClick={() => handleChangeProductPrice(option)}
-								checked={
-									productPrice.isChecked &&
-									productPrice.value.maxPrice === option.maxPrice &&
-									productPrice.value.minPrice === option.minPrice
-								}
-								onChange={() => ""}
-								containerProps={{
-									className: "py-2",
-								}}
-								label={
-									<h1 className="text-blue-gray-900 font-medium">
-										{formatCurrency(option.minPrice)} -{" "}
-										{formatCurrency(option.maxPrice)}
-									</h1>
-								}
-							/>
-						</div>
-					))}
-				</div> */}
 			</div>
 			<div className="border-b">
 				<div className="font-semibold">Danh mục</div>

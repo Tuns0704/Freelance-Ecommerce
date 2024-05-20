@@ -67,7 +67,7 @@ export const AppRouter = () => {
 						<Route path="/warranty-policy" element={<WarrantyPolicy />} />
 						<Route path="/purchase-policy" element={<PurchasePolicy />} />
 						<Route path="/reset-password" element={<ResetPassword />} />
-						<Route path="*" element={<Navigate to="/home" replace />} />
+						<Route path="*" element={<Navigate to="/" replace />} />
 						{state.isAuthenticated && (
 							<>
 								<Route path="/profile" element={<Profile />} />

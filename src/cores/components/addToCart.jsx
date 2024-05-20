@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { PropTypes } from "prop-types";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
-const AddToCartButton = ({ productId, productPrice }) => {
+const AddToCartButton = ({ productId, productPrice, warrantyFee }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const handleOpenModal = () => {
@@ -24,7 +24,7 @@ const AddToCartButton = ({ productId, productPrice }) => {
 					productId: productId,
 					quantity: 1,
 					totalPrice: productPrice,
-					warrantyFee: 0,
+					warrantyFee: warrantyFee,
 				};
 				const response = await addToCart(body);
 				if (response.status === 201) {
@@ -58,6 +58,7 @@ const AddToCartButton = ({ productId, productPrice }) => {
 AddToCartButton.propTypes = {
 	productId: PropTypes.string.isRequired,
 	productPrice: PropTypes.number.isRequired,
+	warrantyFee: PropTypes.number.isRequired,
 };
 
 export default AddToCartButton;

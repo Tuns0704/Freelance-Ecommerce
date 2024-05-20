@@ -205,6 +205,7 @@ const ModalInfo = ({ isOpen, closeModal, order, reload }) => {
 											<div className="w-full p-2 border-x-2 border-b-2">
 												<input
 													type="file"
+													accept="image/*"
 													className="block w-full text-sm text-slate-500 file:mr-4 border-r border-y border-blue-gray-900 rounded-md file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-gray-900 file:text-white hover:file:opacity-80 hover:cursor-pointer"
 													onChange={(e) => onFileChange(e.target.files)}
 												/>

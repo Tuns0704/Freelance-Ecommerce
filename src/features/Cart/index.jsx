@@ -18,6 +18,7 @@ const Cart = () => {
 	const [carts, setCarts] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [totalPrice, setTotalPrice] = useState(0);
+	const [totalCartPrice, setTotalCartPrice] = useState(0);
 	const [settings, setSettings] = useState({});
 	const [shippingFee, setShippingFee] = useState(0);
 	const [deposit, setDeposit] = useState(0);
@@ -60,6 +61,14 @@ const Cart = () => {
 		setTotalPrice(total);
 	}, [carts, shippingFee]);
 
+	const calculateTotalCartPrice = useCallback(() => {
+		let total = 0;
+		carts.forEach((item) => {
+			total += (item.product.price[0].value + item.warrantyFee) * item.quantity;
+		});
+		setTotalCartPrice(total);
+	}, [carts]);
+
 	const handleUpdateQuantity = (itemId, newQuantity) => {
 		setCarts((prevCarts) => {
 			return prevCarts.map((item) => {
@@ -85,7 +94,8 @@ const Cart = () => {
 
 	useEffect(() => {
 		calculateTotalPrice();
-	}, [calculateTotalPrice]);
+		calculateTotalCartPrice();
+	}, [calculateTotalPrice, calculateTotalCartPrice]);
 
 	const reloadData = async () => {
 		const useId = decodeToken(token).sub;
@@ -146,7 +156,7 @@ const Cart = () => {
 									<div className="w-full md:w-2/5 h-fit flex flex-col gap-2 ">
 										<div className="flex flex-col gap-2 border-2 border-gray-200 p-3 rounded-xl">
 											<h1 className="font-medium text-xl">
-												Số tiền cần cọc: {formatCurrency(deposit)}
+												Tổng giá trị đơn hàng: {formatCurrency(totalCartPrice)}
 											</h1>
 											<div className="flex gap-2 items-center">
 												<h1 className="font-medium text-xl">
@@ -167,6 +177,9 @@ const Cart = () => {
 												<label className="text-red-900">
 													{formatCurrency(totalPrice)}
 												</label>
+											</h1>
+											<h1 className="font-medium text-xl">
+												Số tiền cần cọc: {formatCurrency(deposit)}
 											</h1>
 										</div>
 										<Button

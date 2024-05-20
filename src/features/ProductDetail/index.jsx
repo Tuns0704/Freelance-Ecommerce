@@ -26,6 +26,7 @@ const ProductDetail = () => {
 	const [price, setPrice] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [guarantee, setGuarantee] = useState(1);
+	const [warrantyFee, setWarrantyFee] = useState(0);
 	const [guaranteeCondition, setGuaranteeCondition] = useState([]);
 	const [descriptionModal, setDescriptionModal] = useState(false);
 
@@ -39,6 +40,7 @@ const ProductDetail = () => {
 
 	const handleChangeGuarantee = (duration, fee, itemPrice) => {
 		setGuarantee(duration);
+		setWarrantyFee(parseInt((fee / 100) * itemPrice));
 		setPrice(
 			parseInt(fee) !== 0 ? (fee / 100) * itemPrice + itemPrice : itemPrice
 		);
@@ -219,6 +221,7 @@ const ProductDetail = () => {
 								<AddToCartButton
 									productId={productId}
 									productPrice={product.price ? product.price.value : 0}
+									warrantyFee={warrantyFee}
 								/>
 							</div>
 							<div className="w-full sm:w-1/2">

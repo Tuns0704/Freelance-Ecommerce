@@ -70,7 +70,7 @@ const CardItem = ({ product }) => {
 			<div className="lg:w-2/6 flex flex-col justify-between">
 				<div className="flex flex-col gap-1 mb-2">
 					<h1 className="text-2xl font-bold text-red-900">
-						{formatCurrency(product.price[0].value)}
+						{formatCurrency(product.price[product.price.length - 1].value)}
 					</h1>
 					<p className="text-sm">
 						Giá tốt nhất:{" "}
@@ -87,12 +87,13 @@ const CardItem = ({ product }) => {
 					<AddToCartButton
 						className="w-1/2"
 						productId={product.id}
-						productPrice={product.price[0].value}
+						productPrice={product.price[product.price.length - 1].value}
+						warrantyFee={0}
 					/>
 					<BuyNowButton
 						className="w-1/2"
 						productId={product.id}
-						productPrice={product.price[0].value}
+						productPrice={product.price[product.price.length - 1].value}
 					/>
 				</div>
 			</div>

@@ -30,18 +30,20 @@ const CardItem = ({ product }) => {
 			</h4>
 			<section className="flex justify-start items-center gap-2">
 				<h2 className="text-2xl font-bold">
-					{formatCurrency(product.price[0].value)}
+					{formatCurrency(product.price[product.price.length - 1].value)}
 				</h2>
 				<del className="text-gray-500 text-sm">
 					{formatCurrency(product.marketingPrice.originalPrice.value)}
 				</del>
 			</section>
 			<i className="font-medium text-sm">
-				Giá tốt nhất: <b>{formatCurrency(product.price[0].value)}</b>
+				Giá tốt nhất:{" "}
+				<b>{formatCurrency(product.price[product.price.length - 1].value)}</b>
 			</i>
 			<AddToCartButton
 				productId={product.id}
-				productPrice={product.price[0].value}
+				productPrice={product.price[product.price.length - 1].value}
+				warrantyFee={0}
 			/>
 		</div>
 	);
