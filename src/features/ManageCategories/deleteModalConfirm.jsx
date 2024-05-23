@@ -11,11 +11,19 @@ const ModalDeleteCategoryConfirm = ({
 	closeModal,
 	reload,
 }) => {
-	const onSubmit = () => {
-		deleteCategory(categoryId);
-		toast.success("Xoá thành công");
-		closeModal();
-		reload();
+	const onSubmit = async () => {
+		try {
+			const response = await deleteCategory(categoryId);
+			if (response.status === 200) {
+				toast.success("Xoá thành công");
+				closeModal();
+				reload();
+			} else {
+				toast.error("Lỗi khi xoá danh mục");
+			}
+		} catch (error) {
+			toast.error("Lỗi khi xoá danh mục");
+		}
 	};
 
 	return (

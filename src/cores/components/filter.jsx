@@ -217,8 +217,8 @@ const FilterOption = ({
 	searchParams,
 }) => {
 	return (
-		<>
-			<div className="hidden md:flex w-[30%]">
+		<div className="w-full">
+			<div className="hidden md:flex">
 				<RenderFilter
 					categories={categories}
 					setSearchParams={setSearchParams}
@@ -273,7 +273,7 @@ const FilterOption = ({
 					</div>
 				</Dialog>
 			</Transition>
-		</>
+		</div>
 	);
 };
 

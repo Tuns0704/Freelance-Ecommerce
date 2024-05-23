@@ -131,13 +131,15 @@ const ManageProducts = () => {
 						</>
 					)}
 				</div>
-				<FilterOption
-					isOpen={isOpen}
-					closeModal={closeModal}
-					searchParams={searchParams}
-					setSearchParams={setSearchParams}
-					categories={categories}
-				/>
+				<div className="w-[23%]">
+					<FilterOption
+						isOpen={isOpen}
+						closeModal={closeModal}
+						searchParams={searchParams}
+						setSearchParams={setSearchParams}
+						categories={categories}
+					/>
+				</div>
 			</section>
 		</div>
 	);

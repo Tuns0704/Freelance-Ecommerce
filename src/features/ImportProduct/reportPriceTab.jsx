@@ -13,8 +13,9 @@ import { addProductByStoreName } from "../../services/product";
 
 const ImportShopTab = () => {
 	const [listCategory, setListCategory] = useState([]);
-	const [shopName, setShopName] = useState("");
+	const [storeName, setStoreName] = useState("");
 	const [keywords, setKeywords] = useState("");
+	const [category, setCategory] = useState("");
 
 	const getCategories = async () => {
 		const response = await getListCategory();
@@ -27,10 +28,11 @@ const ImportShopTab = () => {
 
 	const onSubmit = async () => {
 		try {
-			if (shopName !== "" && keywords !== "") {
+			if (storeName !== "" && category !== "") {
 				const body = {
-					shopName: shopName,
+					storeName: storeName,
 					keywords: keywords,
+					category: category,
 				};
 				const response = await addProductByStoreName(body);
 				if (response.status === 201) {
@@ -56,16 +58,23 @@ const ImportShopTab = () => {
 			<div className="flex w-full gap-5 items-center justify-center">
 				<div className="flex w-full flex-col gap-5">
 					<Input
-						value={shopName}
-						onChange={(event) => setShopName(event.target.value)}
+						value={storeName}
+						onChange={(event) => setStoreName(event.target.value)}
 						className="w-full"
 						label="Tên shop"
+						type="text"
+					/>
+					<Input
+						value={keywords}
+						onChange={(event) => setKeywords(event.target.value)}
+						className="w-full"
+						label="Keyword"
 						type="text"
 					/>
 					<Select label="Loại sản phẩm">
 						{listCategory.map((item) => (
 							<Option
-								onClick={() => setKeywords(item.englishName)}
+								onClick={() => setCategory(item.englishName)}
 								key={item.id}
 								value={item.englishName}
 							>

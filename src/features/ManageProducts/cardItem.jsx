@@ -4,20 +4,28 @@ import { IconButton } from "@material-tailwind/react";
 import {
 	InformationCircleIcon,
 	PencilSquareIcon,
+	ArchiveBoxXMarkIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import ModalInfo from "./infoModal";
 import ModalEdit from "./editModal";
+import ModalDeleteConfirm from "./deleteModalConfirm";
 
 const CardItem = ({ product, reload }) => {
 	const [infoModalIsOpen, setInfoModalIsOpen] = useState(false);
 	const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+	const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
 	const handleToggleInfoModal = () => {
 		setInfoModalIsOpen((pre) => !pre);
 	};
+
 	const handleToggleEditModal = () => {
 		setEditModalIsOpen((pre) => !pre);
+	};
+
+	const handleToggleDeleteModal = () => {
+		setDeleteModalIsOpen((pre) => !pre);
 	};
 
 	return (
@@ -36,31 +44,46 @@ const CardItem = ({ product, reload }) => {
 					alt={product.id}
 				/>
 			</td>
-			<td className="px-5 w-[550px] py-2 border-r">{product.name}</td>
-			<td className="px-5 w-[250px] py-2 border-r">
+			<td className="px-5 w-[500px] py-2 border-r">{product.name}</td>
+			<td className="px-5 w-[200px] py-2 border-r">
 				{formatCurrency(product.price[0].value)}
 			</td>
-			<td className="px-5 py-2 w-2/12 border-r">
+			<td className="px-5 py-2 w-[150px] border-r">
 				{product.category.vietnameseName}
 			</td>
-			<td className="px-5 py-2 w-[160px] h-[100px] gap-5 flex items-center">
-				<IconButton onClick={() => handleToggleInfoModal()}>
-					<InformationCircleIcon className="w-5 h-5" />
-				</IconButton>
-				<IconButton color="green" onClick={() => handleToggleEditModal()}>
-					<PencilSquareIcon className="w-5 h-5" />
-				</IconButton>
-				<ModalInfo
-					product={product}
-					isOpen={infoModalIsOpen}
-					closeModal={handleToggleInfoModal}
-				/>
-				<ModalEdit
-					product={product}
-					isOpen={editModalIsOpen}
-					closeModal={handleToggleEditModal}
-					reload={reload}
-				/>
+			<td className="px-5 py-2 h-[100px] gap-5 flex items-center">
+				<div>
+					<ModalInfo
+						product={product}
+						isOpen={infoModalIsOpen}
+						closeModal={handleToggleInfoModal}
+					/>
+					<IconButton onClick={() => handleToggleInfoModal()}>
+						<InformationCircleIcon className="w-5 h-5" />
+					</IconButton>
+				</div>
+				<div>
+					<ModalEdit
+						product={product}
+						isOpen={editModalIsOpen}
+						closeModal={handleToggleEditModal}
+						reload={reload}
+					/>
+					<IconButton color="green" onClick={() => handleToggleEditModal()}>
+						<PencilSquareIcon className="w-5 h-5" />
+					</IconButton>
+				</div>
+				<div>
+					<ModalDeleteConfirm
+						productId={product.id}
+						isOpen={deleteModalIsOpen}
+						closeModal={handleToggleDeleteModal}
+						reload={reload}
+					/>
+					<IconButton color="red" onClick={() => handleToggleDeleteModal()}>
+						<ArchiveBoxXMarkIcon className="w-5 h-5" />
+					</IconButton>
+				</div>
 			</td>
 		</tr>
 	);

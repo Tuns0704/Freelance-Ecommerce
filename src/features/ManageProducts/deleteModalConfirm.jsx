@@ -2,8 +2,30 @@ import { Dialog, Transition } from "@headlessui/react";
 import { PropTypes } from "prop-types";
 import { Button } from "@material-tailwind/react";
 import { Fragment } from "react";
+import { toast } from "react-toastify";
+import { deleteProductById } from "../../services/product";
 
-const ModalDeleteConfirm = ({ isOpen, onSubmit, closeModal }) => {
+const ModalDeleteCategoryConfirm = ({
+	isOpen,
+	productId,
+	closeModal,
+	reload,
+}) => {
+	const onSubmit = async () => {
+		try {
+			const response = await deleteProductById(productId);
+			if (response.status === 200) {
+				toast.success("Xoá thành công");
+				closeModal();
+				reload();
+			} else {
+				toast.error("Lỗi khi xoá sản phẩm");
+			}
+		} catch {
+			toast.error("Lỗi khi xoá sản phẩm");
+		}
+	};
+
 	return (
 		<Transition appear show={isOpen}>
 			<Dialog as="div" className="relative z-50" onClose={closeModal}>
@@ -35,7 +57,7 @@ const ModalDeleteConfirm = ({ isOpen, onSubmit, closeModal }) => {
 									as="h3"
 									className="text-lg text-center font-medium leading-6 text-gray-900 mb-4"
 								>
-									<div>Bạn muốn xoá danh mục này?</div>
+									<div>Bạn muốn xoá sản phẩm này?</div>
 								</Dialog.Title>
 								<div className="flex gap-2">
 									<Button className="w-1/2" onClick={() => closeModal()}>
@@ -57,10 +79,11 @@ const ModalDeleteConfirm = ({ isOpen, onSubmit, closeModal }) => {
 	);
 };
 
-ModalDeleteConfirm.propTypes = {
+ModalDeleteCategoryConfirm.propTypes = {
 	isOpen: PropTypes.bool,
 	closeModal: PropTypes.func,
-	onSubmit: PropTypes.func,
+	reload: PropTypes.func,
+	productId: PropTypes.string,
 };
 
-export default ModalDeleteConfirm;
+export default ModalDeleteCategoryConfirm;

@@ -33,6 +33,14 @@ export const addProductByStoreName = (body) =>
 		validateStatus: (status) => status < 400,
 	});
 
+export const deleteProductById = (id) =>
+	instance.delete(`${import.meta.env.VITE_API_URL}/ebay/${id}`, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		validateStatus: (status) => status < 400,
+	});
+
 export const getListProduct = (searchParams) =>
 	axios.get(`${import.meta.env.VITE_API_URL}/ebay?${searchParams}`, {
 		headers: {
