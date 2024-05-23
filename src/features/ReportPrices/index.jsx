@@ -22,7 +22,7 @@ const ReportPrice = () => {
 	};
 
 	return (
-		<section className="sm:h-[60vh]">
+		<section className="">
 			<Tabs value={activeTab} className="sm:flex sm:gap-3">
 				<TabsHeader
 					className="flex sm:flex-col sm:w-56"

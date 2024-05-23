@@ -28,8 +28,8 @@ const CardItem = ({ product, reload }) => {
 			<td className="px-5 w-[250px] py-2 border-r">
 				<img
 					src={
-						product.thumbnailImages !== null
-							? product.thumbnailImages[0].imageUrl
+						product.additionalImages !== null
+							? product.additionalImages
 							: "Không có ảnh"
 					}
 					className="w-[250px] h-[100px] object-contain"

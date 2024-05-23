@@ -36,6 +36,10 @@ const Deals = ({ deal }) => {
 		navigate(`/products?category=${deal.englishName}&marketingPrice=true`);
 	};
 
+	if (products.length < 8) {
+		return;
+	}
+
 	return (
 		<section className="flex flex-col">
 			<h2 className="font-bold text-3xl">Deal hot {deal.vietnameseName}</h2>

@@ -41,7 +41,7 @@ const ImageSlider = ({ images }) => {
 						{images.map((image, index) => (
 							<SwiperSlide key={index}>
 								<img
-									src={image.imageUrl}
+									src={image}
 									className={`rounded-lg border-2 hover:cursor-pointer object-contain object-center w-full h-[80px] sm:h-[150px] p-2 ${
 										index === activeIndex ? "border-blue-gray-900 " : ""
 									}`}
@@ -67,7 +67,7 @@ const ImageSlider = ({ images }) => {
 						{images.map((image, index) => (
 							<SwiperSlide key={index} className="p-5">
 								<img
-									src={image.imageUrl}
+									src={image}
 									className="w-full h-[300px] sm:h-full rounded-lg hover:cursor-pointer object-contain object-center"
 									alt={`gallery-image-${index}`}
 								/>

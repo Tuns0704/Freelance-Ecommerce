@@ -76,65 +76,70 @@ const ManageProducts = () => {
 	}, [searchParams]);
 
 	return (
-		<section className="flex flex-col md:flex-row-reverse gap-2 w-full">
-			<div className="flex flex-col sm:w-full md:w-full">
-				<div className="flex items-center gap-2 mb-5">
-					<Button
-						className="w-fit p-2 rounded-md md:hidden"
-						variant="outlined"
-						onClick={openModal}
-					>
-						<AdjustmentsHorizontalIcon className="h-5 w-5" />
-					</Button>
-					<p className="font-semibold text-lg">
-						Tổng số sản phẩm: {totalProducts}
-					</p>
-				</div>
-				{loading ? (
-					<Loading />
-				) : (
-					<>
-						<div className="relative overflow-x-auto">
-							<table className="w-full p-5 rounded-t-lg bg-white shadow text-left rtl:text-right">
-								<thead>
-									<tr className="border-b border-blue-gray-50">
-										<th className="px-5 py-2 border-r">Id</th>
-										<th className="px-5 py-2 border-r">Ảnh</th>
-										<th className="px-5 py-2 border-r">Tên sản phẩm</th>
-										<th className="px-5 py-2 border-r">Giá sản phẩm</th>
-										<th className="px-5 py-2 border-r">Danh mục</th>
-										<th className="px-5 py-2 "></th>
-									</tr>
-								</thead>
-								<tbody>
-									{products.map((product) => (
-										<CardItem
-											product={product}
-											key={product.id}
-											reload={getData}
-										/>
-									))}
-								</tbody>
-							</table>
-						</div>
-
-						<Pagination
-							handleClick={handleClick}
-							page={page}
-							totalPages={totalPages}
-							getItemProps={getItemProps}
-						/>
-					</>
-				)}
+		<div className="mt-5">
+			<div className="flex justify-between items-center mb-5">
+				<h2 className="text-2xl font-semibold ">Danh sách sản phẩm</h2>
 			</div>
-			<FilterOption
-				isOpen={isOpen}
-				closeModal={closeModal}
-				searchParams={searchParams}
-				setSearchParams={setSearchParams}
-				categories={categories}
-			/>
-		</section>
+			<section className="flex flex-col md:flex-row-reverse gap-2 w-full">
+				<div className="flex flex-col sm:w-full md:w-full">
+					<div className="flex items-center gap-2 mb-5">
+						<Button
+							className="w-fit p-2 rounded-md md:hidden"
+							variant="outlined"
+							onClick={openModal}
+						>
+							<AdjustmentsHorizontalIcon className="h-5 w-5" />
+						</Button>
+						<p className="font-semibold text-lg">
+							Tổng số sản phẩm: {totalProducts}
+						</p>
+					</div>
+					{loading ? (
+						<Loading />
+					) : (
+						<>
+							<div className="relative overflow-x-auto">
+								<table className="w-full p-5 rounded-t-lg bg-white shadow text-left rtl:text-right">
+									<thead>
+										<tr className="border-b border-blue-gray-50">
+											<th className="px-5 py-2 border-r">Id</th>
+											<th className="px-5 py-2 border-r">Ảnh</th>
+											<th className="px-5 py-2 border-r">Tên sản phẩm</th>
+											<th className="px-5 py-2 border-r">Giá sản phẩm</th>
+											<th className="px-5 py-2 border-r">Danh mục</th>
+											<th className="px-5 py-2 "></th>
+										</tr>
+									</thead>
+									<tbody>
+										{products.map((product) => (
+											<CardItem
+												product={product}
+												key={product.id}
+												reload={getData}
+											/>
+										))}
+									</tbody>
+								</table>
+							</div>
+
+							<Pagination
+								handleClick={handleClick}
+								page={page}
+								totalPages={totalPages}
+								getItemProps={getItemProps}
+							/>
+						</>
+					)}
+				</div>
+				<FilterOption
+					isOpen={isOpen}
+					closeModal={closeModal}
+					searchParams={searchParams}
+					setSearchParams={setSearchParams}
+					categories={categories}
+				/>
+			</section>
+		</div>
 	);
 };
 

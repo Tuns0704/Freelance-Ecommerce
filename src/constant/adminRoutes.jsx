@@ -12,6 +12,7 @@ import CategoryManage from "../features/ManageCategories";
 import ManageProducts from "./../features/ManageProducts/index";
 import AdminSetting from "../features/AdminSetting";
 import OrderManage from "../features/ManageOrders";
+import ImportProducts from "../features/ImportProduct";
 
 const icon = {
 	className: "w-5 h-5 text-inherit",
@@ -24,7 +25,7 @@ export const adminRoutes = [
 			{
 				icon: <HomeIcon {...icon} />,
 				name: "Trang chủ",
-				path: "/",
+				path: "/home",
 				element: <Home />,
 			},
 			{
@@ -44,6 +45,12 @@ export const adminRoutes = [
 				name: "Quản lý danh mục",
 				path: "/category-manage",
 				element: <CategoryManage />,
+			},
+			{
+				icon: <ClipboardDocumentListIcon {...icon} />,
+				name: "Import sản phẩm",
+				path: "/import-product",
+				element: <ImportProducts />,
 			},
 			{
 				icon: <ClipboardDocumentListIcon {...icon} />,

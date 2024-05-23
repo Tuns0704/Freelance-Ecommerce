@@ -43,7 +43,7 @@ const CategoryManage = () => {
 	}, [categoryId]);
 
 	return (
-		<div>
+		<div className="mt-5">
 			<div className="flex justify-between items-center mb-5">
 				<h2 className="text-2xl font-semibold ">Quản lý danh mục</h2>
 				<ModalAddCategory

@@ -19,7 +19,7 @@ const CardItem = ({ product }) => {
 			<div className="lg:w-4/6 flex flex-col md:flex-row gap-3 lg:gap-5">
 				<img
 					onClick={handleNavigateToDetail}
-					src={product.thumbnailImages?.[0]?.imageUrl}
+					src={product.additionalImages}
 					className="md:min-w-[180px] md:max-w-[180px] h-[220px] object-cover rounded-lg group-hover:scale-105 transition-all duration-300 group-hover:cursor-pointer"
 				/>
 				<div className="flex flex-col gap-2 lg:w-4/6">
@@ -61,7 +61,7 @@ const CardItem = ({ product }) => {
 								alt="ebaylogo"
 							/>
 							<p className="text-sm">
-								Người bán: <b>{product?.seller?.username}</b>
+								Người bán: <b>{product.storeName || "None"}</b>
 							</p>
 						</div>
 					</div>

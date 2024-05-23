@@ -46,8 +46,8 @@ const ModalInfo = ({ isOpen, closeModal, product }) => {
 								<div className="mt-5 w-full flex flex-col gap-2">
 									<img
 										src={
-											product.thumbnailImages !== null
-												? product.thumbnailImages[0].imageUrl
+											product.additionalImages !== null
+												? product.additionalImages
 												: ""
 										}
 										className="w-[300px] h-[300px] object-contain self-center"
@@ -81,7 +81,7 @@ const ModalInfo = ({ isOpen, closeModal, product }) => {
 									</p>
 									<p className="">
 										<b>Người bán: </b>
-										<label className="">{product.seller.username}</label>
+										<label className="">{product.storeName}</label>
 									</p>
 									<p className="">
 										<b>Tình trạng hàng: </b>

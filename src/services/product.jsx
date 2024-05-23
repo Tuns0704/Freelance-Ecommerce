@@ -2,7 +2,7 @@ import axios from "axios";
 import instance from "./axios.config";
 
 export const reportPrice = (productId) =>
-	axios.get(`${import.meta.env.VITE_API_URL}/ebay/searchById/${productId}`, {
+	axios.get(`${import.meta.env.VITE_API_URL}/ebay/searchItem/${productId}`, {
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -10,7 +10,23 @@ export const reportPrice = (productId) =>
 	});
 
 export const getProduct = (productId) =>
-	axios.get(`${import.meta.env.VITE_API_URL}/ebay/item/${productId}`, {
+	axios.get(`${import.meta.env.VITE_API_URL}/ebay/searchById/${productId}`, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		validateStatus: (status) => status < 400,
+	});
+
+export const addProductByLink = (body) =>
+	instance.post(`${import.meta.env.VITE_API_URL}/ebay/searchById`, body, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		validateStatus: (status) => status < 400,
+	});
+
+export const addProductByStoreName = (body) =>
+	instance.post(`${import.meta.env.VITE_API_URL}/ebay/search`, body, {
 		headers: {
 			"Content-Type": "application/json",
 		},

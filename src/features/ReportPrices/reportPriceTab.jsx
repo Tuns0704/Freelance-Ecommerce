@@ -52,7 +52,7 @@ const ReportPriceTab = () => {
 	};
 
 	return (
-		<TabPanel value="report-price" className="px-0 h-[80vh]">
+		<TabPanel value="report-price" className="px-0 h-[60vh]">
 			<div className="text-center">
 				<Typography variant="h2" className="font-bold mb-4">
 					Nhận báo giá

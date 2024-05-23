@@ -63,8 +63,18 @@ const DescriptionDetail = ({
 													<>
 														{localizedAspects.map((item, index) => (
 															<tr className="w-full" key={index}>
-																<td className="w-1/2 p-2">{item.name}</td>
-																<td className="w-1/2 p-2">{item.value}</td>
+																<td className="w-1/2 p-2">{item.Name}</td>
+																<td className="w-1/2 p-2">
+																	{Array.isArray(item.Value) ? (
+																		<ul>
+																			{item.Value.map((value, subIndex) => (
+																				<li key={subIndex}>{value}</li>
+																			))}
+																		</ul>
+																	) : (
+																		item.Value
+																	)}
+																</td>
 															</tr>
 														))}
 													</>

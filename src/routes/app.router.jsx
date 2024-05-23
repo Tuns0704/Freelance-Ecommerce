@@ -1,5 +1,3 @@
-// import AuthContext from "../cores/context/app.context";
-// import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AppContainer from "../container/app.container";
 import Home from "../features/Home/index";
@@ -30,6 +28,7 @@ export const AppRouter = () => {
 			{state.role === "admin" ? (
 				<>
 					<Route path="/dashboard" element={<AdminContainer />}>
+						<Route path="/dashboard/home" element={<Home />} />
 						{adminRoutes.map(
 							({ layout, pages }) =>
 								layout === "dashboard" &&
@@ -41,10 +40,6 @@ export const AppRouter = () => {
 									/>
 								))
 						)}
-						<Route
-							path="/dashboard/product-detail/:id"
-							element={<ProductDetail />}
-						/>
 					</Route>
 					<Route path="*" element={<Navigate to="/dashboard/home" replace />} />
 				</>

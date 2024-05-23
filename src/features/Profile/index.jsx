@@ -18,7 +18,6 @@ const Profile = () => {
 		const response = await getUserOrder(useId);
 		if (response.status === 200) {
 			setOrders(response.data);
-			console.log(response.data);
 		}
 	}, [token]);
 

@@ -34,7 +34,6 @@ const LinkReportTab = () => {
 				setLoading(true);
 				const response = await reportPrice(itemIdMatch[1]);
 				setItem(response.data);
-				console.log(response.data);
 				setLoading(false);
 			} catch (error) {
 				setLoading(false);
@@ -58,7 +57,7 @@ const LinkReportTab = () => {
 	}, [getSettingValue, item.price, shippingFee]);
 
 	return (
-		<TabPanel value="report-price-auto" className="px-0">
+		<TabPanel value="report-price-auto" className="px-0  min-h-[60vh]">
 			<div className="text-center">
 				<Typography variant="h2" className="font-bold text-gray-900 mb-4">
 					Nhận báo giá tự động
@@ -83,16 +82,16 @@ const LinkReportTab = () => {
 				<Loading />
 			) : (
 				item.price !== 0 && (
-					<div className="flex flex-col md:flex-row gap-3 mt-5">
-						<div className="flex gap-2 md:w-2/3 sm:p-3">
+					<div className="flex flex-col lg:flex-row gap-3 mt-5">
+						<div className="flex flex-col md:flex-row gap-2 lg:w-2/3 sm:p-3">
 							<img
-								src={item.thumbnailImages[0]}
+								src={item.thumbnailImages}
 								alt={item.name}
-								className="w-1/4 lg:w-[200px] rounded-lg"
+								className="w-full md:w-1/4 lg:w-[200px] rounded-lg"
 							/>
 							<div className="flex flex-col justify-between">
 								<div className="flex flex-col gap-2">
-									<p className="font-semibold text-gray-900  text-2xl">
+									<p className="font-semibold text-justify text-gray-900  text-2xl">
 										{item.name}
 									</p>
 									<div className="flex gap-2">
@@ -116,7 +115,7 @@ const LinkReportTab = () => {
 								</select>
 							</div>
 						</div>
-						<div className="md:w-1/2 w-full p-3 border border-gray-400 rounded">
+						<div className="lg:w-1/2 w-full p-3 border border-gray-400 rounded">
 							<div className="flex flex-col gap-2">
 								<p className="font-semibold text-3xl text-gray-900">Kết quả</p>
 								<div className="flex justify-between">

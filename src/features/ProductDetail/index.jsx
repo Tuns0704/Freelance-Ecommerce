@@ -64,16 +64,12 @@ const ProductDetail = () => {
 			try {
 				const response = await getProduct(id);
 				setProduct(response.data);
-				const combinedImages = [
-					{
-						imageUrl: response.data.image.imageUrl,
-						width: response.data.image.width,
-						height: response.data.image.height,
-					},
-					...(response.data.additionalImages || []),
-				];
+				const combinedImages = Array.isArray(response.data.additionalImages)
+					? response.data.additionalImages
+					: [response.data.additionalImages];
 				setImages(combinedImages);
-				setPrice(response.data.price[response.data.price.length - 1].value);
+				const dataPrice = response.data.price;
+				setPrice(dataPrice[dataPrice.length - 1].value);
 				setLoading(false);
 			} catch (error) {
 				console.error(error);
@@ -106,7 +102,7 @@ const ProductDetail = () => {
 						</div>
 
 						<h1 className="font-bold text-blue-gray-900 sm:text-2xl lg:text-3xl text-lg text-justify">
-							{product.title}
+							{product.name}
 						</h1>
 						<div className="flex gap-2">
 							<p className="uppercase font-semibold">Hãng:</p>
@@ -150,7 +146,7 @@ const ProductDetail = () => {
 										</Button>
 										<DescriptionDetail
 											localizedAspects={product.localizedAspects}
-											shortDescription={product.shortDescription}
+											shortDescription={product.description}
 											isOpen={descriptionModal}
 											closeModal={() => handleOpenDescriptionModal()}
 										/>
@@ -220,14 +216,22 @@ const ProductDetail = () => {
 							<div className="w-full sm:w-1/2">
 								<AddToCartButton
 									productId={productId}
-									productPrice={product.price ? product.price.value : 0}
+									productPrice={
+										product.price
+											? product.price[product.price.length - 1].value
+											: 0
+									}
 									warrantyFee={warrantyFee}
 								/>
 							</div>
 							<div className="w-full sm:w-1/2">
 								<BuyNowButton
 									productId={productId}
-									productPrice={product.price ? product.price.value : 0}
+									productPrice={
+										product.price
+											? product.price[product.price.length - 1].value
+											: 0
+									}
 								/>
 							</div>
 						</div>

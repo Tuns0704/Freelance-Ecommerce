@@ -17,7 +17,7 @@ const CardItem = ({ product }) => {
 				Giảm {formatPercentage(product.marketingPrice.discountPercentage)}%
 			</label>
 			<img
-				src={product?.thumbnailImages?.[0]?.imageUrl}
+				src={product.additionalImages}
 				onClick={() => handleNavigateToDetail(product.id)}
 				alt="products"
 				className="w-full object-contain h-48 scale-100 group-hover:scale-105 transition-all duration-500 ease-in-out rounded-lg"
