@@ -4,7 +4,7 @@ import { formatCurrency } from "../../helper/formatCurrency";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { deleteFromCart } from "../../services/cart";
-import ModalDeleteConfirm from "./../../cores/components/deleteModalConfirm";
+import ModalDeleteConfirm from "./deleteModalConfirm";
 import { toast } from "react-toastify";
 
 const CardItem = ({ cart, reload, updateQuantity }) => {
