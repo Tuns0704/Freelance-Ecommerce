@@ -188,13 +188,15 @@ const Products = () => {
 					</>
 				)}
 			</div>
-			<FilterOption
-				isOpen={isOpen}
-				closeModal={closeModal}
-				searchParams={searchParams}
-				setSearchParams={setSearchParams}
-				categories={categories}
-			/>
+			<div className="md:w-[35%] lg:w-[25%]">
+				<FilterOption
+					isOpen={isOpen}
+					closeModal={closeModal}
+					searchParams={searchParams}
+					setSearchParams={setSearchParams}
+					categories={categories}
+				/>
+			</div>
 		</section>
 	);
 };
