@@ -118,14 +118,14 @@ const Order = () => {
 				userId: decodeToken(token).sub,
 				products: carts.map((cart) => ({
 					productId: cart.product.id,
-					quantity: cart.quantity,
-					warrantyFee: cart.warrantyFee,
-					price: Number.parseFloat(cart.quantity * cart.product.price[0].value),
+					quantity: Number.parseInt(cart.quantity),
+					warrantyFee: Number.parseInt(cart.warrantyFee),
+					price: Number.parseInt(cart.quantity * cart.product.price[0].value),
 				})),
 				totalPrice: Number.parseInt(totalPrice),
-				shippingFee: shippingFee,
+				shippingFee: Number.parseInt(shippingFee),
 				phone: phoneNumber,
-				depositAmount: deposit,
+				depositAmount: Number.parseInt(deposit),
 				address:
 					location.street +
 					"," +
