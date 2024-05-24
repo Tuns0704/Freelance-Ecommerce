@@ -103,6 +103,7 @@ const Order = () => {
 				calculateTotalCartPrice();
 			} else {
 				toast.error("Mã giảm giá sai!");
+				setDiscountValue(0);
 				calculateTotalCartPrice();
 			}
 		} catch {
