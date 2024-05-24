@@ -35,6 +35,7 @@ const Order = () => {
 	});
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [coupon, setCoupon] = useState("");
+	const [discountValue, setDiscountValue] = useState(0);
 
 	const token = localStorage.getItem("token");
 
@@ -74,7 +75,7 @@ const Order = () => {
 		getUserInformation();
 	}, [getCartOfUser, settingsOption]);
 
-	const calculateTotalPrice = useCallback(() => {
+	const calculateTotalCartPrice = useCallback(() => {
 		let total = 0;
 		carts.forEach((item) => {
 			total +=
@@ -82,28 +83,27 @@ const Order = () => {
 					item.warrantyFee) *
 				item.quantity;
 		});
-		total = total + shippingFee;
+		total = total + shippingFee - total * (discountValue / 100);
 		setTotalPrice(total);
-	}, [carts, shippingFee]);
+	}, [carts, discountValue, shippingFee]);
 
 	useEffect(() => {
-		calculateTotalPrice();
-	}, [calculateTotalPrice]);
+		calculateTotalCartPrice();
+	}, [calculateTotalCartPrice, carts]);
 
 	const getCoupon = async () => {
 		try {
 			const body = { discountCode: coupon };
 			const response = await checkDiscountCode(body);
 			if (response.status === 201 && response.data.discount) {
-				setTotalPrice(
-					totalPrice - (totalPrice * response.data.discount.value) / 100
-				);
+				setDiscountValue(response.data.discount.value);
 				toast.success(
 					`Mã giảm giá ${response.data.discount.value}% giá trị hoá đơn`
 				);
+				calculateTotalCartPrice();
 			} else {
-				calculateTotalPrice();
 				toast.error("Mã giảm giá sai!");
+				calculateTotalCartPrice();
 			}
 		} catch {
 			toast.error("Mã giảm giá sai");
@@ -119,9 +119,9 @@ const Order = () => {
 					productId: cart.product.id,
 					quantity: cart.quantity,
 					warrantyFee: cart.warrantyFee,
-					price: cart.quantity * cart.product.price[0].value,
+					price: Number.parseFloat(cart.quantity * cart.product.price[0].value),
 				})),
-				totalPrice: totalPrice,
+				totalPrice: Number.parseInt(totalPrice),
 				shippingFee: shippingFee,
 				phone: phoneNumber,
 				depositAmount: deposit,

@@ -82,6 +82,4 @@ const Profile = () => {
 	);
 };
 
-// Profile.propTypes = {};
-
 export default Profile;
