@@ -12,6 +12,7 @@ import { Fragment, useEffect, useState } from "react";
 import { updateProduct } from "../../services/product";
 import { formatNumberToFloat } from "../../helper/formatNumberToString";
 import { toast } from "react-toastify";
+import { filterOrdersConditionOptions } from "./../../constant/filter";
 
 const ModalEdit = ({ isOpen, closeModal, product, reload }) => {
 	const [productDiscount, setProductDiscount] = useState(0);
@@ -100,11 +101,11 @@ const ModalEdit = ({ isOpen, closeModal, product, reload }) => {
 										label="Trạng thái sản phẩm"
 										onChange={handleDeliveryStatusChange}
 									>
-										<Option value="Pre Order">Pre Order</Option>
-										<Option value="Open Box">Open Box</Option>
-										<Option value="Used">Used</Option>
-										<Option value="Refurbished">Refurbished</Option>
-										<Option value="New">New</Option>
+										{filterOrdersConditionOptions.map((item) => (
+											<Option key={item.value} value={item.value}>
+												{item.label}
+											</Option>
+										))}
 									</Select>
 									<Input
 										disabled={product.marketingPrice === null ? true : false}
@@ -119,7 +120,7 @@ const ModalEdit = ({ isOpen, closeModal, product, reload }) => {
 										className="w-full mt-20"
 										onClick={() => handleOnSubmit()}
 									>
-										Thêm
+										Sửa
 									</Button>
 								</div>
 							</Dialog.Panel>
