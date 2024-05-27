@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { formatCurrency } from "../../helper/formatCurrency";
-import { filterConditionOptions } from "../../constant/filter";
+import {
+	filterProductsConditionOptions,
+	filterOrdersConditionOptions,
+} from "../../constant/filter";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
@@ -19,6 +22,11 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 	});
 
 	const [productCondition, setProductCondition] = useState({
+		isChecked: false,
+		value: "",
+	});
+
+	const [orderCondition, setOrderCondition] = useState({
 		isChecked: false,
 		value: "",
 	});
@@ -57,6 +65,15 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			: setProductCondition({ isChecked: true, value: option.value });
 	};
 
+	const handleChangeOrderCondition = (option) => {
+		orderCondition.value === option.value
+			? setOrderCondition({
+					isChecked: false,
+					value: "",
+			  })
+			: setOrderCondition({ isChecked: true, value: option.value });
+	};
+
 	useEffect(() => {
 		handleInitFilter({
 			searchParams,
@@ -65,6 +82,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			setMaxValue,
 			setMinValue,
 			setProductCondition,
+			setOrderCondition,
 		});
 	}, []);
 
@@ -77,11 +95,13 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			maxValue,
 			productCategory,
 			productCondition,
+			orderCondition,
 		});
 	}, [
 		marketingPrice,
 		productCategory,
 		productCondition,
+		orderCondition,
 		searchParams,
 		setSearchParams,
 		minValue,
@@ -115,9 +135,35 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 				</div>
 			</div>
 			<div className="border-b">
+				<div className="font-semibold">Tình trạng giao hàng</div>
+				<div className="flex flex-col gap-1">
+					{filterOrdersConditionOptions.map((option, index) => (
+						<div key={index} className="flex">
+							<Radio
+								name="conditionOrderOption"
+								onClick={() => handleChangeOrderCondition(option)}
+								checked={
+									orderCondition.isChecked &&
+									orderCondition.value === option.value
+								}
+								onChange={() => ""}
+								containerProps={{
+									className: "py-2",
+								}}
+								label={
+									<h1 className="text-blue-gray-900 font-medium">
+										{option.label}
+									</h1>
+								}
+							/>
+						</div>
+					))}
+				</div>
+			</div>
+			<div className="border-b">
 				<div className="font-semibold">Tình trạng hàng</div>
 				<div className="flex flex-col gap-1">
-					{filterConditionOptions.map((option, index) => (
+					{filterProductsConditionOptions.map((option, index) => (
 						<div key={index} className="flex">
 							<Radio
 								name="conditionOption"

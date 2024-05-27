@@ -8,6 +8,7 @@ export const handleFilter = ({
 	productCondition,
 	minValue,
 	maxValue,
+	orderCondition,
 }) => {
 	const param = new URLSearchParams(searchParams);
 	if (marketingPrice.isChecked) {
@@ -43,15 +44,32 @@ export const handleFilter = ({
 
 	if (
 		productCondition.isChecked &&
-		productCondition.value !== param.get("conditionOrder")
+		productCondition.value !== param.get("condition")
 	) {
 		setSearchParams((prev) => {
-			prev.set("conditionOrder", productCondition.value);
+			prev.set("condition", productCondition.value);
 			return prev;
 		});
 	}
 
-	if (productCondition.isChecked === false && param.has("conditionOrder")) {
+	if (productCondition.isChecked === false && param.has("condition")) {
+		setSearchParams((prev) => {
+			prev.delete("condition");
+			return prev;
+		});
+	}
+
+	if (
+		orderCondition.isChecked &&
+		orderCondition.value !== param.get("conditionOrder")
+	) {
+		setSearchParams((prev) => {
+			prev.set("conditionOrder", orderCondition.value);
+			return prev;
+		});
+	}
+
+	if (orderCondition.isChecked === false && param.has("conditionOrder")) {
 		setSearchParams((prev) => {
 			prev.delete("conditionOrder");
 			return prev;
@@ -81,6 +99,7 @@ export const handleInitFilter = ({
 	setMinValue,
 	setMaxValue,
 	setProductCondition,
+	setOrderCondition,
 }) => {
 	const param = new URLSearchParams(searchParams);
 
@@ -101,6 +120,12 @@ export const handleInitFilter = ({
 		setProductCondition({
 			isChecked: true,
 			value: param.get("conditionOrder"),
+		});
+	}
+	if (param.has("conditionProduct")) {
+		setOrderCondition({
+			isChecked: true,
+			value: param.get("conditionProduct"),
 		});
 	}
 };
