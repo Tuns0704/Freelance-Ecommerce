@@ -1,5 +1,5 @@
 // import PropTypes from "prop-types";
-import { Card, CardBody, Avatar, Typography } from "@material-tailwind/react";
+import { Card, CardBody, Avatar } from "@material-tailwind/react";
 import { ProfileInfoCard } from "./profileInforCard";
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
@@ -49,9 +49,7 @@ const Profile = () => {
 								className="rounded-lg bg-blue-gray-900 shadow-lg shadow-blue-gray-500/40"
 							/>
 							<div>
-								<Typography variant="h5" color="blue-gray" className="mb-1">
-									{profile.displayName}
-								</Typography>
+								<p className="mb-1 text-xl font-bold">{profile.displayName}</p>
 							</div>
 						</div>
 					</div>

@@ -92,7 +92,7 @@ const ModalInfo = ({ isOpen, closeModal, order, reload }) => {
 									</IconButton>
 								</Dialog.Title>
 								{detailView ? (
-									<div className="flex flex-col gap-5 mt-5">
+									<div className="flex flex-col gap-5 mt-2">
 										<div>
 											<div className="font-semibold text-lg">
 												Thông tin đơn hàng:
@@ -191,7 +191,7 @@ const ModalInfo = ({ isOpen, closeModal, order, reload }) => {
 									</div>
 								) : (
 									<>
-										<div className="flex flex-col items-center justify-center min-h-[60vh]">
+										<div className="flex flex-col items-center justify-center min-h-[60vh] mt-2">
 											<div className="w-full flex flex-col items-center justify-center border-2 rounded-t-xl border-gray-200">
 												<img
 													src={settings.bankUrl}
@@ -203,6 +203,10 @@ const ModalInfo = ({ isOpen, closeModal, order, reload }) => {
 												</h1>
 											</div>
 											<div className="w-full p-2 border-x-2 border-b-2">
+												<p className="italic text-sm mb-1">
+													<b className="text-red-400">*</b> Tải lên hoạt động
+													thanh toán tại đây
+												</p>
 												<input
 													type="file"
 													accept="image/*"

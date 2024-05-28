@@ -76,6 +76,10 @@ const OrderPayment = () => {
 							<h1 className="font-medium text-2xl">{settings.bankInfoName}</h1>
 						</div>
 						<div className="sm:w-2/6 p-2 border-x-2 border-b-2">
+							<p className="italic text-sm mb-1">
+								<b className="text-red-400">*</b> Tải lên hoạt động thanh toán
+								tại đây
+							</p>
 							<input
 								type="file"
 								className="block w-full text-sm text-slate-500 file:mr-4 border-r border-y border-blue-gray-900 rounded-md file:py-2 file:px-4 file:rounded-l-md file:border-0 file:text-sm file:font-semibold file:bg-blue-gray-900 file:text-white hover:file:opacity-80 hover:cursor-pointer"
