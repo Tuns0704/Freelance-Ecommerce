@@ -1,9 +1,13 @@
 export const calculateDateShipping = () => {
 	const currentDate = new Date();
-	const shippingDate = new Date(currentDate);
-	shippingDate.setDate(shippingDate.getDate() + 28);
+	const shippingStartDate = new Date(currentDate);
+	shippingStartDate.setDate(shippingStartDate.getDate() + 21);
+	const shippingEndDate = new Date(currentDate);
+	shippingEndDate.setDate(shippingEndDate.getDate() + 28);
 
 	return (
-		currentDate.toLocaleDateString() + " - " + shippingDate.toLocaleDateString()
+		shippingStartDate.toLocaleDateString() +
+		" - " +
+		shippingEndDate.toLocaleDateString()
 	);
 };
