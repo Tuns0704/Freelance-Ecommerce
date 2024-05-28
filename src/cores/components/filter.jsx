@@ -6,6 +6,7 @@ import { handleFilter, handleInitFilter } from "@helper/handleFilter";
 import {
 	filterProductsConditionOptions,
 	filterOrdersConditionOptions,
+	filterBrandsOptions,
 } from "@constant/filter";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
@@ -28,6 +29,11 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 	});
 
 	const [orderCondition, setOrderCondition] = useState({
+		isChecked: false,
+		value: "",
+	});
+
+	const [brands, setBrands] = useState({
 		isChecked: false,
 		value: "",
 	});
@@ -75,6 +81,15 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			: setOrderCondition({ isChecked: true, value: option.value });
 	};
 
+	const handleChangeBrands = (option) => {
+		brands.value === option.value
+			? setBrands({
+					isChecked: false,
+					value: "",
+			  })
+			: setBrands({ isChecked: true, value: option.value });
+	};
+
 	useEffect(() => {
 		handleInitFilter({
 			searchParams,
@@ -84,6 +99,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			setMinValue,
 			setProductCondition,
 			setOrderCondition,
+			setBrands,
 		});
 	}, []);
 
@@ -97,6 +113,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			productCategory,
 			productCondition,
 			orderCondition,
+			brands,
 		});
 	}, [
 		marketingPrice,
@@ -105,6 +122,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 		orderCondition,
 		searchParams,
 		setSearchParams,
+		brands,
 		minValue,
 		maxValue,
 	]);
@@ -136,6 +154,29 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 				</div>
 			</div>
 			<div className="border-b">
+				<div className="font-semibold">Hãng Laptop</div>
+				<div className="flex flex-col gap-1">
+					{filterBrandsOptions.map((option, index) => (
+						<div key={index} className="flex">
+							<Radio
+								name="brandsOption"
+								onClick={() => handleChangeBrands(option)}
+								checked={brands.isChecked && brands.value === option.value}
+								onChange={() => ""}
+								containerProps={{
+									className: "py-2",
+								}}
+								label={
+									<h1 className="text-blue-gray-900 font-medium">
+										{option.label}
+									</h1>
+								}
+							/>
+						</div>
+					))}
+				</div>
+			</div>
+			<div className="border-b">
 				<div className="font-semibold">Tình trạng giao hàng</div>
 				<div className="flex flex-col gap-1">
 					{filterOrdersConditionOptions.map((option, index) => (
@@ -161,6 +202,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 					))}
 				</div>
 			</div>
+
 			<div className="border-b">
 				<div className="font-semibold">Tình trạng hàng</div>
 				<div className="flex flex-col gap-1">

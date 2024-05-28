@@ -13,6 +13,45 @@ export const filterOrdersConditionOptions = [
 	},
 ];
 
+export const filterBrandsOptions = [
+	{
+		value: "Apple",
+		label: "Apple",
+	},
+	{
+		value: "Lenovo",
+		label: "Lenovo",
+	},
+	{
+		value: "Dell",
+		label: "Dell",
+	},
+	{
+		value: "Window",
+		label: "Window",
+	},
+	{
+		value: "Asus",
+		label: "Asus",
+	},
+	{
+		value: "Sony",
+		label: "Sony",
+	},
+	{
+		value: "HP",
+		label: "HP",
+	},
+	{
+		value: "Acer",
+		label: "Acer",
+	},
+	{
+		value: "Razer",
+		label: "Razer",
+	},
+];
+
 export const filterProductsConditionOptions = [
 	{
 		value: "New",

@@ -9,6 +9,7 @@ export const handleFilter = ({
 	minValue,
 	maxValue,
 	orderCondition,
+	brands,
 }) => {
 	const param = new URLSearchParams(searchParams);
 	if (marketingPrice.isChecked) {
@@ -38,6 +39,20 @@ export const handleFilter = ({
 	if (productCategory.isChecked === false && param.has("category")) {
 		setSearchParams((prev) => {
 			prev.delete("category");
+			return prev;
+		});
+	}
+
+	if (brands.isChecked && brands.value !== param.get("keywords")) {
+		setSearchParams((prev) => {
+			prev.set("keywords", brands.value);
+			return prev;
+		});
+	}
+
+	if (brands.isChecked === false && param.has("keywords")) {
+		setSearchParams((prev) => {
+			prev.delete("keywords");
 			return prev;
 		});
 	}
@@ -100,6 +115,7 @@ export const handleInitFilter = ({
 	setMaxValue,
 	setProductCondition,
 	setOrderCondition,
+	setBrands,
 }) => {
 	const param = new URLSearchParams(searchParams);
 
@@ -114,6 +130,12 @@ export const handleInitFilter = ({
 		setProductCategory({
 			isChecked: true,
 			value: param.get("category"),
+		});
+	}
+	if (param.has("keywords")) {
+		setBrands({
+			isChecked: true,
+			value: param.get("keywords"),
 		});
 	}
 	if (param.has("conditionOrder")) {
