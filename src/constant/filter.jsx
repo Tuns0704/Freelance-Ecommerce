@@ -27,8 +27,8 @@ export const filterBrandsOptions = [
 		label: "Dell",
 	},
 	{
-		value: "Window",
-		label: "Window",
+		value: "Microsoft",
+		label: "Microsoft",
 	},
 	{
 		value: "Asus",

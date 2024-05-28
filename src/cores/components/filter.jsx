@@ -11,13 +11,27 @@ import {
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
-import { IconButton, Radio } from "@material-tailwind/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { IconButton, Radio, Collapse } from "@material-tailwind/react";
+import {
+	XMarkIcon,
+	ChevronDownIcon,
+	ChevronUpIcon,
+} from "@heroicons/react/24/outline";
 import MultiRangeSlider from "multi-range-slider-react";
 import "../../App.css";
 import { debounce } from "lodash";
 
 const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
+	const [openLaptop, setLaptopOpen] = useState(false);
+	const [openConditionProduct, setConditionProduct] = useState(true);
+	const [openConditionOrder, setConditionOrder] = useState(true);
+	const [openCategory, setCategory] = useState(false);
+
+	const toggleLaptopOpen = () => setLaptopOpen((cur) => !cur);
+	const toggleConditionProductOpen = () => setConditionProduct((cur) => !cur);
+	const toggleConditionOrderOpen = () => setConditionOrder((cur) => !cur);
+	const toggleCategoryOpen = () => setCategory((cur) => !cur);
+
 	const [marketingPrice, setMarketingPrice] = useState({
 		isChecked: false,
 		value: false,
@@ -154,82 +168,6 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 				</div>
 			</div>
 			<div className="border-b">
-				<div className="font-semibold">Hãng Laptop</div>
-				<div className="flex flex-col gap-1">
-					{filterBrandsOptions.map((option, index) => (
-						<div key={index} className="flex">
-							<Radio
-								name="brandsOption"
-								onClick={() => handleChangeBrands(option)}
-								checked={brands.isChecked && brands.value === option.value}
-								onChange={() => ""}
-								containerProps={{
-									className: "py-2",
-								}}
-								label={
-									<h1 className="text-blue-gray-900 font-medium">
-										{option.label}
-									</h1>
-								}
-							/>
-						</div>
-					))}
-				</div>
-			</div>
-			<div className="border-b">
-				<div className="font-semibold">Tình trạng giao hàng</div>
-				<div className="flex flex-col gap-1">
-					{filterOrdersConditionOptions.map((option, index) => (
-						<div key={index} className="flex">
-							<Radio
-								name="conditionOrderOption"
-								onClick={() => handleChangeOrderCondition(option)}
-								checked={
-									orderCondition.isChecked &&
-									orderCondition.value === option.value
-								}
-								onChange={() => ""}
-								containerProps={{
-									className: "py-2",
-								}}
-								label={
-									<h1 className="text-blue-gray-900 font-medium">
-										{option.label}
-									</h1>
-								}
-							/>
-						</div>
-					))}
-				</div>
-			</div>
-
-			<div className="border-b">
-				<div className="font-semibold">Tình trạng hàng</div>
-				<div className="flex flex-col gap-1">
-					{filterProductsConditionOptions.map((option, index) => (
-						<div key={index} className="flex">
-							<Radio
-								name="conditionOption"
-								onClick={() => handleChangeProductCondition(option)}
-								checked={
-									productCondition.isChecked &&
-									productCondition.value === option.value
-								}
-								onChange={() => ""}
-								containerProps={{
-									className: "py-2",
-								}}
-								label={
-									<h1 className="text-blue-gray-900 font-medium">
-										{option.label}
-									</h1>
-								}
-							/>
-						</div>
-					))}
-				</div>
-			</div>
-			<div className="border-b">
 				<div className="font-semibold">Giá sản phẩm</div>
 				<MultiRangeSlider
 					min={0}
@@ -262,31 +200,155 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 					<div className="font-medium">{formatCurrency(100000000)}</div>
 				</div>
 			</div>
-			<div className="border-b">
-				<div className="font-semibold">Danh mục</div>
-				<div className="flex flex-col">
-					{categories.map((item) => (
-						<div key={item.id} className="flex">
-							<Radio
-								onClick={() => handleChangeCategory(item.englishName)}
-								checked={
-									productCategory.isChecked &&
-									productCategory.value === item.englishName
-								}
-								onChange={() => ""}
-								name="category"
-								containerProps={{
-									className: "py-2",
-								}}
-								label={
-									<h1 className="text-blue-gray-900 font-medium">
-										{item.vietnameseName}
-									</h1>
-								}
-							/>
-						</div>
-					))}
+
+			<div className="border-b py-3">
+				<div
+					onClick={toggleConditionOrderOpen}
+					className="font-semibold flex justify-between"
+				>
+					Tình trạng giao hàng
+					{openConditionOrder ? (
+						<ChevronUpIcon className="w-6 h-6" />
+					) : (
+						<ChevronDownIcon className="w-6 h-6" />
+					)}
 				</div>
+				<Collapse open={openConditionOrder}>
+					<div className="flex flex-col gap-1">
+						{filterOrdersConditionOptions.map((option, index) => (
+							<div key={index} className="flex">
+								<Radio
+									name="conditionOrderOption"
+									onClick={() => handleChangeOrderCondition(option)}
+									checked={
+										orderCondition.isChecked &&
+										orderCondition.value === option.value
+									}
+									onChange={() => ""}
+									containerProps={{
+										className: "py-2",
+									}}
+									label={
+										<h1 className="text-blue-gray-900 font-medium">
+											{option.label}
+										</h1>
+									}
+								/>
+							</div>
+						))}
+					</div>
+				</Collapse>
+			</div>
+			<div className="border-b py-3">
+				<div
+					onClick={toggleConditionProductOpen}
+					className="font-semibold flex justify-between"
+				>
+					Tình trạng hàng
+					{openConditionProduct ? (
+						<ChevronUpIcon className="w-6 h-6" />
+					) : (
+						<ChevronDownIcon className="w-6 h-6" />
+					)}
+				</div>
+				<Collapse open={openConditionProduct}>
+					<div className="flex flex-col gap-1">
+						{filterProductsConditionOptions.map((option, index) => (
+							<div key={index} className="flex">
+								<Radio
+									name="conditionOption"
+									onClick={() => handleChangeProductCondition(option)}
+									checked={
+										productCondition.isChecked &&
+										productCondition.value === option.value
+									}
+									onChange={() => ""}
+									containerProps={{
+										className: "py-2",
+									}}
+									label={
+										<h1 className="text-blue-gray-900 font-medium">
+											{option.label}
+										</h1>
+									}
+								/>
+							</div>
+						))}
+					</div>
+				</Collapse>
+			</div>
+			<div className="border-b py-3">
+				<div
+					onClick={toggleLaptopOpen}
+					className="font-semibold flex justify-between"
+				>
+					Hãng Laptop
+					{openLaptop ? (
+						<ChevronUpIcon className="w-6 h-6" />
+					) : (
+						<ChevronDownIcon className="w-6 h-6" />
+					)}
+				</div>
+				<Collapse open={openLaptop}>
+					<div className="flex flex-col gap-1">
+						{filterBrandsOptions.map((option, index) => (
+							<div key={index} className="flex">
+								<Radio
+									name="brandsOption"
+									onClick={() => handleChangeBrands(option)}
+									checked={brands.isChecked && brands.value === option.value}
+									onChange={() => ""}
+									containerProps={{
+										className: "py-2",
+									}}
+									label={
+										<h1 className="text-blue-gray-900 font-medium">
+											{option.label}
+										</h1>
+									}
+								/>
+							</div>
+						))}
+					</div>
+				</Collapse>
+			</div>
+			<div className="py-3">
+				<div
+					onClick={toggleCategoryOpen}
+					className="font-semibold flex justify-between"
+				>
+					Danh mục
+					{openCategory ? (
+						<ChevronUpIcon className="w-6 h-6" />
+					) : (
+						<ChevronDownIcon className="w-6 h-6" />
+					)}
+				</div>
+				<Collapse open={openCategory}>
+					<div className="flex flex-col gap-1">
+						{categories.map((item) => (
+							<div key={item.id} className="flex">
+								<Radio
+									onClick={() => handleChangeCategory(item.englishName)}
+									checked={
+										productCategory.isChecked &&
+										productCategory.value === item.englishName
+									}
+									onChange={() => ""}
+									name="category"
+									containerProps={{
+										className: "py-2",
+									}}
+									label={
+										<h1 className="text-blue-gray-900 font-medium">
+											{item.vietnameseName}
+										</h1>
+									}
+								/>
+							</div>
+						))}
+					</div>
+				</Collapse>
 			</div>
 		</aside>
 	);

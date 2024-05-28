@@ -29,14 +29,19 @@ export const handleFilter = ({
 	}
 	if (
 		productCategory.isChecked &&
-		productCategory.value !== param.get("category")
+		productCategory.value !== param.get("category") &&
+		!param.has("keywords")
 	) {
 		setSearchParams((prev) => {
 			prev.set("category", productCategory.value);
 			return prev;
 		});
 	}
-	if (productCategory.isChecked === false && param.has("category")) {
+	if (
+		productCategory.isChecked === false &&
+		param.has("category") &&
+		!param.has("keywords")
+	) {
 		setSearchParams((prev) => {
 			prev.delete("category");
 			return prev;
@@ -46,6 +51,7 @@ export const handleFilter = ({
 	if (brands.isChecked && brands.value !== param.get("keywords")) {
 		setSearchParams((prev) => {
 			prev.set("keywords", brands.value);
+			prev.set("category", "Laptop");
 			return prev;
 		});
 	}
@@ -53,6 +59,7 @@ export const handleFilter = ({
 	if (brands.isChecked === false && param.has("keywords")) {
 		setSearchParams((prev) => {
 			prev.delete("keywords");
+			prev.delete("category");
 			return prev;
 		});
 	}
@@ -136,6 +143,10 @@ export const handleInitFilter = ({
 		setBrands({
 			isChecked: true,
 			value: param.get("keywords"),
+		});
+		setProductCategory({
+			isChecked: true,
+			value: param.get("category"),
 		});
 	}
 	if (param.has("conditionOrder")) {
