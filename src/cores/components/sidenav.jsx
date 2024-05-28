@@ -5,7 +5,7 @@ import { Button, IconButton, Typography } from "@material-tailwind/react";
 import {
 	useMaterialTailwindController,
 	setOpenSidenav,
-} from "../context/admin.context";
+} from "@context/admin.context";
 
 export function Sidenav({ brandName, routes }) {
 	const [controller, dispatch] = useMaterialTailwindController();

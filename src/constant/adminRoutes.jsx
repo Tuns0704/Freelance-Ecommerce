@@ -6,13 +6,13 @@ import {
 	Cog6ToothIcon,
 	ShoppingBagIcon,
 } from "@heroicons/react/24/solid";
-import Home from "./../features/Home/index";
-import UserManage from "./../features/ManageUsers/index";
-import CategoryManage from "../features/ManageCategories";
-import ManageProducts from "./../features/ManageProducts/index";
-import AdminSetting from "../features/AdminSetting";
-import OrderManage from "../features/ManageOrders";
-import ImportProducts from "../features/ImportProduct";
+import Home from "@features/Home/index";
+import UserManage from "@features/ManageUsers/index";
+import CategoryManage from "@features/ManageCategories";
+import ManageProducts from "@features/ManageProducts/index";
+import AdminSetting from "@features/AdminSetting";
+import OrderManage from "@features/ManageOrders";
+import ImportProducts from "@features/ImportProduct";
 
 const icon = {
 	className: "w-5 h-5 text-inherit",

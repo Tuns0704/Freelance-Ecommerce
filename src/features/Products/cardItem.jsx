@@ -1,11 +1,12 @@
 import { PropTypes } from "prop-types";
-import { calculateDateShipping } from "../../helper/calculateDateShipping";
 import { useNavigate } from "react-router-dom";
-import { formatCurrency } from "../../helper/formatCurrency";
-import { formatDate } from "../../helper/formatDate";
-import { formatPercentage } from "../../helper/formatPercentage";
-import AddToCartButton from "../../cores/components/addToCart";
-import BuyNowButton from "../../cores/components/buyNowButton";
+
+import { formatPercentage } from "@helper/formatPercentage";
+import { calculateDateShipping } from "@helper/calculateDateShipping";
+import { formatCurrency } from "@helper/formatCurrency";
+import { formatDate } from "@helper/formatDate";
+import AddToCartButton from "@components/addToCart";
+import BuyNowButton from "@components/buyNowButton";
 
 const CardItem = ({ product }) => {
 	const navigate = useNavigate();

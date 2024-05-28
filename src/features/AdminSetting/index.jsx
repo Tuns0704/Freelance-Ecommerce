@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Button, IconButton } from "@material-tailwind/react";
-import { getAdminSettings } from "../../services/setting";
-import { formatCurrency } from "../../helper/formatCurrency";
-import ImageSlider from "../../cores/components/imageSlider";
-import Loading from "../../cores/components/loading";
+import { getAdminSettings } from "@services/setting";
+import { formatCurrency } from "@helper/formatCurrency";
+import ImageSlider from "@components/imageSlider";
+import Loading from "@components/loading";
 import ModalEditSettings from "./editModal";
 import {
 	WrenchScrewdriverIcon,
 	PlusCircleIcon,
 	ArchiveBoxXMarkIcon,
 } from "@heroicons/react/24/solid";
-import { getDiscounts } from "../../services/discount";
+import { getDiscounts } from "@services/discount";
 import DiscountCodeModal from "./addDiscountCodeModal";
 import ModalDeleteCategoryConfirm from "./deleteModalConfirm";
 

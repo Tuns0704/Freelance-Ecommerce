@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { formatCurrency } from "../../helper/formatCurrency";
+import { formatCurrency } from "@helper/formatCurrency";
+import { handleFilter, handleInitFilter } from "@helper/handleFilter";
+
 import {
 	filterProductsConditionOptions,
 	filterOrdersConditionOptions,
-} from "../../constant/filter";
+} from "@constant/filter";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
 import { IconButton, Radio } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { handleFilter, handleInitFilter } from "../../helper/handleFilter";
 import MultiRangeSlider from "multi-range-slider-react";
 import "../../App.css";
 import { debounce } from "lodash";

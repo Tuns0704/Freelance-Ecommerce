@@ -1,5 +1,5 @@
 import { PropTypes } from "prop-types";
-import { formatCurrency } from "../../helper/formatCurrency";
+import { formatCurrency } from "@helper/formatCurrency";
 import { IconButton } from "@material-tailwind/react";
 import {
 	InformationCircleIcon,

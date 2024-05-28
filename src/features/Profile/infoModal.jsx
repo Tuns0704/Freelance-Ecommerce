@@ -9,14 +9,17 @@ import {
 	ClipboardDocumentIcon,
 } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
-import { formatCurrency } from "./../../helper/formatCurrency";
-import { getSettings } from "./../../services/setting";
+
+import { getSettings } from "@services/setting";
+import { updateOrder } from "@services/order";
+
 import { useState, useEffect } from "react";
-import { updateOrder } from "../../services/order";
 import { toast } from "react-toastify";
-import { formatDateTime } from "../../helper/formatDateTime";
-import { paymentStatus } from "../../helper/paymentStatus";
-import { deliveryStatus } from "../../helper/deliveryStatus";
+
+import { formatCurrency } from "@helper/formatCurrency";
+import { formatDateTime } from "@helper/formatDateTime";
+import { paymentStatus } from "@helper/paymentStatus";
+import { deliveryStatus } from "@helper/deliveryStatus";
 
 const ModalInfo = ({ isOpen, closeModal, order, reload }) => {
 	const [images, setImages] = useState([]);

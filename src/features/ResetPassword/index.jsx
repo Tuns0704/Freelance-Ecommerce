@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
-import { validateResetPassword } from "./../../helper/validateResetPassword";
-import { resetPassword } from "../../services/auth";
+import { validateResetPassword } from "@helper/validateResetPassword";
+import { resetPassword } from "@services/auth";
 
 const ResetPassword = () => {
 	const [password, setPassword] = useState({

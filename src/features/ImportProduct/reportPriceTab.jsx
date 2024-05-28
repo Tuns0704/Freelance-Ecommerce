@@ -7,9 +7,10 @@ import {
 	Button,
 } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
-import { getListCategory } from "./../../services/category";
 import { toast } from "react-toastify";
-import { addProductByStoreName } from "../../services/product";
+
+import { getListCategory } from "@services/category";
+import { addProductByStoreName } from "@services/product";
 
 const ImportShopTab = () => {
 	const [listCategory, setListCategory] = useState([]);

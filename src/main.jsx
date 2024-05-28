@@ -4,9 +4,9 @@ import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-tailwind/react";
-import AuthContext from "./cores/context/app.context.jsx";
+import AuthContext from "@context/app.context.jsx";
 import { AppRouter } from "./routes/app.router";
-import { MaterialTailwindControllerProvider } from "./cores/context/admin.context.jsx";
+import { MaterialTailwindControllerProvider } from "@context/admin.context.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>

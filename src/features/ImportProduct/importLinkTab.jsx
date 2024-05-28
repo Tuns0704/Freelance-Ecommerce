@@ -9,8 +9,8 @@ import {
 import { useEffect, useState } from "react";
 
 import { toast } from "react-toastify";
-import { getListCategory } from "../../services/category";
-import { addProductByLink } from "../../services/product";
+import { getListCategory } from "@services/category";
+import { addProductByLink } from "@services/product";
 
 const ImportLinkTab = () => {
 	const [link, setLink] = useState("");

@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProduct } from "../../services/product";
 import {
 	Button,
 	Popover,
 	PopoverHandler,
 	PopoverContent,
 } from "@material-tailwind/react";
-import Loading from "../../cores/components/loading";
-import { formatCurrency } from "../../helper/formatCurrency";
-import { calculateDateShipping } from "../../helper/calculateDateShipping";
 import { TruckIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
-import ImageSlider from "./imageSlider";
-import { formatPercentage } from "../../helper/formatPercentage";
-import { getSettings } from "../../services/setting";
-import BuyNowButton from "./../../cores/components/buyNowButton";
+
+import Loading from "@components/loading";
+import BuyNowButton from "@components/buyNowButton";
+import AddToCartButton from "@components/addToCart";
+
+import { formatCurrency } from "@helper/formatCurrency";
+import { calculateDateShipping } from "@helper/calculateDateShipping";
+import { formatPercentage } from "@helper/formatPercentage";
+import { getSettings } from "@services/setting";
+import { getProduct } from "@services/product";
+
 import DescriptionDetail from "./descriptionDetail";
 import { StatisticsChart } from "./chart";
-import AddToCartButton from "./../../cores/components/addToCart";
+import ImageSlider from "./imageSlider";
 
 const ProductDetail = () => {
 	const { id } = useParams();

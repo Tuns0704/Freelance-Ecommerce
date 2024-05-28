@@ -9,10 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { PropTypes } from "prop-types";
 import { useEffect, useState } from "react";
-import {
-	handleInitOrderFilter,
-	handleOrderFilter,
-} from "../../helper/handleFilter";
+import { handleInitOrderFilter, handleOrderFilter } from "@helper/handleFilter";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";

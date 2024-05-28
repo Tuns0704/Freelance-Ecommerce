@@ -11,9 +11,9 @@ import {
 	PhoneIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { validateContactUs } from "../../helper/validateContactUs";
+import { validateContactUs } from "@helper/validateContactUs";
 import { toast } from "react-toastify";
-import { sendContactUs } from "../../services/contactUs";
+import { sendContactUs } from "@services/contactUs";
 import { useNavigate } from "react-router-dom";
 
 const contact = [

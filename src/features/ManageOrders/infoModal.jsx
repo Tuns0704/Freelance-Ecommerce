@@ -6,11 +6,12 @@ import {
 	ClipboardDocumentListIcon,
 } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
-import { formatCurrency } from "./../../helper/formatCurrency";
 import { toast } from "react-toastify";
-import { formatDateTime } from "../../helper/formatDateTime";
-import { deliveryStatus } from "../../helper/deliveryStatus";
-import { paymentStatus } from "../../helper/paymentStatus";
+
+import { formatCurrency } from "@helper/formatCurrency";
+import { formatDateTime } from "@helper/formatDateTime";
+import { deliveryStatus } from "@helper/deliveryStatus";
+import { paymentStatus } from "@helper/paymentStatus";
 
 const ModalInfo = ({ isOpen, closeModal, order }) => {
 	const copyLinkToClipboard = async (link) => {

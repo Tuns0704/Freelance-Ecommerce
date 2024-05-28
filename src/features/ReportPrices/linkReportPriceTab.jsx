@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { formatCurrency } from "../../helper/formatCurrency";
-import { reportPrice } from "../../services/product";
+import { formatCurrency } from "@helper/formatCurrency";
 import { toast } from "react-toastify";
 import {
 	Button,
@@ -12,8 +11,10 @@ import {
 	MagnifyingGlassIcon,
 	InformationCircleIcon,
 } from "@heroicons/react/24/outline";
-import Loading from "../../cores/components/loading";
-import { getSettings } from "./../../services/setting";
+import Loading from "@components/loading";
+
+import { reportPrice } from "@services/product";
+import { getSettings } from "@services/setting";
 
 const LinkReportTab = () => {
 	const [link, setLink] = useState("");

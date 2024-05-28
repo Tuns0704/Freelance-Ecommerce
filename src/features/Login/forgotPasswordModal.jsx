@@ -9,7 +9,7 @@ import {
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useState } from "react";
 import { toast } from "react-toastify";
-import { forgotPassword } from "../../services/auth";
+import { forgotPassword } from "@services/auth";
 
 const ForgotPasswordModal = ({ isOpen, closeModal }) => {
 	const [email, setEmail] = useState("");

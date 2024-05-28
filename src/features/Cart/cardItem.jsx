@@ -1,9 +1,9 @@
 import { PropTypes } from "prop-types";
 import { IconButton } from "@material-tailwind/react";
-import { formatCurrency } from "../../helper/formatCurrency";
+import { formatCurrency } from "@helper/formatCurrency";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { deleteFromCart } from "../../services/cart";
+import { deleteFromCart } from "@services/cart";
 import ModalDeleteConfirm from "./deleteModalConfirm";
 import { toast } from "react-toastify";
 

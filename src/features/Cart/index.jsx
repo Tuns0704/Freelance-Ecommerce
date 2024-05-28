@@ -1,18 +1,21 @@
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
-import { decodeToken } from "../../helper/decodeToken";
-import { getUserCart } from "../../services/user";
 import CardItem from "./cardItem";
-import Loading from "../../cores/components/loading";
-import { formatCurrency } from "../../helper/formatCurrency";
+import { useNavigate } from "react-router-dom";
+
+import { getUserCart } from "@services/user";
+import { getSettings } from "@services/setting";
+import { updateCart } from "@services/cart";
+
+import Loading from "@components/loading";
+import { formatCurrency } from "@helper/formatCurrency";
+import { decodeToken } from "@helper/decodeToken";
+
 import { Tooltip, Button } from "@material-tailwind/react";
 import {
 	InformationCircleIcon,
 	CreditCardIcon,
 } from "@heroicons/react/24/outline";
-import { getSettings } from "../../services/setting";
-import { updateCart } from "../../services/cart";
-import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
 	const [carts, setCarts] = useState([]);

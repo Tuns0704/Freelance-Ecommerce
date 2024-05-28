@@ -2,19 +2,21 @@ import {
 	InformationCircleIcon,
 	ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 import { Button, Input, Tooltip } from "@material-tailwind/react";
 import { PropTypes } from "prop-types";
-import { order, updateOrder } from "./../../services/order";
-import { decodeToken } from "./../../helper/decodeToken";
 import { toast } from "react-toastify";
 import { Fragment, useCallback, useEffect, useState } from "react";
-import { getSettings } from "../../services/setting";
-import { formatAddressToLocation } from "../../helper/formatAdressToObjectLocation";
-import { getUserProfile } from "../../services/user";
-import { validateInputs } from "./../../helper/validateInputOrder";
-import { formatCurrency } from "./../../helper/formatCurrency";
-import { useNavigate } from "react-router-dom";
+
+import { getSettings } from "@services/setting";
+import { order, updateOrder } from "@services/order";
+import { getUserProfile } from "@services/user";
+
+import { validateInputs } from "@helper/validateInputOrder";
+import { decodeToken } from "@helper/decodeToken";
+import { formatAddressToLocation } from "@helper/formatAdressToObjectLocation";
+import { formatCurrency } from "@helper/formatCurrency";
 
 const BuyNowModal = ({ isOpen, closeModal, productId, productPrice }) => {
 	const [show, setShow] = useState(false);

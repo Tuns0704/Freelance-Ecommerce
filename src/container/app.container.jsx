@@ -1,8 +1,8 @@
 // import { useContext } from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "../cores/components/navbar";
-import routes from "../constant/routes";
-import Footer from "../cores/components/footer";
+import Navbar from "@components/navbar";
+import routes from "@constant/routes";
+import Footer from "@components/footer";
 
 const AppContainer = () => {
 	return (

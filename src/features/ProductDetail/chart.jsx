@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import Chart from "react-apexcharts";
-import { chartsConfig } from "./../../constant/chart";
-import { formatChartData } from "../../helper/formatChatData";
-import { formatCurrency } from "../../helper/formatCurrency";
+import { chartsConfig } from "@constant/chart";
+import { formatChartData } from "@helper/formatChatData";
+import { formatCurrency } from "@helper/formatCurrency";
 
 export function StatisticsChart({ chart }) {
 	const formattedData = formatChartData(chart);

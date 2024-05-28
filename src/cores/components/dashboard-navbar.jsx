@@ -3,9 +3,13 @@ import { Bars3Icon, ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import {
 	useMaterialTailwindController,
 	setOpenSidenav,
-} from "../context/admin.context";
-import { AppContext } from "./../context/app.context";
-import { SET_TOKEN, SET_AUTHENTICATED } from "./../context/app.context";
+} from "@context/admin.context";
+import {
+	AppContext,
+	SET_TOKEN,
+	SET_AUTHENTICATED,
+	SET_ROLE,
+} from "@context/app.context";
 import { useContext } from "react";
 
 export function DashboardNavbar() {
@@ -21,6 +25,7 @@ export function DashboardNavbar() {
 		localStorage.removeItem("token");
 		dispatchAuth({ type: SET_TOKEN, payload: null });
 		dispatchAuth({ type: SET_AUTHENTICATED, payload: false });
+		dispatchAuth({ type: SET_ROLE, payload: "user" });
 
 		window.location.reload();
 	};

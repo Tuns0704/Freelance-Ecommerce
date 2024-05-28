@@ -1,6 +1,6 @@
-import { formatPercentage } from "./../../helper/formatPercentage";
-import { formatCurrency } from "./../../helper/formatCurrency";
-import AddToCartButton from "./../../cores/components/addToCart";
+import { formatPercentage } from "@helper/formatPercentage";
+import { formatCurrency } from "@helper/formatCurrency";
+import AddToCartButton from "@components/addToCart";
 import { useNavigate } from "react-router-dom";
 import { PropTypes } from "prop-types";
 

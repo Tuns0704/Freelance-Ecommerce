@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-// import { formatCurrency } from "./../../helper/formatCurrency";
 import { Button } from "@material-tailwind/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Pagination } from "swiper/modules";
-import { getSaleProductByCategory } from "../../services/product";
+import { getSaleProductByCategory } from "@services/product";
 import { useEffect, useState } from "react";
-import Loading from "../../cores/components/loading";
+import Loading from "@components/loading";
 import { useNavigate } from "react-router-dom";
 import CardItem from "./cardItem";
 import { PropTypes } from "prop-types";

@@ -1,9 +1,12 @@
-import ImageSlider from "../../cores/components/imageSlider";
 import { useEffect, useState } from "react";
-import { getSettings } from "../../services/setting";
-import Loading from "./../../cores/components/loading";
-import { getListCategory } from "../../services/category";
 import { useNavigate } from "react-router-dom";
+
+import { getSettings } from "@services/setting";
+import { getListCategory } from "@services/category";
+
+import ImageSlider from "@components/imageSlider";
+import Loading from "@components/loading";
+
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Deals from "./deal";
 

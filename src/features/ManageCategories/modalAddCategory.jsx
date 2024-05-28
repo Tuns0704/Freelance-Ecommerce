@@ -4,7 +4,7 @@ import { IconButton, Input, Button } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 import { useState } from "react";
-import { addCategory } from "../../services/category";
+import { addCategory } from "@services/category";
 import { toast } from "react-toastify";
 
 const ModalAddCategory = ({ isOpen, closeModal, reload }) => {

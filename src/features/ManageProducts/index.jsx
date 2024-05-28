@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getListProduct } from "../../services/product";
+import { getListProduct } from "@services/product";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { Button } from "@material-tailwind/react";
-import Loading from "../../cores/components/loading";
-import Pagination from "../../cores/components/pagination";
-import FilterOption from "../../cores/components/filter";
-import { getListCategory } from "../../services/category";
+import Loading from "@components/loading";
+import Pagination from "@components/pagination";
+import FilterOption from "@components/filter";
+import { getListCategory } from "@services/category";
 import CardItem from "./cardItem";
 
 const ManageProducts = () => {

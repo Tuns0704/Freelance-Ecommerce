@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getListCategory } from "../../services/category";
+import { getListCategory } from "@services/category";
 import { toast } from "react-toastify";
 import { IconButton } from "@material-tailwind/react";
 import ModalAddCategory from "./modalAddCategory";
 import ModalDeleteCategoryConfirm from "./deleteModalConfirm";
-import Loading from "../../cores/components/loading";
+import Loading from "@components/loading";
 import { ArchiveBoxXMarkIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
 
 const CategoryManage = () => {

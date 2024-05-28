@@ -1,11 +1,12 @@
 import { useState } from "react";
 import ConfirmLogin from "./confirmLogin";
 import { Button } from "@material-tailwind/react";
-import { decodeToken } from "./../../helper/decodeToken";
-import { addToCart } from "../../services/cart";
 import { toast } from "react-toastify";
 import { PropTypes } from "prop-types";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+
+import { decodeToken } from "@helper/decodeToken";
+import { addToCart } from "@services/cart";
 
 const AddToCartButton = ({ productId, productPrice, warrantyFee }) => {
 	const [isOpen, setIsOpen] = useState(false);

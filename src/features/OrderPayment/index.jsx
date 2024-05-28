@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
-import Loading from "../../cores/components/loading";
-import { formatCurrency } from "../../helper/formatCurrency";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import { Tooltip, Button } from "@material-tailwind/react";
 import {
 	InformationCircleIcon,
 	ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
-import { getSettings } from "../../services/setting";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { orderDetail, updateOrder } from "../../services/order";
+
+import Loading from "@components/loading";
+import { formatCurrency } from "@helper/formatCurrency";
+
+import { getSettings } from "@services/setting";
+import { orderDetail, updateOrder } from "@services/order";
 
 const OrderPayment = () => {
 	const [images, setImages] = useState([]);

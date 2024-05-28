@@ -3,8 +3,8 @@ import { Card, CardBody, Avatar } from "@material-tailwind/react";
 import { ProfileInfoCard } from "./profileInforCard";
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
-import { decodeToken } from "../../helper/decodeToken";
-import { getUserOrder, getUserProfile } from "../../services/user";
+import { decodeToken } from "@helper/decodeToken";
+import { getUserOrder, getUserProfile } from "@services/user";
 import OrderItem from "./orderItem";
 
 const Profile = () => {

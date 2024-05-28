@@ -3,7 +3,7 @@ import { PropTypes } from "prop-types";
 import { Button } from "@material-tailwind/react";
 import { Fragment } from "react";
 import { toast } from "react-toastify";
-import { deleteDiscount } from "../../services/discount";
+import { deleteDiscount } from "@services/discount";
 
 const ModalDeleteCategoryConfirm = ({
 	isOpen,

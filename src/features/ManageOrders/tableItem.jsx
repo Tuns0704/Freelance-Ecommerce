@@ -5,9 +5,9 @@ import {
 	PencilSquareIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import { paymentStatus } from "./../../helper/paymentStatus";
-import { formatDateTime } from "./../../helper/formatDateTime";
-import { deliveryStatus } from "../../helper/deliveryStatus";
+import { paymentStatus } from "@helper/paymentStatus";
+import { formatDateTime } from "@helper/formatDateTime";
+import { deliveryStatus } from "@helper/deliveryStatus";
 import ModalInfo from "./infoModal";
 import ModalEdit from "./editModal";
 

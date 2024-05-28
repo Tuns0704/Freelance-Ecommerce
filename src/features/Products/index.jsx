@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getListProduct } from "../../services/product";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { Button, Select, Option } from "@material-tailwind/react";
-import Loading from "../../cores/components/loading";
-import Pagination from "../../cores/components/pagination";
+import Loading from "@components/loading";
+import Pagination from "@components/pagination";
 import CardItem from "./cardItem";
-import FilterOption from "../../cores/components/filter";
-import { getListCategory } from "../../services/category";
+import FilterOption from "@components/filter";
+import { getListProduct } from "@services/product";
+import { getListCategory } from "@services/category";
 import { toast } from "react-toastify";
-import { setValueSort } from "../../helper/handleGetSort";
+import { setValueSort } from "@helper/handleGetSort";
 
 const sortOptions = [
 	{ value: "", sortField: "", sortDirection: "", label: "Mặc định" },

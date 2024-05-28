@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import PropTypes from "prop-types";
-import { decodeToken } from "../../helper/decodeToken";
+import { decodeToken } from "@helper/decodeToken";
 
 export const SET_TOKEN = "SET_TOKEN";
 export const SET_AUTHENTICATED = "SET_AUTHENTICATED";

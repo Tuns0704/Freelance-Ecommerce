@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getListUser } from "../../services/user";
-import Loading from "../../cores/components/loading";
+import { getListUser } from "@services/user";
+import Loading from "@components/loading";
 
 const UserManage = () => {
 	const [listUser, setListUser] = useState([]);

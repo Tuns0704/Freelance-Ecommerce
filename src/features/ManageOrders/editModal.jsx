@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 import { IconButton, Button } from "@material-tailwind/react";
 import { XMarkIcon, BookmarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useState } from "react";
-import { adminUpdateOrder } from "../../services/order";
+import { adminUpdateOrder } from "@services/order";
 import { toast } from "react-toastify";
 
 const ModalEdit = ({ isOpen, closeModal, order, reload }) => {

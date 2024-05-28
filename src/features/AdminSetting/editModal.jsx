@@ -4,8 +4,8 @@ import { IconButton, Input, Button } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useState } from "react";
 import { toast } from "react-toastify";
-import { formatNumberToFloat } from "../../helper/formatNumberToString";
-import { updateSettings } from "../../services/setting";
+import { formatNumberToFloat } from "@helper/formatNumberToString";
+import { updateSettings } from "@services/setting";
 
 const ModalEditSettings = ({
 	isOpen,

@@ -1,10 +1,10 @@
 import { PropTypes } from "prop-types";
-import { formatCurrency } from "../../helper/formatCurrency";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { paymentStatus } from "../../helper/paymentStatus";
 import ModalInfo from "./infoModal";
-import { deliveryStatus } from "../../helper/deliveryStatus";
+import { formatCurrency } from "@helper/formatCurrency";
+import { paymentStatus } from "@helper/paymentStatus";
+import { deliveryStatus } from "@helper/deliveryStatus";
 
 const OrderItem = ({ order, reload }) => {
 	const [infoModalIsOpen, setInfoModalIsOpen] = useState(false);

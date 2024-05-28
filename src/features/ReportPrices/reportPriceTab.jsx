@@ -7,9 +7,9 @@ import {
 	Button,
 	IconButton,
 } from "@material-tailwind/react";
-import { formatCurrency } from "../../helper/formatCurrency";
 import { useState, useEffect } from "react";
-import { getListCategory } from "./../../services/category";
+import { formatCurrency } from "@helper/formatCurrency";
+import { getListCategory } from "@services/category";
 
 const ReportPriceTab = () => {
 	const [weight, setWeight] = useState(0.1);

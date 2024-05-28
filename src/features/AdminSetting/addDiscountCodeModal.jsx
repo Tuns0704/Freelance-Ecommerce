@@ -5,7 +5,7 @@ import { PropTypes } from "prop-types";
 import { Fragment, useState } from "react";
 import { toast } from "react-toastify";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
-import { addDiscount } from "../../services/discount";
+import { addDiscount } from "@services/discount";
 
 const DiscountCodeModal = ({ isOpen, closeModal, reload }) => {
 	const [discount, setDiscount] = useState({

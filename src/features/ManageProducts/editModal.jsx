@@ -9,10 +9,10 @@ import {
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useEffect, useState } from "react";
-import { updateProduct } from "../../services/product";
-import { formatNumberToFloat } from "../../helper/formatNumberToString";
+import { updateProduct } from "@services/product";
+import { formatNumberToFloat } from "@helper/formatNumberToString";
 import { toast } from "react-toastify";
-import { filterOrdersConditionOptions } from "./../../constant/filter";
+import { filterOrdersConditionOptions } from "@constant/filter";
 
 const ModalEdit = ({ isOpen, closeModal, product, reload }) => {
 	const [productDiscount, setProductDiscount] = useState(0);

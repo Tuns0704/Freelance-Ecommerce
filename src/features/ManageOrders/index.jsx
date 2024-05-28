@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import Loading from "../../cores/components/loading";
-import { getListOrder } from "../../services/order";
+import Loading from "@components/loading";
+import { getListOrder } from "@services/order";
 
 import TableItem from "./tableItem";
 import { useSearchParams } from "react-router-dom";
-import Pagination from "../../cores/components/pagination";
+import Pagination from "@components/pagination";
 import Filter from "./filter";
 
 const OrderManage = () => {

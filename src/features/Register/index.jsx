@@ -1,10 +1,10 @@
 import { Input, Button, Typography, Tooltip } from "@material-tailwind/react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { validateRegister } from "./../../helper/validateRegister";
+import { validateRegister } from "@helper/validateRegister";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { toast } from "react-toastify";
-import { register } from "../../services/auth";
+import { register } from "@services/auth";
 
 const Register = () => {
 	const [user, setUser] = useState({

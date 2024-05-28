@@ -3,14 +3,15 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ForgotPasswordModal from "./forgotPasswordModal";
 import { toast } from "react-toastify";
-import { login } from "../../services/auth";
-import { AppContext, SET_ROLE } from "../../cores/context/app.context";
+import { login } from "@services/auth";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import {
+	AppContext,
+	SET_ROLE,
 	SET_TOKEN,
 	SET_AUTHENTICATED,
-} from "./../../cores/context/app.context";
-import { decodeToken } from "../../helper/decodeToken";
+} from "@context/app.context";
+import { decodeToken } from "@helper/decodeToken";
 
 const Login = () => {
 	const { dispatchAuth } = useContext(AppContext);

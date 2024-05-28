@@ -22,8 +22,12 @@ import {
 	MenuItem,
 	Menu,
 } from "@material-tailwind/react";
-import { AppContext } from "./../context/app.context";
-import { SET_TOKEN, SET_AUTHENTICATED } from "./../context/app.context";
+import {
+	AppContext,
+	SET_TOKEN,
+	SET_AUTHENTICATED,
+	SET_ROLE,
+} from "@context/app.context";
 
 export function Navbar({ routes }) {
 	const navigate = useNavigate();
@@ -46,6 +50,7 @@ export function Navbar({ routes }) {
 		localStorage.removeItem("token");
 		dispatchAuth({ type: SET_TOKEN, payload: null });
 		dispatchAuth({ type: SET_AUTHENTICATED, payload: false });
+		dispatchAuth({ type: SET_ROLE, payload: "user" });
 	};
 
 	const navigateLogin = () => {

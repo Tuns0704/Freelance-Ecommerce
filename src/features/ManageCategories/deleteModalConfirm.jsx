@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { PropTypes } from "prop-types";
 import { Button } from "@material-tailwind/react";
 import { Fragment } from "react";
-import { deleteCategory } from "../../services/category";
+import { deleteCategory } from "@services/category";
 import { toast } from "react-toastify";
 
 const ModalDeleteCategoryConfirm = ({

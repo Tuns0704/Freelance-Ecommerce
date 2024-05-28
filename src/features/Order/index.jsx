@@ -1,22 +1,24 @@
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
-import { decodeToken } from "../../helper/decodeToken";
-import { getUserCart, getUserProfile } from "../../services/user";
+
+import { getUserCart, getUserProfile } from "@services/user";
+import { checkDiscountCode } from "@services/discount";
+import { getSettings } from "@services/setting";
+import { decodeToken } from "@helper/decodeToken";
+import { validateInputs } from "@helper/validateInputOrder";
+import { formatAddressToLocation } from "@helper/formatAdressToObjectLocation";
+import { formatCurrency } from "@helper/formatCurrency";
+
 import CardItem from "./cardItem";
-import Loading from "../../cores/components/loading";
-import { formatCurrency } from "../../helper/formatCurrency";
+import Loading from "@components/loading";
 import { Tooltip, Button, Input } from "@material-tailwind/react";
 import {
 	InformationCircleIcon,
 	ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
-import { getSettings } from "../../services/setting";
-import { validateInputs } from "../../helper/validateInputOrder";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { order } from "../../services/order";
-import { formatAddressToLocation } from "../../helper/formatAdressToObjectLocation";
-import { checkDiscountCode } from "../../services/discount";
+import { order } from "@services/order";
 
 const Order = () => {
 	const navigate = useNavigate();

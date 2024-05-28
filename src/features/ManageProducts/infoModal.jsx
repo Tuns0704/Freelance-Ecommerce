@@ -3,8 +3,8 @@ import { PropTypes } from "prop-types";
 import { IconButton } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
-import { formatCurrency } from "./../../helper/formatCurrency";
-import { formatPercentage } from "./../../helper/formatPercentage";
+import { formatCurrency } from "@helper/formatCurrency";
+import { formatPercentage } from "@helper/formatPercentage";
 
 const ModalInfo = ({ isOpen, closeModal, product }) => {
 	return (
