@@ -54,18 +54,22 @@ export function Navbar({ routes }) {
 	};
 
 	const navigateLogin = () => {
+		setOpenNav(false);
 		navigate("/login");
 	};
 
 	const navigateRegister = () => {
+		setOpenNav(false);
 		navigate("/register");
 	};
 
 	const navigateProfile = () => {
+		setOpenNav(false);
 		navigate("/profile");
 	};
 
 	const navigateCart = () => {
+		setOpenNav(false);
 		navigate("/cart");
 	};
 

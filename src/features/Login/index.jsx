@@ -85,7 +85,7 @@ const Login = () => {
 	};
 
 	return (
-		<section className="flex h-[85vh] p-8 gap-4">
+		<section className="flex md:h-[85vh] p-8 gap-4">
 			<div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
 				<div className="text-center">
 					<Typography variant="h2" className="font-bold">

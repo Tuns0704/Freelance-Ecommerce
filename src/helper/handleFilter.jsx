@@ -59,7 +59,6 @@ export const handleFilter = ({
 	if (brands.isChecked === false && param.has("keywords")) {
 		setSearchParams((prev) => {
 			prev.delete("keywords");
-			prev.delete("category");
 			return prev;
 		});
 	}
