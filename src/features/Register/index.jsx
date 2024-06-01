@@ -87,13 +87,13 @@ const Register = () => {
 				/>
 			</div>
 			<div className="w-full lg:w-3/5 flex flex-col items-center justify-center">
-				<form className="mt-8 mb-2 mx-auto max-w-screen-lg lg:w-1/2">
+				<form className="lg:mt-8 mb-2 w-full ss:w-2/3 lg:mx-auto max-w-screen-lg lg:w-1/2">
 					<div className="text-center">
 						<Typography variant="h2" className="font-bold">
 							Đăng ký
 						</Typography>
 					</div>
-					<div className="mb-2 flex flex-col gap-6">
+					<div className="mb-2 w-full flex flex-col gap-6">
 						<Typography
 							variant="small"
 							color="blue-gray"
@@ -120,7 +120,7 @@ const Register = () => {
 							/>
 						</Tooltip>
 					</div>
-					<div className="mb-2 flex flex-col gap-6">
+					<div className="mb-2 w-full flex flex-col gap-6">
 						<Typography
 							variant="small"
 							color="blue-gray"
@@ -141,6 +141,7 @@ const Register = () => {
 								value={user.displayName}
 								onChange={handleChangeInput}
 								type="text"
+								fullWidth
 								className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
 								labelProps={{
 									className: "before:content-none after:content-none",

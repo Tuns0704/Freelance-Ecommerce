@@ -148,16 +148,16 @@ export const handleInitFilter = ({
 			value: param.get("category"),
 		});
 	}
-	if (param.has("conditionOrder")) {
+	if (param.has("condition")) {
 		setProductCondition({
 			isChecked: true,
-			value: param.get("conditionOrder"),
+			value: param.get("condition"),
 		});
 	}
-	if (param.has("conditionProduct")) {
+	if (param.has("conditionOrder")) {
 		setOrderCondition({
 			isChecked: true,
-			value: param.get("conditionProduct"),
+			value: param.get("conditionOrder"),
 		});
 	}
 };

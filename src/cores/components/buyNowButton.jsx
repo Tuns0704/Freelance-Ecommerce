@@ -5,7 +5,7 @@ import { PropTypes } from "prop-types";
 import { CreditCardIcon } from "@heroicons/react/24/solid";
 import BuyNowModal from "./buyNowModal";
 
-const BuyNowButton = ({ productId, productPrice }) => {
+const BuyNowButton = ({ productId, productPrice, quantity }) => {
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 	const [isBuyNowModalOpen, setBuyNowModalOpen] = useState(false);
 
@@ -29,6 +29,7 @@ const BuyNowButton = ({ productId, productPrice }) => {
 				size="lg"
 				className="font-medium flex justify-center items-center text-sm font-opensans outline-none w-full"
 				ripple={false}
+				disabled={quantity !== null || quantity > 0 ? true : false}
 				onClick={() => handleToggleBuyNowModal()}
 			>
 				<CreditCardIcon className="w-6 h-6" /> Mua ngay
@@ -50,6 +51,7 @@ const BuyNowButton = ({ productId, productPrice }) => {
 BuyNowButton.propTypes = {
 	productId: PropTypes.string,
 	productPrice: PropTypes.number,
+	quantity: PropTypes.number,
 };
 
 export default BuyNowButton;

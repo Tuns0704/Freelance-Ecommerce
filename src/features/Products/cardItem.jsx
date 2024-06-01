@@ -18,11 +18,21 @@ const CardItem = ({ product }) => {
 	return (
 		<div className="group flex flex-col sm:w-[48%] md:w-full lg:flex-row justify-between gap-3 rounded-md p-3 shadow-md bg-white">
 			<div className="lg:w-4/6 flex flex-col md:flex-row gap-3 lg:gap-5">
-				<img
-					onClick={handleNavigateToDetail}
-					src={product.additionalImages}
-					className="md:min-w-[180px] md:max-w-[180px] h-[220px] object-cover rounded-lg group-hover:scale-105 transition-all duration-300 group-hover:cursor-pointer"
-				/>
+				<div className="relative flex justify-center">
+					<img
+						onClick={handleNavigateToDetail}
+						src={product.additionalImages}
+						className="md:min-w-[180px] md:max-w-[180px] h-[220px] object-cover rounded-lg group-hover:scale-105 transition-all duration-300 group-hover:cursor-pointer"
+					/>
+					{product.quantity !== null || product.quantity > 0 ? (
+						<p className="absolute bg-red-900 px-2 py-3 top-0 left-0 text-white text-lg border border-red-900 font-bold rounded">
+							Hết hàng
+						</p>
+					) : (
+						<></>
+					)}
+				</div>
+
 				<div className="flex flex-col gap-2 lg:w-4/6">
 					<h1
 						onClick={handleNavigateToDetail}
@@ -90,11 +100,13 @@ const CardItem = ({ product }) => {
 						productId={product.id}
 						productPrice={product.price[product.price.length - 1].value}
 						warrantyFee={0}
+						quantity={product.quantity}
 					/>
 					<BuyNowButton
 						className="w-1/2"
 						productId={product.id}
 						productPrice={product.price[product.price.length - 1].value}
+						quantity={product.quantity}
 					/>
 				</div>
 			</div>

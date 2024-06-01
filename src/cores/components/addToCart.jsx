@@ -8,7 +8,12 @@ import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { decodeToken } from "@helper/decodeToken";
 import { addToCart } from "@services/cart";
 
-const AddToCartButton = ({ productId, productPrice, warrantyFee }) => {
+const AddToCartButton = ({
+	productId,
+	productPrice,
+	warrantyFee,
+	quantity,
+}) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const handleOpenModal = () => {
@@ -48,6 +53,7 @@ const AddToCartButton = ({ productId, productPrice, warrantyFee }) => {
 				size="lg"
 				className="font-medium flex justify-center items-center text-sm font-opensans outline-none w-full"
 				ripple={false}
+				disabled={quantity !== null || quantity > 0 ? true : false}
 				onClick={() => AddToCart()}
 			>
 				<ShoppingCartIcon className="w-6 h-6" /> Thêm vào giỏ hàng
@@ -60,6 +66,7 @@ AddToCartButton.propTypes = {
 	productId: PropTypes.string.isRequired,
 	productPrice: PropTypes.number.isRequired,
 	warrantyFee: PropTypes.number.isRequired,
+	quantity: PropTypes.number,
 };
 
 export default AddToCartButton;

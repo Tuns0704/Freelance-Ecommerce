@@ -44,6 +44,7 @@ const CardItem = ({ product }) => {
 				productId={product.id}
 				productPrice={product.price[product.price.length - 1].value}
 				warrantyFee={0}
+				quantity={product.quantity}
 			/>
 		</div>
 	);
