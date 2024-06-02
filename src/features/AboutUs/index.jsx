@@ -52,18 +52,16 @@ const AboutUs = () => {
 		"Có ship COD: nhận hàng, kiểm tra ok mới phải thanh toán (toàn bộ phí ship Khách chịu với bên giao hàng)",
 	];
 	const img = [
-		"/img/pic2.png",
-		"/img/pic7.png",
-		"/img/pic8.png",
-		"/img/pic2.png",
-		"/img/pic7.png",
-		"/img/pic8.png",
-		"/img/pic2.png",
-		"/img/pic7.png",
-		"/img/pic8.png",
-		"/img/pic2.png",
-		"/img/pic7.png",
-		"/img/pic8.png",
+		"/img/pic1.jpg",
+		"/img/pic2.jpg",
+		"/img/pic3.jpg",
+		"/img/pic4.jpg",
+		"/img/pic5.jpg",
+		"/img/pic6.jpg",
+		"/img/pic7.jpg",
+		"/img/pic8.jpg",
+		"/img/pic9.jpg",
+		"/img/pic1.jpg",
 	];
 	return (
 		<div className="flex flex-col gap-5">
@@ -189,7 +187,7 @@ const AboutUs = () => {
 							<img
 								src={product}
 								alt="products"
-								className="w-full object-cover self-center h-48 sm:h-28 md:h-48 rounded-lg"
+								className="w-full object-cover self-center h-48 sm:h-28 md:h-56 rounded-lg"
 							/>
 						</SwiperSlide>
 					))}
