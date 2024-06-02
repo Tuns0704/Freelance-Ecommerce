@@ -71,7 +71,7 @@ const AboutUs = () => {
 			<div className="flex gap-5 w-full flex-col md:flex-row">
 				<div className="md:w-1/2 flex justify-center">
 					<img
-						src="/public/img/pic2.png"
+						src="/public/img/pic2.jpg"
 						className="rounded w-full h-[50vh] justify-center object-cover"
 					/>
 				</div>
