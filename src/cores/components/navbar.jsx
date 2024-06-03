@@ -109,11 +109,13 @@ export function Navbar({ routes }) {
 
 	const findProduct = () => {
 		handleSetSearchString();
+		setOpenNav(false);
 	};
 
 	const handleKeyDown = (e) => {
 		if (e.keyCode === 13) {
 			handleSetSearchString();
+			setOpenNav(false);
 		}
 	};
 
