@@ -5,7 +5,12 @@ const CardItem = ({ cart }) => {
 		<div className="rounded-xl relative border-2 border-gray-200 p-2 grid grid-cols-12">
 			<div className="col-span-12 lg:col-span-2 flex justify-center">
 				<img
-					src={cart.product.thumbnailImages}
+					src={
+						Array.isArray(cart.product.additionalImages) &&
+						cart.product.additionalImages.length > 0
+							? cart.product.additionalImages[0]
+							: cart.product.additionalImages
+					}
 					alt="speaker image"
 					className="w-[180px] max-lg:h-full object-contain self-center"
 				/>

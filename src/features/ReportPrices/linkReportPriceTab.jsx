@@ -86,7 +86,12 @@ const LinkReportTab = () => {
 					<div className="flex flex-col lg:flex-row gap-3 mt-5">
 						<div className="flex flex-col md:flex-row gap-2 lg:w-2/3 sm:p-3">
 							<img
-								src={item.thumbnailImages}
+								src={
+									Array.isArray(item.additionalImages) &&
+									item.additionalImages.length > 0
+										? item.additionalImages[0]
+										: item.additionalImages
+								}
 								alt={item.name}
 								className="w-full md:w-1/4 lg:w-[200px] rounded-lg"
 							/>

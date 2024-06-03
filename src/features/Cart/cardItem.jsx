@@ -52,7 +52,12 @@ const CardItem = ({ cart, reload, updateQuantity }) => {
 			</button>
 			<div className="col-span-12 lg:col-span-2 flex justify-center">
 				<img
-					src={cart.product.thumbnailImages}
+					src={
+						Array.isArray(cart.product.additionalImages) &&
+						cart.product.additionalImages.length > 0
+							? cart.product.additionalImages[0]
+							: cart.product.additionalImages
+					}
 					alt="speaker image"
 					className="w-[180px] max-lg:h-full h-[180px] object-contain self-center"
 				/>

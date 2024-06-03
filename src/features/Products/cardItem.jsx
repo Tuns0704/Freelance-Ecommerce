@@ -21,7 +21,12 @@ const CardItem = ({ product }) => {
 				<div className="relative flex justify-center">
 					<img
 						onClick={handleNavigateToDetail}
-						src={product.additionalImages}
+						src={
+							Array.isArray(product.additionalImages) &&
+							product.additionalImages.length > 0
+								? product.additionalImages[0]
+								: product.additionalImages
+						}
 						className="md:min-w-[180px] md:max-w-[180px] h-[220px] object-cover rounded-lg group-hover:scale-105 transition-all duration-300 group-hover:cursor-pointer"
 					/>
 					{product.quantity !== null && product.quantity > 0 ? (
