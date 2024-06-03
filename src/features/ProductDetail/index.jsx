@@ -93,12 +93,12 @@ const ProductDetail = () => {
 						<ImageSlider images={images} />
 					</div>
 					<div className="flex flex-col justify-between w-full md:w-1/2 gap-2 h-fit">
-						{product.quantity !== null || product.quantity > 0 ? (
+						{product.quantity !== null && product.quantity > 0 ? (
+							<></>
+						) : (
 							<p className="text-lg text-center px-3 py-1 border border-red-900 text-white bg-red-900 font-bold rounded">
 								Hết hàng
 							</p>
-						) : (
-							<></>
 						)}
 						<div className="flex gap-2">
 							<div className="text-lg px-3 py-1 border border-red-900 text-red-900 font-bold rounded">
@@ -120,6 +120,17 @@ const ProductDetail = () => {
 								{product.brand ? product.brand : "Không có hãng"}
 							</p>
 						</div>
+						{product.quantity !== null && product.quantity > 0 ? (
+							<div className="flex gap-2">
+								<p className="uppercase font-semibold">Số lượng hàng:</p>
+								<p className="font-bold text-white px-2 bg-blue-800 rounded">
+									{product.quantity}
+								</p>
+							</div>
+						) : (
+							""
+						)}
+
 						<div className="flex gap-2 items-center">
 							<p className="font-bold text-red-900 text-3xl">
 								{formatCurrency(price)}

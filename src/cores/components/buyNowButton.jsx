@@ -29,7 +29,7 @@ const BuyNowButton = ({ productId, productPrice, quantity }) => {
 				size="lg"
 				className="font-medium flex justify-center items-center text-sm font-opensans outline-none w-full"
 				ripple={false}
-				disabled={quantity !== null || quantity > 0 ? true : false}
+				disabled={quantity !== null && quantity > 0 ? false : true}
 				onClick={() => handleToggleBuyNowModal()}
 			>
 				<CreditCardIcon className="w-6 h-6" /> Mua ngay

@@ -24,16 +24,16 @@ const CardItem = ({ product }) => {
 						src={product.additionalImages}
 						className="md:min-w-[180px] md:max-w-[180px] h-[220px] object-cover rounded-lg group-hover:scale-105 transition-all duration-300 group-hover:cursor-pointer"
 					/>
-					{product.quantity !== null || product.quantity > 0 ? (
+					{product.quantity !== null && product.quantity > 0 ? (
+						<></>
+					) : (
 						<p className="absolute bg-red-900 px-2 py-3 top-0 left-0 text-white text-lg border border-red-900 font-bold rounded">
 							Hết hàng
 						</p>
-					) : (
-						<></>
 					)}
 				</div>
 
-				<div className="flex flex-col gap-2 lg:w-4/6">
+				<div className="flex flex-col gap-2 lg:w-5/6">
 					<h1
 						onClick={handleNavigateToDetail}
 						className="font-bold text-base h-12 text-justify overflow-clip group-hover:text-blue-600 group-hover:cursor-pointer"
@@ -43,6 +43,9 @@ const CardItem = ({ product }) => {
 					<div className="flex flex-col gap-2">
 						<p className="text-sm">
 							<b>Danh mục:</b> {product.category.vietnameseName}
+						</p>
+						<p className="text-sm">
+							<b> Số lượng hàng:</b> {product.quantity}
 						</p>
 						<div className="flex gap-2">
 							{product.marketingPrice && (

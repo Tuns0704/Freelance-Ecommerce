@@ -53,7 +53,7 @@ const AddToCartButton = ({
 				size="lg"
 				className="font-medium flex justify-center items-center text-sm font-opensans outline-none w-full"
 				ripple={false}
-				disabled={quantity !== null || quantity > 0 ? true : false}
+				disabled={quantity !== null && quantity > 0 ? false : true}
 				onClick={() => AddToCart()}
 			>
 				<ShoppingCartIcon className="w-6 h-6" /> Thêm vào giỏ hàng
