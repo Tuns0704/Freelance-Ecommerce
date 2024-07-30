@@ -75,7 +75,7 @@ const Home = () => {
 						<img
 							src={settings.bannerTop}
 							alt=""
-							className="md:w-3/4 rounded-lg shadow-lg"
+							className="md:w-3/4 max-h-[50vh] object-cover rounded-lg shadow-lg"
 						/>
 					</div>
 					{categories.map((item, index) => (
@@ -84,7 +84,7 @@ const Home = () => {
 					<img
 						src={settings.bannerBot}
 						alt=""
-						className="w-full rounded-lg shadow-lg"
+						className="w-full max-h-[30vh] object-cover rounded-lg shadow-lg"
 					/>
 					<ImageSlider images={settings.slide} />
 				</div>

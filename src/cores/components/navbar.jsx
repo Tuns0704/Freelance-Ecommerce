@@ -155,7 +155,6 @@ export function Navbar({ routes }) {
 						{route.href ? (
 							<a
 								href={route.href}
-								target={route.target}
 								className="flex items-center gap-1 p-1 font-bold"
 							>
 								{route.icon &&
@@ -167,7 +166,6 @@ export function Navbar({ routes }) {
 						) : (
 							<Link
 								to={route.path}
-								target={route.target}
 								className="flex items-center gap-1 p-1 font-bold"
 							>
 								{route.icon &&

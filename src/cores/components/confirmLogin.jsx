@@ -1,4 +1,7 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import {
+	XMarkIcon,
+	ArrowRightOnRectangleIcon,
+} from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
 import { Button } from "@material-tailwind/react";
 import { PropTypes } from "prop-types";
@@ -51,7 +54,10 @@ const ConfirmLogin = ({ isOpen, closeModal }) => {
 									className="flex w-1/2 gap-2 justify-center items-center"
 									onClick={() => navigateToLogin()}
 								>
-									<XMarkIcon strokeWidth={2} className="w-5 h-5" />
+									<ArrowRightOnRectangleIcon
+										strokeWidth={2}
+										className="w-5 h-5"
+									/>
 									Đăng nhập
 								</Button>
 							</div>

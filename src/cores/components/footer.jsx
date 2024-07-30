@@ -16,12 +16,7 @@ export function Footer({ title, description, socials, menus, copyright }) {
 					</Typography>
 					<div className="mx-auto mt-6 mb-8 flex justify-start sm:justify-center gap-2 md:mb-0 lg:justify-start">
 						{socials.map(({ color, name, path }) => (
-							<a
-								key={name}
-								href={path}
-								target="_blank"
-								rel="noopener noreferrer"
-							>
+							<a key={name} href={path} rel="noopener noreferrer">
 								<IconButton
 									color="white"
 									className="rounded-full shadow-none bg-transparent"
@@ -50,7 +45,6 @@ export function Footer({ title, description, socials, menus, copyright }) {
 										<Typography
 											as="a"
 											href={item.path}
-											target="_blank"
 											rel="noreferrer"
 											variant="small"
 											className="mb-2 block font-normal text-blue-gray-500 hover:text-blue-gray-700"
@@ -86,22 +80,17 @@ Footer.defaultProps = {
 		{
 			color: "gray",
 			name: "twitter",
-			path: "https://www.twitter.com/creativetim",
+			path: "",
 		},
 		{
 			color: "gray",
 			name: "youtube",
-			path: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w",
+			path: "",
 		},
 		{
 			color: "gray",
 			name: "instagram",
-			path: "https://www.instagram.com/creativetimofficial/",
-		},
-		{
-			color: "black",
-			name: "github",
-			path: "https://github.com/creativetimofficial/material-tailwind",
+			path: "",
 		},
 	],
 	menus: [
@@ -137,10 +126,6 @@ Footer.defaultProps = {
 					name: "Chính sách trả góp",
 					path: "/installment-policy",
 				},
-				{
-					name: "Hướng dẫn sử dụng",
-					path: "https://github.com/creativetimofficial/material-tailwind/blob/main/CHANGELOG.md?ref=mtk",
-				},
 			],
 		},
 	],
@@ -148,8 +133,7 @@ Footer.defaultProps = {
 		<>
 			Copyright © {year} by{" "}
 			<a
-				href="https://www.creative-tim.com?ref=mtk"
-				target="_blank"
+				href=""
 				rel="noreferrer"
 				className="text-blue-gray-500 transition-colors hover:text-blue-500"
 			>
