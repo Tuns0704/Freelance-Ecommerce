@@ -11,6 +11,9 @@ const CardItem = ({ product }) => {
 		navigate(`/product-detail/${id}`);
 	};
 
+	const imageDefault =
+		"https://media.istockphoto.com/id/1197832105/vector/male-hand-holding-megaphone-with-new-product-speech-bubble-loudspeaker-banner-for-business.jpg?s=612x612&w=0&k=20&c=INIM5M-N2DZh6pS6DUBSGh7x9ItOBSC3atZOVJtQf7M=";
+
 	return (
 		<div className="group flex w-full relative flex-col gap-2 bg-white shadow-md p-5 rounded-lg hover:cursor-pointer">
 			<label className="absolute px-2 rounded top-[-5px] z-40 left-[-5px] bg-red-900 text-white font-bold py-1">
@@ -21,6 +24,9 @@ const CardItem = ({ product }) => {
 				onClick={() => handleNavigateToDetail(product.id)}
 				alt="products"
 				className="w-full object-contain h-48 scale-100 group-hover:scale-105 transition-all duration-500 ease-in-out rounded-lg"
+				onError={(e) => {
+					e.currentTarget.src = imageDefault;
+				}}
 			/>
 			<h4
 				onClick={() => handleNavigateToDetail(product.id)}

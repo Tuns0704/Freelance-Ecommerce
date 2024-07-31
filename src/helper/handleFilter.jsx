@@ -17,6 +17,10 @@ export const handleFilter = ({
 			prev.set("marketingPrice", marketingPrice.value);
 			return prev;
 		});
+		setSearchParams((prev) => {
+			prev.set("page", 1);
+			return prev;
+		});
 	}
 	if (
 		marketingPrice.isChecked === false &&
@@ -34,6 +38,10 @@ export const handleFilter = ({
 	) {
 		setSearchParams((prev) => {
 			prev.set("category", productCategory.value);
+			return prev;
+		});
+		setSearchParams((prev) => {
+			prev.set("page", 1);
 			return prev;
 		});
 	}
@@ -54,6 +62,10 @@ export const handleFilter = ({
 			prev.set("category", "Laptop");
 			return prev;
 		});
+		setSearchParams((prev) => {
+			prev.set("page", 1);
+			return prev;
+		});
 	}
 
 	if (brands.isChecked === false && param.has("keywords")) {
@@ -69,6 +81,10 @@ export const handleFilter = ({
 	) {
 		setSearchParams((prev) => {
 			prev.set("condition", productCondition.value);
+			return prev;
+		});
+		setSearchParams((prev) => {
+			prev.set("page", 1);
 			return prev;
 		});
 	}
@@ -88,6 +104,10 @@ export const handleFilter = ({
 			prev.set("conditionOrder", orderCondition.value);
 			return prev;
 		});
+		setSearchParams((prev) => {
+			prev.set("page", 1);
+			return prev;
+		});
 	}
 
 	if (orderCondition.isChecked === false && param.has("conditionOrder")) {
@@ -101,6 +121,10 @@ export const handleFilter = ({
 		setSearchParams((prev) => {
 			prev.set("minPrice", minValue);
 			prev.set("maxPrice", maxValue);
+			return prev;
+		});
+		setSearchParams((prev) => {
+			prev.set("page", 1);
 			return prev;
 		});
 	}
