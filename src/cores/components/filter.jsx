@@ -82,7 +82,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			? setProductCondition({
 					isChecked: false,
 					value: "",
-			  })
+				})
 			: setProductCondition({ isChecked: true, value: option.value });
 	};
 
@@ -91,7 +91,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			? setOrderCondition({
 					isChecked: false,
 					value: "",
-			  })
+				})
 			: setOrderCondition({ isChecked: true, value: option.value });
 	};
 
@@ -100,7 +100,7 @@ const RenderFilter = ({ categories, setSearchParams, searchParams }) => {
 			? setBrands({
 					isChecked: false,
 					value: "",
-			  })
+				})
 			: setBrands({ isChecked: true, value: option.value });
 	};
 

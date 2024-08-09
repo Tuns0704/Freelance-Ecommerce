@@ -105,6 +105,13 @@ const Products = () => {
 		getData();
 	}, [searchParams]);
 
+	useEffect(() => {
+		setSearchParams((prev) => {
+			prev.set("page", 1);
+			return prev;
+		});
+	}, [totalPages]);
+
 	const handleChangeSortOption = (option) => {
 		if (option.value !== "") {
 			setSearchParams((prev) => {
