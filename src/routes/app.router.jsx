@@ -18,6 +18,7 @@ const ContactUs = lazy(() => import("@features/ContactUs"));
 const InstallmentPolicy = lazy(() => import("@features/InstallmentPolicy"));
 const WarrantyPolicy = lazy(() => import("@features/WarrantyPolicy"));
 const PurchasePolicy = lazy(() => import("@features/PurchasePolicy"));
+const PrivacyPolicy = lazy(() => import("@features/PrivacyPolicy"));
 const Profile = lazy(() => import("@features/Profile"));
 const Cart = lazy(() => import("@features/Cart"));
 const Order = lazy(() => import("@features/Order"));
@@ -71,6 +72,7 @@ export const AppRouter = () => {
 								element={<InstallmentPolicy />}
 							/>
 							<Route path="/warranty-policy" element={<WarrantyPolicy />} />
+							<Route path="/privacy-policy" element={<PrivacyPolicy />} />
 							<Route path="/purchase-policy" element={<PurchasePolicy />} />
 							<Route path="/reset-password" element={<ResetPassword />} />
 							<Route path="*" element={<Navigate to="/" replace />} />

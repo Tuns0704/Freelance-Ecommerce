@@ -126,6 +126,10 @@ Footer.defaultProps = {
 					name: "Chính sách trả góp",
 					path: "/installment-policy",
 				},
+				{
+					name: "Chính sách bảo mật",
+					path: "/privacy-policy",
+				},
 			],
 		},
 	],
